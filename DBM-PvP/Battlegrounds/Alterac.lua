@@ -84,6 +84,7 @@ local bgzone = false
 do
 	local function AV_Initialize()
 		if select(2, IsInInstance()) == "pvp" and GetRealZoneText() == L.ZoneName then
+			DBM:AddMsg("This battleground has not yet been tested in OBM. In order to assist with scripting, please record your game and send the footage to Sky17#0017 on Discord.")
 			bgzone = true
 			for i=1, GetNumMapLandmarks(), 1 do
 				local name, _, textureIndex = GetMapLandmarkInfo(i)
