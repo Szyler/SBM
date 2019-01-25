@@ -19,6 +19,8 @@ local shardsDead
 local maxShards
 local ouroHealth
 
+local soundShards					= mod:NewSound2(0, "Play Sound on Shard Spawn")
+
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
 	self:ScheduleMethod(0, "initialShardSpawn")
@@ -28,7 +30,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundShards:Play()
 end
 
 function mod:preShard()
