@@ -38,6 +38,7 @@ local timerDHunt				= mod:NewCDTimer(30, 1002325)
 local timerSDeath				= mod:NewCDTimer(30, 1002348)
 -----SOUND-----
 local soundMelee				= mod:NewSound(1002347)
+local soundKick					= mod:NewSound2(1766)
 -----PREWARNING FUNCTIONS-----
 function mod:preSTranslocation()
 	prewarnSTranslocation:Show()
@@ -86,7 +87,7 @@ end
 
 -----MISC FUNCTIONS-----
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundKick:Play()
 end
 function mod:kickThisCunt()
 	self:ScheduleMethod(0, "alarmSound")
