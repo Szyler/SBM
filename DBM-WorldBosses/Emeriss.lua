@@ -21,6 +21,8 @@ local corruptionCount
 local aspamOne
 local aspamTwo
 
+local soundCorruption		= mod:NewSound2(24910)
+
 function mod:preCorruption()
 	prewarnCorruption:Show()
 end
@@ -31,7 +33,7 @@ function mod:alertCorruption()
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundCorruption:Play()
 end
 
 function mod:OnCombatStart()
