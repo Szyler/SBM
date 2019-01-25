@@ -22,7 +22,7 @@ local warnEmerge		= mod:NewAnnounce("WarnEmerge", "Interface\\AddOns\\DBM-Core\\
 
 local timerWrathRag		= mod:NewNextTimer(30, 20566)
 --local timerHandRag		= mod:NewNextTimer(111, 19780)
-local timerSubmerge		= mod:NewTimer(180, "TimerSubmerge", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendBurrow.blp")
+local timerSubmerge		= mod:NewTimer(90, "TimerSubmerge", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendBurrow.blp")
 local timerEmerge		= mod:NewTimer(90, "TimerEmerge", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local timerCombatStart	= mod:NewTimer(78, "TimerCombatStart", 2457)
 
