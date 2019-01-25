@@ -2791,7 +2791,7 @@ do
 		end
 		return obj
 	end
-	bossModPrototype.NewRunAwaySound = bossModPrototype.NewSound2
+	bossModPrototype.NewRunAwaySound2 = bossModPrototype.NewSound2
 	
 	function soundPrototype2:Play(file)
 		if not self.option or self.mod.Options[self.option] then
