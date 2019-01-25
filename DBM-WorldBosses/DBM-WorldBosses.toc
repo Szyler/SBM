@@ -1,0 +1,18 @@
+﻿## Interface: 30300
+## Title:|cffffffff<|r|cff009600OBM|r|cffffffff>|r |cffffffffClassic World Bosses|r
+## Notes: OAK Boss Mods for Project Ascension, made by Sky @ Andorhal
+## LoadOnDemand: 1
+## RequiredDeps: DBM-Core
+## SavedVariablesPerCharacter: DBMWorldBosses_SavedVars, DBMWorldBosses_SavedStats
+## X-DBM-Mod: 1
+## X-DBM-Mod-Category: WORLD
+## X-DBM-Mod-Name: Classic World Bosses
+## X-DBM-Mod-Sort: 150
+## X-DBM-Mod-LoadZone: Ashenvale,Azshara,Blasted Lands,Duskwood,Feralas,The Hinterlands
+localization.en.lua
+Azuregos.lua
+Emeriss.lua
+Kazzak.lua
+Lethon.lua
+Taerar.lua
+Ysondre.lua

@@ -1,0 +1,34 @@
+﻿## Interface: 30300
+## Title:|cffffffff<|r|cff009600OBM|r|cffffffff>|r |cffffffffTemple of Ahn'Qiraj|r
+## Notes: OAK Boss Mods for Project Ascension, made by Sky @ Andorhal
+## LoadOnDemand: 1
+## RequiredDeps: DBM-Core
+## SavedVariablesPerCharacter: DBMAQ40_SavedVars, DBMAQ40_SavedStats
+## X-DBM-Mod: 1
+## X-DBM-Mod-Category: Classic
+## X-DBM-Mod-Has-Heroic-Mode: 0
+## X-DBM-Mod-Name: The Temple of Ahn'Qiraj
+## X-DBM-Mod-Name-esES: Templo de Ahn'Qiraj
+## X-DBM-Mod-Name-ruRU: Храм Ан'Киража
+## X-DBM-Mod-Sort: 7
+## X-DBM-Mod-LoadZone: Nitram,Ahn'Qiraj
+## X-DBM-Mod-LoadZone-esES: Nitram,Ahn'Qiraj
+## X-DBM-Mod-LoadZone-ruRU: Nitram,Ан'Кираж
+## X-DBM-Mod-LoadZone-frFR: Nitram,Ahn'Qiraj
+## X-DBM-Mod-LoadZone-esMX: Nitram,Ahn'Qiraj
+## X-DBM-Mod-LoadZone-zhTW: 安其拉
+## X-DBM-Mod-LoadZone-zhCN: 安其拉
+## X-DBM-Mod-LoadZone-koKR: 안퀴라즈
+## X-DBM-Mod-LoadZone-deDE: Nitram,Ahn'Qiraj
+localization.en.lua
+localization.es.lua
+localization.ru.lua
+Skeram.lua
+ThreeBugs.lua
+Sartura.lua
+Fankriss.lua
+Viscidus.lua
+Huhuran.lua
+TwinEmps.lua
+CThun.lua
+Ouro.lua

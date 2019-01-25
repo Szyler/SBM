@@ -1,0 +1,23 @@
+﻿## Interface: 30300
+## Title:|cffffffff<|r|cff009600OBM|r|cffffffff>|r |cffffffffCore|r
+## Notes: OAK Boss Mods for Project Ascension, made by Sky @ Andorhal
+## SavedVariablesPerCharacter: DBM_SavedOptions, DBT_SavedOptions
+## LoadOnDemand: 0
+## DefaultState: enabled
+## Author: Tandanu and Nitram
+## X-Website: http://www.deadlybossmods.com
+localization.en.lua
+localization.de.lua
+localization.cn.lua
+localization.ru.lua
+localization.fr.lua
+localization.tw.lua
+localization.kr.lua
+localization.es.lua
+DBT-Template.xml
+DBT.lua
+DBM-Core.lua
+DBM-Arrow.lua
+DBM-RangeCheck.lua
+DBM-BossHealth.lua
+DBM-BossHealth.xml
