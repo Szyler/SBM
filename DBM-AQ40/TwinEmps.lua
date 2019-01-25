@@ -13,7 +13,7 @@ local warnTeleport		= mod:NewSpellAnnounce(800, 3)
 local timerTeleport			= mod:NewNextTimer(30, 800)
 local berserkTimer	=	mod:NewBerserkTimer(600)
 
-local soundTele		= mod:NewSound2("Teleport Sound Effect")
+local soundTele		= mod:NewSound2(0, "Teleport Sound Effect")
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
