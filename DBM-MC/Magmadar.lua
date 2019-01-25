@@ -6,34 +6,16 @@ mod:SetCreatureID(11982)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED",
 	"SPELL_CAST_SUCCESS"
 )
 
 local warnPanic		= mod:NewSpellAnnounce(19408)
-local warnEnrage	= mod:NewSpellAnnounce(19451)
-
 local timerPanicCD	= mod:NewCDTimer(30, 19408)
 local timerPanic	= mod:NewBuffActiveTimer(8, 19408)
-local timerEnrage	= mod:NewBuffActiveTimer(8, 19451)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
-end
-
-function mod:SPELL_AURA_APPLIED(args)
-	if args:IsSpellID(19451) then
-		warnEnrage:Show()
-		timerEnrage:Start()
-	end
-end
-
-function mod:SPELL_AURA_REMOVED(args)
-	if args:IsSpellID(19451) then
-		timerEnrage:Cancel()
-	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
