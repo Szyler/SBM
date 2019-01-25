@@ -2769,6 +2769,45 @@ do
 	end	
 end
 
+--------------------
+--  ALERT  --
+--------------------
+do
+	local soundPrototype2 = {}
+	local mt = { __index = soundPrototype2 }
+	function bossModPrototype:NewSound2(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound = bossModPrototype.NewSound2
+	
+	function soundPrototype2:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+		end
+	end
+
+	function soundPrototype2:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype2:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
 ------------------------------
 --  Special Warning Object  --
 ------------------------------
