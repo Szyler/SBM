@@ -10,9 +10,20 @@ mod:SetBossHealthInfo(
 	14988, L.Ohgan
 )
 
+mod:RegisterEvents(
+	"UNIT_DIED"
+)
+
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 	DBM:AddMsg("This boss is currently in progress in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
+end
+
+function mod:UNIT_DIED(args)
+	local recapID = self:GetCIDFromGUID(args.destGUID)
+	if UnitName("player") == "Sky" then
+		DBM:AddMsg("ID:"+recapID)
+	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
