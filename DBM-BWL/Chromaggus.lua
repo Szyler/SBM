@@ -174,7 +174,6 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(23170) then
 		self:ScheduleMethod(0, "bronzeCheck")
-		warnBronze:Show()
 	elseif args:IsSpellID(23128) then
 		warnEnrage:Show()
 		timerEnrage:Start()
