@@ -15,6 +15,8 @@ local prewarnBurrow 				= mod:NewAnnounce("Burrow Soon", 3)
 local warnBurrow 					= mod:NewAnnounce("Burrow Now", 2)
 local timerBurrow					= mod:NewTimer(35, "Vem: Next Burrow")
 
+local soundBurrow					= mod:NewSound2(0, "Play Sound on Burrow")
+
 local timerCheck
 
 function mod:OnCombatStart(delay)
@@ -25,7 +27,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundBurrow:Play()
 end
 
 function mod:preBurrow()
