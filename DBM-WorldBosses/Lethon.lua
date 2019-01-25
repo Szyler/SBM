@@ -18,6 +18,8 @@ local warnSpirit				= mod:NewSpellAnnounce(24811, 2)
 local spiritCount
 local prespiritCount
 
+local soundSpirit		= mod:NewSound2(24811)
+
 function mod:preSpirit()
 	prewarnCorruption:Show()
 end
@@ -28,7 +30,7 @@ function mod:alertSpirit()
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundSpirit:Play()
 end
 
 

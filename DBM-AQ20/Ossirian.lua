@@ -14,6 +14,8 @@ local warnAdds						= mod:NewAnnounce("Adds Spawned", 2)
 local timerVoid						= mod:NewTimer(45, "Void Singularity Spawn")
 local timerAdds						= mod:NewTimer(15, "Next Add Wave")
 
+local soundVoid						= mod:NewSound2(0, "Play Sound on Void Singularity Spawn")
+
 function mod:preVoid()
 	prewarnVoid:Show()
 end
@@ -22,7 +24,7 @@ function mod:preAdds()
 end
 function mod:alertVoid()
 	warnVoid:Show()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundVoid:Play()
 end
 function mod:alertAdds()
 	warnAdds:Show()

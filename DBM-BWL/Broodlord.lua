@@ -21,13 +21,15 @@ local warnMortal	= mod:NewTargetAnnounce(24573)
 
 local timerMortal	= mod:NewTargetTimer(5, 24573)
 
+local soundEgg		= mod:NewSound2(0, "Play Sound on Egg Spawn")
+
 function mod:preEgg()
 	prewarnEgg:Show()
 end
 
 function mod:alertEgg()
 	warnEgg:Show()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundEgg:Play()
 end
 
 function mod:broodEgg()

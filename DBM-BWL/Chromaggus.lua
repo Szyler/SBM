@@ -37,6 +37,8 @@ local timerTime					= mod:NewCDTimer(20, 23312)
 
 local berserkTimer				= mod:NewBerserkTimer(260)
 
+local soundBronze		= mod:NewSound2(23170)
+
 local isFirstCast
 local bronzeNoSpam
 
@@ -184,7 +186,7 @@ function mod:bronzeCheck()
 	if bronzeNoSpam == 1 then 
 		bronzeNoSpam = 2 
 		warnBronze:Show()
-		PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+		soundBronze:Play()
 	elseif bronzeNoSpam == 2 then
 	end
 end

@@ -18,6 +18,8 @@ local warnShades				= mod:NewSpellAnnounce(24841, 2)
 local preshadesCount
 local shadesCount
 
+local soundShades		= mod:NewSound2(24841)
+
 function mod:preShades()
 	prewarnShades:Show()
 end
@@ -28,7 +30,7 @@ function mod:alertShades()
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundShades:Play()
 end
 
 function mod:UNIT_DIED(args)

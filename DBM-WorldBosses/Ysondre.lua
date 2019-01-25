@@ -19,6 +19,8 @@ local warnDruids				= mod:NewSpellAnnounce(24795, 2)
 local predruidCount
 local druidCount
 
+local soundDruid		= mod:NewSound2(24795)
+
 function mod:preDruid()
 	prewarnDruids:Show()
 end
@@ -29,7 +31,7 @@ function mod:alertDruid()
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundDruid:Play()
 end
 
 function mod:UNIT_DIED(args)

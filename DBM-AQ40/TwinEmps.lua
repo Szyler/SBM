@@ -13,6 +13,8 @@ local warnTeleport		= mod:NewSpellAnnounce(800, 3)
 local timerTeleport			= mod:NewNextTimer(30, 800)
 local berserkTimer	=	mod:NewBerserkTimer(600)
 
+local soundTele		= mod:NewSound2(800)
+
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	self:ScheduleMethod(0-delay, "twinTeleport")
@@ -20,7 +22,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundTele:Play()
 end
 
 function mod:teleSoon()
