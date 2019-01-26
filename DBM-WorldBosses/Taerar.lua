@@ -36,7 +36,7 @@ end
 function mod:UNIT_DIED(args)
 	local recapID = self:GetCIDFromGUID(args.destGUID)
 	if UnitName("player") == "Sky" then
-		DBM:AddMsg("ID:"+recapID)
+		print(recapID)
 	end
 end
 
