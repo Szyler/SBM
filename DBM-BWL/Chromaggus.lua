@@ -35,7 +35,7 @@ local timerIgnite				= mod:NewCDTimer(20, 23316)
 local timerCorrosive			= mod:NewCDTimer(20, 23313)
 local timerTime					= mod:NewCDTimer(20, 23312)
 
-local berserkTimer				= mod:NewBerserkTimer(260)
+local berserkTimer				= mod:NewBerserkTimer(270)
 
 local soundBronze		= mod:NewSound2(23170)
 
