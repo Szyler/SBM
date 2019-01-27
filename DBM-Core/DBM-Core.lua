@@ -1242,14 +1242,18 @@ do
 		RaidWarningFrame:SetPoint(DBM.Options.RaidWarningPosition.Point, UIParent, DBM.Options.RaidWarningPosition.Point, DBM.Options.RaidWarningPosition.X, DBM.Options.RaidWarningPosition.Y)
 	end
 	
-	local function joinChat()
+	function joinChat()
 		JoinChannelByName(CommChannel);
 		JoinChannelByName(VerChannel);
 	end
 	
-	local function sendAddonVersion()
+	function sendAddonVersion()
 		SendChatMessage("I am running version "..DBM.Version.." of OAK Boss Mods", "CHANNEL", nil, ChanID2);
 		DBM:AddMsg("Loaded OAK Boss Mods, you are running version "..DBM.Version);
+	end
+	
+	function disableScriptErrors()
+		SetCVar("ScriptErrors","0");
 	end
 	
 	function loadOptions()
@@ -1257,6 +1261,7 @@ do
 		addDefaultOptions(DBM.Options, DBM.DefaultOptions)
 		-- load special warning options
 		DBM:UpdateSpecialWarningOptions()
+		disableScriptErrors()
 		-- set this with a short delay to prevent issues with other addons also trying to do the same thing with another position ;)
 		DBM:Schedule(5, setRaidWarningPositon)
 		DBM:Schedule(5, joinChat)
