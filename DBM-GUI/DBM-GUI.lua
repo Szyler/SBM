@@ -1200,6 +1200,7 @@ local function CreateOptionsMenu()
 	
 		local StatusEnabled = generaloptions:CreateCheckButton(L.EnableStatus, true, nil, "StatusEnabled")
 		local AutoRespond   = generaloptions:CreateCheckButton(L.AutoRespond,  true, nil, "AutoRespond")
+		local CombatLogRepeat = generaloptions:CreateCheckButton(L.CombatLogRepeat, true, nil, "CombatLogRepeat")
 		local MiniMapIcon   = generaloptions:CreateCheckButton(L.EnableMiniMapIcon,  true)
 		local FixCLEUOnCombatStart   = generaloptions:CreateCheckButton(L.FixCLEUOnCombatStart,  true, nil, "FixCLEUOnCombatStart")
 		MiniMapIcon:SetScript("OnClick", function(self)

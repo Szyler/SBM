@@ -66,6 +66,7 @@ DBM.DefaultOptions = {
 	},
 	StatusEnabled = true,
 	AutoRespond = true,
+	CombatLogRepeat = true,
 	Enabled = true,
 	ShowWarningsInChat = true,
 	ShowFakedRaidWarnings = false,
@@ -610,6 +611,15 @@ do
 
 	mainFrame:SetScript("OnUpdate", function(self, elapsed)
 		local time = GetTime()
+
+	if DBM.Options.CombatLogRepeat then		
+		if(nextCheck and nextCheck + 1.0 > GetTime()) then -- only check once every second
+			return;
+		else
+			CombatLogClearEntries()
+			nextCheck = GetTime();
+		end	
+	end
 		
 		-- execute scheduled tasks
 		local nextTask = getMin()
