@@ -144,6 +144,10 @@ local loadModOptions
 local checkWipe
 local fireEvent
 local wowVersion = select(4, GetBuildInfo())
+local VerChannel = "OBMVersion"
+local ChanID2 = GetChannelName(VerChannel)
+local CommChannel = "OAKBossMods"
+local ChanID = GetChannelName(CommChannel)
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
 
@@ -1238,6 +1242,16 @@ do
 		RaidWarningFrame:SetPoint(DBM.Options.RaidWarningPosition.Point, UIParent, DBM.Options.RaidWarningPosition.Point, DBM.Options.RaidWarningPosition.X, DBM.Options.RaidWarningPosition.Y)
 	end
 	
+	local function joinChat()
+		JoinChannelByName(CommChannel);
+		JoinChannelByName(VerChannel);
+	end
+	
+	local function sendAddonVersion()
+		SendChatMessage("I am running version "..DBM.Version.." of OAK Boss Mods", "CHANNEL", nil, ChanID2);
+		DBM:AddMsg("Loaded OAK Boss Mods, you are running version "..DBM.Version);
+	end
+	
 	function loadOptions()
 		DBM.Options = DBM_SavedOptions
 		addDefaultOptions(DBM.Options, DBM.DefaultOptions)
@@ -1245,6 +1259,8 @@ do
 		DBM:UpdateSpecialWarningOptions()
 		-- set this with a short delay to prevent issues with other addons also trying to do the same thing with another position ;)
 		DBM:Schedule(5, setRaidWarningPositon)
+		DBM:Schedule(5, joinChat)
+		DBM:Schedule(10, sendAddonVersion)
 	end
 
 	function loadModOptions(modId)
@@ -1828,6 +1844,7 @@ function DBM:StartCombat(mod, delay, synced)
 		end
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
+		SendChatMessage(DBM_CORE_COMBAT_STARTED1:format(mod.combatInfo.name), "CHANNEL", nil, ChanID);
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
 		elseif mod:IsDifficulty("normal5", "heroic10") then
@@ -1887,6 +1904,7 @@ function DBM:EndCombat(mod, wipe)
 				end
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
+			SendChatMessage(DBM_CORE_COMBAT_ENDED1:format(mod.combatInfo.name), "CHANNEL", nil, ChanID);
 			local msg
 			for k, v in pairs(autoRespondSpam) do
 				msg = msg or chatPrefixShort..DBM_CORE_WHISPER_COMBAT_END_WIPE:format(UnitName("player"), (mod.combatInfo.name or ""))
@@ -1908,10 +1926,13 @@ function DBM:EndCombat(mod, wipe)
 			end
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
+				SendChatMessage(DBM_CORE_BOSS_DOWN1:format(mod.combatInfo.name), "CHANNEL", nil, ChanID);
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
+				SendChatMessage(DBM_CORE_BOSS_DOWN1:format(mod.combatInfo.name), "CHANNEL", nil, ChanID);
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
+				SendChatMessage(DBM_CORE_BOSS_DOWN1:format(mod.combatInfo.name), "CHANNEL", nil, ChanID);
 			end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
