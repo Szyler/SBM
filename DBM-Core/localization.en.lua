@@ -79,6 +79,8 @@ DBM_CORE_SLASHCMD_HELP				= {
 	"/obm timer <x> <text>: Starts a <x> second OBM Timer with the name <text>.",
 	"/obm broadcast timer <x> <text>: Broadcasts a <x> second OBM Timer with the name <text> to the raid (requires leader/promoted status).",
 	"/obm break <min>: Starts a break timer for <min> minutes. Gives all raid members with OBM a break timer (requires leader/promoted status).",
+	"/obm aaa: Grants all raid members the assistant role.",
+	"/obm cr: Convers the party group to a raid group (alias convert).",
 	"/obm help: Shows slash command descriptions",
 }
 
