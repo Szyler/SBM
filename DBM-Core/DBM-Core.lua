@@ -42,10 +42,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 4600 $"):sub(12, -3),
-	Version = "4.60",
-	DisplayVersion = "4.60", -- the string that is shown as version
-	ReleaseRevision = 4600 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1270 $"):sub(12, -3),
+	Version = "1.27",
+	DisplayVersion = "1.27", -- the string that is shown as version
+	ReleaseRevision = 1270 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -672,6 +672,23 @@ function DBM:ForceUpdate()
 	mainFrame:GetScript("OnUpdate")(mainFrame, 0)
 end
 
+function DBM:PromoteAllRaidOBM()
+	if(IsRaidLeader()) then
+		local i;
+		for i=1,GetNumRaidMembers() do
+			PromoteToAssistant("raid"..i);
+		end
+		DBM:AddMsg("Granted all raid members assistant status.")
+	else
+		DBM:AddMsg("You are not a raid leader.")
+	end
+end
+
+function DBM:ConvertRaid()
+	ConvertToRaid();
+	DBM:AddMsg("Converted to a Raid Group.")
+end
+
 ----------------------
 --  Slash Commands  --
 ----------------------
@@ -684,6 +701,10 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		DBM:ShowVersions(true)
 	elseif cmd == "unlock" or cmd == "move" then
 		DBM.Bars:ShowMovableBar()
+	elseif cmd == "aaa" then
+		DBM:PromoteAllRaidOBM()
+	elseif cmd == "cr" or cmd == "convert" then
+		DBM:ConvertRaid()
 	elseif cmd == "help" then
 		for i, v in ipairs(DBM_CORE_SLASHCMD_HELP) do DBM:AddMsg(v) end
 	elseif cmd:sub(1, 5) == "timer" then
