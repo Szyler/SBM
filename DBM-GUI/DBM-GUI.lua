@@ -38,7 +38,7 @@
 --
 --
 
-local revision =("$Revision: 4600 $"):sub(12, -3) 
+local revision =("$Revision: 1000 $"):sub(12, -3) 
 local FrameTitle = "DBM_GUI_Option_"	-- all GUI frames get automatically a name FrameTitle..ID
 
 local PanelPrototype = {}
@@ -1200,6 +1200,7 @@ local function CreateOptionsMenu()
 	
 		local StatusEnabled = generaloptions:CreateCheckButton(L.EnableStatus, true, nil, "StatusEnabled")
 		local AutoRespond   = generaloptions:CreateCheckButton(L.AutoRespond,  true, nil, "AutoRespond")
+		local CombatLogRepeat = generaloptions:CreateCheckButton(L.CombatLogRepeat, true, nil, "CombatLogRepeat")
 		local MiniMapIcon   = generaloptions:CreateCheckButton(L.EnableMiniMapIcon,  true)
 		local FixCLEUOnCombatStart   = generaloptions:CreateCheckButton(L.FixCLEUOnCombatStart,  true, nil, "FixCLEUOnCombatStart")
 		MiniMapIcon:SetScript("OnClick", function(self)
@@ -1829,8 +1830,8 @@ local function CreateOptionsMenu()
 	end
 
 	-- Set Revision // please don't translate this!
-	DBM_GUI_OptionsFrameRevision:SetText("Version: "..DBM.DisplayVersion.." - Core: r"..DBM.Revision.." - Gui: r"..revision)
-	DBM_GUI_OptionsFrameTranslation:SetText("Translated by: "..L.TranslationBy)
+	DBM_GUI_OptionsFrameRevision:SetText("Version: "..DBM.DisplayVersion)
+	DBM_GUI_OptionsFrameTranslation:SetText("")
 end
 DBM:RegisterOnGuiLoadCallback(CreateOptionsMenu, 1)
 

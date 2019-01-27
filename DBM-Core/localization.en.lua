@@ -11,6 +11,10 @@ DBM_CORE_BOSS_DOWN_LONG				= "%s down after %s! Your last kill took %s and your 
 DBM_CORE_BOSS_DOWN_NEW_RECORD		= "%s down after %s! This is a new record! (Old record was %s)"
 DBM_CORE_COMBAT_ENDED				= "Combat against %s ended after %s."
 
+DBM_CORE_COMBAT_STARTED1			= "Encounter started: %s."
+DBM_CORE_BOSS_DOWN1					= "Encounter completed: %s!"
+DBM_CORE_COMBAT_ENDED1				= "Encounter failed: %s."
+
 DBM_CORE_TIMER_FORMAT_SECS			= "%d |4second:seconds;"
 DBM_CORE_TIMER_FORMAT_MINS			= "%d |4minute:minutes;"
 DBM_CORE_TIMER_FORMAT				= "%d |4minute:minutes; and %d |4second:seconds;"
@@ -79,6 +83,8 @@ DBM_CORE_SLASHCMD_HELP				= {
 	"/obm timer <x> <text>: Starts a <x> second OBM Timer with the name <text>.",
 	"/obm broadcast timer <x> <text>: Broadcasts a <x> second OBM Timer with the name <text> to the raid (requires leader/promoted status).",
 	"/obm break <min>: Starts a break timer for <min> minutes. Gives all raid members with OBM a break timer (requires leader/promoted status).",
+	"/obm aaa: Grants all raid members the assistant role.",
+	"/obm cr: Convers the party group to a raid group (alias: convert).",
 	"/obm help: Shows slash command descriptions",
 }
 
