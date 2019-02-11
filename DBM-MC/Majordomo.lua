@@ -22,7 +22,6 @@ local timerDamageShield	= mod:NewBuffActiveTimer(10, 21075)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
