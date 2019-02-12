@@ -2740,8 +2740,8 @@ do
 		return newAnnounce(self, "target", spellId, color or 2, ...)
 	end
 	
-	function bossModPrototype:NewSpellAnnounce(spellId, color, ...)
-		return newAnnounce(self, "spell", spellId, color or 3, ...)
+	function bossModPrototype:NewSpellAnnounce(spellId, color, optionName, ...)
+		return newAnnounce(self, "spell", spellId, color or 3, optionName, ...)
 	end
 
 	function bossModPrototype:NewCastAnnounce(spellId, color, castTime, icon, optionDefault, optionName)
