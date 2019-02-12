@@ -23,7 +23,6 @@ local inviteTimer = mod:NewTimer(60, "TimerInvite", nil, nil, false)
 
 function mod:ZONE_CHANGED_NEW_AREA()
 	if select(2, IsInInstance()) == "pvp" then
-		SendAddonMessage("DBMv4-Ver", "Hi!", "BATTLEGROUND")
 		self:Schedule(3, DBM.RequestTimers, DBM)
 		inviteTimer:Stop()
 		SetMapToCurrentZone() -- for GetMapLandmarkInfo()
