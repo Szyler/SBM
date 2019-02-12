@@ -7,8 +7,22 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"SPELL_CAST_START",
-	"SPELL_AURA_APPLIED"
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	--self:wipeAllTimers();
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		--self:wipeAllTimers();
+		self:Stop();
+	end
+end
 
 -----MISC TIMERS-----
 local berserkTimer				= mod:NewBerserkTimer(360)
@@ -23,6 +37,10 @@ local prewarnSOppression		= mod:NewAnnounce("Song of Oppression Soon", 3)
 local prewarnDHunt				= mod:NewAnnounce("Dance of The Hunt Soon", 3)
 local prewarnSDeath				= mod:NewAnnounce("Song of Death Soon", 3)
 -----ALERTS-----
+local warn1Stacks				= mod:NewAnnounce("1 Stack of Suspended Assault", 3)
+local warn2Stacks				= mod:NewAnnounce("2 Stacks of Suspended Assault", 3)
+local warn3Stacks				= mod:NewAnnounce("3 Stacks of Suspended Assault", 3)
+local warn4Stacks				= mod:NewAnnounce("4 Stacks of Suspended Assault", 3)
 local warnSTranslocation		= mod:NewSpellAnnounce(1002345, 2)
 local warnDTranslocation		= mod:NewSpellAnnounce(1002323, 2)
 local warnSColossus				= mod:NewSpellAnnounce(1002346, 2)
@@ -32,8 +50,8 @@ local warnDHunt					= mod:NewSpellAnnounce(1002325, 2)
 local warnSDeath				= mod:NewSpellAnnounce(1002348, 2)
 -----TIMERS-----
 local timerStacks				= mod:NewTimer(60, "Time Remaining: Stacks")
-local timerSongRemaining		= mod:NewTimer(17, "Time Remaining: Song")
-local timerDanceRemaining		= mod:NewTimer(17, "Time Remaining: Dance")
+local timerSongRemaining		= mod:NewTimer(15, "Time Remaining: Song")
+local timerDanceRemaining		= mod:NewTimer(15, "Time Remaining: Dance")
 local timerSTranslocation		= mod:NewCDTimer(30, 1002345)
 local timerDTranslocation		= mod:NewCDTimer(30, 1002323)
 local timerSColossus			= mod:NewCDTimer(30, 1002346)
@@ -45,6 +63,10 @@ local timerSDeath				= mod:NewCDTimer(30, 1002348)
 local soundMelee				= mod:NewSound(1002347)
 local soundKick					= mod:NewSound2(1766)
 local castNumber
+local dancetimerFix
+local songtimerFix
+local isFourStack
+local latestAuraFix
 -----PREWARNING FUNCTIONS-----
 function mod:preSTranslocation()
 	prewarnSTranslocation:Show()
@@ -109,7 +131,128 @@ function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "initialSarturaCast")
 	self:ScheduleMethod(0, "getBestKill")
 	castNumber = 0
+	dancetimerFix = 0
+	songtimerFix = 0
+	isFourStack = 0
+	latestAuraFix = 0
 end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(1002328) and (args.amount or 1) == 1 then
+		warn1Stacks:Show()
+		timerStacks:Start()
+	elseif args:IsSpellID(1002328) and (args.amount or 1) == 2 then
+		warn2Stacks:Show()
+		timerStacks:Start()
+	elseif args:IsSpellID(1002328) and (args.amount or 1) == 3 then
+		warn3Stacks:Show()
+		timerStacks:Start()
+	elseif args:IsSpellID(1002328) and (args.amount or 1) == 4 then
+		warn4Stacks:Show()
+		timerStacks:Start()
+		if isFourStack == 0 then
+			isFourStack = 1
+			self:ScheduleMethod(60, "fixFourStack")
+		end
+	elseif args:IsSpellID(1002323) then
+		if dancetimerFix == 0 then
+			timerDanceRemaining:Start()
+			dancetimerFix = 1
+			self:ScheduleMethod(20, "fixDanceTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002323
+		end
+	elseif args:IsSpellID(1002324) then
+		if dancetimerFix == 0 then
+			timerDanceRemaining:Start()
+			dancetimerFix = 1
+			self:ScheduleMethod(20, "fixDanceTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002324
+		end
+	elseif args:IsSpellID(1002325) then
+		if dancetimerFix == 0 then
+			timerDanceRemaining:Start()
+			dancetimerFix = 1
+			self:ScheduleMethod(20, "fixDanceTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002325
+		end
+	elseif args:IsSpellID(1002345) then
+		if songtimerFix == 0 then
+			timerSongRemaining:Start()
+			songtimerFix = 1
+			self:ScheduleMethod(20, "fixSongTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002345
+		end
+	elseif args:IsSpellID(1002346) then
+		if songtimerFix == 0 then
+			timerSongRemaining:Start()
+			songtimerFix = 1
+			self:ScheduleMethod(20, "fixSongTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002346
+		end
+	elseif args:IsSpellID(1002347) then
+		if songtimerFix == 0 then
+			timerSongRemaining:Start()
+			songtimerFix = 1
+			self:ScheduleMethod(20, "fixSongTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002347
+		end
+	elseif args:IsSpellID(1002348) then
+		if songtimerFix == 0 then
+			timerSongRemaining:Start()
+			songtimerFix = 1
+			self:ScheduleMethod(20, "fixSongTimer")
+			self:ScheduleMethod(1, "checkFourCast")
+			latestAuraFix = 1002348
+		end
+	end
+end
+
+function mod:fixDanceTimer()
+	dancetimerFix = 0
+end
+
+function mod:fixSongTimer()
+	songtimerFix = 0
+end
+
+function mod:fixFourStack()
+	isFourStack = 0
+end
+
+function mod:checkFourCast()
+	if isFourStack == 1 then
+		if latestAuraFix == 1002323 then
+			self:ScheduleMethod(0, "dotCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002324 then
+			self:ScheduleMethod(0, "dohCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002325 then
+			self:ScheduleMethod(0, "dothCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002345 then
+			self:ScheduleMethod(0, "sotCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002346 then
+			self:ScheduleMethod(0, "socCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002347 then
+			self:ScheduleMethod(0, "sooCast")
+			latestAuraFix = 0
+		elseif latestAuraFix == 1002348 then
+			self:ScheduleMethod(0, "sodCast")
+			latestAuraFix = 0 
+		end
+	end
+end
+
+mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(1002345) then --Song of Translocation
@@ -188,7 +331,7 @@ function mod:initialSarturaCast()
 end
 
 function mod:sodCast()
-	local timer1 = 25
+	local timer1 = 50
 	timerSTranslocation:Start(timer1)
 	self:ScheduleMethod(timer1-5, "preSTranslocation")
 	self:ScheduleMethod(timer1, "alertSTranslocation")
@@ -217,7 +360,6 @@ end
 
 function mod:dohCast()
 	local timer5 = 25
-	timerDanceRemaining:Start()
 	timerSOppression:Start(timer5)
 	self:ScheduleMethod(timer5-5, "preSOppression")
 	self:ScheduleMethod(timer5, "alertSOppression")
@@ -225,7 +367,6 @@ end
 
 function mod:sooCast()
 	local timer6 = 25
-	timerSongRemaining:Start()	
 	timerDHunt:Start(timer6)
 	self:ScheduleMethod(timer6-5, "preDHunt")
 	self:ScheduleMethod(timer6, "alertDHunt")
@@ -233,7 +374,6 @@ end
 
 function mod:dothCast()
 	local timer7 = 25
-	timerDanceRemaining:Start()
 	timerSDeath:Start(timer7)
 	self:ScheduleMethod(timer7-5, "preSDeath")
 	self:ScheduleMethod(timer7, "alertSDeath")
