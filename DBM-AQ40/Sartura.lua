@@ -5,6 +5,11 @@ mod:SetRevision(("$Revision: 132 $"):sub(12, -3))
 mod:SetCreatureID(15516)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"SPELL_CAST_START",
+	"SPELL_AURA_APPLIED"
+)
+
 -----MISC TIMERS-----
 local berserkTimer				= mod:NewBerserkTimer(360)
 local kickAnnounce				= mod:NewSpellAnnounce(1766, 4)
@@ -39,6 +44,7 @@ local timerSDeath				= mod:NewCDTimer(30, 1002348)
 -----SOUND-----
 local soundMelee				= mod:NewSound(1002347)
 local soundKick					= mod:NewSound2(1766)
+local castNumber
 -----PREWARNING FUNCTIONS-----
 function mod:preSTranslocation()
 	prewarnSTranslocation:Show()
@@ -90,7 +96,6 @@ function mod:alarmSound()
 	soundKick:Play()
 end
 function mod:kickThisCunt()
-	self:ScheduleMethod(0, "alarmSound")
 	kickAnnounce:Show()
 end
 function mod:runBitch()
@@ -101,128 +106,137 @@ end
 -----ACTUAL FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
-	self:ScheduleMethod(0, "iSarturaCast")
+	self:ScheduleMethod(0, "initialSarturaCast")
 	self:ScheduleMethod(0, "getBestKill")
+	castNumber = 0
 end
 
-function mod:iSarturaCast()
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(1002345) then --Song of Translocation
+		self:ScheduleMethod(0, "sotCast")
+		mod:alarmSound()
+		mod:kickThisCunt()		
+		if castNumber == 0 then
+			castNumber = castNumber+1
+		elseif castNumber == 7 then
+			castNumber = castNumber+1
+		end
+	elseif args:IsSpellID(1002323) then --Dance of Translocation
+		self:ScheduleMethod(0, "dotCast")
+		mod:alarmSound()
+		mod:kickThisCunt()
+		if castNumber == 1 then
+			castNumber = castNumber+1
+		elseif castNumber == 8 then
+			castNumber = castNumber+1
+		end
+	elseif args:IsSpellID(1002346) then --Song of the Colossus
+		self:ScheduleMethod(0, "socCast")
+		if castNumber == 2 then
+			castNumber = castNumber+1
+			mod:alarmSound()
+			mod:kickThisCunt()
+		elseif castNumber == 9 then
+			castNumber = castNumber+1 
+			mod:runBitch()
+		end
+	elseif args:IsSpellID(1002324) then --Dance of Haste
+		self:ScheduleMethod(0, "dohCast")
+		if castNumber == 3 then
+			castNumber = castNumber+1
+		elseif castNumber == 10 then
+			castNumber = castNumber+1
+		end
+	elseif args:IsSpellID(1002347) then --Song of Oppression
+		self:ScheduleMethod(0, "sooCast")
+		if castNumber == 4 then
+			castNumber = castNumber+1
+			mod:runBitch()
+		elseif castNumber == 11 then
+			castNumber = castNumber+1
+			mod:alarmSound()
+			mod:kickThisCunt()
+		end
+	elseif args:IsSpellID(1002325) then --Dance of the Hunt
+		self:ScheduleMethod(0, "dothCast")
+		if castNumber == 5 then
+			castNumber = castNumber+1
+		elseif castNumber == 12 then
+			castNumber = castNumber+1
+			mod:alarmSound()
+			mod:kickThisCunt()
+		end
+	elseif args:IsSpellID(1002348) then --Song of Death
+		self:ScheduleMethod(0, "sodCast")
+		mod:alarmSound()
+		mod:kickThisCunt()
+		if castNumber == 6 then
+			castNumber = castNumber+1
+		elseif castNumber == 13 then
+			castNumber = castNumber+1
+			mod:alarmSound()
+			mod:kickThisCunt()
+		end
+	end
+end
+
+function mod:initialSarturaCast()
 	local timer1 = 10
 	timerSTranslocation:Start(timer1)
 	self:ScheduleMethod(timer1-5, "preSTranslocation")
 	self:ScheduleMethod(timer1, "alertSTranslocation")
-	self:ScheduleMethod(timer1, "kickThisCunt")
-	self:ScheduleMethod(timer1, "iiSarturaCast")
 end
 
-function mod:iiSarturaCast()
+function mod:sodCast()
+	local timer1 = 25
+	timerSTranslocation:Start(timer1)
+	self:ScheduleMethod(timer1-5, "preSTranslocation")
+	self:ScheduleMethod(timer1, "alertSTranslocation")
+end
+
+function mod:sotCast()
 	local timer2 = 25
 	timerDTranslocation:Start(timer2)
 	self:ScheduleMethod(timer2-5, "preDTranslocation")
 	self:ScheduleMethod(timer2, "alertDTranslocation")
-	self:ScheduleMethod(timer2, "kickThisCunt")
-	self:ScheduleMethod(timer2, "iiiSarturaCast")
 end
 
-function mod:iiiSarturaCast()
+function mod:dotCast()
 	local timer3 = 25
 	timerSColossus:Start(timer3)
 	self:ScheduleMethod(timer3-5, "preSColossus")
 	self:ScheduleMethod(timer3, "alertSColossus")
-	self:ScheduleMethod(timer3, "kickThisCunt")
-	self:ScheduleMethod(timer3, "ivSarturaCast")
 end
 
-function mod:ivSarturaCast()
+function mod:socCast()
 	local timer4 = 25
 	timerDHaste:Start(timer4)
-	timerStacks:Start()
 	self:ScheduleMethod(timer4-5, "preDHaste")
 	self:ScheduleMethod(timer4, "alertDHaste")
-	self:ScheduleMethod(timer4, "vSarturaCast")
 end
 
-function mod:vSarturaCast()
+function mod:dohCast()
 	local timer5 = 25
 	timerDanceRemaining:Start()
 	timerSOppression:Start(timer5)
 	self:ScheduleMethod(timer5-5, "preSOppression")
 	self:ScheduleMethod(timer5, "alertSOppression")
-	self:ScheduleMethod(timer5-2, "runBitch")
-	self:ScheduleMethod(timer5, "viSarturaCast")
 end
 
-function mod:viSarturaCast()
+function mod:sooCast()
 	local timer6 = 25
 	timerSongRemaining:Start()	
 	timerDHunt:Start(timer6)
 	self:ScheduleMethod(timer6-5, "preDHunt")
 	self:ScheduleMethod(timer6, "alertDHunt")
-	self:ScheduleMethod(timer6, "viiSarturaCast")
 end
 
-function mod:viiSarturaCast()
+function mod:dothCast()
 	local timer7 = 25
 	timerDanceRemaining:Start()
 	timerSDeath:Start(timer7)
 	self:ScheduleMethod(timer7-5, "preSDeath")
 	self:ScheduleMethod(timer7, "alertSDeath")
-	self:ScheduleMethod(timer7, "kickThisCunt")
-	self:ScheduleMethod(timer7, "viiiSarturaCast")
-end
-
-function mod:viiiSarturaCast()
-	local timer8 = 50
-	timerSTranslocation:Start(timer8)
-	self:ScheduleMethod(timer8-5, "preSTranslocation")
-	self:ScheduleMethod(timer8, "alertSTranslocation")
-	self:ScheduleMethod(timer8, "kickThisCunt")
-	self:ScheduleMethod(timer8, "ixSarturaCast")
-end
-
-function mod:ixSarturaCast()
-	local timer9 = 25
-	timerDTranslocation:Start(timer9)
-	self:ScheduleMethod(timer9-5, "preDTranslocation")
-	self:ScheduleMethod(timer9, "alertDTranslocation")
-	self:ScheduleMethod(timer9, "kickThisCunt")
-	self:ScheduleMethod(timer9, "xSarturaCast")
-end
-
-function mod:xSarturaCast()
-	local timer10 = 25 
-	timerSColossus:Start(timer10)
-	timerStacks:Start()
-	self:ScheduleMethod(timer10-5, "preSColossus")
-	self:ScheduleMethod(timer10, "alertSColossus")
-	self:ScheduleMethod(timer10-2, "runBitch")
-	self:ScheduleMethod(timer10, "xiSarturaCast")
-end
-
-function mod:xiSarturaCast()
-	local timer11 = 25
-	timerSongRemaining:Start()
-	timerDHaste:Start(timer11)
-	self:ScheduleMethod(timer11-5, "preDHaste")
-	self:ScheduleMethod(timer11, "alertDHaste")
-	self:ScheduleMethod(timer11, "xiiSarturaCast")
-end
-
-function mod:xiiSarturaCast()
-	local timer12 = 25
-	timerDanceRemaining:Start()
-	timerSOppression:Start(timer12)
-	self:ScheduleMethod(timer12-5, "preSOppression")
-	self:ScheduleMethod(timer12, "alertSOppression")
-	self:ScheduleMethod(timer12, "kickThisCunt")
-	self:ScheduleMethod(timer12, "xiiiSarturaCast")
-end
-
-function mod:xiiiSarturaCast()
-	local timer13 = 25
-	timerDHunt:Start(timer13)
-	self:ScheduleMethod(timer13-5, "preDHunt")
-	self:ScheduleMethod(timer13, "alertDHunt")
-	self:ScheduleMethod(timer13, "kickThisCunt")
 end
 
 ---------- SPEED KILL FUNCTION ----------
