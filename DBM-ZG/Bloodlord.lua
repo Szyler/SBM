@@ -11,8 +11,21 @@ mod:SetBossHealthInfo(
 )
 
 mod:RegisterEvents(
-	"UNIT_DIED"
+	"UNIT_DIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")

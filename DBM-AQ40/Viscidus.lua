@@ -5,6 +5,20 @@ mod:SetRevision(("$Revision: 132 $"):sub(12, -3))
 mod:SetCreatureID(15299)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 local berserkTimer	=	mod:NewBerserkTimer(435)
 
 function mod:OnCombatStart(delay)

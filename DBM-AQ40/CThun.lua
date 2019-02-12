@@ -7,8 +7,19 @@ mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"SPELL_SUMMON",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
-	"UNIT_DIED"
+	"UNIT_DIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 ----------Pre-warnings----------
 local prewarnEyeTentacleShadow		= mod:NewAnnounce("Eye Tentacles: Shadow Soon", 3)

@@ -4,10 +4,26 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision(("$Revision: 132 $"):sub(12, -3))
 mod:SetCreatureID(15276, 15275)
 mod:RegisterCombat("combat")
+
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 mod:SetBossHealthInfo(
 	15276, L.Veklor,
 	15275, L.Veknil
 )
+
 local warnTeleportSoon	= mod:NewSoonAnnounce(800, 2)
 local warnTeleport		= mod:NewSpellAnnounce(800, 3)
 local timerTeleport			= mod:NewNextTimer(30, 800)

@@ -5,6 +5,20 @@ mod:SetRevision(("$Revision: 184 $"):sub(12, -3))
 mod:SetCreatureID(15510)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 local warnHatchlingssoon	= mod:NewAnnounce("Vekniss Hatchlings Soon", 2)
 local warnExplodingsoon		= mod:NewAnnounce("Volatile Explosion Soon", 3)
 local warnSpawnssoon		= mod:NewAnnounce("Spawn of Fankriss Soon", 4)

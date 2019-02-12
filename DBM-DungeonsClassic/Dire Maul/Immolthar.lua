@@ -5,6 +5,21 @@ mod:SetRevision(("$Revision: 132 $"):sub(12, -3))
 mod:SetCreatureID(11496)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 end

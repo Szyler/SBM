@@ -8,8 +8,19 @@ mod:RegisterCombat("yell", L.YellPull3)--Will fail if msg find isn't used, msg m
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
-	"SPELL_AURA_APPLIED"
+	"SPELL_AURA_APPLIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local prewarnEgg	= mod:NewAnnounce("Egg Hatching Soon", 3)
 local warnEgg		= mod:NewAnnounce("Egg Hatching Now", 2)
