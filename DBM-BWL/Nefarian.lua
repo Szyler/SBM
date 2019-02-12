@@ -11,8 +11,19 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
 	"UNIT_HEALTH",
-	"CHAT_MSG_MONSTER_YELL"
+	"CHAT_MSG_MONSTER_YELL",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local warnPhaseSoon		= mod:NewAnnounce("WarnPhaseSoon", 2)
 local warnPhase			= mod:NewAnnounce("WarnPhase", 3)

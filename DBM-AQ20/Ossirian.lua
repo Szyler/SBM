@@ -5,6 +5,20 @@ mod:SetRevision(("$Revision: 175 $"):sub(12, -3))
 mod:SetCreatureID(15339)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 local prewarnVoid					= mod:NewAnnounce("Void Singularity Soon", 3)
 local prewarnAdds					= mod:NewAnnounce("Adds Soon", 3)
 

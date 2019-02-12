@@ -7,8 +7,19 @@ mod:RegisterCombat("combat", 12259)
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
-	"SPELL_AURA_APPLIED"
+	"SPELL_AURA_APPLIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 --local warnRainFire	= mod:NewSpellAnnounce(19717)
 local warnCurse		= mod:NewSpellAnnounce(19716)

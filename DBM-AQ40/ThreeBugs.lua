@@ -5,6 +5,20 @@ mod:SetRevision(("$Revision: 184 $"):sub(12, -3))
 mod:SetCreatureID(15544, 15511, 15543)
 mod:RegisterCombat("combat")
 
+mod:RegisterEvents(
+	"PLAYER_ALIVE"
+)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 mod:SetBossHealthInfo(
 	15543, L.Yauj,
 	15544, L.Vem,

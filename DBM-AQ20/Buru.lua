@@ -7,8 +7,19 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_EMOTE",
-	"UNIT_DIED"
+	"UNIT_DIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local warnPursue		= mod:NewAnnounce("WarnPursue", 3)
 local specWarnPursue	= mod:NewSpecialWarning("SpecWarnPursue")

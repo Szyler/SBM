@@ -10,8 +10,19 @@ mod:SetWipeTime(45)--guesswork
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_START"
+	"SPELL_CAST_START",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local warnConflagration		= mod:NewTargetAnnounce(23023)
 local timerConflagration	= mod:NewTargetTimer(10, 23023)

@@ -8,8 +8,21 @@ mod:RegisterKill("yell", L.Kill)
 
 mod:RegisterEvents(
 	"SPELL_CAST_START",
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local warnMagicReflect	= mod:NewSpellAnnounce(20619)
 local warnDamageShield	= mod:NewSpellAnnounce(21075)
@@ -22,7 +35,6 @@ local timerDamageShield	= mod:NewBuffActiveTimer(10, 21075)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:SPELL_CAST_SUCCESS(args)

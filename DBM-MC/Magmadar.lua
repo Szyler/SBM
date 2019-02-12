@@ -6,8 +6,21 @@ mod:SetCreatureID(11982)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local warnPanic		= mod:NewSpellAnnounce(19408)
 local timerPanicCD	= mod:NewCDTimer(30, 19408)
@@ -15,7 +28,6 @@ local timerPanic	= mod:NewBuffActiveTimer(8, 19408)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:SPELL_CAST_SUCCESS(args)

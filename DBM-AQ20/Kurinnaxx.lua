@@ -6,8 +6,19 @@ mod:SetCreatureID(15348)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"UNIT_HEALTH"
+	"UNIT_HEALTH",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local prewarnEnrage					= mod:NewAnnounce("Soft Enrage Soon", 3)
 local warnAdds						= mod:NewAnnounce("Adds Spawned", 2)

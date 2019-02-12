@@ -9,8 +9,19 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
 	"SPELL_AURA_REMOVED",
-	"UNIT_HEALTH"
+	"UNIT_HEALTH",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local warnSoon		= mod:NewAnnounce("Adds Soon", 2)
 local warnSpawn		= mod:NewAnnounce("Adds Spawned", 3)

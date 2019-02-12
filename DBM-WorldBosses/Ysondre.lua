@@ -10,8 +10,21 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
 	"UNIT_HEALTH",
-	"UNIT_DIED"
+	"UNIT_DIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local prewarnDruids				= mod:NewAnnounce("Demented Druid Spirits Soon", 3)
 local warnDruids				= mod:NewSpellAnnounce(24795, 2)

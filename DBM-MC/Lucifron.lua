@@ -7,8 +7,21 @@ mod:RegisterCombat("combat", 12118)
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
-	"SPELL_AURA_APPLIED"
+	"SPELL_AURA_APPLIED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local warnDoom		= mod:NewSpellAnnounce(19702)
 local warnCurse		= mod:NewSpellAnnounce(19703)

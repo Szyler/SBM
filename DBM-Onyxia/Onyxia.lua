@@ -9,8 +9,21 @@ mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_CAST_START",
-	"UNIT_HEALTH"
+	"UNIT_HEALTH",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local warnPhase2			= mod:NewPhaseAnnounce(2)
 local warnPhase3			= mod:NewPhaseAnnounce(3)

@@ -7,8 +7,19 @@ mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"UNIT_HEALTH",
 	"UNIT_DIED",
-	"COMBAT_LOG_EVENT_UNFILTERED"
+	"COMBAT_LOG_EVENT_UNFILTERED",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 
 local prewarnShard					= mod:NewAnnounce("Shard Spawn Soon", 3)
 local warnShard						= mod:NewAnnounce("Mind-Corrupting Shard Spawned", 2)
@@ -18,6 +29,7 @@ local berserkTimer					= mod:NewBerserkTimer(360)
 local shardsDead
 local maxShards
 local ouroHealth
+local shardNumber
 
 local soundShards					= mod:NewSound2(0, "Play Sound on Shard Spawn")
 
@@ -27,6 +39,7 @@ function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0.1, "deadShards")
 	maxShards = 1
 	self:ScheduleMethod(0, "getBestKill")
+	shardNumber = 1
 end
 
 function mod:alarmSound()
@@ -48,6 +61,7 @@ function mod:initialShardSpawn()
 	timerShard:Show(timer1)
 	self:ScheduleMethod(timer1-5, "preShard")
 	self:ScheduleMethod(timer1, "alertShard")
+	self:ScheduleMethod(timer1, "checkShards")
 end
 
 function mod:shardSpawn()
@@ -56,6 +70,7 @@ function mod:shardSpawn()
 	timerShard:Show(timer2)
 	self:ScheduleMethod(timer2-5, "preShard")
 	self:ScheduleMethod(timer2, "alertShard")
+	self:ScheduleMethod(timer2, "checkShards")
 end
 
 function mod:deadShards()
@@ -81,7 +96,6 @@ end
 
 function mod:UNIT_HEALTH(args)
     ouroHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
-	self:ScheduleMethod(0, "checkShards")
 end
 
 function mod:UNIT_DIED(args)

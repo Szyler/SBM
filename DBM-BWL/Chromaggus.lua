@@ -8,9 +8,19 @@ mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"SPELL_CAST_START",
 	"SPELL_AURA_APPLIED",
-	"SPELL_AURA_REMOVED"
+	"SPELL_AURA_REMOVED",
+	"PLAYER_ALIVE"
 )
 
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
 local warnBronze				= mod:NewSpellAnnounce(23170, 2)
 local warnEnrage				= mod:NewSpellAnnounce(23128)
 local timerEnrage				= mod:NewBuffActiveTimer(8, 23128)

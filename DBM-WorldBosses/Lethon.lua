@@ -9,8 +9,21 @@ mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
-	"UNIT_HEALTH"
+	"UNIT_HEALTH",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local prewarnSpirit				= mod:NewAnnounce("Draw Spirit Soon", 3)
 local warnSpirit				= mod:NewSpellAnnounce(24811, 2)

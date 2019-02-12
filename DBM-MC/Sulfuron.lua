@@ -8,8 +8,21 @@ mod:RegisterCombat("combat", 12098)
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_START"
+	"SPELL_CAST_START",
+	"PLAYER_ALIVE"
 )
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+
 
 local warnInspire		= mod:NewTargetAnnounce(19779)
 local warnHandRagnaros	= mod:NewTargetAnnounce(19780)
@@ -27,7 +40,6 @@ local HandofRagTargets = {}
 
 function mod:OnCombatStart(delay)
 	table.wipe(HandofRagTargets)
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:warnHandofRagTargets()
