@@ -8,7 +8,12 @@ mod:RegisterEvents(
 	"SPELL_SUMMON",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"UNIT_DIED",
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_PERIODIC_DAMAGE",
+	"SPELL_PERIODIC_HEAL",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
+	"SPELL_CAST_START"
 )
 
 function mod:OnCombatEnd(wipe)
@@ -71,9 +76,16 @@ local lasttent
 local phase
 local miniadd
 local eldfixglare
-
 local soundGlare					= mod:NewSound(26029)
 
+----------JuniorStuff----------
+local specWarnEradicate		= mod:NewSpecialWarning("Eradicate damage too high!", nil, "Special warning when taking >1000 damage from Eradicate", true) -- 4500054
+local specWarnConsume		= mod:NewSpecialWarning("Consume healing too high!", nil, "Special warning when healing >4000 from Consume Essence", true) -- 4500061
+local specWarnMiasma		= mod:NewSpecialWarningMove(4500001, false, "Special warning when standing in Miasma", true)
+local warnMalignantGrasp	= mod:NewAnnounce("%s Grabbed!", 4, nil, nil, "Announce when someone within 28 yards is grabbed by a Malignant Tentacle")
+local specWarnRevelations	= mod:NewSpecialWarning("Look Away", nil, "Special warning for Eldritch Revelations cast") --4500009)
+local specWarnSensoryOverload	= mod:NewSpecialWarningYou(4500068)
+local specWarnDigestiveAcid	= mod:NewSpecialWarningStack(26476, nil, 4) --(mod.Options.NumAcidStacks or 4))
 ----------PreWarning Functions----------
 function mod:preShadow()
 	prewarnEyeTentacleShadow:Show()
@@ -372,6 +384,7 @@ end
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if msg:find(L.Eldritch) then
 		self:ScheduleMethod(0, "eldFear")
+		specWarnRevelations:Show();
 	end
 	if msg:find(L.Glare) then
 		eldfixglare = 2
@@ -414,6 +427,65 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 		self:UnscheduleMethod("preNature")
 		self:UnscheduleMethod("alertNature")
 		self:ScheduleMethod(30, "fixweaknessTimers")
+	end
+end
+
+function mod:SPELL_PERIODIC_DAMAGE(args)
+	if args:IsSpellID(4500054) then -- Eradicate (Eye Tentacles)
+		if args:IsPlayer() and (((args.amount or 0) + (args.resisted or 0) + (args.absorbed or 0)) > 1000) then
+			specWarnEradicate:Show();
+		end
+	end
+end
+
+function mod:SPELL_PERIODIC_HEAL(args)
+	if args:IsSpellID(4500062) then -- Consume Essence (Eye Tentacles, debuff is 61)
+		if args:IsPlayerSource() and ((args.amount or 0) > 4000) then
+			specWarnConsume:Show();
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(4500026) then -- Malignant Grasp (Malignant Tentacle)
+		if args.destName then
+			if (not args:IsPlayer()) then
+				local uId = DBM:GetRaidUnitId(args.destName)
+				if uId then
+					local inRange = CheckInteractDistance(uId, 4)
+					if inRange then
+						warnMalignantGrasp:Show(args.destName);
+					end
+				else
+					warnMalignantGrasp:Show(args.destName);
+				end
+			end
+		end
+elseif args:IsSpellID(4500001) then -- Miasma (Eye Tentacles)
+		if args:IsPlayer() then
+			specWarnMiasma:Show();
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(26476) then -- Digestive Acid (Stomach)
+		if args:IsPlayer() and ((args.amount or 1) >= 4) then --(self.Options.NumAcidStacks or 4)) then
+			specWarnDigestiveAcid:Show(args.amount);
+		end
+	elseif args:IsSpellID(4500001) then -- Miasma (Eye Tentacles)
+		if args:IsPlayer() then
+			specWarnMiasma:Show();
+		end
+	end
+end
+
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(4500068) then
+		local targetname = self:GetBossTarget(26180) -- self:GetBossTarget(157252)
+		if targetname and (targetname == UnitName("PLAYER")) then
+			specWarnSensoryOverload:Show();
+		end
 	end
 end
 
