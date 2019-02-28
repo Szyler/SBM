@@ -43,9 +43,9 @@
 -------------------------------
 DBM = {
 	Revision = ("$Revision: 1310 $"):sub(12, -3),
-	Version = "1.31",
-	DisplayVersion = "1.31", -- the string that is shown as version
-	ReleaseRevision = 1310 -- the revision of the latest stable version that is available (for /obm ver2)
+	Version = "1.32",
+	DisplayVersion = "1.32", -- the string that is shown as version
+	ReleaseRevision = 1320 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -715,6 +715,8 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		DBM:PromoteAllRaidOBM()
 	elseif cmd == "cr" or cmd == "convert" then
 		DBM:ConvertRaid()
+	elseif cmd == "cfix" then
+		DBM:CthunFix()
 	elseif cmd == "help" then
 		for i, v in ipairs(DBM_CORE_SLASHCMD_HELP) do DBM:AddMsg(v) end
 	elseif cmd:sub(1, 5) == "timer" then
