@@ -12,7 +12,8 @@ mod:EnableModel()
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
 
 local warnInjection		= mod:NewTargetAnnounce(28169, 2)
@@ -46,6 +47,7 @@ local function removeIcon(target)
 end
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	table.wipe(mutateIcons)
 	enrageTimer:Start(-delay)
 end
@@ -85,3 +87,21 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerCloud:Start()
 	end	
 end
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
