@@ -7,7 +7,8 @@ mod:SetCreatureID(16061)
 mod:RegisterCombat("yell", L.Yell1, L.Yell2, L.Yell3, L.Yell4)
 
 mod:RegisterEvents(
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
 
 local warnShoutNow		= mod:NewSpellAnnounce(55543, 1)
@@ -19,6 +20,7 @@ local timerTaunt		= mod:NewCDTimer(20, 29060)
 local timerShieldWall	= mod:NewCDTimer(20, 29061)
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	timerShout:Start(16 - delay)
 	warnShoutSoon:Schedule(11 - delay)
 end
@@ -36,3 +38,20 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
