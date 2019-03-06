@@ -7,7 +7,8 @@ mod:SetCreatureID(15954)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
 
 local warnTeleportNow	= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
@@ -20,6 +21,7 @@ local timerTeleportBack	= mod:NewTimer(70, "TimerTeleportBack", 46573)
 local phase = 0
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	phase = 0
 	self:BackInRoom(delay)
 end
@@ -55,3 +57,21 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnCurse:Show()
 	end
 end
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
