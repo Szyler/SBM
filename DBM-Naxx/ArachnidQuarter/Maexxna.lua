@@ -10,7 +10,8 @@ mod:EnableModel()
 
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
 
 local warnWebWrap		= mod:NewTargetAnnounce(28622, 2)
@@ -23,6 +24,7 @@ local timerWebSpray		= mod:NewNextTimer(40.5, 29484)
 local timerSpider		= mod:NewTimer(30, "TimerSpider", 17332)
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	warnWebSpraySoon:Schedule(35.5 - delay)
 	timerWebSpray:Start(40.5 - delay)
 	warnSpidersSoon:Schedule(25 - delay)
@@ -57,3 +59,21 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerSpider:Start()
 	end
 end
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
