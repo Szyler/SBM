@@ -13,7 +13,8 @@ mod:EnableModel()
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_SUCCESS",
-	"UNIT_HEALTH"
+	"UNIT_HEALTH",
+	"PLAYER_ALIVE"
 )
 
 local warnAddsSoon			= mod:NewAnnounce("warnAddsSoon", 1)
@@ -34,6 +35,7 @@ mod:AddBoolOption("ShowRange", true)
 local warnedAdds = false
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	if self.Options.ShowRange then
 		self:ScheduleMethod(215-delay, "RangeToggle", true)
 	end
@@ -108,3 +110,21 @@ function mod:RangeToggle(show)
 		DBM.RangeCheck:Hide()
 	end
 end
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
