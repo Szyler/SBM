@@ -12,7 +12,8 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"CHAT_MSG_MONSTER_EMOTE",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
-	"SPELL_CAST_SUCCESS"
+	"SPELL_CAST_SUCCESS",
+	"PLAYER_ALIVE"
 )
 
 local warnDrainLifeNow	= mod:NewSpellAnnounce(28542, 2)
@@ -34,6 +35,7 @@ local noTargetTime = 0
 local isFlying = false
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	noTargetTime = 0
 	isFlying = false
 	warnAirPhaseSoon:Schedule(38.5 - delay)
@@ -108,3 +110,21 @@ mod:RegisterOnUpdateHandler(function(self, elapsed)
 			timerLanding:Start()
 		end
 end, 0.2)
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
