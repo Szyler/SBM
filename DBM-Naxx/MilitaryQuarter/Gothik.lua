@@ -7,7 +7,8 @@ mod:SetCreatureID(16060)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"UNIT_DIED"
+	"UNIT_DIED",
+	"PLAYER_ALIVE"
 )
 
 local warnWaveNow		= mod:NewAnnounce("WarningWaveSpawned", 3, nil, false)
@@ -78,6 +79,7 @@ local function getWaveString(wave)
 end
 
 function mod:OnCombatStart(delay)
+	self:ScheduleMethod(0, "getBestKill")
 	if mod:IsDifficulty("heroic25") then
 		waves = wavesHeroic
 	else
@@ -113,3 +115,20 @@ function mod:UNIT_DIED(args)
 	end
 end
 
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+---------- SPEED KILL FUNCTION ----------
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+	timerSpeedKill:Show(bestkillTime)
+end
+---------- SPEED KILL FUNCTION ----------
