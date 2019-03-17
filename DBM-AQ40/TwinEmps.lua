@@ -6,7 +6,9 @@ mod:SetCreatureID(15276, 15275)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE"
 )
 
 function mod:OnCombatEnd(wipe)
@@ -30,6 +32,8 @@ local timerTeleport			= mod:NewNextTimer(30, 800)
 local berserkTimer	=	mod:NewBerserkTimer(600)
 
 local soundTele		= mod:NewSound2(800)
+
+local specWarnBlizzard		= mod:NewSpecialWarningMove(26607, false, "Special warning when standing in Blizzard", true)\
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
@@ -56,6 +60,22 @@ function mod:twinTeleport()
 	self:ScheduleMethod(timer-5, "teleSoon")
 	self:ScheduleMethod(timer, "teleNow")
 	self:ScheduleMethod(timer, "twinTeleport")
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(26607) then 
+		if args:IsPlayer() then
+			specWarnBlizzard:Show();
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(26607) then -- Miasma (Eye Tentacles)
+		if args:IsPlayer() then
+			specWarnBlizzard:Show();
+		end
+	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
