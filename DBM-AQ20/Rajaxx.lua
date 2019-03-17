@@ -6,8 +6,7 @@ mod:SetCreatureID(15341)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"PLAYER_ALIVE",
-	"SPELL_AURA_APPLIED"
+	"PLAYER_ALIVE"
 )
 
 function mod:OnCombatEnd(wipe)
@@ -22,16 +21,6 @@ end
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-end
-
-local specWarnSpellReflect	= mod:NewSpecialWarning("Spell Reflect: Stop Casting", nil, "Special warning for Spell Reflect") --4500009)
-local warnSpellReflect    = mod:NewSpellAnnounce(1002113)
-
-function mod:SPELL_AURA_APPLIED(args)
-	if args:IsSpellID(1002113) then
-		warnSpellReflect:Show()
-		specWarnSpellReflect:Show()
-	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
