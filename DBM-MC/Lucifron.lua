@@ -8,6 +8,7 @@ mod:RegisterCombat("combat", 12118)
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
 
@@ -32,6 +33,11 @@ local timerDoomCD	= mod:NewNextTimer(20, 19702)
 local timerDoom		= mod:NewCastTimer(10, 19702)
 local timerMC		= mod:NewTargetTimer(5, 20604)
 
+local specWarnDoomN	= mod:NewSpecialWarningYou(19702)
+local specWarnDoomH	= mod:NewSpecialWarningYou(975137)
+local specWarnGift	= mod:NewSpecialWarningYou(965098)
+local specWarnTouch	= mod:NewSpecialWarningYou(975000)
+
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
@@ -52,6 +58,14 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(20604) then
 		warnMC:Show(args.destName)
 		timerMC:Start(args.destName)
+	elseif args:IsSpellID(19702) and args:IsPlayer() then
+		specWarnDoomN:Show()
+	elseif args:IsSpellID(975137) and args:IsPlayer() then
+		specWarnDoomH:Show()
+	elseif args:IsSpellID(965098) and args:IsPlayer() then
+		specWarnGift:Show()
+	elseif args:IsSpellID(975000) and args:IsPlayer() then
+		specWarnTouch:Show()
 	end
 end
 

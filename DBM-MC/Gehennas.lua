@@ -8,6 +8,7 @@ mod:RegisterCombat("combat", 12259)
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
 
@@ -27,6 +28,9 @@ local warnFist		= mod:NewTargetAnnounce(20277)
 
 local timerCurse	= mod:NewNextTimer(30, 19716)
 local timerFist		= mod:NewBuffActiveTimer(4, 20277)
+
+local specWarnRoF	= mod:NewSpecialWarningYou(965019)
+local specWarnGCurse	= mod:NewSpecialWarningYou(975063)
 
 local FistTargets = {}
 
@@ -55,6 +59,16 @@ function mod:SPELL_AURA_APPLIED(args)
 		self:UnscheduleMethod("warnFistTargets")
 		FistTargets[#FistTargets + 1] = args.destName
 		self:ScheduleMethod(0.3, "warnFistTargets")
+	elseif args:IsSpellID(965019) then
+		specWarnRoF:Show()
+	end
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(965019) and args:IsPlayer() then
+		specWarnRoF:Show()
+	elseif args:IsSpellID(975063) and args:IsPlayer() then
+		specWarnGCurse:Show()
 	end
 end
 

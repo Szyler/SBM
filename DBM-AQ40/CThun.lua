@@ -81,7 +81,7 @@ local soundGlare					= mod:NewSound(26029)
 ----------JuniorStuff----------
 local specWarnEradicate		= mod:NewSpecialWarning("Eradicate damage too high!", nil, "Special warning when taking >1000 damage from Eradicate", true) -- 4500054
 local specWarnConsume		= mod:NewSpecialWarning("Consume healing too high!", nil, "Special warning when healing >4000 from Consume Essence", true) -- 4500061
-local specWarnMiasma		= mod:NewSpecialWarningMove(4500001, false, "Special warning when standing in Miasma", true)
+local specWarnMiasma		= mod:NewSpecialWarningMove(4500001, true, "Special warning when standing in Miasma", true)
 local warnMalignantGrasp	= mod:NewAnnounce("%s Grabbed!", 4, nil, nil, "Announce when someone within 28 yards is grabbed by a Malignant Tentacle")
 local specWarnRevelations	= mod:NewSpecialWarning("Look Away", nil, "Special warning for Eldritch Revelations cast") --4500009)
 local specWarnSensoryOverload	= mod:NewSpecialWarningYou(4500068)
