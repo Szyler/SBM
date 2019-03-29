@@ -33,7 +33,7 @@ local berserkTimer	=	mod:NewBerserkTimer(600)
 
 local soundTele		= mod:NewSound2(800)
 
-local specWarnBlizzard		= mod:NewSpecialWarningMove(26607, false, "Special warning when standing in Blizzard", true)
+local specWarnBlizzard		= mod:NewSpecialWarningMove(26607, true, "Special warning when standing in Blizzard", true)
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
