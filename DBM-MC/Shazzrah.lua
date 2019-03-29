@@ -33,6 +33,8 @@ local timerCurseCD		= mod:NewNextTimer(20, 19713)
 local timerGrounding	= mod:NewBuffActiveTimer(30, 19714, nil, false)
 local timerBlinkCD		= mod:NewNextTimer(30, 21655)
 
+local specWarnBomb	= mod:NewSpecialWarningYou(965153)
+
 function mod:OnCombatStart(delay)
 	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
@@ -41,6 +43,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(19714) and self:IsInCombat() and not args:IsDestTypePlayer() then
 		warnGrounding:Show()
 		timerGrounding:Start()
+	elseif args:IsSpellID(965153) and args:IsPlayer() then
+		specWarnBomb:Show()
 	end
 end
 
