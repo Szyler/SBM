@@ -23,11 +23,13 @@ local specialWarningLocust	= mod:NewSpecialWarning("SpecialLocust")
 
 local timerLocustIn			= mod:NewCDTimer(80, 28785)
 local timerLocustFade 		= mod:NewBuffActiveTimer(26, 28785)
+local berserkTimer				= mod:NewBerserkTimer(600)
 
 mod:AddBoolOption("ArachnophobiaTimer", true, "timer")
 
 
 function mod:OnCombatStart(delay)
+	berserkTimer:Start()
 	self:ScheduleMethod(0, "getBestKill")
 	if mod:IsDifficulty("heroic25") then
 		timerLocustIn:Start(90 - delay)
