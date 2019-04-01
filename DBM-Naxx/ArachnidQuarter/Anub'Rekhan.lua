@@ -12,18 +12,19 @@ mod:RegisterEvents(
 	"SPELL_CAST_START",
 	"SPELL_AURA_REMOVED",
 	"UNIT_DIED",
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_AURA_APPLIED"
 )
 
 local warningLocustSoon		= mod:NewSoonAnnounce(28785, 2)
 local warningLocustNow		= mod:NewSpellAnnounce(28785, 3)
 local warningLocustFaded	= mod:NewAnnounce("WarningLocustFaded", 1, 28785)
-
 local specialWarningLocust	= mod:NewSpecialWarning("SpecialLocust")
-
 local timerLocustIn			= mod:NewCDTimer(80, 28785)
 local timerLocustFade 		= mod:NewBuffActiveTimer(26, 28785)
+
 local berserkTimer				= mod:NewBerserkTimer(600)
+local specWarnDarkGaze	= mod:NewSpecialWarning("Dark Gaze", nil, "Special warning for Dark Gaze on you")
 
 mod:AddBoolOption("ArachnophobiaTimer", true, "timer")
 
@@ -78,6 +79,15 @@ end
 function mod:PLAYER_ALIVE()
 	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
 		self:Stop();
+	end
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(1003011) then 
+		if args:IsPlayer() then
+			specWarnDarkGaze:Show();
+			SendChatMessage(L.YellDarkGaze, "YELL")
+		end
 	end
 end
 
