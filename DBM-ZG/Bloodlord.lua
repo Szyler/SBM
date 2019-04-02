@@ -25,7 +25,7 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local warnOghan					= mod:NewAnnounce("Mandokir Enrage - Oghan Died", 3)
+local warnOghan					= mod:NewAnnounce("Mandokir Enrage - Oghan Died", 3, 666006)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
