@@ -55,7 +55,6 @@ function mod:OnCombatStart()
 	self:ScheduleMethod(0, "getBestKill")
 	aspamOne = 1
 	self:ScheduleMethod(1, "antiSpamone")
-	DBM:AddMsg("This boss is not completed in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 ---------- NIGHTMARE DRAKES SHARED ----------

@@ -7,7 +7,8 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_EMOTE",
-	"UNIT_DIED",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
 
@@ -26,13 +27,14 @@ local specWarnPursue	= mod:NewSpecialWarning("SpecWarnPursue")
 
 local berserkTimer	=	mod:NewBerserkTimer(600)
 
+local specWarnWeakened	= mod:NewSpecialWarning("Buru is Weakened!", nil, "Special warning for Buru's weakened phase") 
+
 local eggsDead
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
 	self:ScheduleMethod(0, "getBestKill")
 	eggsDead = 0 
-	DBM:AddMsg("This boss is not yet completed in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:CHAT_MSG_MONSTE_EMOTE(msg)
@@ -46,11 +48,15 @@ function mod:CHAT_MSG_MONSTE_EMOTE(msg)
 	end
 end
 
---EDIT THIS: add the recapID
-function mod:UNIT_DIED(args)
-	local recapID = self:GetCIDFromGUID(args.destGUID)
-	if recapID == 15514 then
-		eggsDead = eggsDead + 1  
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(1002041) then 
+		specWarnWeakened:Show();
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(1002041) then -- Miasma (Eye Tentacles)
+		specWarnWeakened:Show();
 	end
 end
 
