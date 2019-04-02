@@ -25,8 +25,10 @@ end
 
 
 
-local prewarnSpirit				= mod:NewAnnounce("Draw Spirit Soon", 3)
+local prewarnSpirit				= mod:NewAnnounce("Draw Spirit Soon", 3, 24811)
 local warnSpirit				= mod:NewSpellAnnounce(24811, 2)
+
+local lethonHealth = 100
 
 local spiritCount
 local prespiritCount
@@ -34,11 +36,11 @@ local prespiritCount
 local soundSpirit		= mod:NewSound2(24811)
 
 function mod:preSpirit()
-	prewarnCorruption:Show()
+	prewarnSpirit:Show()
 end
 
 function mod:alertSpirit()
-	warnCorruption:Show()
+	warnSpirit:Show()
 	self:ScheduleMethod(0, "alarmSound")
 end
 
@@ -57,6 +59,7 @@ function mod:OnCombatStart()
 end
 
 ---------- NIGHTMARE DRAKES SHARED ----------
+local warnBreath				= mod:NewSpellAnnounce(24818, 3)
 local aspamOne
 function mod:antiSpamone()
 	if aspamOne == 2 then
@@ -66,7 +69,6 @@ function mod:antiSpamone()
 	self:ScheduleMethod(1, "antiSpamone")
 end
 
-local warnBreath				= mod:NewSpellAnnounce(24818, 3)
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(24818) then
 		aspamOne = 2
@@ -77,27 +79,29 @@ mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 
 function mod:UNIT_HEALTH(uId)
 	if self:GetUnitCreatureId(uId) == 14888 then
-		self:ScheduleMethod(0, "checkSpirit")
+		lethonHealth = UnitHealth(uId) / UnitHealthMax(uId) * 100
 	end
+	print(lethonHealth)
+	self:ScheduleMethod(0, "checkSpirit")
 end
 
 function mod:checkSpirit()
-	if self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 80 and prespiritCount == 0 then
+	if lethonHealth <= 80 and prespiritCount == 0 then
 		prespiritCount = 1
 		self:ScheduleMethod(0, "preSpirit")
-	elseif self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 75 and spiritCount == 0 then
+	elseif lethonHealth <= 75 and spiritCount == 0 then
 		spiritCount = 1
 		self:ScheduleMethod(0, "alertSpirit")
-	elseif self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 55 and prespiritCount == 1 then
+	elseif lethonHealth <= 55 and prespiritCount == 1 then
 		prespiritCount = 2
 		self:ScheduleMethod(0, "preSpirit")	
-	elseif self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 50 and spiritCount == 1 then
+	elseif lethonHealth <= 50 and spiritCount == 1 then
 		spiritCount = 2 
 		self:ScheduleMethod(0, "alertSpirit")
-	elseif self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 30 and prespiritCount == 2 then
+	elseif lethonHealth <= 30 and prespiritCount == 2 then
 		prespiritCount = 3 
 		self:ScheduleMethod(0, "preSpirit")
-	elseif self:GetUnitCreatureId(uId) == 14888 and UnitHealth(uId) / UnitHealthMax(uId) <= 25 and spiritCount == 2 then 
+	elseif lethonHealth <= 25 and spiritCount == 2 then 
 		spiritCount = 3
 		self:ScheduleMethod(0, "alertSpirit")
 	end
