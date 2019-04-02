@@ -2,7 +2,7 @@ local mod	= DBM:NewMod("Ouro", "DBM-AQ40", 1)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 132 $"):sub(12, -3))
-mod:SetCreatureID(15517, 1002085, 1015517, 1015957, 1073411, 15957, 73411)
+mod:SetCreatureID(15517)
 mod:RegisterCombat("combat")
 mod:RegisterEvents(
 	"UNIT_HEALTH",
@@ -102,7 +102,7 @@ function mod:UNIT_DIED(args)
 	local recapID = self:GetCIDFromGUID(args.destGUID)
 	if recapID == 19045 then
 		shardsDead = shardsDead + 1  
-	end
+end
 end
 
 ---------- SPEED KILL FUNCTION ----------
