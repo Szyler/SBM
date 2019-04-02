@@ -25,6 +25,7 @@ end
 
 
 local warnInferno		= mod:NewSpellAnnounce(19695)
+local soundInferno					= mod:NewSound(19695)
 local warnIgnite		= mod:NewSpellAnnounce(19659)
 local warnBomb			= mod:NewTargetAnnounce(20475)
 local warnArmageddon	= mod:NewSpellAnnounce(20478)
@@ -59,6 +60,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(19695) then
 		warnInferno:Show()
 		timerInferno:Start()
+		soundInferno:Play()
 	elseif args:IsSpellID(19659) then
 		warnIgnite:Show()
 		timerIgnite:Start()
