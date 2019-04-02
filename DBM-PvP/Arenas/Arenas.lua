@@ -16,7 +16,6 @@ local timerShadow	= Arenas:NewTimer(90, "TimerShadow")
 
 function Arenas:CHAT_MSG_BG_SYSTEM_NEUTRAL(args)
 	if not IsActiveBattlefieldArena() then return end
-	DBM:AddMsg("This arena has not yet been tested in OBM. In order to assist with scripting, please record your game and send the footage to Sky17#0017 on Discord.")
 	if args == L.Start60 then
 		timerStart:Start()
 
