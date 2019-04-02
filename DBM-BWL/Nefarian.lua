@@ -27,7 +27,7 @@ end
 
 local warnPhaseSoon		= mod:NewAnnounce("WarnPhaseSoon", 2)
 local warnPhase			= mod:NewAnnounce("WarnPhase", 3)
-local prewarnFear		= mod:NewAnnounce("Bellowing Roar Soon", 3)
+local prewarnFear		= mod:NewAnnounce("Bellowing Roar Soon", 3, 22686)
 local warnShadowFlame	= mod:NewCastAnnounce(22539, 2)
 local warnFear			= mod:NewCastAnnounce(22686, 2)
 local warnVeilShadow	= mod:NewTargetAnnounce(22687, 3)

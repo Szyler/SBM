@@ -22,9 +22,9 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local prewarnEgg	= mod:NewAnnounce("Egg Hatching Soon", 3)
-local warnEgg		= mod:NewAnnounce("Egg Hatching Now", 2)
-local timerEgg		= mod:NewTimer(35, "Egg Hatches")
+local prewarnEgg	= mod:NewAnnounce("Egg Hatching Soon", 3, 100355)
+local warnEgg		= mod:NewAnnounce("Egg Hatching Now", 2, 100355)
+local timerEgg		= mod:NewTimer(35, "Egg Hatches", 100355)
 
 local warnBlastWave	= mod:NewSpellAnnounce(23331)
 local warnKnockAway	= mod:NewSpellAnnounce(18670)
@@ -32,7 +32,7 @@ local warnMortal	= mod:NewTargetAnnounce(24573)
 
 local timerMortal	= mod:NewTargetTimer(5, 24573)
 
-local soundEgg		= mod:NewSound2(0, "Play Sound on Egg Spawn")
+local soundEgg		= mod:NewSound2(100355, "Play Sound on Egg Spawn")
 
 function mod:preEgg()
 	prewarnEgg:Show()
