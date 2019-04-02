@@ -36,7 +36,6 @@ local timerBlinkCD		= mod:NewNextTimer(30, 21655)
 local specWarnBomb	= mod:NewSpecialWarningYou(965153)
 
 function mod:OnCombatStart(delay)
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 function mod:SPELL_AURA_APPLIED(args)

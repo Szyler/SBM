@@ -21,7 +21,6 @@ end
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-	DBM:AddMsg("This boss has not yet been re-scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
 end
 
 ---------- SPEED KILL FUNCTION ----------
