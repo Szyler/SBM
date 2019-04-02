@@ -75,8 +75,7 @@ function mod:repeatVoid()
 end
 
 ---------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
-function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill", 48266)function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end

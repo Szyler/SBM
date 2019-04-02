@@ -39,20 +39,19 @@ function mod:UNIT_HEALTH(args)
     skeramHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
 	
 	if skeramHealth < 80 and check1 == 0 then
-		check1 == 1
+		check1 = 1
 		prewarnClones:Show()
 	elseif skeramHealth < 55 and check2 == 0 then
-		check2 == 1
+		check2 = 1
 		prewarnClones:Show()
 	elseif skeramHealth < 30 and check3 == 0 then
-		check3 == 1
+		check3 = 1
 		prewarnClones:Show()
 	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill")
-function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill", 48266)function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
