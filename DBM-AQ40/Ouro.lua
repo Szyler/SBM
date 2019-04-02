@@ -21,9 +21,9 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local prewarnShard					= mod:NewAnnounce("Shard Spawn Soon", 3)
-local warnShard						= mod:NewAnnounce("Mind-Corrupting Shard Spawned", 2)
-local timerShard					= mod:NewTimer(35, "Shard Spawn")
+local prewarnShard					= mod:NewAnnounce("Shard Spawn Soon", 3, 1002340)
+local warnShard						= mod:NewAnnounce("Mind-Corrupting Shard Spawned", 2, 1002340)
+local timerShard					= mod:NewTimer(35, "Shard Spawn", 1002340)
 local berserkTimer					= mod:NewBerserkTimer(360)
 
 local shardsDead
@@ -31,7 +31,7 @@ local maxShards
 local ouroHealth
 local shardNumber
 
-local soundShards					= mod:NewSound2(0, "Play Sound on Shard Spawn")
+local soundShards					= mod:NewSound2(1002340, "Play Sound on Shard Spawn")
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()

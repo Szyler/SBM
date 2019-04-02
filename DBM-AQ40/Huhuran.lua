@@ -23,11 +23,11 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local warnSoon		= mod:NewAnnounce("Adds Soon", 2)
-local warnSpawn		= mod:NewAnnounce("Adds Spawned", 3)
-local prewarnSoftEnrage		= mod:NewAnnounce("Soft Enrage Soon", 2)
-local warnSoftEnrage		= mod:NewAnnounce("Soft Enrage Now", 3)
-local timerSpawn	= mod:NewTimer(60, "Adds")
+local warnSoon		= mod:NewAnnounce("Adds Soon", 2, 1002077)
+local warnSpawn		= mod:NewAnnounce("Adds Spawned", 3, 1002077)
+local prewarnSoftEnrage		= mod:NewAnnounce("Soft Enrage Soon", 2, 1002304)
+local warnSoftEnrage		= mod:NewAnnounce("Soft Enrage Now", 3, 1002304)
+local timerSpawn	= mod:NewTimer(60, "Adds", 1002077)
 
 local warnSting			= mod:NewTargetAnnounce(26180, 2)
 local warnAcid			= mod:NewAnnounce("WarnAcid", 3)

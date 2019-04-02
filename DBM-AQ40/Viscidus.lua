@@ -19,7 +19,7 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local berserkTimer	=	mod:NewBerserkTimer(435)
+local berserkTimer	=	mod:NewBerserkTimer(420)
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()	

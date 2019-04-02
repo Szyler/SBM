@@ -19,12 +19,12 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local warnHatchlingssoon	= mod:NewAnnounce("Vekniss Hatchlings Soon", 2)
-local warnExplodingsoon		= mod:NewAnnounce("Volatile Explosion Soon", 3)
-local warnSpawnssoon		= mod:NewAnnounce("Spawn of Fankriss Soon", 4)
-local warnHatchlings		= mod:NewAnnounce("Vekniss Hatchlings Spawned", 2)
-local warnExploding			= mod:NewAnnounce("Volatile Hatchlings Exploding", 3)
-local warnSpawns			= mod:NewAnnounce("Spawn of Fankriss Spawned", 4)
+local warnHatchlingssoon	= mod:NewAnnounce("Vekniss Hatchlings Soon", 2, 1002256)
+local warnExplodingsoon		= mod:NewAnnounce("Volatile Explosion Soon", 3, 1002356)
+local warnSpawnssoon		= mod:NewAnnounce("Spawn of Fankriss Soon", 4, 1002297)
+local warnHatchlings		= mod:NewAnnounce("Vekniss Hatchlings Spawned", 2, 1002256)
+local warnExploding			= mod:NewAnnounce("Volatile Hatchlings Exploding", 3, 1002356)
+local warnSpawns			= mod:NewAnnounce("Spawn of Fankriss Spawned", 4, 1002297)
 
 local timerHatchlingA		= mod:NewTimer(60, "Hatchlings", 1002256)
 local timerExplosionA		= mod:NewTimer(60, "Explosion", 1002356)
