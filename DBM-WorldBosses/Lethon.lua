@@ -81,7 +81,6 @@ function mod:UNIT_HEALTH(uId)
 	if self:GetUnitCreatureId(uId) == 14888 then
 		lethonHealth = UnitHealth(uId) / UnitHealthMax(uId) * 100
 	end
-	print(lethonHealth)
 	self:ScheduleMethod(0, "checkSpirit")
 end
 
