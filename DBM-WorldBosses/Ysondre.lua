@@ -24,7 +24,7 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-
+local ysondreHealth = 100
 
 local prewarnDruids				= mod:NewAnnounce("Demented Druid Spirits Soon", 3)
 local warnDruids				= mod:NewSpellAnnounce(24795, 2)
@@ -64,6 +64,7 @@ function mod:OnCombatStart()
 end
 
 ---------- NIGHTMARE DRAKES SHARED ----------
+local warnBreath				= mod:NewSpellAnnounce(24818, 3)
 local aspamOne
 function mod:antiSpamone()
 	if aspamOne == 2 then
@@ -73,7 +74,6 @@ function mod:antiSpamone()
 	self:ScheduleMethod(1, "antiSpamone")
 end
 
-local warnBreath				= mod:NewSpellAnnounce(24818, 3)
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(24818) then
 		aspamOne = 2
@@ -84,27 +84,28 @@ mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED
 
 function mod:UNIT_HEALTH(uId)
 	if self:GetUnitCreatureId(uId) == 14887 then
-		self:ScheduleMethod(0, "checkDruid")
+		ysondreHealth = UnitHealth(uId) / UnitHealthMax(uId) * 100
 	end
+	self:ScheduleMethod(0, "checkDruid")
 end
 
 function mod:checkDruid()
-	if self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 80 and predruidCount == 0 then
+	if ysondreHealth <= 80 and predruidCount == 0 then
 		predruidCount = 1
 		self:ScheduleMethod(0, "preDruid")
-	elseif self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 75 and druidCount == 0 then
+	elseif ysondreHealth <= 75 and druidCount == 0 then
 		druidCount = 1
 		self:ScheduleMethod(0, "alertDruid")
-	elseif self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 55 and predruidCount == 1 then
+	elseif ysondreHealth <= 55 and predruidCount == 1 then
 		predruidCount = 2
 		self:ScheduleMethod(0, "preDruid")	
-	elseif self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 50 and druidCount == 1 then
+	elseif ysondreHealth <= 50 and druidCount == 1 then
 		druidCount = 2 
 		self:ScheduleMethod(0, "alertDruid")
-	elseif self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 30 and predruidCount == 2 then
+	elseif ysondreHealth <= 30 and predruidCount == 2 then
 		predruidCount = 3 
 		self:ScheduleMethod(0, "preDruid")
-	elseif self:GetUnitCreatureId(uId) == 14887 and UnitHealth(uId) / UnitHealthMax(uId) <= 25 and druidCount == 2 then 
+	elseif ysondreHealth <= 25 and druidCount == 2 then 
 		druidCount = 3
 		self:ScheduleMethod(0, "alertDruid")
 	end

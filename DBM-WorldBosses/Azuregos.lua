@@ -7,8 +7,15 @@ mod:SetCreatureID(6109)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE"
 )
+
+local specWarnManastorm		= mod:NewSpecialWarningMove(21097, true, "Special warning when standing in Blizzard", true)
+local warnMagicReflection		= mod:NewSpellAnnounce(20223, 3)
+local soundMagicReflection		= mod:NewSound2(20223)
+
 
 function mod:OnCombatEnd(wipe)
 	self:Stop();
@@ -23,7 +30,28 @@ end
 
 function mod:OnCombatStart()
 	self:ScheduleMethod(0, "getBestKill")
-	DBM:AddMsg("This boss is not yet scripted in OBM. In order to assist with scripting, please record your attempts and send the footage to Sky17#0017 on Discord.")
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(21097) then 
+		if args:IsPlayer() then
+			specWarnManastorm:Show();
+		end
+	elseif args:IsSpellID(20223) then
+		warnMagicReflection:Show()
+		soundMagicReflection:Play()
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(21097) then 
+		if args:IsPlayer() then
+			specWarnManastorm:Show();
+		end
+	elseif args:IsSpellID(20223) then
+		warnMagicReflection:Show()
+		soundMagicReflection:Play()
+	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
