@@ -25,7 +25,7 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-
+local warnOghan					= mod:NewAnnounce("Mandokir Enrage - Oghan Died", 3)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
@@ -33,8 +33,8 @@ end
 
 function mod:UNIT_DIED(args)
 	local recapID = self:GetCIDFromGUID(args.destGUID)
-	if UnitName("player") == "Sky" then
-		print(recapID)
+	if recapID == 14988 then
+		warnOghan:Show() 
 	end
 end
 
