@@ -6,7 +6,8 @@ mod:SetCreatureID(14834)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_AURA_APPLIED"
 )
 
 function mod:OnCombatEnd(wipe)
@@ -19,10 +20,20 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
+local warnMindControl		= mod:NewTargetAnnounce(24718, 2)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 end
+		
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(24718) then 
+		warnMindControl:Show(args.destName)
+		if args.destName == UnitName("player") then
+			SendChatMessage(L.YellMindControl, "YELL")
+		end
+	end
+end		
 		
 ---------- SPEED KILL FUNCTION ----------
 local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill", 48266)function mod:getBestKill()

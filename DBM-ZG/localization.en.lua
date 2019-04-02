@@ -33,6 +33,9 @@ L = DBM:GetModLocalization("Marli")
 L:SetGeneralLocalization{
 	name = "High Priestess Mar'li"
 }
+L:SetMiscLocalization{
+	YellCertainDeath	= "Certain Death on me!"
+}
 
 -------------------
 --  Thekal  --
@@ -81,6 +84,9 @@ L = DBM:GetModLocalization("Hakkar")
 
 L:SetGeneralLocalization{
 	name = "Hakkar the Soulflayer"
+}
+L:SetMiscLocalization{
+	YellMindControl	= "I'm Mind Controlled!"
 }
 
 -------------------

@@ -6,7 +6,8 @@ mod:SetCreatureID(14510)
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
-	"PLAYER_ALIVE"
+	"PLAYER_ALIVE",
+	"SPELL_AURA_APPLIED"
 )
 
 function mod:OnCombatEnd(wipe)
@@ -19,10 +20,24 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
+local warnAdrenalineRush		= mod:NewTargetAnnounce(100333, 2)
+local warnCertainDeath		= mod:NewTargetAnnounce(100336, 2)
+
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(100336) then 
+		warnCertainDeath:Show(args.destName)
+		if args.destName == UnitName("player") then
+			SendChatMessage(L.YellCertainDeath, "YELL")
+		end
+	elseif args:IsSpellID(100333) then
+		warnAdrenalineRush:Show(args.destName)
+	end
+end		
 
 ---------- SPEED KILL FUNCTION ----------
 local timerSpeedKill		= mod:NewTimer(5, "Fastest Kill", 48266)function mod:getBestKill()
