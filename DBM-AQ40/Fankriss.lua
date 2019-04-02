@@ -26,11 +26,11 @@ local warnHatchlings		= mod:NewAnnounce("Vekniss Hatchlings Spawned", 2)
 local warnExploding			= mod:NewAnnounce("Volatile Hatchlings Exploding", 3)
 local warnSpawns			= mod:NewAnnounce("Spawn of Fankriss Spawned", 4)
 
-local timerHatchlingA		= mod:NewTimer(60, "Hatchlings - Group A")
-local timerExplosionA		= mod:NewTimer(60, "Explosion -  Group A")
-local timerHatchlingB		= mod:NewTimer(60, "Hatchlings - Group B")
-local timerExplosionB		= mod:NewTimer(60, "Explosion -  Group B")
-local timerSpawnofFankriss	= mod:NewTimer(60, "Spawn of Fankriss")
+local timerHatchlingA		= mod:NewTimer(60, "Hatchlings", 1002256)
+local timerExplosionA		= mod:NewTimer(60, "Explosion", 1002356)
+local timerHatchlingB		= mod:NewTimer(60, "Hatchlings", 1002256)
+local timerExplosionB		= mod:NewTimer(60, "Explosion", 1002356)
+local timerSpawnofFankriss	= mod:NewTimer(60, "Spawn of Fankriss", 1002297)
 
 local berserkTimer	=	mod:NewBerserkTimer(540)
 
