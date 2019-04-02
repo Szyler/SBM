@@ -19,16 +19,16 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local prewarnVoid					= mod:NewAnnounce("Void Singularity Soon", 3)
-local prewarnAdds					= mod:NewAnnounce("Adds Soon", 3)
+local prewarnVoid					= mod:NewAnnounce("Void Singularity Soon", 3, 1002140)
+local prewarnAdds					= mod:NewAnnounce("Adds Soon", 3, 1002126)
 
-local warnVoid						= mod:NewAnnounce("Void Singularity Spawned", 2)
-local warnAdds						= mod:NewAnnounce("Adds Spawned", 2)
+local warnVoid						= mod:NewAnnounce("Void Singularity Spawned", 2, 1002140)
+local warnAdds						= mod:NewAnnounce("Adds Spawned", 2, 1002126)
 
-local timerVoid						= mod:NewTimer(45, "Void Singularity Spawn")
-local timerAdds						= mod:NewTimer(15, "Next Add Wave")
+local timerVoid						= mod:NewTimer(45, "Void Singularity Spawn", 1002140)
+local timerAdds						= mod:NewTimer(15, "Next Add Wave", 1002126)
 
-local soundVoid						= mod:NewSound2(0, "Play Sound on Void Singularity Spawn")
+local soundVoid						= mod:NewSound2(1002140, "Play Sound on Void Singularity Spawn")
 
 function mod:preVoid()
 	prewarnVoid:Show()
