@@ -263,7 +263,11 @@ function mod:eldFearGlareFix()
 end
 
 function mod:enterStomach()
-	local timer2 = 20
+	if mod:IsDifficulty("normal10") then
+		local timer2 = 20
+	elseif mod:IsDifficulty("normal25") then
+		local timer2 = 10
+	end
 	timerStomach:Start(timer2)
 	self:ScheduleMethod(timer2-5, "preStomach")
 	self:ScheduleMethod(timer2, "alertStomach")
@@ -271,7 +275,11 @@ function mod:enterStomach()
 end
 
 function mod:stomachWeaknessFix()
-	local timer4 = 15
+	if mod:IsDifficulty("normal10") then
+		local timer2 = 15
+	elseif mod:IsDifficulty("normal25") then
+		local timer2 = 5
+	end
 	timerStomach:Start(timer4)
 	self:ScheduleMethod(timer4-5, "preStomach")
 	self:ScheduleMethod(timer4, "alertStomach")
