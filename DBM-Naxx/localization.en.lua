@@ -21,7 +21,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	YellDarkGaze = "Dark Gaze on me!"
+	YellDarkGaze = "Dark Gaze on me!",
 	ArachnophobiaTimer	= "Arachnophobia"
 })
 
