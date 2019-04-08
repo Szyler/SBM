@@ -263,27 +263,35 @@ function mod:eldFearGlareFix()
 end
 
 function mod:enterStomach()
+	local timer2a = 20
+	local timer2b = 10
 	if mod:IsDifficulty("normal10") then
-		local timer2 = 20
+		timerStomach:Start(timer2a)
+		self:ScheduleMethod(timer2a-5, "preStomach")
+		self:ScheduleMethod(timer2a, "alertStomach")
+		self:ScheduleMethod(timer2a, "enterStomach")
 	elseif mod:IsDifficulty("normal25") then
-		local timer2 = 10
+		timerStomach:Start(timer2b)
+		self:ScheduleMethod(timer2b-5, "preStomach")
+		self:ScheduleMethod(timer2b, "alertStomach")
+		self:ScheduleMethod(timer2b, "enterStomach")
 	end
-	timerStomach:Start(timer2)
-	self:ScheduleMethod(timer2-5, "preStomach")
-	self:ScheduleMethod(timer2, "alertStomach")
-	self:ScheduleMethod(timer2, "enterStomach")
 end
 
 function mod:stomachWeaknessFix()
+	local timer4a = 15
+	local timer4b = 5
 	if mod:IsDifficulty("normal10") then
-		local timer2 = 15
+		timerStomach:Start(timer4a)
+		self:ScheduleMethod(timer4a-5, "preStomach")
+		self:ScheduleMethod(timer4a, "alertStomach")
+		self:ScheduleMethod(timer4a, "enterStomach")
 	elseif mod:IsDifficulty("normal25") then
-		local timer2 = 5
+		timerStomach:Start(timer4b)
+		self:ScheduleMethod(timer4b-5, "preStomach")
+		self:ScheduleMethod(timer4b, "alertStomach")
+		self:ScheduleMethod(timer4b, "enterStomach")
 	end
-	timerStomach:Start(timer4)
-	self:ScheduleMethod(timer4-5, "preStomach")
-	self:ScheduleMethod(timer4, "alertStomach")
-	self:ScheduleMethod(timer4, "enterStomach")
 end
 
 function mod:clawTentacleInitial()
