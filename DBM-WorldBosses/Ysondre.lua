@@ -10,7 +10,6 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
 	"UNIT_HEALTH",
-	"UNIT_DIED",
 	"PLAYER_ALIVE"
 )
 
@@ -45,13 +44,6 @@ end
 
 function mod:alarmSound()
 	soundDruid:Play()
-end
-
-function mod:UNIT_DIED(args)
-	local recapID = self:GetCIDFromGUID(args.destGUID)
-	if UnitName("player") == "Sky" then
-		print(recapID)
-	end
 end
 
 function mod:OnCombatStart()
