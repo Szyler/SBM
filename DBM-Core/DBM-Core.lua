@@ -42,10 +42,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1400 $"):sub(12, -3),
-	Version = "1.40",
-	DisplayVersion = "1.40", -- the string that is shown as version
-	ReleaseRevision = 1400 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1500 $"):sub(12, -3),
+	Version = "1.50",
+	DisplayVersion = "1.50", -- the string that is shown as version
+	ReleaseRevision = 1500 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -135,8 +135,11 @@ local chatPrefix = "<OAK BOSS MODS> "
 local chatPrefixShort = "<OAK-BM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
+local newFrame = CreateFrame("Frame")
+local noCombatFrame = CreateFrame("Frame")
+local combatFrame = CreateFrame("Frame")
 local showedUpdateReminder = false
-local combatInitialized = false
+local combatInitialized = false 
 local schedule
 local unschedule
 local loadOptions
@@ -608,7 +611,86 @@ do
 			end
 		end
 	end
+	
+----------OBMTV FUNCTIONS----------
+	local inCombat
+	local delayPop = false
+	noCombatFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+	noCombatFrame:SetScript("OnEvent", function(self, event)
+		if(event == "PLAYER_REGEN_ENABLED") then
+			inCombat = false
+			if(delayPop) then
+				delayPop = false
+				popUp()
+			end
+		end
+	end)
+	
+	combatFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+	combatFrame:SetScript("OnEvent", function(self, event)
+		if(event == "PLAYER_REGEN_DISABLED") then
+			inCombat = true
+		end
+	end)
+	
+    newFrame:RegisterEvent("CHAT_MSG_CHANNEL")
+    newFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+    newFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
+    newFrame:SetScript("OnEvent", function(self, event)
+	
+        if(event == "CHAT_MSG_CHANNEL") then
+            local ChannelID = GetChannelName("OBMTV")
+            local name = UnitName("player")
+            local MSG_FROM = arg2
+            local found,_,p1 = string.find(arg4, " (.+)")
+       
+            if(found) then
+                if(p1 == "OBMTV") then
+                    if(string.find(arg1,"obm_tv: get_version_")) then
+                        if(MSG_FROM == "Sky") then
+                            if(string.find(arg1, "obm_tv: get_version_"..DBM.Version)) then
+                                SendChatMessage("I have the latest version!", "CHANNEL", nil, ChannelID)
+                                return;
+                            else
+                                SendChatMessage("My version is out of date, my version is "..DBM.Version, "CHANNEL", nil, ChannelID)
+								if not(inCombat) then
+									delayPop = true
+									popUp()
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+		end
+    end
+    )
+	
+function popUp()
+	StaticPopupDialogs["UPDATE_OBM"] = {
+		text = "Please update OBM.\n(CTRL + A > CTRL+C to copy)",
+		hasEditBox = 1;
+		maxLetters = 128;
+		button1 = "Okay",
+		OnShow = function(self, data)
+			self.editBox:SetText("discord.gg/NQkgFbT");
+			self.editBox:SetFocus();
+		end,
+			EditBoxOnEnterPressed = function(self)
+			self:GetParent():Hide();
+		end,
+			EditBoxOnEscapePressed = function(self)
+			self:GetParent():Hide();
+		end,
+			timeout = 0,
+			whileDead = 1,
+			hideOnEscape = 1,
+		};
+	StaticPopup_Show("UPDATE_OBM");
+end
 
+----------OBMTV FUNCTIONS----------
+	
 	mainFrame:SetScript("OnUpdate", function(self, elapsed)
 		local time = GetTime()
 
@@ -1313,6 +1395,7 @@ do
 			DBM.Bars:LoadOptions("DBM")
 			DBM.Arrow:LoadPosition()
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
+			JoinChannelByName("OBMTV");
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
 				if GetAddOnMetadata(i, "X-DBM-Mod") and not checkEntry(bannedMods, GetAddOnInfo(i)) then
@@ -1823,6 +1906,7 @@ function checkWipe(confirm)
 end
 
 function DBM:StartCombat(mod, delay, synced)
+    local ChannelID = GetChannelName("OBMTV")
 	if not checkEntry(inCombat, mod) then
 		if not mod.combatInfo then return end
 		if mod.combatInfo.noCombatInVehicle and UnitInVehicle("player") then -- HACK
@@ -1830,6 +1914,7 @@ function DBM:StartCombat(mod, delay, synced)
 		end
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
+		SendChatMessage(OBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
 		elseif mod:IsDifficulty("normal5", "heroic10") then
@@ -1870,6 +1955,7 @@ end
 
 
 function DBM:EndCombat(mod, wipe)
+    local ChannelID = GetChannelName("OBMTV")
 	if removeEntry(inCombat, mod) then
 		mod:Stop()
 		mod.inCombat = false
@@ -1889,6 +1975,7 @@ function DBM:EndCombat(mod, wipe)
 				end
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
+			SendChatMessage(OBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			local msg
 			for k, v in pairs(autoRespondSpam) do
 				msg = msg or chatPrefixShort..DBM_CORE_WHISPER_COMBAT_END_WIPE:format(UnitName("player"), (mod.combatInfo.name or ""))
@@ -1910,10 +1997,13 @@ function DBM:EndCombat(mod, wipe)
 			end
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
