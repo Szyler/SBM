@@ -639,15 +639,15 @@ do
     newFrame:SetScript("OnEvent", function(self, event)
 	
         if(event == "CHAT_MSG_CHANNEL") then
-            local ChannelID = GetChannelName("OBMTV")
+            local ChannelID = GetChannelName("OBMCOMMAND")
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
        
             if(found) then
-                if(p1 == "OBMTV") then
+                if(p1 == "OBMCOMMAND") then
                     if(string.find(arg1,"obm_tv: get_version_")) then
-                        if(MSG_FROM == "Sky") then
+                        if(MSG_FROM == "Sky" or MSG_FROM == "Oakbot") then
                             if(string.find(arg1, "obm_tv: get_version_"..DBM.Version)) then
                                 SendChatMessage("I have the latest version!", "CHANNEL", nil, ChannelID)
                                 return;
@@ -1395,7 +1395,10 @@ do
 			DBM.Bars:LoadOptions("DBM")
 			DBM.Arrow:LoadPosition()
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
+			JoinChannelByName("OBMCOMMAND");
 			JoinChannelByName("OBMTV");
+			local ChannelID = GetChannelName("OBMCOMMAND")
+			SendChatMessage("My version of OBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
 				if GetAddOnMetadata(i, "X-DBM-Mod") and not checkEntry(bannedMods, GetAddOnInfo(i)) then
