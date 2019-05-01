@@ -265,12 +265,12 @@ end
 function mod:enterStomach()
 	local timer2a = 20
 	local timer2b = 10
-	if mod:IsDifficulty("normal10") then
+	if mod:IsDifficulty("heroic10") then
 		timerStomach:Start(timer2a)
 		self:ScheduleMethod(timer2a-5, "preStomach")
 		self:ScheduleMethod(timer2a, "alertStomach")
 		self:ScheduleMethod(timer2a, "enterStomach")
-	elseif mod:IsDifficulty("normal25") then
+	elseif mod:IsDifficulty("heroic25") then
 		timerStomach:Start(timer2b)
 		self:ScheduleMethod(timer2b-5, "preStomach")
 		self:ScheduleMethod(timer2b, "alertStomach")
@@ -281,12 +281,12 @@ end
 function mod:stomachWeaknessFix()
 	local timer4a = 15
 	local timer4b = 5
-	if mod:IsDifficulty("normal10") then
+	if mod:IsDifficulty("heroic10") then
 		timerStomach:Start(timer4a)
 		self:ScheduleMethod(timer4a-5, "preStomach")
 		self:ScheduleMethod(timer4a, "alertStomach")
 		self:ScheduleMethod(timer4a, "enterStomach")
-	elseif mod:IsDifficulty("normal25") then
+	elseif mod:IsDifficulty("heroic25") then
 		timerStomach:Start(timer4b)
 		self:ScheduleMethod(timer4b-5, "preStomach")
 		self:ScheduleMethod(timer4b, "alertStomach")
