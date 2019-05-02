@@ -1,42 +1,8 @@
 -- *********************************************************
--- **               OAK Boss Mods - Core               **
+-- **                   OAK Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
+-- **        An addon by Sky @ Andorhal - No Risk         **
 -- *********************************************************
---
--- This addon is written and copyrighted by:
---    * Paul Emmerich (Tandanu @ EU-Aegwynn) (DBM-Core)
---    * Martin Verges (Nitram @ EU-Azshara) (DBM-GUI)
---
--- The localizations are written by:
---    * enGB/enUS: Tandanu				http://www.deadlybossmods.com
---    * deDE: Tandanu					http://www.deadlybossmods.com
---    * zhCN: Diablohu					http://wow.gamespot.com.cn
---    * ruRU: BootWin					bootwin@gmail.com
---    * ruRU: Vampik					admin@vampik.ru
---    * zhTW: Hman						herman_c1@hotmail.com
---    * zhTW: Azael/kc10577				kc10577@hotmail.com
---    * koKR: BlueNyx					bluenyx@gmail.com
---    * esES: Interplay/1nn7erpLaY      http://www.1nn7erpLaY.com
---
--- Special thanks to:
---    * Arta (DBM-Party)
---    * Omegal @ US-Whisperwind (continuing mod support for 3.2+)
---    * Tennberg (a lot of fixes in the enGB/enUS localization)
---
---
--- The code of this addon is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 License. (see license.txt)
--- All included textures and sounds are copyrighted by their respective owners, license information for these media files can be found in the modules that make use of them.
---
---
---  You are free:
---    * to Share - to copy, distribute, display, and perform the work
---    * to Remix - to make derivative works
---  Under the following conditions:
---    * Attribution. You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). (A link to http://www.deadlybossmods.com is sufficient)
---    * Noncommercial. You may not use this work for commercial purposes.
---    * Share Alike. If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
---
-
 
 -------------------------------
 --  Globals/Default Options  --
@@ -147,6 +113,8 @@ local loadModOptions
 local checkWipe
 local fireEvent
 local wowVersion = select(4, GetBuildInfo())
+local developerName = "Sky"
+local botName = "Oakbot"
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
 
@@ -647,7 +615,7 @@ do
             if(found) then
                 if(p1 == "OBMCOMMAND") then
                     if(string.find(arg1,"obm_tv: get_version_")) then
-                        if(MSG_FROM == "Sky" or MSG_FROM == "Oakbot") then
+                        if(MSG_FROM == developerName or MSG_FROM == botName) then
                             if(string.find(arg1, "obm_tv: get_version_"..DBM.Version)) then
                                 SendChatMessage("I have the latest version!", "CHANNEL", nil, ChannelID)
                                 return;

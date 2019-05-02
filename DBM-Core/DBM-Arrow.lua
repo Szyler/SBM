@@ -1,4 +1,8 @@
--- This file uses models and textures taken from TomTom. The 3d arrow model was created by Guillotine (curse.guillotine@gmail.com) and 2d minimap textures by Cladhaire.
+-- *********************************************************
+-- **                   OAK Boss Mods                     **
+-- **            http://www.deadlybossmods.com            **
+-- **        An addon by Sky @ Andorhal - No Risk         **
+-- *********************************************************
 
 ----------------------------
 --  Initialize variables  --

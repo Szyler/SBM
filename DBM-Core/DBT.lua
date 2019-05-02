@@ -1,37 +1,8 @@
--- ***************************************************
--- **               Deadly Bar Timers               **
--- **         http://www.deadlybossmods.com         **
--- ***************************************************
---
--- This addon is written and copyrighted by:
---    * Paul Emmerich (Tandanu @ EU-Aegwynn) (DBM-Core)
---    * Martin Verges (Nitram @ EU-Azshara) (DBM-GUI)
--- 
--- The localizations are written by:
---    * enGB/enUS: Tandanu			http://www.deadlybossmods.com
---    * deDE: Tandanu				http://www.deadlybossmods.com
---    * zhCN: Diablohu				http://wow.gamespot.com.cn
---    * ruRU: BootWin				bootwin@gmail.com
---    * zhTW: Azael/kc10577			kc10577@hotmail.com
---    * esES: Interplay/1nn7erpLaY      http://www.1nn7erpLaY.com
---    * (add your names here!)
---
--- Special thanks to:
---    * Arta (DBM-Party)
---
--- 
--- The code of this addon is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 License. (see license.txt)
--- All included textures and sounds are copyrighted by their respective owners.
---
---
---  You are free:
---    * to Share ?to copy, distribute, display, and perform the work
---    * to Remix ?to make derivative works
---  Under the following conditions:
---    * Attribution. You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
---    * Noncommercial. You may not use this work for commercial purposes.
---    * Share Alike. If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
-
+-- *********************************************************
+-- **                   OAK Boss Mods                     **
+-- **            http://www.deadlybossmods.com            **
+-- **        An addon by Sky @ Andorhal - No Risk         **
+-- *********************************************************
 
 ---------------
 --  Globals  --
