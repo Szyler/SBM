@@ -60,10 +60,6 @@ function DeadlyBuffFrames_OnEvent(event)
 	end
 	
 	-- turn on or off the addon depending on zone
-	if (event == "ZONE_CHANGED_NEW_AREA") then 
-		DBF_DoZoneDetect();
-		return;
-	end
 
 	if(not DBF_ZONE) then return; end
 end
