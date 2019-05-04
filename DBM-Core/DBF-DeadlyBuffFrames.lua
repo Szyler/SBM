@@ -267,3 +267,13 @@ function DBF_DetectRaid()
 		--turn on autogreed if set to on
 	end
 end
+
+function dbf_sendchat(msg)
+	if(GetNumRaidMembers()>0) then
+		SendChatMessage("<OBM> "..msg,"RAID");
+	elseif(GetNumPartyMembers()>0) then
+		SendChatMessage("<OBM> "..msg,"PARTY");
+	else
+		SendChatMessage("<OBM> "..msg,"SAY");
+	end
+end
