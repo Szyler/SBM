@@ -1,0 +1,475 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="DBF-StatusFrame.lua"/> 
+
+	<!-- Menu frame -->
+	<Frame name="DBFStatusFrameDropDownMenu" inherits="UIDropDownMenuTemplate"></Frame>
+	
+	<!-- Frame that handle the onupdate function to RangeCheck function -->
+	<Frame name="DBFStatusFrame" toplevel="true" enableMouse="true" movable="true" frameStrata="MEDIUM" hidden="false" parent="UIParent">
+		<Scripts> 
+			<OnHide>
+				if(this.isMoving) then
+					this:StopMovingOrSizing();
+					ValidateFramePosition(this);
+					this.isMoving = false;
+				end
+			</OnHide>
+			<OnMouseUp>
+				if(this.isMoving) then
+			  		this:StopMovingOrSizing();
+			  		ValidateFramePosition(this);
+			  		this.isMoving = false;
+			 	end
+			</OnMouseUp>
+			<OnMouseDown>
+				if(not DBF_GetS("SFLocked") and arg1 == "LeftButton") then
+			  		this:StartMoving();
+			  		this.isMoving = true;
+				end
+				
+				if(arg1 == "RightButton") then
+					ToggleDropDownMenu(1, nil, DBFStatusFrameDropDownMenu, this, 0, 0);
+				end
+			</OnMouseDown>
+		</Scripts>
+		<Size>
+			<AbsDimension x="125" y="70"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentHeaderText" inherits="GameFontNormal" text="DeadlyBuffFrames" maxLines="1">
+					<Size>
+						<AbsDimension x="125" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-3"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentCloseButton">
+				<Size>
+					<AbsDimension x="18" y="18"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DBFStatusFrame:Hide();
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+			</Button>
+			
+			<Button name="$parentWellFed">
+				<Size>
+					<AbsDimension x="20" y="20" />				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-8" y="7"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateWellFedTooltip();
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 > GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateWellFedTooltip();
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\Spell_Misc_Food"/>
+				<HighlightTexture alphaMode="ADD">
+					<Color r="0" g="1" b="0" a="0.3"/>
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentFlask">
+				<Size>
+					<AbsDimension x="20" y="20" />				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parentWellFed" relativePoint="TOP">
+						<Offset x="0" y="14"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateFlaskTooltip();
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 > GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateFlaskTooltip();
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\Inv_Potion_97"/>
+				<HighlightTexture alphaMode="ADD">
+					<Color r="0" g="1" b="0" a="0.3"/>
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsArcaneIntellect">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentWellFed" relativePoint="LEFT">
+						<Offset x="-2" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Arcane Intellect");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Arcane Intellect");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_arcaneintellect" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsFortitude">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parentBuffsArcaneIntellect" relativePoint="TOP">
+						<Offset x="0" y="14"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Power Word: Fortitude");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Power Word: Fortitude");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_wordfortitude" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsMarkOfTheWild">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentBuffsArcaneIntellect" relativePoint="LEFT">
+						<Offset x="-2" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Mark of the Wild");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Mark of the Wild");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_nature_giftofthewild" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsBlessingOfKings">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parentBuffsMarkOfTheWild" relativePoint="TOP">
+						<Offset x="0" y="14"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Blessing of Kings");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Blessing of Kings");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_magic_greaterblessingofkings" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsBlessingOfSanctuary">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentBuffsMarkOfTheWild" relativePoint="LEFT">
+						<Offset x="-2" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Blessing of Sanctuary");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Blessing of Sanctuary");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_greaterblessingofsanctuary" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsBlessingOfMight">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentBuffsBlessingOfSanctuary" relativePoint="LEFT">
+						<Offset x="-2" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Blessing of Might");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Blessing of Might");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_greaterblessingofkings" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsBlessingOfWisdom">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parentBuffsBlessingOfSanctuary" relativePoint="TOP">
+						<Offset x="0" y="14"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Blessing of Wisdom");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Blessing of Wisdom");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_greaterblessingofwisdom" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsBattleShout">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parentBuffsBlessingOfMight" relativePoint="TOP">
+						<Offset x="0" y="14"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Battle Shout");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Battle Shout");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\ability_warrior_battleshout" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

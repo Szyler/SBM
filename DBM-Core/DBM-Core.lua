@@ -3864,4 +3864,3 @@ do
 		return modLocalizations[name] or self:CreateModLocalization(name)
 	end
 end
-
