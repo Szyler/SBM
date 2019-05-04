@@ -14,6 +14,7 @@ local DBF_BATTLE_ELIXIR = {
 local DBF_GUARDIAN_ELIXIR = {
 	["Mighty Thoughts"] = 1,
 	["Mighty Defense"] = 1,
+	["Crystal Force"] = 1,
 };
 
 local DBF_BOTH_ELIXIR = {
