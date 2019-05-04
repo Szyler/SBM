@@ -45,7 +45,7 @@ local default_settings = {
 		{ spell = 66233, bartext = default_bartext, cooldown = 120 },	-- Ardent Defender
 		{ spell = 871, bartext = default_bartext, cooldown = 300 },		-- Shield Wall
 		{ spell = 2565, bartext = default_bartext, cooldown = 60 },		-- Shield Block
-		{ spell = 20484, bartext = default_bartext, cooldown = 600 },	-- Rebirth
+		{ spell = 20748, bartext = default_bartext, cooldown = 600 },	-- Rebirth
 		{ spell = 22812, bartext = default_bartext, cooldown = 60 },	-- Barkskin
 		{ spell = 61336, bartext = default_bartext, cooldown = 120 }, 	-- Survival Instincts
 		{ spell = 22842, bartext = default_bartext, cooldown = 180 }, 	-- Frenzied Regeneration
