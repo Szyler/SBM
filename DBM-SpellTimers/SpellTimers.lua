@@ -60,6 +60,8 @@ local default_settings = {
 		{ spell = 47585, bartext = default_bartext, cooldown = 120 }, 	-- Dispersion
 		{ spell = 5277, bartext = default_bartext, cooldown = 180 }, 	-- Evasion
 		{ spell = 16190, bartext = default_bartext, cooldown = 180 }, 	-- Mana Tide Totem
+		{ spell = 12975, bartext = default_bartext, cooldown = 180 }, 	-- Last Stand
+		{ spell = 694, bartext = default_bartext, cooldown = 120 }, 	-- Mocking Blow
 	},
 	portal_alliance = {
 		{ spell = 53142, bartext = default_bartext, cooldown = 60 }, 	-- Portal: Dalaran
@@ -105,6 +107,7 @@ end
 local addDefaultOptions
 do 
 	local function creategui()
+		rebuildSpellIDIndex()
 		local createnewentry
 		local CurCount = 0
 		local panel = DBM_GUI:CreateNewPanel(L.TabCategory_SpellsUsed, "option")
@@ -119,7 +122,7 @@ do
 				v:SetParent(UIParent)
 				v:ClearAllPoints()
 			end
-			auraarea.frame:SetHeight(20)
+			auraarea.frame:SetHeight(24)
 			CurCount = 0
 
 			if #settings.spells == 0 then

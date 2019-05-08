@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1500 $"):sub(12, -3),
-	Version = "1.50",
-	DisplayVersion = "1.50", -- the string that is shown as version
-	ReleaseRevision = 1500 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1510 $"):sub(12, -3),
+	Version = "1.51",
+	DisplayVersion = "1.51", -- the string that is shown as version
+	ReleaseRevision = 1510 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -900,15 +900,15 @@ do
 			table.insert(sortMe, v)
 		end
 		table.sort(sortMe, sort)
-		self:AddMsg(DBM_CORE_VERSIONCHECK_HEADER)
+		--self:AddMsg(DBM_CORE_VERSIONCHECK_HEADER)
 		for i, v in ipairs(sortMe) do
 			if v.displayVersion then
-				self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY:format(v.name, v.displayVersion, v.revision))
+				--self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY:format(v.name, v.displayVersion, v.revision))
 				if notify and v.displayVersion ~= DBM.Version and v.revision < DBM.ReleaseRevision then
-					SendChatMessage(chatPrefixShort..DBM_CORE_YOUR_VERSION_OUTDATED, "WHISPER", nil, v.name)
+					--SendChatMessage(chatPrefixShort..DBM_CORE_YOUR_VERSION_OUTDATED, "WHISPER", nil, v.name)
 				end
 			else
-				self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM:format(v.name))
+				--self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM:format(v.name))
 			end
 		end
 		for i = #sortMe, 1, -1 do
@@ -916,7 +916,7 @@ do
 				table.remove(sortMe, i)
 			end
 		end
-		self:AddMsg(DBM_CORE_VERSIONCHECK_FOOTER:format(#sortMe))
+		--self:AddMsg(DBM_CORE_VERSIONCHECK_FOOTER:format(#sortMe))
 		for i = #sortMe, 1, -1 do
 			sortMe[i] = nil
 		end
@@ -1586,11 +1586,11 @@ do
 						if found then
 							showedUpdateReminder = true
 							if not DBM.Options.BlockVersionUpdatePopup then
-								DBM:ShowUpdateReminder(displayVersion, revision)
+								--DBM:ShowUpdateReminder(displayVersion, revision)
 							else 
-								DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
-								DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, revision))
-								DBM:AddMsg(("|HDBM:update:%s:%s|h|cff3588ff[http://deadlybossmods.com]"):format(displayVersion, revision))
+								--DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
+								--DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, revision))
+								--DBM:AddMsg(("|HDBM:update:%s:%s|h|cff3588ff[http://deadlybossmods.com]"):format(displayVersion, revision))
 							end
 						end
 					end

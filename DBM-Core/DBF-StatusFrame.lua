@@ -135,6 +135,7 @@ function DBF_PopulateWellFedTooltip()
 		end
 	end
 	--add total or all have
+	if(GetNumRaidMembers()>0) then
 	if(count==0) then
 		text = text..dbf_c_g;
 		texttochat = "Everybody has "..text;
@@ -149,6 +150,10 @@ function DBF_PopulateWellFedTooltip()
 			first = false;
 		end
 		text = text..DBF_GetTextClassColor(class)..name.." ";
+	end
+	else
+		text = text.."\n"..dbf_c_r.."Not in raid";
+		texttochat = texttochat.."Not in a raid.";
 	end
 	--add extra info
 	text = text.."\n"..dbf_c_grey.."(Shift+Click): Paste to chat.";
@@ -179,6 +184,7 @@ function DBF_PopulateSpellTooltip(nameinput)
 		end
 	end
 	--add total or all have
+	if(GetNumRaidMembers()>0) then
 	if(count==0) then
 		text = text.."\n"..dbf_c_g.."All have";
 		texttochat = "Everybody has "..nameinput..".";
@@ -193,6 +199,10 @@ function DBF_PopulateSpellTooltip(nameinput)
 			first = false;
 		end
 		text = text..DBF_GetTextClassColor(class)..name.." ";
+	end
+	else
+		text = text.."\n"..dbf_c_r.."Not in raid";
+		texttochat = texttochat.."Not in a raid.";
 	end
 	--add extra info
 	text = text.."\n"..dbf_c_grey.."(Shift+Click): Paste to chat.";
@@ -240,44 +250,6 @@ function DBF_ScanForWellFed()
 				oor_dead[UnitName("raid"..i)] = class;
 			end
 		end
-	elseif(GetNumPartyMembers()>0) then
-		--check player
-		local w = DBF_CheckForBuff("Well Fed","player");
-		if(not w) then
-		local w = DBF_CheckForBuff("Blessed Sunfruit","player");
-		if(not w) then
-		local w = DBF_CheckForBuff("Blessed Sunfruit Juice","player");
-		if(not w) then
-		local w = DBF_CheckForBuff("Increased Stamina","player");
-		if(not w) then
-			local _,class = UnitClass("player");
-			if(not missing_well[1]) then missing_well[1] = {}; end
-			missing_well[1][UnitName("player")] = class;
-		end
-		end
-		end
-		end
-		--check party
-		for i=1,GetNumPartyMembers() do
-			--dont check dead or out of range
-			if((not UnitIsDeadOrGhost("party"..i)) and UnitIsVisible("party"..i)) then
-				local w = DBF_CheckForBuff("Well Fed","party"..i);
-				if(not w) then
-				local w = DBF_CheckForBuff("Blessed Sunfruit","party"..i);
-				if(not w) then
-				local w = DBF_CheckForBuff("Blessed Sunfruit Juice","party"..i);
-				if(not w) then
-					local _,class = UnitClass("party"..i);
-					if(not missing_well[1]) then missing_well[1] = {}; end
-					missing_well[1][UnitName("party"..i)] = class;
-				end
-				end
-				end
-			else
-				local _,class = UnitClass("party"..i);
-				oor_dead[UnitName("party"..i)] = class;
-			end
-		end
 	end
 	return missing_well,oor_dead;
 end
@@ -323,29 +295,6 @@ function DBF_ScanForbuff(name)
 			else
 				local _,class = UnitClass("raid"..i);
 				oor_dead[UnitName("raid"..i)] = class;
-			end
-		end
-	elseif(GetNumPartyMembers()>0) then
-		--check player
-		local w = DBF_CheckForBuff(name,"player");
-		if(not w) then
-			local _,class = UnitClass("player");
-			if(not missing_well[1]) then missing_well[1] = {}; end
-			missing_well[1][UnitName("player")] = class;
-		end
-		--check party
-		for i=1,GetNumPartyMembers() do
-			--dont check dead or out of range
-			if((not UnitIsDeadOrGhost("party"..i)) and UnitIsVisible("party"..i)) then
-				local w = DBF_CheckForBuff(name,"party"..i);
-				if(not w) then
-					local _,class = UnitClass("party"..i);
-					if(not missing_well[1]) then missing_well[1] = {}; end
-					missing_well[1][UnitName("party"..i)] = class;
-				end
-			else
-				local _,class = UnitClass("party"..i);
-				oor_dead[UnitName("party"..i)] = class;
 			end
 		end
 	end
