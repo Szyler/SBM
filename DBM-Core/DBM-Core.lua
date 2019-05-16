@@ -765,8 +765,6 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		DBM:PromoteAllRaidOBM()
 	elseif cmd == "cr" or cmd == "convert" then
 		DBM:ConvertRaid()
-	elseif cmd == "cfix" then
-		DBM:CthunFix()
 	elseif cmd == "help" then
 		for i, v in ipairs(DBM_CORE_SLASHCMD_HELP) do DBM:AddMsg(v) end
 	elseif cmd:sub(1, 5) == "timer" then
