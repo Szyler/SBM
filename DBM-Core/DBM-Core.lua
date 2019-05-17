@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1520 $"):sub(12, -3),
-	Version = "1.52",
-	DisplayVersion = "1.52", -- the string that is shown as version
-	ReleaseRevision = 1520 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1530 $"):sub(12, -3),
+	Version = "1.53",
+	DisplayVersion = "1.53", -- the string that is shown as version
+	ReleaseRevision = 1530 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -612,6 +612,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
+			local codedGuild = 0
             
 			if(found) then  
 				local guildName, guildRankName, guildRankIndex, guildRealm = GetGuildInfo(MSG_FROM)
@@ -622,70 +623,62 @@ do
 							checkOBMVersion()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK") then
-								if(guildName == "OAK") then
-									if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
-										checkOBMVersion()
-									end
+							if(myguildName == "OAK" and guildName == "OAK") then
+								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
+									checkOBMVersion()
+									codedGuild = 1
 								end
-							elseif(myguildName == "Long Live Cenarius") then
-								if(guildName == "Long Live Cenarius") then
-									if(guildRankIndex == 0 or guildRankIndex == 1) then
-										checkOBMVersion()
-									end
+							elseif(myguildName == "Long Live Cenarius" and guildName == "Long Live Cenarius") then
+								if(guildRankIndex == 0 or guildRankIndex == 1) then
+									checkOBMVersion()
+									codedGuild = 1
 								end
-							elseif(myguildName == "Exiled") then
-								if(guildName == "Exiled") then
-									if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
-										checkOBMVersion()
-									end
+							elseif(myguildName == "Exiled" and guildName == "Exiled") then
+								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
+									checkOBMVersion()
+									codedGuild = 1
 								end
-							elseif(myguildName == "HordeGuards") then
-								if(guildName == "HordeGuards") then
-									if(guildRankIndex == 0 or guildRankIndex == 1) then
-										checkOBMVersion()
-									end
+							elseif(myguildName == "HordeGuards" and guildName == "HordeGuards") then
+								if(guildRankIndex == 0 or guildRankIndex == 1) then
+									checkOBMVersion()
+									codedGuild = 1
 								end
-							elseif(myguildName == guildName) then
+							end
+						end
+							elseif(myguildName == guildName and codedGuild == 0) then
 								if(guildRankIndex == 0 or guildRankIndex == 1) then
 									checkOBMVersion()
 								end	
-							end
 						end
-                    end
 					-----END CHECK-----
 					-----ABILITY CHECK-----
 					if(string.find(arg1,"obm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK") then
-								if(guildName == "OAK") then
-									if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
-										obmCleansingCheck()
-									end
+							if(myguildName == "OAK" and guildName == "OAK") then
+								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
+									obmAbilityCheck()
+									codedGuild = 1
 								end
-							elseif(myguildName == "Long Live Cenarius") then
-								if(guildName == "Long Live Cenarius") then
-									if(guildRankIndex == 0 or guildRankIndex == 1) then
-										obmCleansingCheck()
-									end
+							elseif(myguildName == "Long Live Cenarius" and guildName == "Long Live Cenarius") then
+								if(guildRankIndex == 0 or guildRankIndex == 1) then
+									obmAbilityCheck()
+									codedGuild = 1
 								end
-							elseif(myguildName == "Exiled") then
-								if(guildName == "Exiled") then
-									if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
-										obmCleansingCheck()
-									end
+							elseif(myguildName == "Exiled" and guildName == "Exiled") then
+								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
+									obmAbilityCheck()
+									codedGuild = 1
 								end
-							elseif(myguildName == "HordeGuards") then
-								if(guildName == "HordeGuards") then
-									if(guildRankIndex == 0 or guildRankIndex == 1) then
-										obmCleansingCheck()
-									end
+							elseif(myguildName == "HordeGuards" and guildName == "HordeGuards") then
+								if(guildRankIndex == 0 or guildRankIndex == 1) then
+									obmAbilityCheck()
+									codedGuild = 1
 								end
-							elseif(myguildName == guildName) then
+							end
+							elseif(myguildName == guildName and codedGuild == 0) then
 								if(guildRankIndex == 0 or guildRankIndex == 1) then
 									obmCleansingCheck()
 								end	
-							end
 						end
                     end
 					-----END CHECK-----
@@ -695,7 +688,7 @@ do
     end
     )
 
-function obmCleansingCheck()
+function obmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
 		myName, _, groupId = GetRaidRosterInfo(j);
 	end
