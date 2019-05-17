@@ -77,11 +77,11 @@ local default_settings = {
 		{ spell = 11420, bartext = default_bartext, cooldown = 60 }, 	-- Portal: Thunder Bluff
 		{ spell = 32667, bartext = default_bartext, cooldown = 60 }, 	-- Portal: Silvermoon
 		{ spell = 49361, bartext = default_bartext, cooldown = 60 }, 	-- Portal: Stonard
-		{ spell = 22700, bartext = default_bartext, cooldown = 600 }, 	-- Field Repair Bot 74A
-		{ spell = 985210, bartext = default_bartext, cooldown = 180 }, 	-- Gnomish Post Tube
-		{ spell = 979611, bartext = default_bartext, cooldown = 180 }, 	-- Gnomish Portable Transpolyporter
-		{ spell = 985211, bartext = default_bartext, cooldown = 180 }, 	-- Mystic Altar
-		{ spell = 979411, bartext = default_bartext, cooldown = 180 }, 	-- Fel Gateway
+		{ spell = 22700, bartext = "Repair Bot: %player", cooldown = 600 }, 	-- Field Repair Bot 74A
+		{ spell = 985210, bartext = "Mailbox: %player", cooldown = 180 }, 	-- Gnomish Post Tube
+		{ spell = 979611, bartext = "Teleporter: %player", cooldown = 180 }, 	-- Gnomish Portable Transpolyporter
+		{ spell = 985211, bartext = "Altar: %player", cooldown = 180 }, 	-- Mystic Altar
+		{ spell = 979411, bartext = "Gateway: %player", cooldown = 180 }, 	-- Fel Gateway
 	},
 	portal_horde = {
 	}

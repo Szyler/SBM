@@ -18,10 +18,31 @@ end
 
 function DeadlyBuffFrames_PrintOfficerInfo()
 	local text = "\n"..
-	dbf_c_t.."Commands\n"..
-	"|cFF00FF00Convert to raid: |cFFFFFFFF/obm cr \n"..
-	"|cFF00FF00Grant all raiders assistant: |cFFFFFFFF/obm aaa \n"..
-	"|cFF00FF00Toggle DBF (this UI): |cFFFFFFFF/dbf \n"..
+	dbf_c_t.."Available slash commands:\n"..
+	"\n"..
+	"|cFF00FF00/obm unlock: |cFFFFFFFFShows a movable status bar timer (alias: move). \n"..
+	"|cFF00FF00/obm pull <x>: |cFFFFFFFFStarts a <x> second OBM pull timer. \n"..
+	"|cFF00FF00/obm timer <x> <text>: |cFFFFFFFFStarts a <x> second OBM Timer with the name <text>. \n"..
+	"|cFF00FF00/obm broadcast timer <x> <text>: |cFFFFFFFFBroadcasts a <x> second OBM Timer with the name <text> to the raid. \n"..
+	"|cFF00FF00/obm break <min>: |cFFFFFFFFStarts a break timer for <min> minutes. Gives all raid members with OBM a break timer. \n"..
+	"|cFF00FF00/obm aaa: |cFFFFFFFFGrants all raid members the assistant role. \n"..
+	"|cFF00FF00/obm cr: |cFFFFFFFFConvers the party group to a raid group. \n"..
+	"|cFF00FF00/obm gl: |cFFFFFFFFSwap to Group Loot. \n"..
+	"|cFF00FF00/obm ml: |cFFFFFFFFSwap to Master Looter. \n"..
+	"|cFF00FF00/obm ffa: |cFFFFFFFFSwap to Free For All. \n"..
+	"|cFF00FF00/obm ri: |cFFFFFFFFReset instance. \n"..
+	"|cFF00FF00/obm 5n: |cFFFFFFFFSwaps dungeon difficulty to Normal5. \n"..
+	"|cFF00FF00/obm 5h: |cFFFFFFFFSwaps dungeon difficulty to Heroic5. \n"..
+	"|cFF00FF00/obm 10n: |cFFFFFFFFSwaps raid difficulty to Normal10. \n"..
+	"|cFF00FF00/obm 10h: |cFFFFFFFFSwaps raid difficulty to Heroic10. \n"..
+	"|cFF00FF00/obm 25n: |cFFFFFFFFSwaps raid difficulty to Normal25. \n"..
+	"|cFF00FF00/obm 25h: |cFFFFFFFFSwaps raid difficulty to Heroic25. \n"..
+	"|cFF00FF00/obm disband: |cFFFFFFFFDisband party or raid group. \n"..
+	"|cFF00FF00/obm m <1-8>: |cFFFFFFFFAdd a raid marker to your current target. \n"..
+	"|cFF00FF00/range: |cFFFFFFFFToggles the range frame. \n"..
+	"|cFF00FF00/dbf: |cFFFFFFFFToggles the DeadlyBuffFrames UI. \n"..
+	"|cFF00FF00/obm: |cFFFFFFFFToggles the OBM Options GUI. \n"..
+	"|cFF00FF00/obm help: |cFFFFFFFFShows slash command descriptions \n"..
 	"";
 	ShowUIPanel(DeadlyBuffFrames_TextBoxTT);
 	if ( not DeadlyBuffFrames_TextBoxTT:IsVisible() ) then
@@ -31,7 +52,7 @@ function DeadlyBuffFrames_PrintOfficerInfo()
 	DeadlyBuffFrames_TextBoxTT:AddLine(text, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, 1);
 	
 	DeadlyBuffFrames_TextBoxTT:SetWidth(550);
-	DeadlyBuffFrames_TextBoxTT:SetHeight(300);
+	DeadlyBuffFrames_TextBoxTT:SetHeight(350);
 end
 
 function DeadlyBuffFrames_OnEvent(event)
