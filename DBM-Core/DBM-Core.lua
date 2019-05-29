@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1530 $"):sub(12, -3),
-	Version = "1.53",
-	DisplayVersion = "1.53", -- the string that is shown as version
-	ReleaseRevision = 1530 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1540 $"):sub(12, -3),
+	Version = "1.54",
+	DisplayVersion = "1.54", -- the string that is shown as version
+	ReleaseRevision = 1540 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -959,27 +959,61 @@ end
 function popUp()
 	if shownPopup == 0 then
 	shownPopup = 1
-		StaticPopupDialogs["UPDATE_OBM"] = {
-			text = "Please update OBM.\n(CTRL + A > CTRL+C to copy)",
-			hasEditBox = 1;
-			maxLetters = 128;
-			button1 = "Okay",
-			OnShow = function(self, data)
-				self.editBox:SetText("discord.gg/NQkgFbT");
-				self.editBox:SetFocus();
-			end,
-				EditBoxOnEnterPressed = function(self)
-				self:GetParent():Hide();
-			end,
-				EditBoxOnEscapePressed = function(self)
-				self:GetParent():Hide();
-			end,
-				timeout = 0,
-				whileDead = 1,
-				hideOnEscape = 1,
-			};
-		StaticPopup_Show("UPDATE_OBM");
+	StaticPopupDialogs["UPDATE_OBM"] =
+    {
+		text = "Please update OBM",
+		button1 = "Cancel",
+		button2 = "Show link",
+		timeout = 0,
+		whileDead = 1,
+		hideOnEscape = 1,
+                                        
+		OnAccept = function(self)
+			self:Hide();
+		end,
+        
+		OnCancel = function(self)
+			self:Hide();
+			showDiscordLink();
+		end,
+                                        
+		EditBoxOnEscapePressed = function(self)
+			self:GetParent():Hide();
+		end,
+	};
+	StaticPopup_Show("UPDATE_OBM");
 	end
+end
+
+function showDiscordLink()
+    StaticPopupDialogs["UPDATE_OBM_LINK"] = {
+        text = "CTRL + A > CTRL + C to copy",
+        hasEditBox = 1;
+        maxLetters = 128;
+        button1 = "Okay",
+        button2 = "Cancel",
+        
+        OnShow = function(self, data)
+            self.editBox:SetText("discord.gg/NQkgFbT");
+            self.editBox:SetFocus();
+        end,
+            
+        OnCancel = function(self)
+            self:Hide();
+        end,
+        
+        EditBoxOnEnterPressed = function(self)
+            self:GetParent():Hide();
+        end,
+        
+        EditBoxOnEscapePressed = function(self)
+            self:GetParent():Hide();
+        end,
+        timeout = 0,
+        whileDead = 1,
+        hideOnEscape = 1,
+        };
+    StaticPopup_Show("UPDATE_OBM_LINK");
 end
 
 ----------OBMTV FUNCTIONS----------
@@ -1246,7 +1280,7 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	elseif cmd == "m 8" or cmd == "m" then
 		DBM:MarkTarget8()	
 	elseif cmd == "help" then
-		for i, v in ipairs(DBM_CORE_SLASHCMD_HELP) do DBM:AddMsg(v) end
+		DeadlyBuffFrames_PrintOfficerInfo();
 	elseif cmd:sub(1, 5) == "timer" then
 		local time, text = msg:match("^%w+ ([%d:]+) (.+)$")
 		if not (time and text) then
@@ -2373,7 +2407,7 @@ function DBM:StartCombat(mod, delay, synced)
 		end
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
-		SendChatMessage(OBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		SendChatMessage(OBMTV_CORE_COMBAT_STARTED:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
 		elseif mod:IsDifficulty("normal5", "heroic10") then
@@ -2434,7 +2468,7 @@ function DBM:EndCombat(mod, wipe)
 				end
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
-			SendChatMessage(OBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			SendChatMessage(OBMTV_CORE_COMBAT_ENDED:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			local msg
 			for k, v in pairs(autoRespondSpam) do
 				msg = msg or chatPrefixShort..DBM_CORE_WHISPER_COMBAT_END_WIPE:format(UnitName("player"), (mod.combatInfo.name or ""))
@@ -2456,13 +2490,13 @@ function DBM:EndCombat(mod, wipe)
 			end
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			end
 			local msg
 			for k, v in pairs(autoRespondSpam) do

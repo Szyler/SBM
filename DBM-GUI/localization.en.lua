@@ -84,6 +84,8 @@ L.RaidWarnMessage 			= "Thanks for using OAK Boss Mods"
 L.BarWhileMove 				= "Raid warning movable"
 L.RaidWarnSound				= "Play sound on raid warning"
 L.SpecialWarnSound			= "Play sound on special warning"
+L.SliderEnlargeBarsTime		= "Enlarge bars at: %d seconds"
+L.SlideEnlargeBarsDesc1		= "A timer will transition from Small Bar style to Huge Bar style when the timer has 12.5% of its duration remaining, or when the timer reaches the value established below. (def: 8 sec) Timer will transition based on the higher of the two values."
 
 -- Tab: Barsetup
 L.BarSetup   				= "Bar Style"

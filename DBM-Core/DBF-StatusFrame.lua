@@ -43,13 +43,23 @@ function DBF_StatusFrame_Init()
 	
 	DBF_CreateExtraMenuFrames(4,15);
 	UIDropDownMenu_Initialize(DBFStatusFrameDropDownMenu, DBF_Settings_Menuofdoom, "MENU");
+	
+	if DBFSettings['FrameShown'] == 0 then
+		DBFStatusFrame:Hide();
+	elseif DBFSettings['FrameShown'] == 1 then
+		DBFStatusFrame:Show();
+	else
+		DBFStatusFrame:Show();
+	end
 end
 
 function DBF_SF_Toggle()
 	if(DBFStatusFrame:IsShown()) then
 		DBFStatusFrame:Hide();
+		DBFSettings['FrameShown'] = 0;
 	else
 		DBFStatusFrame:Show();
+		DBFSettings['FrameShown'] = 1;
 	end
 end
 
@@ -97,6 +107,7 @@ function DBF_SF_UpdateTitle()
 				DBFStatusFrameHeaderText:SetText(m..":"..s.." - "..DBF_GetRealBossName(DBF_BOSS));
 				if(DBF_GetS("AutoShowSF")) then
 					DBFStatusFrame:Show();
+					DBFSettings['FrameShown'] = 1;
 				end
 			else
 				DBF_SF_TitleTime = math.floor(GetTime());

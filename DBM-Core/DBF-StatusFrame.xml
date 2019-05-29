@@ -84,6 +84,7 @@
 				<Scripts>
 					<OnClick>
 						DBFStatusFrame:Hide();
+						DBFSettings['FrameShown'] = 0;
 					</OnClick>
 				</Scripts>
 				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up"/>

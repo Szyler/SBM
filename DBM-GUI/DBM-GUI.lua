@@ -1391,7 +1391,7 @@ local function CreateOptionsMenu()
 	do
 		local BarSetupPanel = DBM_GUI_Frame:CreateNewPanel(L.BarSetup, "option")
 		
-		local BarSetup = BarSetupPanel:CreateArea(L.AreaTitle_BarSetup, nil, 240, true)
+		local BarSetup = BarSetupPanel:CreateArea(L.AreaTitle_BarSetup, nil, 320, true)
 
 		local movemebutton = BarSetup:CreateButton(L.MoveMe, 100, 16)
 		movemebutton:SetPoint('BOTTOMRIGHT', BarSetup.frame, "TOPRIGHT", 0, -1)
@@ -1533,7 +1533,15 @@ local function CreateOptionsMenu()
 		FontSizeSlider:SetPoint("TOPLEFT", BarSetup.frame, "TOPLEFT", 20, -202)
 		FontSizeSlider:SetScript("OnShow", createDBTOnShowHandler("FontSize"))
 		FontSizeSlider:HookScript("OnValueChanged", createDBTOnValueChangedHandler("FontSize"))
-
+		
+		local EnlargeBarsText = BarSetup:CreateText(L.SlideEnlargeBarsDesc1, 400)
+		EnlargeBarsText:SetPoint("TOPLEFT", BarSetup.frame, "TOPLEFT", 0, -232)
+		
+		local EnlargeBarsTimeSlider = BarSetup:CreateSlider(L.SliderEnlargeBarsTime, 0, 30, 1)
+		EnlargeBarsTimeSlider:SetPoint("TOPLEFT", BarSetup.frame, "TOPLEFT", 20, -282)
+		EnlargeBarsTimeSlider:SetScript("OnShow", createDBTOnShowHandler("EnlargeBarsTime"))
+		EnlargeBarsTimeSlider:HookScript("OnValueChanged", createDBTOnValueChangedHandler("EnlargeBarsTime"))	
+		
 		-----------------------
 		-- Small Bar Options --
 		-----------------------

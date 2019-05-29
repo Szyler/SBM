@@ -11,9 +11,9 @@ DBM_CORE_BOSS_DOWN_LONG				= "%s down after %s! Your last kill took %s and your 
 DBM_CORE_BOSS_DOWN_NEW_RECORD		= "%s down after %s! This is a new record! (Old record was %s)"
 DBM_CORE_COMBAT_ENDED				= "Combat against %s ended after %s."
 
-OBMTV_CORE_COMBAT_STARTED			= "Encounter started: %s."
-OBMTV_CORE_BOSS_DOWN				= "Encounter completed: %s!"
-OBMTV_CORE_COMBAT_ENDED				= "Encounter failed: %s."
+OBMTV_CORE_COMBAT_STARTED			= "<%s> Encounter started: %s."
+OBMTV_CORE_BOSS_DOWN				= "<%s> Encounter completed: %s!"
+OBMTV_CORE_COMBAT_ENDED				= "<%s> Encounter failed: %s."
 
 DBM_CORE_TIMER_FORMAT_SECS			= "%d |4second:seconds;"
 DBM_CORE_TIMER_FORMAT_MINS			= "%d |4minute:minutes;"
@@ -75,33 +75,6 @@ DBM_CORE_RANGECHECK_SETRANGE_TO		= "%d yd"
 DBM_CORE_RANGECHECK_LOCK			= "Lock frame"
 
 DBM_LFG_INVITE						= "LFG Invite"
-
-DBM_CORE_SLASHCMD_HELP				= {
-	"Available slash commands:",
-	"/obm unlock: Shows a movable status bar timer (alias: move).",
-	"/obm pull <x>: Starts a <x> second OBM pull timer.",
-	"/obm timer <x> <text>: Starts a <x> second OBM Timer with the name <text>.",
-	"/obm broadcast timer <x> <text>: Broadcasts a <x> second OBM Timer with the name <text> to the raid.",
-	"/obm break <min>: Starts a break timer for <min> minutes. Gives all raid members with OBM a break timer.",
-	"/obm aaa: Grants all raid members the assistant role.",
-	"/obm cr: Convers the party group to a raid group",
-	"/obm gl: Swap to Group Loot.",
-	"/obm ml: Swap to Master Looter.",
-	"/obm ffa: Swap to Free For All.",
-	"/obm ri: Reset instance.",
-	"/obm 5n: Swaps dungeon difficulty to Normal5.",
-	"/obm 5h: Swaps dungeon difficulty to Heroic5.",
-	"/obm 10n: Swaps raid difficulty to Normal10.",
-	"/obm 10h: Swaps raid difficulty to Heroic10.",
-	"/obm 25n: Swaps raid difficulty to Normal25.",
-	"/obm 25h: Swaps raid difficulty to Heroic25.",
-	"/obm disband: Disband party or raid group.",
-	"/obm m <1-8>: Add a raid marker to your current target.",
-	"/range: Toggles the range frame.",
-	"/dbf: Toggles the DeadlyBuffFrames UI.",
-	"/obm: Toggles the OBM Options GUI.",
-	"/obm help: Shows slash command descriptions"
-}
 
 DBM_ERROR_NO_PERMISSION				= "You don't have the required permission to do this."
 
