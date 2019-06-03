@@ -2407,7 +2407,7 @@ function DBM:StartCombat(mod, delay, synced)
 		end
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
-		SendChatMessage(OBMTV_CORE_COMBAT_STARTED:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		SendChatMessage(OBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
 		elseif mod:IsDifficulty("normal5", "heroic10") then
@@ -2468,7 +2468,7 @@ function DBM:EndCombat(mod, wipe)
 				end
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
-			SendChatMessage(OBMTV_CORE_COMBAT_ENDED:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			SendChatMessage(OBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			local msg
 			for k, v in pairs(autoRespondSpam) do
 				msg = msg or chatPrefixShort..DBM_CORE_WHISPER_COMBAT_END_WIPE:format(UnitName("player"), (mod.combatInfo.name or ""))
@@ -2490,13 +2490,13 @@ function DBM:EndCombat(mod, wipe)
 			end
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
-				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(myguildName, mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				SendChatMessage(OBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
