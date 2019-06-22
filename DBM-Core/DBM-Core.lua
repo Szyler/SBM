@@ -9,9 +9,9 @@
 -------------------------------
 DBM = {
 	Revision = ("$Revision: 1540 $"):sub(12, -3),
-	Version = "1.54",
-	DisplayVersion = "1.54", -- the string that is shown as version
-	ReleaseRevision = 1540 -- the revision of the latest stable version that is available (for /obm ver2)
+	Version = "1.55",
+	DisplayVersion = "1.55", -- the string that is shown as version
+	ReleaseRevision = 1550 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -98,7 +98,7 @@ local raid = {}
 local modSyncSpam = {}
 local autoRespondSpam = {}
 local chatPrefix = "<OAK BOSS MODS> "
-local chatPrefixShort = "<OAK-BM> "
+local chatPrefixShort = "<OBM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
 local newFrame = CreateFrame("Frame")
@@ -612,76 +612,61 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local codedGuild = 0
-            
+			-----OFFICER MAINS-----
+            local o1 = "Sky"
+			local o2 = "Turncoat"
+			local o3 = "Torguun"
+			local o4 = "Skray"
+			local o5 = "Namelessness"
+			local o6 = "Junior"
+			local o7 = "Dang"
+			local o8 = "Oakbot"
+			-----OFFICER ALTS-----
+			local o9 = "Skytwo"
+			local o10 = "Skythree"
+			local o11 = "Alternate"
+			local o12 = "Chiken"
+			local o13 = "Fug"
+			local o14 = "Blart"
+			-----TEAM LEADERS-----
+			local o15 = "Smjte"
+			local o16 = "Roknash"
+			local o17 = "Nakskao"
+			local o18 = "Jinjab"
+			local o19 = "Haddeqi"
+			local o20 = "Froppy"
+			local o21 = "Epzilon"
+			local o22 = "Dreadsmell"
+			local o23 = "Arwya"
+			-----TEAM LEADER ALTS-----
+			local o24 = "Breadsmell"
+			local o25 = "Hanlin"
+			local o26 = "Hannlin"
+			local o27 = "Jinjabo"
+			
 			if(found) then  
-				local guildName, guildRankName, guildRankIndex, guildRealm = GetGuildInfo(MSG_FROM)
                 if(p1 == "OBMCOMMAND") then
-					-----VERSION CHECK-----
                     if(string.find(arg1,"obm_tv: get_version_")) then
 						if(MSG_FROM == "Oakbot") then
 							checkOBMVersion()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK" and guildName == "OAK") then
-								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
+							if(myguildName == "OAK") then
+								if(MSG_FROM == o1 or o2 or o3 or o4 or o5 or o6 or o7 or o8 or o9 or o10 or o11 or o12 or o13 or o14 or o15 or o16 or o17 or o18 or o19 or o20 or o21 or o22 or o23 or o24 or o25 or o26 or o27) then
 									checkOBMVersion()
-									codedGuild = 1
-								end
-							elseif(myguildName == "Long Live Cenarius" and guildName == "Long Live Cenarius") then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									checkOBMVersion()
-									codedGuild = 1
-								end
-							elseif(myguildName == "Exiled" and guildName == "Exiled") then
-								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
-									checkOBMVersion()
-									codedGuild = 1
-								end
-							elseif(myguildName == "HordeGuards" and guildName == "HordeGuards") then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									checkOBMVersion()
-									codedGuild = 1
 								end
 							end
 						end
-							elseif(myguildName == guildName and codedGuild == 0) then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									checkOBMVersion()
-								end	
-						end
-					-----END CHECK-----
-					-----ABILITY CHECK-----
+					end
 					if(string.find(arg1,"obm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK" and guildName == "OAK") then
-								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2) then
+							if(myguildName == "OAK") then
+								if(MSG_FROM == o1 or o2 or o3 or o4 or o5 or o6 or o7 or o8 or o9 or o10 or o11 or o12 or o13 or o14 or o15 or o16 or o17 or o18 or o19 or o20 or o21 or o22 or o23 or o24 or o25 or o26 or o27) then
 									obmAbilityCheck()
-									codedGuild = 1
-								end
-							elseif(myguildName == "Long Live Cenarius" and guildName == "Long Live Cenarius") then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									obmAbilityCheck()
-									codedGuild = 1
-								end
-							elseif(myguildName == "Exiled" and guildName == "Exiled") then
-								if(guildRankIndex == 0 or guildRankIndex == 1 or guildRankIndex == 2 or guildRankIndex == 3) then
-									obmAbilityCheck()
-									codedGuild = 1
-								end
-							elseif(myguildName == "HordeGuards" and guildName == "HordeGuards") then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									obmAbilityCheck()
-									codedGuild = 1
 								end
 							end
-							elseif(myguildName == guildName and codedGuild == 0) then
-								if(guildRankIndex == 0 or guildRankIndex == 1) then
-									obmCleansingCheck()
-								end	
 						end
                     end
-					-----END CHECK-----
                 end
             end
 		end
