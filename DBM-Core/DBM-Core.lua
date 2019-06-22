@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1540 $"):sub(12, -3),
-	Version = "1.55",
-	DisplayVersion = "1.55", -- the string that is shown as version
-	ReleaseRevision = 1550 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1560 $"):sub(12, -3),
+	Version = "1.56",
+	DisplayVersion = "1.56", -- the string that is shown as version
+	ReleaseRevision = 1560 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -652,7 +652,7 @@ do
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "OAK") then
-								if(MSG_FROM == o1 or o2 or o3 or o4 or o5 or o6 or o7 or o8 or o9 or o10 or o11 or o12 or o13 or o14 or o15 or o16 or o17 or o18 or o19 or o20 or o21 or o22 or o23 or o24 or o25 or o26 or o27) then
+								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27) then
 									checkOBMVersion()
 								end
 							end
@@ -661,7 +661,7 @@ do
 					if(string.find(arg1,"obm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "OAK") then
-								if(MSG_FROM == o1 or o2 or o3 or o4 or o5 or o6 or o7 or o8 or o9 or o10 or o11 or o12 or o13 or o14 or o15 or o16 or o17 or o18 or o19 or o20 or o21 or o22 or o23 or o24 or o25 or o26 or o27) then
+								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27) then
 									obmAbilityCheck()
 								end
 							end
