@@ -145,7 +145,7 @@ function DBF_Settings_Menuofdoom()
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
 		
 		if(REALM_NAME == "Andorhal - No-Risk") then
-			if(myguildName == "OAK") then
+			if(myguildName == "toxicity") then
 				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
 					ShowOfficer = true;
 					ShowOAKOfficer = true;
@@ -198,6 +198,18 @@ function DBF_Settings_Menuofdoom()
 			info.hasArrow = 1;
 			info.notCheckable = 1;
 			info.value = "OfficerMenu";
+			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
+		end
+		
+		if(ShowOAKOfficer) then
+			info = {};
+			info.text = "Check versions";
+			info.tooltipTitle = info.text;
+			info.tooltipText = "People who have a different version than you will get a warning to update their addon.";
+			info.notCheckable = 1;
+			info.func = function() ChanID = GetChannelName("OBMCOMMAND");
+			SendChatMessage("obm_tv: get_version_"..DBM.Version, "CHANNEL", nil, ChanID) end;
+			info.value = "CheckVersions";
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 		end
 	end
@@ -274,18 +286,6 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.disabled = 1;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
-			
-			if(ShowOAKOfficer) then
-				info = {};
-				info.text = "Check versions";
-				info.tooltipTitle = info.text;
-				info.tooltipText = "People who have a different version than you will get a warning to update their addon.";
-				info.notCheckable = 1;
-				info.func = function() ChanID = GetChannelName("OBMCOMMAND");
-				SendChatMessage("obm_tv: get_version_"..DBM.Version, "CHANNEL", nil, ChanID) end;
-				info.value = "CheckVersions";
-				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
-			end
 
 			info = {};
 			info.text = "General Group Settings";

@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1560 $"):sub(12, -3),
-	Version = "1.56",
-	DisplayVersion = "1.56", -- the string that is shown as version
-	ReleaseRevision = 1560 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1570 $"):sub(12, -3),
+	Version = "1.58",
+	DisplayVersion = "1.58", -- the string that is shown as version
+	ReleaseRevision = 1580 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -614,35 +614,55 @@ do
             local found,_,p1 = string.find(arg4, " (.+)")
 			-----OFFICER MAINS-----
             local o1 = "Sky"
-			local o2 = "Turncoat"
-			local o3 = "Torguun"
-			local o4 = "Skray"
-			local o5 = "Namelessness"
-			local o6 = "Junior"
+			local o2 = "Skytwo"
+			local o3 = "Skray"
+			local o4 = "Namelessness"
+			local o5 = "Junior"
+			local o6 = "Fug"
 			local o7 = "Dang"
-			local o8 = "Oakbot"
-			-----OFFICER ALTS-----
-			local o9 = "Skytwo"
-			local o10 = "Skythree"
-			local o11 = "Alternate"
-			local o12 = "Chiken"
-			local o13 = "Fug"
-			local o14 = "Blart"
-			-----TEAM LEADERS-----
-			local o15 = "Smjte"
-			local o16 = "Roknash"
-			local o17 = "Nakskao"
-			local o18 = "Jinjab"
-			local o19 = "Haddeqi"
-			local o20 = "Froppy"
-			local o21 = "Epzilon"
-			local o22 = "Dreadsmell"
-			local o23 = "Arwya"
-			-----TEAM LEADER ALTS-----
-			local o24 = "Breadsmell"
-			local o25 = "Hanlin"
-			local o26 = "Hannlin"
-			local o27 = "Jinjabo"
+			local o8 = "Turncoat"
+			local o9 = "Torguun"
+			local o10 = "Smjte"
+			local o11 = "Rookie"
+			local o12 = "Jinjabo"
+			local o13 = "Jinjab"
+			local o14 = "Froppy"
+			local o15 = "Epzilon"
+			local o16 = "Dreadsmell"
+			local o17 = "Breadsmell"
+			local o18 = "Arwya"
+			local o19 = "Alternate"
+			local o20 = "1"
+			local o21 = "1"
+			local o22 = "1"
+			local o23 = "1"
+			local o24 = "1"
+			local o25 = "1"
+			local o26 = "1"
+			local o27 = "1"
+			local o28 = "1"
+			local o29 = "1"
+			local o30 = "1"
+			local o31 = "1"
+			local o32 = "1"
+			local o33 = "1"
+			local o34 = "1"
+			local o35 = "1"
+			local o36 = "1"
+			local o37 = "1"
+			local o38 = "1"
+			local o39 = "1"
+			local o40 = "1"
+			local o41 = "1"
+			local o42 = "1"
+			local o43 = "1"
+			local o44 = "1"
+			local o45 = "1"
+			local o46 = "1"
+			local o47 = "1"
+			local o48 = "1"
+			local o49 = "1"
+			local o50 = "1"
 			
 			if(found) then  
                 if(p1 == "OBMCOMMAND") then
@@ -651,8 +671,8 @@ do
 							checkOBMVersion()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK") then
-								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27) then
+							if(myguildName == "toxicity") then
+								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
 									checkOBMVersion()
 								end
 							end
@@ -660,8 +680,8 @@ do
 					end
 					if(string.find(arg1,"obm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "OAK") then
-								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27) then
+							if(myguildName == "toxicity") then
+								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
 									obmAbilityCheck()
 								end
 							end
@@ -967,6 +987,27 @@ function popUp()
 		end,
 	};
 	StaticPopup_Show("UPDATE_OBM");
+	end
+end
+
+function reloadPopUp()
+	if(myguildName) then
+	else
+		if IsInGuild() == 1 then
+		StaticPopupDialogs["RELOAD_OBM"] =
+		{
+			text = "RELOAD YOUR ADDON\n\nOBM has additional features that require a reload.\nTo access these features, you must reload on every login.",
+			button1 = "Reload",
+			timeout = 0,
+			whileDead = 1,
+											
+			OnAccept = function(self)
+				self:Hide();
+				ReloadUI();
+			end,
+		};
+		StaticPopup_Show("RELOAD_OBM");
+		end
 	end
 end
 
@@ -1851,6 +1892,10 @@ do
 		StaticPopup_Show("DBM_OLD_VERSION")
 	end
 	
+	function reloadPopOnLogin()
+		reloadPopUp()
+	end
+	
 	local function setCombatInitialized()
 		combatInitialized = true
 	end
@@ -1874,6 +1919,7 @@ do
 			DBM:Schedule(10, joinChatChannels)
 			local ChannelID = GetChannelName("OBMCOMMAND")
 			DBM:Schedule(15, sendVersionMessage)
+			DBM:Schedule(15, reloadPopOnLogin)
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
 				if GetAddOnMetadata(i, "X-DBM-Mod") and not checkEntry(bannedMods, GetAddOnInfo(i)) then
