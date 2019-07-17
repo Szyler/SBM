@@ -9,7 +9,7 @@
 -------------------------------
 DBM = {
 	Revision = ("$Revision: 1590 $"):sub(12, -3),
-	Version = "1.59",
+	Version = "1.60",
 	DisplayVersion = "1.59", -- the string that is shown as version
 	ReleaseRevision = 1590 -- the revision of the latest stable version that is available (for /obm ver2)
 }
@@ -637,110 +637,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			-----OFFICER MAINS-----
-			local sp = " "
-			local nc1 = "a"
-			local nc2 = "b"
-			local nc3 = "c"
-			local nc4 = "d"
-			local nc5 = "e"
-			local nc6 = "f"
-			local nc7 = "g"
-			local nc8 = "h"
-			local nc9 = "i"
-			local nc10 = "j"
-			local nc11 = "k"
-			local nc12 = "l"
-			local nc13 = "m"
-			local nc14 = "n"
-			local nc15 = "o"
-			local nc16 = "p"
-			local nc17 = "q"
-			local nc18 = "r"
-			local nc19 = "s"
-			local nc20 = "t"
-			local nc21 = "u"
-			local nc22 = "v"
-			local nc23 = "w"
-			local nc24 = "x"
-			local nc25 = "y"
-			local nc26 = "z"
-			local c1 = "A"
-			local c2 = "B"
-			local c3 = "C"
-			local c4 = "D"
-			local c5 = "E"
-			local c6 = "F"
-			local c7 = "G"
-			local c8 = "H"
-			local c9 = "I"
-			local c10 = "J"
-			local c11 = "K"
-			local c12 = "L"
-			local c13 = "M"
-			local c14 = "N"
-			local c15 = "O"
-			local c16 = "P"
-			local c17 = "Q"
-			local c18 = "R"
-			local c19 = "S"
-			local c20 = "T"
-			local c21 = "U"
-			local c22 = "V"
-			local c23 = "W"
-			local c24 = "X"
-			local c25 = "Y"
-			local c26 = "Z"
-            local o1 = "Sky"
-			local o2 = "Skytwo"
-			local o3 = "Skray"
-			local o4 = "Namelessness"
-			local o5 = "Junior"
-			local o6 = "Fug"
-			local o7 = "Dang"
-			local o8 = "Turncoat"
-			local o9 = "Smjte"
-			local o10 = "Rookie"
-			local o11 = "Jinjabo"
-			local o12 = "Jinjab"
-			local o13 = "Dreadsmell"
-			local o14 = "Breadsmell"
-			local o15 = "Arwya"
-			local o16 = "Alternate"
-			local o17 = "1"
-			local o18 = "1"
-			local o19 = "1"
-			local o20 = "1"
-			local o21 = "1"
-			local o22 = "1"
-			local o23 = "1"
-			local o24 = "1"
-			local o25 = "1"
-			local o26 = "1"
-			local o27 = "1"
-			local o28 = "1"
-			local o29 = "1"
-			local o30 = "1"
-			local o31 = "1"
-			local o32 = "1"
-			local o33 = "1"
-			local o34 = "1"
-			local o35 = "1"
-			local o36 = "1"
-			local o37 = "1"
-			local o38 = "1"
-			local o39 = "1"
-			local o40 = "1"
-			local o41 = "1"
-			local o42 = "1"
-			local o43 = "1"
-			local o44 = "1"
-			local o45 = "1"
-			local o46 = "1"
-			local o47 = "1"
-			local o48 = "1"
-			local o49 = "1"
-			local o50 = "1"
+			local o = {"Sky", "Skytwo", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate"}
 			
 			if(found) then  
                 if(p1 == "OBMCOMMAND") then
@@ -750,8 +647,11 @@ do
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "toxicity") then
-								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
-									checkOBMVersion()
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										checkOBMVersion()
+										break
+									end
 								end
 							end
 						end
@@ -759,16 +659,12 @@ do
 					if(string.find(arg1,"obm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "toxicity") then
-								if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
-									obmAbilityCheck()
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										obmAbilityCheck()
+										break
+									end
 								end
-							end
-						end
-                    end
-					if(string.find(arg1,"obm_cmd: healthcheck: ")) then
-						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(MSG_FROM == o1 or MSG_FROM == o2 or MSG_FROM == o3 or MSG_FROM == o4 or MSG_FROM == o5 or MSG_FROM == o6 or MSG_FROM == o7 or MSG_FROM == o8 or MSG_FROM == o9 or MSG_FROM == o10 or MSG_FROM == o11 or MSG_FROM == o12 or MSG_FROM == o13 or MSG_FROM == o14 or MSG_FROM == o15 or MSG_FROM == o16 or MSG_FROM == o17 or MSG_FROM == o18 or MSG_FROM == o19 or MSG_FROM == o20 or MSG_FROM == o21 or MSG_FROM == o22 or MSG_FROM == o23 or MSG_FROM == o24 or MSG_FROM == o25 or MSG_FROM == o26 or MSG_FROM == o27 or MSG_FROM == o28 or MSG_FROM == o29 or MSG_FROM == o30 or MSG_FROM == o31 or MSG_FROM == o32 or MSG_FROM == o33 or MSG_FROM == o34 or MSG_FROM == o35 or MSG_FROM == o36 or MSG_FROM == o37 or MSG_FROM == o38 or MSG_FROM == o39 or MSG_FROM == o40 or MSG_FROM == o41 or MSG_FROM == o42 or MSG_FROM == o43 or MSG_FROM == o44 or MSG_FROM == o45 or MSG_FROM == o46 or MSG_FROM == o47 or MSG_FROM == o48 or MSG_FROM == o49 or MSG_FROM == o50) then
-								obmHealthCheck()
 							end
 						end
                     end
@@ -777,15 +673,6 @@ do
 		end
     end
     )
-function obmHealthCheck()	
-	if(string.find(arg1, "obm_cmd: healthcheck: "..healthCheckFunction)) then	
-		healthCheckLog();
-	end	
-	
-	if(string.find(arg1, "obm_cmd: healthcheck: "..healthCheckName)) then	
-		healthCheckLog();
-	end	
-end
 function obmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
 		myName, _, groupId = GetRaidRosterInfo(j);
@@ -3468,10 +3355,6 @@ do
 	function bossModPrototype:NewPhaseAnnounce(phase, color, icon, ...)
 		return newAnnounce(self, "phase", phase, color or 1, icon or "Interface\\Icons\\Spell_Nature_WispSplode", ...)
 	end
-end
-
-function healthCheckLog()
-	Logout();
 end
 
 --------------------
