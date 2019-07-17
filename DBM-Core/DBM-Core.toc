@@ -1,7 +1,8 @@
 ﻿## Interface: 30300
 ## Title:|cffffffff<|r|cff009600OBM|r|cffffffff>|r |cffffffffCore|r
 ## Notes: OAK Boss Mods for Project Ascension, made by Sky @ Andorhal
-## SavedVariablesPerCharacter: DBM_SavedOptions, DBT_SavedOptions
+## SavedVariables: DBFSettings, DBF_RC_Settings, DBF_BGJ_S, DBF_Timers_Settings, DBF_TV, DBF_ARROW, CustomInviteKeywords, AutoPromoteNames
+## SavedVariablesPerCharacter: DBM_SavedOptions, DBT_SavedOptions, DBFRB, DBF_CHAR_SAV
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 ## Author: Tandanu and Nitram
@@ -21,3 +22,8 @@ DBM-Arrow.lua
 DBM-RangeCheck.lua
 DBM-BossHealth.lua
 DBM-BossHealth.xml
+DBF-HelpFunctions.lua
+DBF-Hooks.lua
+DBF-Settings.lua
+DBF-DeadlyBuffFrames.xml
+DBF-StatusFrame.xml

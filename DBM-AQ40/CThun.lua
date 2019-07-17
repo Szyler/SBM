@@ -165,10 +165,6 @@ function mod:alertMalignant()
 end
 
 ----------Real Functions----------
-function DBM:CthunFix()
-	DBM:AddMsg("Fixed C'thun tentacle timer.")
-	etent = etent - 1
-end
 
 function mod:OnCombatStart(delay)
 	phase = 1 
@@ -364,7 +360,6 @@ function mod:phaseTwo()
 	elseif lasttent == 3 then
 		etent = 1
 	end
-	DBM:AddMsg("If the type of eye tentacle spawns shown in phase 2 is wrong, type /obm cfix in chat and it should resolve the next set of timers for you.")	
 	self:ScheduleMethod(6, "eyeTentacle")
 	self:ScheduleMethod(1, "enterStomach")
 	self:ScheduleMethod(0, "clawTentacleInitial")

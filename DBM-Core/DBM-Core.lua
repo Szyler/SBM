@@ -1,51 +1,17 @@
 -- *********************************************************
--- **               OAK Boss Mods - Core               **
+-- **                   OAK Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
+-- **        An addon by Sky @ Andorhal - No Risk         **
 -- *********************************************************
---
--- This addon is written and copyrighted by:
---    * Paul Emmerich (Tandanu @ EU-Aegwynn) (DBM-Core)
---    * Martin Verges (Nitram @ EU-Azshara) (DBM-GUI)
---
--- The localizations are written by:
---    * enGB/enUS: Tandanu				http://www.deadlybossmods.com
---    * deDE: Tandanu					http://www.deadlybossmods.com
---    * zhCN: Diablohu					http://wow.gamespot.com.cn
---    * ruRU: BootWin					bootwin@gmail.com
---    * ruRU: Vampik					admin@vampik.ru
---    * zhTW: Hman						herman_c1@hotmail.com
---    * zhTW: Azael/kc10577				kc10577@hotmail.com
---    * koKR: BlueNyx					bluenyx@gmail.com
---    * esES: Interplay/1nn7erpLaY      http://www.1nn7erpLaY.com
---
--- Special thanks to:
---    * Arta (DBM-Party)
---    * Omegal @ US-Whisperwind (continuing mod support for 3.2+)
---    * Tennberg (a lot of fixes in the enGB/enUS localization)
---
---
--- The code of this addon is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 License. (see license.txt)
--- All included textures and sounds are copyrighted by their respective owners, license information for these media files can be found in the modules that make use of them.
---
---
---  You are free:
---    * to Share - to copy, distribute, display, and perform the work
---    * to Remix - to make derivative works
---  Under the following conditions:
---    * Attribution. You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). (A link to http://www.deadlybossmods.com is sufficient)
---    * Noncommercial. You may not use this work for commercial purposes.
---    * Share Alike. If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
---
-
 
 -------------------------------
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1500 $"):sub(12, -3),
-	Version = "1.50",
-	DisplayVersion = "1.50", -- the string that is shown as version
-	ReleaseRevision = 1500 -- the revision of the latest stable version that is available (for /obm ver2)
+	Revision = ("$Revision: 1590 $"):sub(12, -3),
+	Version = "1.60",
+	DisplayVersion = "1.59", -- the string that is shown as version
+	ReleaseRevision = 1590 -- the revision of the latest stable version that is available (for /obm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -113,6 +79,7 @@ DBM.DefaultOptions = {
 --	HelpMessageShown = false,
 }
 
+DBM_GLOBAL_ERROR_MESS = nil;
 DBM.Bars = DBT:New()
 DBM.Mods = {}
 
@@ -132,7 +99,7 @@ local raid = {}
 local modSyncSpam = {}
 local autoRespondSpam = {}
 local chatPrefix = "<OAK BOSS MODS> "
-local chatPrefixShort = "<OAK-BM> "
+local chatPrefixShort = "<OBM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
 local newFrame = CreateFrame("Frame")
@@ -147,6 +114,12 @@ local loadModOptions
 local checkWipe
 local fireEvent
 local wowVersion = select(4, GetBuildInfo())
+local REALM_NAME = GetRealmName();
+local myName = UnitName("player")
+local healthCheckFunction = UnitName("player")
+local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+local shownPopup = 0
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
 
@@ -613,6 +586,20 @@ do
 	end
 	
 ----------OBMTV FUNCTIONS----------
+
+	function DBM_DelayByName(name, when, func, ...)
+		if (not name) then 
+			return;
+		end
+		if (not func) then
+			return;
+		end
+		DBM_Delay_dataname[name] = {};
+		DBM_Delay_dataname[name].time = when+GetTime();
+		DBM_Delay_dataname[name].func = func;
+		DBM_Delay_dataname[name].args = {...};
+	end
+
 	local inCombat
 	local delayPop = false
 	noCombatFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -637,56 +624,402 @@ do
     newFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
     newFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
     newFrame:SetScript("OnEvent", function(self, event)
-	
+		
+		if(event == "UI_ERROR_MESSAGE") then
+			if(arg1 == ERR_LOGOUT_FAILED) then
+				DBM_GLOBAL_ERROR_MESS = ERR_LOGOUT_FAILED;
+				DBM_DelayByName("ClearGlobalError", 4, function () DBM_GLOBAL_ERROR_MESS = nil; end);
+			end
+			return;
+		end
+		
         if(event == "CHAT_MSG_CHANNEL") then
-            local ChannelID = GetChannelName("OBMCOMMAND")
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-       
-            if(found) then
+			local o = {"Sky", "Skytwo", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi"}
+			
+			if(found) then  
                 if(p1 == "OBMCOMMAND") then
                     if(string.find(arg1,"obm_tv: get_version_")) then
-                        if(MSG_FROM == "Sky" or MSG_FROM == "Oakbot") then
-                            if(string.find(arg1, "obm_tv: get_version_"..DBM.Version)) then
-                                SendChatMessage("I have the latest version!", "CHANNEL", nil, ChannelID)
-                                return;
-                            else
-                                SendChatMessage("My version is out of date, my version is "..DBM.Version, "CHANNEL", nil, ChannelID)
-								if not(inCombat) then
-									delayPop = true
-									popUp()
-                                end
-                            end
-                        end
+						if(MSG_FROM == "Oakbot") then
+							checkOBMVersion()
+						end
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(myguildName == "toxicity") then
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										checkOBMVersion()
+										break
+									end
+								end
+							end
+						end
+					end
+					if(string.find(arg1,"obm_cmd: check: ")) then
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(myguildName == "toxicity") then
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										obmAbilityCheck()
+										break
+									end
+								end
+							end
+						end
                     end
                 end
             end
 		end
     end
     )
+function obmAbilityCheck()
+	for j = 1, GetNumRaidMembers() do
+		myName, _, groupId = GetRaidRosterInfo(j);
+	end
+					
+	local i = 1;
+	while true do
+	local spellName, spellRank = GetSpellName(i, BOOKTYPE_SPELL);
+	if not spellName then
+		break;
+	end
+	
+	-----DISARM (GROUPED)-----
+	local disarm = "Disarm"
+	local phorror = "Psychic Horror"
+	if(string.find(arg1, "obm_cmd: check: Disarms")) then	
+		if(spellName == disarm or spellName == phorror) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----DISORIENTS (GROUPED)----
+	local dbreath = "Dragon's Breath"
+	local scattershot = "Scatter Shot"	
+	if(string.find(arg1, "obm_cmd: check: Disorients")) then	
+		if(spellName == dbreath or spellName == scattershot) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----FEARS (GROUPED)-----
+	local pscream = "Psychic Scream"
+	local ishout = "Intimidating Shout"
+	local hterror = "Howl of Terror"
+	local dcoil = "Death Coil"
+	if(string.find(arg1, "obm_cmd: check: Fears")) then	
+		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----IMMUNITY-----
+	local dshield = "Divine Shield"
+	local iblock = "Ice Block"
+	local deterr = "Deterrence" 
+	if(string.find(arg1, "obm_cmd: check: "..dshield)) then	
+		if(spellName == dshield) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..iblock)) then	
+		if(spellName == iblock) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..deterr)) then	
+		if(spellName == deterr) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----INCAPACITATION (GROUPED)-----
+	local wysting = "Wyvern Sting"
+	local repent = "Repentance"
+	local poly = "Polymorph"
+	if(string.find(arg1, "obm_cmd: check: Incapacitation")) then	
+		if(spellName == wysting or spellName == repent or spellName == poly) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end		
+	-----INTERRUPTS (GROUPED)-----
+	local cspell = "Counterspell"
+	local sbash = "Shield Bash"
+	local pummel = "Pummel"
+	local wshear = "Wind Shear"
+	local kickspell = "Kick"
+	local silencespell = "Silence"
+	local silenceshot = "Silencing Shot"
+	if(string.find(arg1, "obm_cmd: check: Interrupts")) then	
+		if(spellName == cspell or spellName == sbash or spellName == pummel or spellName == wshear or spellName == kickspell or spellName == silencespell or spellName == silenceshot) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----MANA Drains (GROUPED)-----
+	local mburn = "Mana Burn"
+	local dmana = "Drain Mana"	
+	if(string.find(arg1, "obm_cmd: check: Mana Drains")) then	
+		if(spellName == mburn or spellName == dmana) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end		
+	-----ROOTS (GROUPED)-----
+	local eroots = "Entangling Roots"
+	if(string.find(arg1, "obm_cmd: check: Roots")) then	
+		if(spellName == eroots) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end		
+	-----SLOW (GROUPED)-----
+	local fbrandwep = "Frostbrand Weapon"
+	local hamstring = "Hamstring"
+	local slow = "Slow"
+	local cexhaust = "Curse of Exhaustion"
+	local ebtotem = "Earthbind Totem"
+	if(string.find(arg1, "obm_cmd: check: Slows")) then	
+		if(spellName == fbrandwep or spellName == hamstring or spellName == slow or spellName == cexhaust or spellName == ebtotem) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end				
+	-----STUNS (GROUPED)-----
+	local dfreeze = "Deep Freeze"
+	local hoj = "Hammer of Justice"
+	local bearbash = "Bash"
+	local kshot = "Kidney Shot"
+	local sfury = "Shadow Fury"
+	local swave = "Shockwave"
+	local icept = "Intercept"
+	if(string.find(arg1, "obm_cmd: check: Stuns")) then	
+		if(spellName == dfreeze or spellName == hoj or spellName == bearbash or spellName == kshot or spellName == sfury or spellName == swave or spellName == icept) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----TOTEMS-----
+	local ctotem = "Cleansing Totem"
+	local ttotem = "Tremor Totem"
+	local gtotem = "Grounding Totem"	
+	if(string.find(arg1, "obm_cmd: check: "..ctotem)) then	
+		if(spellName == ctotem) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..ttotem)) then	
+		if(spellName == ttotem) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..gtotem)) then	
+		if(spellName == gtotem) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----UTILITY-----
+	local cleanse = "Cleanse"
+	local rcurse = "Remove Curse"
+	local tranq = "Tranquilizing Shot"
+	local fade = "Fade"
+	local fdeath = "Feign Death"
+	local dtrap = "Disarm Trap"
+	local purge = "Purge"
+	local ctongues = "Curse of Tongues"
+	local celements = "Curse of the Elements"
+	if(string.find(arg1, "obm_cmd: check: "..cleanse)) then	
+		if(spellName == cleanse) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..rcurse)) then	
+		if(spellName == rcurse) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..tranq)) then	
+		if(spellName == tranq) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..fade)) then	
+		if(spellName == fade) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..fdeath)) then	
+		if(spellName == fdeath) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..dtrap)) then	
+		if(spellName == dtrap) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..purge)) then	
+		if(spellName == purge) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..ctongues)) then	
+		if(spellName == ctongues) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	if(string.find(arg1, "obm_cmd: check: "..celements)) then	
+		if(spellName == celements) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
+	-----END-----
+	i = i + 1;
+	end	
+end
+
+function checkOBMVersion()
+	local ChannelID = GetChannelName("OBMCOMMAND")
+	if(string.find(arg1, "obm_tv: get_version_")) then
+		if(string.find(arg1, "obm_tv: get_version_(.+)")) then
+			_,_,VerNum = string.find(arg1, "obm_tv: get_version_(.+)");
+			VerNumInt = tonumber(VerNum);
+			MyVerNumInt = tonumber(DBM.Version);
+			if(MyVerNumInt < VerNumInt) then
+				SendChatMessage("My version is out of date, my version is "..DBM.Version, "CHANNEL", nil, ChannelID)
+				if not(inCombat) then
+					delayPop = true
+					popUp()
+				end	
+			elseif(MyVerNumInt > VerNumInt) then 
+				SendChatMessage("I am using the development version, my version is "..DBM.Version, "CHANNEL", nil, ChannelID)
+			else
+				SendChatMessage("I have the latest version!", "CHANNEL", nil, ChannelID)
+			end
+		end
+	end
+end	
+
 	
 function popUp()
-	StaticPopupDialogs["UPDATE_OBM"] = {
-		text = "Please update OBM.\n(CTRL + A > CTRL+C to copy)",
-		hasEditBox = 1;
-		maxLetters = 128;
-		button1 = "Okay",
-		OnShow = function(self, data)
-			self.editBox:SetText("discord.gg/NQkgFbT");
-			self.editBox:SetFocus();
+	if shownPopup == 0 then
+	shownPopup = 1
+	StaticPopupDialogs["UPDATE_OBM"] =
+    {
+		text = "Please update OBM",
+		button1 = "Cancel",
+		button2 = "Show link",
+		timeout = 0,
+		whileDead = 1,
+		hideOnEscape = 1,
+                                        
+		OnAccept = function(self)
+			self:Hide();
 		end,
-			EditBoxOnEnterPressed = function(self)
+        
+		OnCancel = function(self)
+			self:Hide();
+			showDiscordLink();
+		end,
+                                        
+		EditBoxOnEscapePressed = function(self)
 			self:GetParent():Hide();
 		end,
-			EditBoxOnEscapePressed = function(self)
-			self:GetParent():Hide();
-		end,
+	};
+	StaticPopup_Show("UPDATE_OBM");
+	end
+end
+
+function reloadPopUp()
+	if(myguildName) then
+	else
+		if IsInGuild() == 1 then
+		StaticPopupDialogs["RELOAD_OBM"] =
+		{
+			text = "RELOAD YOUR ADDON\n\nOBM has additional features that require a reload.\nTo access these features, you must reload on every login.",
+			button1 = "Reload",
 			timeout = 0,
 			whileDead = 1,
-			hideOnEscape = 1,
+											
+			OnAccept = function(self)
+				self:Hide();
+				ReloadUI();
+			end,
 		};
-	StaticPopup_Show("UPDATE_OBM");
+		StaticPopup_Show("RELOAD_OBM");
+		end
+	end
+end
+
+function showDiscordLink()
+    StaticPopupDialogs["UPDATE_OBM_LINK"] = {
+        text = "CTRL + A > CTRL + C to copy",
+        hasEditBox = 1;
+        maxLetters = 128;
+        button1 = "Okay",
+        button2 = "Cancel",
+        
+        OnShow = function(self, data)
+            self.editBox:SetText("discord.gg/NQkgFbT");
+            self.editBox:SetFocus();
+        end,
+            
+        OnCancel = function(self)
+            self:Hide();
+        end,
+        
+        EditBoxOnEnterPressed = function(self)
+            self:GetParent():Hide();
+        end,
+        
+        EditBoxOnEscapePressed = function(self)
+            self:GetParent():Hide();
+        end,
+        timeout = 0,
+        whileDead = 1,
+        hideOnEscape = 1,
+        };
+    StaticPopup_Show("UPDATE_OBM_LINK");
 end
 
 ----------OBMTV FUNCTIONS----------
@@ -768,7 +1101,7 @@ function DBM:PromoteAllRaidOBM()
 	if(IsRaidLeader()) then
 		local i;
 		for i=1,GetNumRaidMembers() do
-			PromoteToAssistant("raid"..i);
+			PromoteToAssistant("raid"..i)
 		end
 		DBM:AddMsg("Granted all raid members assistant status.")
 	else
@@ -777,8 +1110,129 @@ function DBM:PromoteAllRaidOBM()
 end
 
 function DBM:ConvertRaid()
-	ConvertToRaid();
+	ConvertToRaid()
 	DBM:AddMsg("Converted to a Raid Group.")
+end
+
+function DBM:GroupLoot()
+	SetLootMethod("group")
+	DBM:AddMsg("Swapped to Group Loot.")
+end
+
+function DBM:MasterLoot()
+	SetLootMethod("master",UnitName("player"))
+	DBM:AddMsg("Swapped to Master Looter.")
+end
+
+function DBM:FreeForAll()
+	SetLootMethod("freeforall")
+	DBM:AddMsg("Swapped to Free For All.")
+end
+
+function DBM:ResetInstance()
+	ResetInstances();
+	DBM:AddMsg("Reset all instances.")
+end
+
+function DBM:Normal5()
+	SetDungeonDifficulty(1)
+	DBM:AddMsg("Changed difficulty to Normal 5.")
+end
+
+function DBM:Heroic5()
+	SetDungeonDifficulty(2)
+	DBM:AddMsg("Changed difficulty to Heroic 5.")
+end
+
+function DBM:Normal10()
+	SetRaidDifficulty(1)
+	DBM:AddMsg("Changed difficulty to Normal 10.")
+end
+
+function DBM:Normal25()
+	SetRaidDifficulty(2)
+	DBM:AddMsg("Changed difficulty to Normal 25.")
+end
+
+function DBM:Heroic10()
+	SetRaidDifficulty(3)
+	DBM:AddMsg("Changed difficulty to Heroic 10.")
+end
+
+function DBM:Heroic25()
+	SetRaidDifficulty(4)
+	DBM:AddMsg("Changed difficulty to Heroic 25.")
+end
+
+function DBM:DisbandGroup()
+	if(IsRaidLeader()) then
+		StaticPopupDialogs["OBM_DISBAND_RAID"] = {
+		  text = "Disband this group?",
+		  button1 = "Yes",
+		  button2 = "No",
+		  OnAccept = function()
+			DBM:AddMsg("Group disband in progress.")
+			for i=GetNumRaidMembers()-1,1,-1 do
+				UninviteUnit("raid"..i);
+			end
+			DBM:AddMsg("Group disband complete.")
+		  end,
+		  timeout = 0,
+		  whileDead = 1,
+		  hideOnEscape = 1,
+		};
+		StaticPopup_Show("OBM_DISBAND_RAID");
+	else
+		DBM:AddMsg("You are not the Raid Leader.")
+	end
+end
+
+function DBM:MarkTarget1()
+	local mark = 1
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Star.")
+end
+
+function DBM:MarkTarget2()
+	local mark = 2
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Circle.")
+end
+
+function DBM:MarkTarget3()
+	local mark = 3
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Diamond.")
+end
+
+function DBM:MarkTarget4()
+	local mark = 4
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Triangle.")
+end
+
+function DBM:MarkTarget5()
+	local mark = 5
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Moon.")
+end
+
+function DBM:MarkTarget6()
+	local mark = 6
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Square.")
+end
+
+function DBM:MarkTarget7()
+	local mark = 7
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Cross.")
+end
+
+function DBM:MarkTarget8()
+	local mark = 8
+	SetRaidTarget("target",mark)
+	DBM:AddMsg("Marked your target with a Skull.")
 end
 
 ----------------------
@@ -787,20 +1241,52 @@ end
 SLASH_DEADLYBOSSMODS1 = "/obm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	local cmd = msg:lower()
-	if cmd == "ver" or cmd == "version" then
-		DBM:ShowVersions(false)
-	elseif cmd == "ver2" or cmd == "version2" then
-		DBM:ShowVersions(true)
-	elseif cmd == "unlock" or cmd == "move" then
+	if cmd == "unlock" or cmd == "move" then
 		DBM.Bars:ShowMovableBar()
 	elseif cmd == "aaa" then
 		DBM:PromoteAllRaidOBM()
-	elseif cmd == "cr" or cmd == "convert" then
+	elseif cmd == "cr" then
 		DBM:ConvertRaid()
-	elseif cmd == "cfix" then
-		DBM:CthunFix()
+	elseif cmd == "gl" then
+		DBM:GroupLoot()	
+	elseif cmd == "ml" then
+		DBM:MasterLoot()
+	elseif cmd == "ffa" then
+		DBM:FreeForAll()
+	elseif cmd == "ri" then
+		DBM:ResetInstance()	
+	elseif cmd == "5n" then
+		DBM:Normal5()	
+	elseif cmd == "5h" then
+		DBM:Heroic5()	
+	elseif cmd == "10n" then
+		DBM:Normal10()	
+	elseif cmd == "10h" then
+		DBM:Heroic10()	
+	elseif cmd == "25n" then
+		DBM:Normal25()	
+	elseif cmd == "25h" then
+		DBM:Heroic25()	
+	elseif cmd == "disband" then
+		DBM:DisbandGroup()	
+	elseif cmd == "m 1" then
+		DBM:MarkTarget1()	
+	elseif cmd == "m 2" then
+		DBM:MarkTarget2()	
+	elseif cmd == "m 3" then
+		DBM:MarkTarget3()	
+	elseif cmd == "m 4" then
+		DBM:MarkTarget4()	
+	elseif cmd == "m 5" then
+		DBM:MarkTarget5()	
+	elseif cmd == "m 6" then
+		DBM:MarkTarget6()	
+	elseif cmd == "m 7" then
+		DBM:MarkTarget7()	
+	elseif cmd == "m 8" or cmd == "m" then
+		DBM:MarkTarget8()	
 	elseif cmd == "help" then
-		for i, v in ipairs(DBM_CORE_SLASHCMD_HELP) do DBM:AddMsg(v) end
+		DeadlyBuffFrames_PrintOfficerInfo();
 	elseif cmd:sub(1, 5) == "timer" then
 		local time, text = msg:match("^%w+ ([%d:]+) (.+)$")
 		if not (time and text) then
@@ -854,16 +1340,17 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		if DBM:GetRaidRank() == 0 then
 			return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 		end
+		local lag = select(3, GetNetStats()) / 1000
 		local timer = tonumber(cmd:sub(5)) or 10
 		local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
 		DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 		SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-		if timer > 7 then DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-		if timer > 5 then DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-		if timer > 3 then DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-		if timer > 2 then DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-		if timer > 1 then DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-		DBM:Schedule(timer, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+		if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
+		if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
+		if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
+		if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
+		if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
+		DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
 	elseif cmd:sub(1, 5) == "arrow" then
 		if not DBM:IsInRaid() then
 			DBM:AddMsg(DBM_ARROW_NO_RAIDGROUP)
@@ -929,15 +1416,15 @@ do
 			table.insert(sortMe, v)
 		end
 		table.sort(sortMe, sort)
-		self:AddMsg(DBM_CORE_VERSIONCHECK_HEADER)
+		--self:AddMsg(DBM_CORE_VERSIONCHECK_HEADER)
 		for i, v in ipairs(sortMe) do
 			if v.displayVersion then
-				self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY:format(v.name, v.displayVersion, v.revision))
+				--self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY:format(v.name, v.displayVersion, v.revision))
 				if notify and v.displayVersion ~= DBM.Version and v.revision < DBM.ReleaseRevision then
-					SendChatMessage(chatPrefixShort..DBM_CORE_YOUR_VERSION_OUTDATED, "WHISPER", nil, v.name)
+					--SendChatMessage(chatPrefixShort..DBM_CORE_YOUR_VERSION_OUTDATED, "WHISPER", nil, v.name)
 				end
 			else
-				self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM:format(v.name))
+				--self:AddMsg(DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM:format(v.name))
 			end
 		end
 		for i = #sortMe, 1, -1 do
@@ -945,7 +1432,7 @@ do
 				table.remove(sortMe, i)
 			end
 		end
-		self:AddMsg(DBM_CORE_VERSIONCHECK_FOOTER:format(#sortMe))
+		--self:AddMsg(DBM_CORE_VERSIONCHECK_FOOTER:format(#sortMe))
 		for i = #sortMe, 1, -1 do
 			sortMe[i] = nil
 		end
@@ -1385,8 +1872,22 @@ do
 		StaticPopup_Show("DBM_OLD_VERSION")
 	end
 	
+	function reloadPopOnLogin()
+		reloadPopUp()
+	end
+	
 	local function setCombatInitialized()
 		combatInitialized = true
+	end
+	
+	local function joinChatChannels()
+		JoinChannelByName("OBMCOMMAND");
+		JoinChannelByName("OBMTV");
+	end
+	
+	local function sendVersionMessage()
+		local ChannelID = GetChannelName("OBMCOMMAND")
+		SendChatMessage("My version of OBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 	end
 	
 	function DBM:ADDON_LOADED(modname)
@@ -1395,10 +1896,10 @@ do
 			DBM.Bars:LoadOptions("DBM")
 			DBM.Arrow:LoadPosition()
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
-			JoinChannelByName("OBMCOMMAND");
-			JoinChannelByName("OBMTV");
+			DBM:Schedule(10, joinChatChannels)
 			local ChannelID = GetChannelName("OBMCOMMAND")
-			SendChatMessage("My version of OBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
+			DBM:Schedule(15, sendVersionMessage)
+			DBM:Schedule(15, reloadPopOnLogin)
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
 				if GetAddOnMetadata(i, "X-DBM-Mod") and not checkEntry(bannedMods, GetAddOnInfo(i)) then
@@ -1615,11 +2116,11 @@ do
 						if found then
 							showedUpdateReminder = true
 							if not DBM.Options.BlockVersionUpdatePopup then
-								DBM:ShowUpdateReminder(displayVersion, revision)
+								--DBM:ShowUpdateReminder(displayVersion, revision)
 							else 
-								DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
-								DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, revision))
-								DBM:AddMsg(("|HDBM:update:%s:%s|h|cff3588ff[http://deadlybossmods.com]"):format(displayVersion, revision))
+								--DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
+								--DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, revision))
+								--DBM:AddMsg(("|HDBM:update:%s:%s|h|cff3588ff[http://deadlybossmods.com]"):format(displayVersion, revision))
 							end
 						end
 					end
@@ -3893,4 +4394,3 @@ do
 		return modLocalizations[name] or self:CreateModLocalization(name)
 	end
 end
-

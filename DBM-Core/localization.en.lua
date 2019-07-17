@@ -76,18 +76,6 @@ DBM_CORE_RANGECHECK_LOCK			= "Lock frame"
 
 DBM_LFG_INVITE						= "LFG Invite"
 
-DBM_CORE_SLASHCMD_HELP				= {
-	"Available slash commands:",
-	"/obm version: Performs a raid-wide version check (alias: ver).",
-	"/obm unlock: Shows a movable status bar timer (alias: move).",
-	"/obm timer <x> <text>: Starts a <x> second OBM Timer with the name <text>.",
-	"/obm broadcast timer <x> <text>: Broadcasts a <x> second OBM Timer with the name <text> to the raid (requires leader/promoted status).",
-	"/obm break <min>: Starts a break timer for <min> minutes. Gives all raid members with OBM a break timer (requires leader/promoted status).",
-	"/obm aaa: Grants all raid members the assistant role.",
-	"/obm cr: Convers the party group to a raid group (alias: convert).",
-	"/obm help: Shows slash command descriptions",
-}
-
 DBM_ERROR_NO_PERMISSION				= "You don't have the required permission to do this."
 
 DBM_CORE_BOSSHEALTH_HIDE_FRAME		= "Close health frame"

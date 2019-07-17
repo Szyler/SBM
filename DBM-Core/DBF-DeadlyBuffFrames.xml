@@ -1,0 +1,189 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+   <Script file="DBF-DeadlyBuffFrames.lua"/>
+
+   <!-- Frame to handle all core events --> 
+   <Frame name="DeadlyBuffFramesFrame"> 
+      <Scripts> 
+         <OnLoad> 
+            DeadlyBuffFrames_OnLoad();
+         </OnLoad> 
+         <OnEvent>
+            DeadlyBuffFrames_OnEvent(event);
+         </OnEvent>
+         <OnUpdate>
+         	DeadlyBuffFrames_OnUpdate();
+        </OnUpdate>
+      </Scripts> 
+   </Frame>
+   
+   <!-- Frame to handle debuff events -->
+   	<Frame name="DBF_EdgeFlashFrame" parent="UIParent" setAllPoints="true" hidden="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentT" file="Interface\FullScreenTextures\LowHealth" alphaMode="ADD">
+					<!-- <Color r="1" g="1" b="1" a="1" /> -->
+				</Texture>	
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>
+				self.elapsed = 0;
+				self:SetAlpha(0);
+			</OnShow>
+			<OnLoad>
+				self:SetScript("OnUpdate", DBF_FlashFrame_OnUpdate);
+			</OnLoad>
+		</Scripts> 
+	</Frame>
+
+   	<Frame name="DBF_FullFlashFrame" parent="UIParent" setAllPoints="true" hidden="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentT" alphaMode="ADD">
+					<Color r="1" g="1" b="1" a="1" />
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnShow>
+				self.elapsed = 0;
+				self:SetAlpha(0);
+			</OnShow>
+			<OnLoad>
+				self:SetScript("OnUpdate", DBF_FlashFrame_OnUpdate);
+			</OnLoad>
+		</Scripts> 
+	</Frame>
+   
+	<Font name="DBF_ZoneTextFont" font="Fonts\FRIZQT__.TTF" outline="THICK" virtual="true">
+		<FontHeight>
+			<AbsValue val="52"/>
+		</FontHeight>
+		<Color r="1.0" g="0.9294" b="0.7607"/>
+		<Shadow/>
+	</Font>
+	<Font name="DBF_ErrorFont" font="Fonts\FRIZQT__.TTF" virtual="true">
+		<FontHeight>
+			<AbsValue val="16"/>
+		</FontHeight>
+		<Color r="1.0" g="0.82" b="0"/>
+		<Shadow>
+			<Offset>
+				<AbsDimension x="1" y="-1"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>
+	</Font>
+	
+    <MessageFrame name="DBF_InfoWarningFrame" insertMode="BOTTOM" parent="UIParent" frameStrata="DIALOG" toplevel="true">
+		<Size>
+			<AbsDimension x="1600" y="56"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="26"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+		</Scripts>
+		<FontString inherits="DBF_ZoneTextFont" virtual="true"/>
+    </MessageFrame>
+    <MessageFrame name="DBF_DebuffWarningFrame" insertMode="BOTTOM" parent="UIParent" frameStrata="DIALOG" toplevel="true">
+		<Size>
+			<AbsDimension x="1600" y="56"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOM" relativePoint="TOP" relativeTo="DBF_InfoWarningFrame">
+				<Offset>
+					<AbsDimension x="0" y="12"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+		</Scripts>
+		<FontString inherits="DBF_ZoneTextFont" virtual="true"/>
+    </MessageFrame>
+   <MessageFrame name="DBF_WarningFrame" insertMode="BOTTOM" parent="UIParent" frameStrata="DIALOG" toplevel="true">
+		<Size>
+			<AbsDimension x="1600" y="56"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOM" relativePoint="TOP" relativeTo="DBF_DebuffWarningFrame">
+				<Offset>
+					<AbsDimension x="0" y="12"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+		</Scripts>
+		<FontString inherits="DBF_ZoneTextFont" virtual="true"/>
+    </MessageFrame>
+    <MessageFrame name="DBF_SmallWarningFrame" insertMode="TOP" parent="UIParent" frameStrata="DIALOG" toplevel="true">
+		<Size>
+			<AbsDimension x="800" y="18"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="DBF_DebuffWarningFrame">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<FontString inherits="DBF_ErrorFont" justifyH="CENTER"/>
+    </MessageFrame>
+    
+    <GameTooltip name="DeadlyBuffFrames_TT" frameStrata="TOOLTIP" hidden="true" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this:SetOwner(UIParent, "ANCHOR_NONE");
+			</OnLoad>
+		</Scripts>
+    </GameTooltip>
+    
+    <GameTooltip name="DeadlyBuffFrames_TextBoxTT" inherits="GameTooltipTemplate" parent="UIParent" enableMouse="true" toplevel="true" movable="true" frameStrata="TOOLTIP" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Button name="$parentCloseButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="1" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						HideUIPanel(DeadlyBuffFrames_TextBoxTT);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				GameTooltip_OnLoad(self);
+				this:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				this:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				this:StopMovingOrSizing();
+				ValidateFramePosition(this);
+			</OnDragStop> 
+		</Scripts>
+    </GameTooltip>
+</Ui>
