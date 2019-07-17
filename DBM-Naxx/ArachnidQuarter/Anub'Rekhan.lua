@@ -17,15 +17,11 @@ mod:RegisterEvents(
 local prewarnLocustInitial	= mod:NewAnnounce("Locust Swarm Initial CD Now", 2, 28785)
 local prewarnLocust			= mod:NewAnnounce("Locust Swarm Soon", 2, 28785)
 local warnLocust			= mod:NewAnnounce("Locust Swarm", 3, 28785)
-local timerLocust			= mod:NewTimer(90, "Locust Swarm", 28785)
+local timerLocust			= mod:NewTimer(90, "Next Locust Swarm", 28785)
 local timerLocustInitial	= mod:NewTimer(90, "Locust Swarm Initial CD", 28785)
 local timerLocustRemaining	= mod:NewTimer(15, "Locust Swarm: Time Remaining", 28785)
 local specWarnLocust		= mod:NewSpecialWarning("Locust Swarm", nil, "Special warning for Locust Swarm cast")
 local soundLocust			= mod:NewSound(28785)
------Impale-----
-local prewarnImpale			= mod:NewAnnounce("Impale Soon", 2, 28783)
-local warnImpale			= mod:NewAnnounce("Impale", 3, 28783)
-local timerImpale			= mod:NewTimer(15, "Impale", 28783)
 -----Dark Gaze-----
 local specWarnDarkGaze		= mod:NewSpecialWarning("Dark Gaze", nil, "Special warning for Dark Gaze on you")
 -----Misc-----
@@ -33,9 +29,6 @@ local berserkTimer			= mod:NewBerserkTimer(600)
 -----Pre-Alert Functions-----
 function mod:preLocust()
 	prewarnLocust:Show()
-end
-function mod:preImpale()
-	prewarnImpale:Show()
 end
 -----Alert FUNCTIONS-----
 function mod:alertLocustInitial()
@@ -45,15 +38,11 @@ function mod:alertLocust()
 	warnLocust:Show()
 	soundLocust:Play()
 end
-function mod:alertImpale()
-	warnImpale:Show()
-end
 -----Boss Functions-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
-	getBestKill()
-	locustInitial()
-	impaleInitial()
+	self:ScheduleMethod(0, "getBestKill")
+	self:ScheduleMethod(0, "locustInitial")
 end
 
 function mod:locustInitial()
@@ -62,25 +51,11 @@ function mod:locustInitial()
 	self:ScheduleMethod(timer1, "alertLocustInitial")
 end
 
-function mod:impaleInitial()
-	timer2 = 20
-	timerImpale:Show(timer2)
-	self:ScheduleMethod(timer2-5, "preImpale")
-	self:ScheduleMethod(timer2, "alertImpale")
-end
-
 function mod:locustRepeat()
 	timer3 = 90
 	timerLocust:Show(timer3)
 	self:ScheduleMethod(timer3-5, "preLocust")
 	self:ScheduleMethod(timer3, "alertLocust")
-end
-
-function mod:impaleRepeat()
-	timer4 = 15
-	timerImpale:Show(timer4)
-	self:ScheduleMethod(timer4-5, "preImpale")
-	self:ScheduleMethod(timer4, "alertImpale")
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -96,10 +71,8 @@ end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(28785) then
-		locustRepeat()
+		mod:locustRepeat()
 		specWarnLocust:Show(17)
-	elseif args:IsSpellID(28783) then
-		impaleRepeat()
 	end
 end
 -----OBM CLEAN UP FUNCTIONS-----

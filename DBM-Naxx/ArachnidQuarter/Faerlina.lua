@@ -2,13 +2,14 @@ local mod	= DBM:NewMod("Faerlina", "DBM-Naxx", 1)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2248 $"):sub(12, -3))
-mod:SetCreatureID(15953)
+mod:SetCreatureID(15953, 16506)
 
 mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
 
@@ -18,15 +19,19 @@ local warnEmbraceExpired	= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
 local warnEnrageSoon		= mod:NewSoonAnnounce(28131, 3)
 local warnEnrageNow			= mod:NewSpellAnnounce(28131, 4)
 
-local timerEmbrace			= mod:NewBuffActiveTimer(30, 28732)
-local timerEnrage			= mod:NewCDTimer(60, 28131)
+local timerEmbrace			= mod:NewBuffActiveTimer(20, 28732)
+local timerEnrage			= mod:NewTimer(60, "Enrage CD", 28131)
+local berserkTimer			= mod:NewBerserkTimer(300)
+
+local specWarnRainOfFire	= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
 
 local embraceSpam = 0
 local enraged = false
 
 function mod:OnCombatStart(delay)
+	berserkTimer:Start(300-delay)
 	self:ScheduleMethod(0, "getBestKill")
-	timerEnrage:Start(-delay)
+	timerEnrage:Start(60 - delay)
 	warnEnrageSoon:Schedule(55 - delay)
 	enraged = false
 end
@@ -41,12 +46,12 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerEnrage:Stop()
 		if enraged then
 			timerEnrage:Start()
-			warnEnrageSoon:Schedule(45)
+			warnEnrageSoon:Schedule(55)
 		end
 		timerEmbrace:Start()
 		warnEmbraceActive:Show()
-		warnEmbraceExpire:Schedule(25)
-		warnEmbraceExpired:Schedule(30)
+		warnEmbraceExpire:Schedule(15)
+		warnEmbraceExpired:Schedule(20)
 		enraged = false
 	end
 end
@@ -55,6 +60,19 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(28798, 54100) then			-- Frenzy
 		warnEnrageNow:Show()
 		enraged = GetTime()
+	end
+	if args:IsSpellID(1003054) then 
+		if args:IsPlayer() then
+			specWarnRainOfFire:Show();
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(1003054) then 
+		if args:IsPlayer() then
+			specWarnRainOfFire:Show();
+		end
 	end
 end
 
