@@ -84,7 +84,7 @@ L:SetGeneralLocalization({
 
 L:SetWarningLocalization({
 	WarningTeleportNow	= "Teleported",
-	WarningTeleportSoon	= "Teleport in 20 seconds"
+	WarningTeleportSoon	= "Teleport in 10 seconds"
 })
 
 L:SetTimerLocalization({
@@ -140,7 +140,7 @@ L:SetWarningLocalization({
 L:SetOptionLocalization({
 	WarningHealSoon		= "Show pre-warning for 3-second healing window",
 	WarningHealNow		= "Show warning for 3-second healing window",
-	SporeDamageAlert	= "Send whisper to and announce to raid players who damage spores\n(requires announce to be enabled and leader/promoted status)"
+	SporeDamageAlert	= "DISABLED"
 })
 
 -----------------

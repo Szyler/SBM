@@ -10,26 +10,30 @@ mod:EnableModel()
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
-	"SPELL_DAMAGE",
-	"SWING_DAMAGE",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
+	"SPELL_SUMMON",
 	"PLAYER_ALIVE"
 )
 
-local warnSporeNow	= mod:NewSpellAnnounce(32329, 2)
-local warnSporeSoon	= mod:NewSoonAnnounce(32329, 1)
+local warnSporeNow	= mod:NewSpellAnnounce(29234, 2)
+local warnSporeSoon	= mod:NewSoonAnnounce(29234, 1)
 local warnDoomNow	= mod:NewSpellAnnounce(29204, 3)
 local warnHealSoon	= mod:NewAnnounce("WarningHealSoon", 4, 48071)
 local warnHealNow	= mod:NewAnnounce("WarningHealNow", 1, 48071, false)
 
 
-local timerSpore	= mod:NewNextTimer(36, 32329)
+local timerSpore	= mod:NewNextTimer(18, 29234)
 local timerDoom		= mod:NewNextTimer(180, 29204)
 local timerAura		= mod:NewBuffActiveTimer(17, 55593)
+
+local specWarnCloudOfBlight	= mod:NewSpecialWarningMove(79008, true, "Special warning when standing in Cloud of Blight", true)
+
 
 mod:AddBoolOption("SporeDamageAlert", false)
 
 local doomCounter	= 0
-local sporeTimer	= 36
+local sporeTimer	= 18
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
@@ -37,7 +41,7 @@ function mod:OnCombatStart(delay)
 	if mod:IsDifficulty("heroic25") then
 		sporeTimer = 18
 	else
-		sporeTimer = 36
+		sporeTimer = 18
 	end
 	timerSpore:Start(sporeTimer - delay)
 	warnSporeSoon:Schedule(sporeTimer - 5 - delay)
@@ -45,11 +49,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
-	if args:IsSpellID(29234) then
-		timerSpore:Start(sporeTimer)
-		warnSporeNow:Show()
-		warnSporeSoon:Schedule(sporeTimer - 5)
-	elseif args:IsSpellID(29204, 55052) then  -- Inevitable Doom
+	if args:IsSpellID(29204, 55052) then  -- Inevitable Doom
 		doomCounter = doomCounter + 1
 		local timer = 30
 		if doomCounter >= 7 then
@@ -65,18 +65,27 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
---Spore loser function. Credits to Forte guild and their old discontinued dbm plugins. Sad to see that guild disband, best of luck to them!
-function mod:SPELL_DAMAGE(args)
-	if self.Options.SporeDamageAlert and args.destName == "Spore" and args.spellId ~= 62124 and self:IsInCombat() then
-		SendChatMessage(args.sourceName..", You are damaging a Spore!!! ("..args.amount.." damage)", "RAID_WARNING")
-		SendChatMessage(args.sourceName..", You are damaging a Spore!!! ("..args.amount.." damage)", "WHISPER", nil, args.sourceName)
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(79008) then 
+		if args:IsPlayer() then
+			specWarnCloudOfBlight:Show();
+		end
 	end
 end
 
-function mod:SWING_DAMAGE(args)
-	if self.Options.SporeDamageAlert and args.destName == "Spore" and self:IsInCombat() then
-		SendChatMessage(args.sourceName..", You are damaging a Spore!!! ("..args.amount.." damage)", "RAID_WARNING")
-		SendChatMessage(args.sourceName..", You are damaging a Spore!!! ("..args.amount.." damage)", "WHISPER", nil, args.sourceName)
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(79008) then 
+		if args:IsPlayer() then
+			specWarnCloudOfBlight:Show();
+		end
+	end
+end
+
+function mod:SPELL_SUMMON(args)
+	if args:IsSpellID(29234) then
+		timerSpore:Start(30)
+		warnSporeNow:Show()
+		warnSporeSoon:Schedule(25)
 	end
 end
 
