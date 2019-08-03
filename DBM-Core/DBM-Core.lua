@@ -637,7 +637,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Sky", "Skytwo", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi"}
+			local o = {"Sky", "Skytwo", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
 			
 			if(found) then  
                 if(p1 == "OBMCOMMAND") then
