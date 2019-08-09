@@ -13,17 +13,19 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
-local warnEmbraceActive		= mod:NewSpellAnnounce(28732, 1)
-local warnEmbraceExpire		= mod:NewAnnounce("WarningEmbraceExpire", 2, 28732)
-local warnEmbraceExpired	= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
-local warnEnrageSoon		= mod:NewSoonAnnounce(28131, 3)
-local warnEnrageNow			= mod:NewSpellAnnounce(28131, 4)
+local warnEmbraceActive			= mod:NewSpellAnnounce(28732, 1)
+local warnEmbraceExpire			= mod:NewAnnounce("WarningEmbraceExpire", 2, 28732)
+local warnEmbraceExpired		= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
+local warnEnrageSoon			= mod:NewSoonAnnounce(28131, 3)
+local warnEnrageNow				= mod:NewSpellAnnounce(28131, 4)
 
-local timerEmbrace			= mod:NewBuffActiveTimer(20, 28732)
-local timerEnrage			= mod:NewTimer(60, "Enrage CD", 28131)
-local berserkTimer			= mod:NewBerserkTimer(300)
+local timerEmbrace				= mod:NewBuffActiveTimer(20, 28732)
+local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
+local berserkTimer				= mod:NewBerserkTimer(300)
 
-local specWarnRainOfFire	= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
+local specWarnRainOfFire		= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
+local specWarnPoisonPool		= mod:NewSpecialWarningMove(869762, true, "Special warning when standing in Poison Pool", true)
+local specWarnClingingPoison	= mod:NewSpecialWarningMove(1003060, true, "Special warning when standing in Clinging Poison", true)
 
 local embraceSpam = 0
 local enraged = false
@@ -66,12 +68,32 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnRainOfFire:Show();
 		end
 	end
+	if args:IsSpellID(869762) then 
+		if args:IsPlayer() then
+			specWarnPoisonPool:Show();
+		end
+	end
+	if args:IsSpellID(1003060) then 
+		if args:IsPlayer() then
+			specWarnClingingPoison:Show();
+		end
+	end
 end
 
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(1003054) then 
 		if args:IsPlayer() then
 			specWarnRainOfFire:Show();
+		end
+	end
+	if args:IsSpellID(869762) then 
+		if args:IsPlayer() then
+			specWarnPoisonPool:Show();
+		end
+	end
+	if args:IsSpellID(1003060) then 
+		if args:IsPlayer() then
+			specWarnClingingPoison:Show();
 		end
 	end
 end
