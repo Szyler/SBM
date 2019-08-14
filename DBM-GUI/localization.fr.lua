@@ -3,7 +3,7 @@ if GetLocale() ~= "frFR" then return end
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame 		= "OAK Boss Mods"
+L.MainFrame 		= "TOXICITY Boss Mods"
 
 L.TranslationBy 	= "Psyco Alias Exodius & Vranwen@EU-Kirin Tor"
 
@@ -76,7 +76,7 @@ L.ShowWarningsInChat 	= "Afficher les alertes dans la fenêtre de dialogue"
 L.ShowFakedRaidWarnings = "Afficher les alertes comme de faux avertissements de raid"
 L.WarningIconLeft 	= "Afficher l'icône à gauche"
 L.WarningIconRight 	= "Afficher l'icône à droite"
-L.RaidWarnMessage 	= "Merci d'utiliser OAK Boss Mods"
+L.RaidWarnMessage 	= "Merci d'utiliser TOXICITY Boss Mods"
 L.BarWhileMove 		= "Alerte-raid déplaçable"
 L.RaidWarnSound		= "Jouer un son pour les alertes raid"
 L.SpecialWarnSound	= "Jouer un son pour les alertes spéciales"
@@ -127,7 +127,7 @@ L.Panel_SpamFilter				= "Filtre anti-spam"
 L.Area_SpamFilter				= "Options générales du filtre anti-spam"
 L.HideBossEmoteFrame			= "Cacher la fenêtre des emotes de boss"
 L.SpamBlockRaidWarning			= "Filtrer les annonces venant d'autres boss mods"
-L.SpamBlockBossWhispers			= "Filtrer les alertes <OAK-BM> chuchotement pendant les combats"
+L.SpamBlockBossWhispers			= "Filtrer les alertes <TOXICITY-BM> chuchotement pendant les combats"
 L.BlockVersionUpdatePopup		= "Enlève le message pop-up quand vous êtes sur un boss"
 L.ShowBigBrotherOnCombatStart	= "Autoriser Big Brother à regarder les buffs quand le combat débute"
 

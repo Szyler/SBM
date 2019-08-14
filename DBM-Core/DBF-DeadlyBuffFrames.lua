@@ -20,35 +20,35 @@ function DeadlyBuffFrames_PrintOfficerInfo()
 	local text = "\n"..
 	dbf_c_t.."Available slash commands:\n"..
 	"\n"..
-	"|cFF00FF00/obm unlock: |cFFFFFFFFShows a movable status bar timer (alias: move). \n"..
-	"|cFF00FF00/obm pull <x>: |cFFFFFFFFStarts a <x> second OBM pull timer. \n"..
-	"|cFF00FF00/obm timer <x> <text>: |cFFFFFFFFStarts a <x> second OBM Timer with the name <text>. \n"..
-	"|cFF00FF00/obm broadcast timer <x> <text>: |cFFFFFFFFBroadcasts a <x> second OBM Timer with the name <text> to the raid. \n"..
-	"|cFF00FF00/obm break <min>: |cFFFFFFFFStarts a break timer for <min> minutes. Gives all raid members with OBM a break timer. \n"..
-	"|cFF00FF00/obm aaa: |cFFFFFFFFGrants all raid members the assistant role. \n"..
-	"|cFF00FF00/obm cr: |cFFFFFFFFConvers the party group to a raid group. \n"..
-	"|cFF00FF00/obm gl: |cFFFFFFFFSwap to Group Loot. \n"..
-	"|cFF00FF00/obm ml: |cFFFFFFFFSwap to Master Looter. \n"..
-	"|cFF00FF00/obm ffa: |cFFFFFFFFSwap to Free For All. \n"..
-	"|cFF00FF00/obm ri: |cFFFFFFFFReset instance. \n"..
-	"|cFF00FF00/obm 5n: |cFFFFFFFFSwaps dungeon difficulty to Normal5. \n"..
-	"|cFF00FF00/obm 5h: |cFFFFFFFFSwaps dungeon difficulty to Heroic5. \n"..
-	"|cFF00FF00/obm 10n: |cFFFFFFFFSwaps raid difficulty to Normal10. \n"..
-	"|cFF00FF00/obm 10h: |cFFFFFFFFSwaps raid difficulty to Heroic10. \n"..
-	"|cFF00FF00/obm 25n: |cFFFFFFFFSwaps raid difficulty to Normal25. \n"..
-	"|cFF00FF00/obm 25h: |cFFFFFFFFSwaps raid difficulty to Heroic25. \n"..
-	"|cFF00FF00/obm disband: |cFFFFFFFFDisband party or raid group. \n"..
-	"|cFF00FF00/obm m <1-8>: |cFFFFFFFFAdd a raid marker to your current target. \n"..
+	"|cFF00FF00/tbm unlock: |cFFFFFFFFShows a movable status bar timer (alias: move). \n"..
+	"|cFF00FF00/tbm pull <x>: |cFFFFFFFFStarts a <x> second TBM pull timer. \n"..
+	"|cFF00FF00/tbm timer <x> <text>: |cFFFFFFFFStarts a <x> second TBM Timer with the name <text>. \n"..
+	"|cFF00FF00/tbm broadcast timer <x> <text>: |cFFFFFFFFBroadcasts a <x> second TBM Timer with the name <text> to the raid. \n"..
+	"|cFF00FF00/tbm break <min>: |cFFFFFFFFStarts a break timer for <min> minutes. Gives all raid members with TBM a break timer. \n"..
+	"|cFF00FF00/tbm aaa: |cFFFFFFFFGrants all raid members the assistant role. \n"..
+	"|cFF00FF00/tbm cr: |cFFFFFFFFConvers the party group to a raid group. \n"..
+	"|cFF00FF00/tbm gl: |cFFFFFFFFSwap to Group Loot. \n"..
+	"|cFF00FF00/tbm ml: |cFFFFFFFFSwap to Master Looter. \n"..
+	"|cFF00FF00/tbm ffa: |cFFFFFFFFSwap to Free For All. \n"..
+	"|cFF00FF00/tbm ri: |cFFFFFFFFReset instance. \n"..
+	"|cFF00FF00/tbm 5n: |cFFFFFFFFSwaps dungeon difficulty to Normal5. \n"..
+	"|cFF00FF00/tbm 5h: |cFFFFFFFFSwaps dungeon difficulty to Heroic5. \n"..
+	"|cFF00FF00/tbm 10n: |cFFFFFFFFSwaps raid difficulty to Normal10. \n"..
+	"|cFF00FF00/tbm 10h: |cFFFFFFFFSwaps raid difficulty to Heroic10. \n"..
+	"|cFF00FF00/tbm 25n: |cFFFFFFFFSwaps raid difficulty to Normal25. \n"..
+	"|cFF00FF00/tbm 25h: |cFFFFFFFFSwaps raid difficulty to Heroic25. \n"..
+	"|cFF00FF00/tbm disband: |cFFFFFFFFDisband party or raid group. \n"..
+	"|cFF00FF00/tbm m <1-8>: |cFFFFFFFFAdd a raid marker to your current target. \n"..
 	"|cFF00FF00/range: |cFFFFFFFFToggles the range frame. \n"..
 	"|cFF00FF00/dbf: |cFFFFFFFFToggles the DeadlyBuffFrames UI. \n"..
-	"|cFF00FF00/obm: |cFFFFFFFFToggles the OBM Options GUI. \n"..
-	"|cFF00FF00/obm help: |cFFFFFFFFShows slash command descriptions \n"..
+	"|cFF00FF00/tbm: |cFFFFFFFFToggles the TBM Options GUI. \n"..
+	"|cFF00FF00/tbm help: |cFFFFFFFFShows slash command descriptions \n"..
 	"";
 	ShowUIPanel(DeadlyBuffFrames_TextBoxTT);
 	if ( not DeadlyBuffFrames_TextBoxTT:IsVisible() ) then
 		DeadlyBuffFrames_TextBoxTT:SetOwner(UIParent, "ANCHOR_PRESERVE");
 	end
-	DeadlyBuffFrames_TextBoxTT:SetText("OBM commands");
+	DeadlyBuffFrames_TextBoxTT:SetText("TBM commands");
 	DeadlyBuffFrames_TextBoxTT:AddLine(text, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, 1);
 	
 	DeadlyBuffFrames_TextBoxTT:SetWidth(550);
@@ -291,10 +291,10 @@ end
 
 function dbf_sendchat(msg)
 	if(GetNumRaidMembers()>0) then
-		SendChatMessage("<OBM> "..msg,"RAID");
+		SendChatMessage("<TBM> "..msg,"RAID");
 	elseif(GetNumPartyMembers()>0) then
-		SendChatMessage("<OBM> "..msg,"PARTY");
+		SendChatMessage("<TBM> "..msg,"PARTY");
 	else
-		SendChatMessage("<OBM> "..msg,"SAY");
+		SendChatMessage("<TBM> "..msg,"SAY");
 	end
 end

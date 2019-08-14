@@ -1,6 +1,6 @@
 ﻿if GetLocale() ~= "esES" and GetLocale() ~= "esMX" then return end
 
-DBM_CORE_NEED_SUPPORT				= "¡Ey! ¿Eres un programador o eres bueno con los idiomas? Si es así, el Equipo OBM necesita tu ayuda para mantener el OBM como el mejor BossMod del WoW. Únete al equipo haciendo click en www.deadlybossmods.com o enviando un mensaje a tandanu@deadlybossmods.com o nitram@deadlybossmods.com."
+DBM_CORE_NEED_SUPPORT				= "¡Ey! ¿Eres un programador o eres bueno con los idiomas? Si es así, el Equipo TBM necesita tu ayuda para mantener el TBM como el mejor BossMod del WoW. Únete al equipo haciendo click en www.deadlybossmods.com o enviando un mensaje a tandanu@deadlybossmods.com o nitram@deadlybossmods.com."
 
 DBM_CORE_LOAD_MOD_ERROR				= "Error al cargar modulo %s: %s"
 DBM_CORE_LOAD_MOD_SUCCESS			= "Cargado modulo de '%s' !"
@@ -38,25 +38,25 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s esta ocupado en la batalla contra %s (%s, %
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s ha derrotado a %s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s ha wipeado en %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "OAK Boss Mods - Version"
+DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - Version"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: OBM no instalado"
-DBM_CORE_VERSIONCHECK_FOOTER		= "Encontrados %d jugadores con OAK Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "¡Tu versión de OAK Boss Mods es antigua! Por favor, visita www.deadlybossmods.com para bajarte la última versión."
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM no instalado"
+DBM_CORE_VERSIONCHECK_FOOTER		= "Encontrados %d jugadores con TOXICITY Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "¡Tu versión de TOXICITY Boss Mods es antigua! Por favor, visita www.deadlybossmods.com para bajarte la última versión."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "La version de tu OAK Boss Mods es antigua.\n Version %s (r%d) disponible para descargar aqui:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "La version de tu TOXICITY Boss Mods es antigua.\n Version %s (r%d) disponible para descargar aqui:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Presiona Contro+C para copiar el link de la descarga."
-DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Mostrar popup si hay nueva version de OAK Boss Mods"
+DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Mostrar popup si hay nueva version de TOXICITY Boss Mods"
 
 DBM_CORE_MOVABLE_BAR				= "¡Muéveme!"
 
 DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h envia tu tiempo: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Cancelar este tiempo]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Ignorar tiempos de %1$s]|r|h"
 DBM_PIZZA_CONFIRM_IGNORE			= "¿De verdad quieres ignorar los tiempos de %s para esta sesion?"
-DBM_PIZZA_ERROR_USAGE				= "Usa: /obm [broadcast] timer <time> <text>"
+DBM_PIZZA_ERROR_USAGE				= "Usa: /tbm [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "OAK Boss Mods is running twice because you have OBMv3 and OBMv4 installed and enabled!\nClick \"Okay\" to disable OBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old OBMv3 folders."
+DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods is running twice because you have TBMv3 and TBMv4 installed and enabled!\nClick \"Okay\" to disable TBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old TBMv3 folders."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "OBM-Español"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TBM-Español"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Mayus+Raton1 o Raton2 para mover\nAlt+Mayus+Raton1 para moverlo a donde quieras"
 
 DBM_CORE_RANGECHECK_HEADER			= "Comprobacion de Rango (%d yd)"
@@ -75,12 +75,12 @@ DBM_LFG_INVITE						= "Invitación al grupo"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"Comandos disponibles:",
-	"/obm version: comprueba la versión de OBM de toda la banda (alias: ver)",
-	"/obm unlock: muestra una barra de estado desplazable (alias: move)",
-	"/obm timer <x> <text>: Muestra un contador de <x> segundos con el nombre <text>",
-	"/obm broadcast timer <x> <text>: Muestra un contador de <x> segundos con el nombre <text> a la banda (requiere lider/ayudante)",
-	"/obm break <min>: Empieza un descanso de <min> minutos. Muestra a todos los miembros de banda con OBM un contador de descanso (requiere lider/ayudante).",
-	"/obm help: muestra esta ayuda",
+	"/tbm version: comprueba la versión de TBM de toda la banda (alias: ver)",
+	"/tbm unlock: muestra una barra de estado desplazable (alias: move)",
+	"/tbm timer <x> <text>: Muestra un contador de <x> segundos con el nombre <text>",
+	"/tbm broadcast timer <x> <text>: Muestra un contador de <x> segundos con el nombre <text> a la banda (requiere lider/ayudante)",
+	"/tbm break <min>: Empieza un descanso de <min> minutos. Muestra a todos los miembros de banda con TBM un contador de descanso (requiere lider/ayudante).",
+	"/tbm help: muestra esta ayuda",
 }
 
 DBM_ERROR_NO_PERMISSION				= "No tienes permiso para hacer eso."
@@ -185,10 +185,10 @@ DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "La comprobación de rango de %d yardas 
 DBM_ARROW_MOVABLE					= "Flecha movible"
 DBM_ARROW_NO_RAIDGROUP				= "Esta funcionalidad solo puede usarse en grupos de banda o en estancias de banda."
 DBM_ARROW_ERROR_USAGE	= {
-	"Uso de OBM-Arrow:",
-	"/obm arrow <x> <y>: Crea una flecha que apunta a una dirección específica (0 < x/y < 100)",
-	"/obm arrow <jugador>: Crea una flecha que apunta a un miembro específico de la banda",
-	"/obm arrow hide: Oculta la flecha",
-	"/obm arrow move: Hace la flecha movible",
+	"Uso de TBM-Arrow:",
+	"/tbm arrow <x> <y>: Crea una flecha que apunta a una dirección específica (0 < x/y < 100)",
+	"/tbm arrow <jugador>: Crea una flecha que apunta a un miembro específico de la banda",
+	"/tbm arrow hide: Oculta la flecha",
+	"/tbm arrow move: Hace la flecha movible",
 }
 

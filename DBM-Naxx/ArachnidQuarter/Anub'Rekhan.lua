@@ -75,7 +75,7 @@ function mod:SPELL_CAST_START(args)
 		specWarnLocust:Show(17)
 	end
 end
------OBM CLEAN UP FUNCTIONS-----
+-----TBM CLEAN UP FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end

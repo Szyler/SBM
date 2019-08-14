@@ -40,12 +40,12 @@ DBM_CORE_AUTO_RESPONDED				= "已自动回复密语。"
 DBM_CORE_STATUS_WHISPER				= "%s：%s，%d/%d存活"
 DBM_CORE_AUTO_RESPOND_WHISPER		= "%s正在与%s交战，（当前%s，%d/%d存活）"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "OAK Boss Mods - 版本检测"
+DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - 版本检测"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s：%s(r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s：尚未安装OBM"
-DBM_CORE_VERSIONCHECK_FOOTER		= "团队中有%d名成员正在使用OAK Boss Mods"
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s：尚未安装TBM"
+DBM_CORE_VERSIONCHECK_FOOTER		= "团队中有%d名成员正在使用TOXICITY Boss Mods"
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "你的OAK Boss Mods版本已过期。\n你可以在如下地址下载到新版本%s(r%d)："
+DBM_CORE_UPDATEREMINDER_HEADER		= "你的TOXICITY Boss Mods版本已过期。\n你可以在如下地址下载到新版本%s(r%d)："
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Ctrl-C：复制下载地址到剪切板。"
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "发现新版本后弹出提示框"
 
@@ -53,11 +53,11 @@ DBM_CORE_MOVABLE_BAR				= "拖动我！"
 
 DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h向你发送了一个倒计时：'%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[取消该计时]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[忽略来自%1$s的计时]|r|h"
 DBM_PIZZA_CONFIRM_IGNORE			= "是否要在该次游戏连接中屏蔽来自%s的计时？"
-DBM_PIZZA_ERROR_USAGE				= "命令：/obm [broadcast] timer <时间（秒）> <文本>"
+DBM_PIZZA_ERROR_USAGE				= "命令：/tbm [broadcast] timer <时间（秒）> <文本>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2个版本的OAK Boss Mods正在运行：OBMv3和OBMv4。\n单击“确定”按钮可将OBMv3关闭并重载用户界面。\n我们建议将插件目录下的OBMv3删除。"
+DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2个版本的TOXICITY Boss Mods正在运行：TBMv3和TBMv4。\n单击“确定”按钮可将TBMv3关闭并重载用户界面。\n我们建议将插件目录下的TBMv3删除。"
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "OAK Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+单击或右键点击即可移动"
 
 DBM_CORE_RANGECHECK_HEADER			= "距离监视（%d码）"
@@ -73,11 +73,11 @@ DBM_CORE_RANGECHECK_SETRANGE_TO		= "%d码"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"可用命令：",
-	"/obm version：进行团队范围的OBM版本检测（也可使用：ver）",
-	"/obm unlock：显示一个可移动的计时条，可通过对它来移动所有OBM计时条的位置（也可使用：move）",
-	"/obm timer <x> <文本>：开始一个以<文本>为名称的时间为<x>秒的倒计时",
-	"/obm broadcast timer <x> <文本>：向团队广播一个以<文本>为名称的时间为<x>秒的倒计时（需要团队领袖或助理权限）",
-	"/obm help：显示该帮助信息",
+	"/tbm version：进行团队范围的TBM版本检测（也可使用：ver）",
+	"/tbm unlock：显示一个可移动的计时条，可通过对它来移动所有TBM计时条的位置（也可使用：move）",
+	"/tbm timer <x> <文本>：开始一个以<文本>为名称的时间为<x>秒的倒计时",
+	"/tbm broadcast timer <x> <文本>：向团队广播一个以<文本>为名称的时间为<x>秒的倒计时（需要团队领袖或助理权限）",
+	"/tbm help：显示该帮助信息",
 }
 
 DBM_ERROR_NO_PERMISSION				= "无权进行该操作。"

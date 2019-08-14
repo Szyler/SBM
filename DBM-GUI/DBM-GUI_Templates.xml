@@ -359,7 +359,7 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<FontString name="$parentHeaderText" inherits="GameFontNormal" text="OAK Boss Mods">
+				<FontString name="$parentHeaderText" inherits="GameFontNormal" text="TOXICITY Boss Mods">
 					<Anchors>
 						<Anchor point="TOP" relativeTo="$parentHeader">
 							<Offset>
@@ -649,9 +649,9 @@
 					self:UpdateMenuFrame( getglobal(self:GetName().."BossMods") )
 				end
 				if math.random(1,2) == 1 then	-- who is first? hmm lets do it random :)
-					getglobal(self:GetName().."Authors"):SetText("OAK Boss Mods by Sky @ Andorhal, Project Ascension")
+					getglobal(self:GetName().."Authors"):SetText("TOXICITY Boss Mods by Sky @ Andorhal, Project Ascension")
 				else
-					getglobal(self:GetName().."Authors"):SetText("OAK Boss Mods by Sky @ Andorhal, Project Ascension")
+					getglobal(self:GetName().."Authors"):SetText("TOXICITY Boss Mods by Sky @ Andorhal, Project Ascension")
 				end
 			</OnShow>
 			<OnDragStart>

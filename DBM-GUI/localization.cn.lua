@@ -9,7 +9,7 @@ if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods"
+L.MainFrame = "TOXICITY Boss Mods"
 
 L.TranslationBy 	= "Diablohu & yleaf"
 
@@ -82,7 +82,7 @@ L.ShowWarningsInChat 	= "在聊天窗口中显示警报"
 L.ShowFakedRaidWarnings = "以伪装团队警报信息的方式显示警报内容"
 L.WarningIconLeft 	= "左侧显示图标"
 L.WarningIconRight 	= "右侧显示图标"
-L.RaidWarnMessage 	= "感谢您使用OAK Boss Mods"
+L.RaidWarnMessage 	= "感谢您使用TOXICITY Boss Mods"
 L.BarWhileMove 		= "团队警报可以移动"
 L.RaidWarnSound		= "发出团队警报时播放声音"
 L.SpecialWarnSound	= "发出特殊警报时播放声音"

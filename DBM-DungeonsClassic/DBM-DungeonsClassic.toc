@@ -1,6 +1,6 @@
 ## Interface: 30300
-## Title:|cffffffff<|r|cff009600OBM|r|cffffffff>|r |cffffffffDungeons - Classic|r
-## Notes: OAK Boss Mods for Project Ascension, made by Sky @ Andorhal
+## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffDungeons - Classic|r
+## Notes: TOXICITY Boss Mods for Project Ascension, made by Sky @ Andorhal
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
 ## SavedVariablesPerCharacter: DBMClassicDungeons_SavedVars, DBMClassicDungeons_SavedStats

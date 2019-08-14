@@ -2,7 +2,7 @@ DBM_GUI_Translations = {}
 
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods"
+L.MainFrame = "TOXICITY Boss Mods"
 
 L.TranslationBy 			= "N/A"
 
@@ -45,8 +45,8 @@ L.Statistic_BestKill		= "Best Kill:"
 L.Statistic_Heroic			= "Heroic"
 
 -- Tab: General Options
-L.General 					= "General OBM Options"
-L.EnableDBM 				= "Enable OBM"
+L.General 					= "General TBM Options"
+L.EnableDBM 				= "Enable TBM"
 L.EnableStatus 				= "Reply to 'status' whispers"
 L.AutoRespond 				= "Enable auto-respond while fighting"
 L.CombatLogRepeat 			= "Clear combat log cache every second"
@@ -80,7 +80,7 @@ L.ShowWarningsInChat 		= "Show warnings in chat frame"
 L.ShowFakedRaidWarnings 	= "Show warnings as faked raid warning messages"
 L.WarningIconLeft 			= "Show icon on left side"
 L.WarningIconRight 			= "Show icon on right side"
-L.RaidWarnMessage 			= "Thanks for using OAK Boss Mods"
+L.RaidWarnMessage 			= "Thanks for using TOXICITY Boss Mods"
 L.BarWhileMove 				= "Raid warning movable"
 L.RaidWarnSound				= "Play sound on raid warning"
 L.SpecialWarnSound			= "Play sound on special warning"
@@ -133,7 +133,7 @@ L.Panel_SpamFilter				= "Global and Spam Filters"
 L.Area_SpamFilter				= "Spam Filter Options"
 L.HideBossEmoteFrame			= "Hide raid boss emote frame"
 L.SpamBlockRaidWarning			= "Filter announces from other boss mods" 
-L.SpamBlockBossWhispers			= "Filter <OAK-BM> warning whispers while fighting"
+L.SpamBlockBossWhispers			= "Filter <TOXICITY-BM> warning whispers while fighting"
 L.BlockVersionUpdatePopup		= "Disable update notification popup"
 L.ShowBigBrotherOnCombatStart	= "Perform Big Brother buff check on combat start"
 L.BigBrotherAnnounceToRaid		= "Announce Big Brother results to raid"

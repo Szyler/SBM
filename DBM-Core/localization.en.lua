@@ -1,8 +1,8 @@
 
-DBM_CORE_NEED_SUPPORT				= "Are you good with programming or languages? If yes, the OBM team needs your help to keep OBM the best boss mod for WoW. Join the team by visiting www.deadlybossmods.com or sending a message to tandanu@deadlybossmods.com or nitram@deadlybossmods.com."
+DBM_CORE_NEED_SUPPORT				= "Are you good with programming or languages? If yes, the TBM team needs your help to keep TBM the best boss mod for WoW. Join the team by visiting www.deadlybossmods.com or sending a message to tandanu@deadlybossmods.com or nitram@deadlybossmods.com."
 
 DBM_CORE_LOAD_MOD_ERROR				= "Error while loading boss mods for %s: %s"
-DBM_CORE_LOAD_MOD_SUCCESS			= "Loaded '%s' boss mods. For more options, type /obm in your chat."
+DBM_CORE_LOAD_MOD_SUCCESS			= "Loaded '%s' boss mods. For more options, type /tbm in your chat."
 DBM_CORE_LOAD_GUI_ERROR				= "Could not load GUI: %s"
 
 DBM_CORE_COMBAT_STARTED				= "%s engaged. Good luck and have fun! :)";
@@ -11,9 +11,9 @@ DBM_CORE_BOSS_DOWN_LONG				= "%s down after %s! Your last kill took %s and your 
 DBM_CORE_BOSS_DOWN_NEW_RECORD		= "%s down after %s! This is a new record! (Old record was %s)"
 DBM_CORE_COMBAT_ENDED				= "Combat against %s ended after %s."
 
-OBMTV_CORE_COMBAT_STARTED			= "Encounter started: %s."
-OBMTV_CORE_BOSS_DOWN				= "Encounter completed: %s!"
-OBMTV_CORE_COMBAT_ENDED				= "Encounter failed: %s."
+TBMTV_CORE_COMBAT_STARTED			= "Encounter started: %s."
+TBMTV_CORE_BOSS_DOWN				= "Encounter completed: %s!"
+TBMTV_CORE_COMBAT_ENDED				= "Encounter failed: %s."
 
 DBM_CORE_TIMER_FORMAT_SECS			= "%d |4second:seconds;"
 DBM_CORE_TIMER_FORMAT_MINS			= "%d |4minute:minutes;"
@@ -41,25 +41,25 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s is busy fighting against %s (%s, %d/%d peop
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s has defeated %s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s has wiped on %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "OAK Boss Mods - Versions"
+DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - Versions"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: OBM not installed"
-DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with OAK Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of OAK Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM not installed"
+DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with TOXICITY Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of TOXICITY Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of OAK Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of TOXICITY Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Press Ctrl-C to copy the download link to your clipboard."
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Show popup when a new version is available"
 
 DBM_CORE_MOVABLE_BAR				= "Drag me!"
 
-DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a OBM timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Cancel this timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Ignore timers from %1$s]|r|h"
-DBM_PIZZA_CONFIRM_IGNORE			= "Do you really want to ignore OBM timers from %s for this session?"
-DBM_PIZZA_ERROR_USAGE				= "Usage: /obm [broadcast] timer <time> <text>"
+DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a TBM timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Cancel this timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Ignore timers from %1$s]|r|h"
+DBM_PIZZA_CONFIRM_IGNORE			= "Do you really want to ignore TBM timers from %s for this session?"
+DBM_PIZZA_ERROR_USAGE				= "Usage: /tbm [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "OAK Boss Mods is running twice because you have OBMv3 and OBMv4 installed and enabled!\nClick \"Okay\" to disable OBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old OBMv3 folders."
+DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods is running twice because you have TBMv3 and TBMv4 installed and enabled!\nClick \"Okay\" to disable TBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old TBMv3 folders."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "OAK Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+click or right-click to move\nAlt+shift+click for free drag and drop"
 
 DBM_CORE_RANGECHECK_HEADER			= "Range Check (%d yd)"
@@ -180,10 +180,10 @@ DBM_ARROW_MOVABLE					= "Arrow movable"
 DBM_ARROW_NO_RAIDGROUP				= "This function only works in raid groups and within raid instances."
 DBM_ARROW_ERROR_USAGE	= {
 	"DBM-Arrow usage:",
-	"/obm arrow <x> <y>  creates an arrow that points to a specific locataion (0 < x/y < 100)",
-	"/obm arrow <player>  creates and arrow that points to a specific player in your party or raid",
-	"/obm arrow hide  hides the arrow",
-	"/obm arrow move  makes the arrow movable",
+	"/tbm arrow <x> <y>  creates an arrow that points to a specific locataion (0 < x/y < 100)",
+	"/tbm arrow <player>  creates and arrow that points to a specific player in your party or raid",
+	"/tbm arrow hide  hides the arrow",
+	"/tbm arrow move  makes the arrow movable",
 }
 
 

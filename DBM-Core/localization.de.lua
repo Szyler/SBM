@@ -1,9 +1,9 @@
 if GetLocale() ~= "deDE" then return end
 
-DBM_CORE_NEED_SUPPORT				= "Hey, bist du ein Programmierer oder gut in Fremdsprachen? Falls ja, benötigt das OBM-Team deine Hilfe, damit OBM das beste BossMod in WoW bleibt. Trete dem Team auf www.deadlybossmods.com bei oder sende eine E-Mail an tandanu@deadlybossmods.com oder nitram@deadlybossmods.com."
+DBM_CORE_NEED_SUPPORT				= "Hey, bist du ein Programmierer oder gut in Fremdsprachen? Falls ja, benötigt das TBM-Team deine Hilfe, damit TBM das beste BossMod in WoW bleibt. Trete dem Team auf www.deadlybossmods.com bei oder sende eine E-Mail an tandanu@deadlybossmods.com oder nitram@deadlybossmods.com."
 
 DBM_CORE_LOAD_MOD_ERROR				= "Fehler beim Laden von Boss Mods für %s: %s"
-DBM_CORE_LOAD_MOD_SUCCESS			= "Boss Mods für '%s' geladen, für weitere Optionen gib /obm in deinem Chatfenster ein!"
+DBM_CORE_LOAD_MOD_SUCCESS			= "Boss Mods für '%s' geladen, für weitere Optionen gib /tbm in deinem Chatfenster ein!"
 DBM_CORE_LOAD_GUI_ERROR				= "Konnte das GUI nicht laden: %s"
 
 DBM_CORE_COMBAT_STARTED				= "Kampf gegen %s hat begonnen. Viel Glück! :)";
@@ -38,26 +38,26 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s ist damit beschäftigt, gegen %s zu kämpfe
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s hat %s besiegt!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s ist an %s gewipet"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "OAK Boss Mods - Versionen"
+DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - Versionen"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: OBM nicht installiert"
-DBM_CORE_VERSIONCHECK_FOOTER		= "%d Spieler mit OAK Boss Mods gefunden"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Deine Version von OAK Boss Mods ist veraltet! Bitte besuche www.deadlybossmods.com, um die neueste Version herunterzuladen."
-DBM_CORE_DISABLED_ICON_FUNCTION		= "Dein OBM setzt keine Zeichen mehr, weil deine Version veraltet ist. Bitte aktualisiere dein OBM so bald wie möglich und aktiviere die Zeichenfunktion wieder."
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM nicht installiert"
+DBM_CORE_VERSIONCHECK_FOOTER		= "%d Spieler mit TOXICITY Boss Mods gefunden"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Deine Version von TOXICITY Boss Mods ist veraltet! Bitte besuche www.deadlybossmods.com, um die neueste Version herunterzuladen."
+DBM_CORE_DISABLED_ICON_FUNCTION		= "Dein TBM setzt keine Zeichen mehr, weil deine Version veraltet ist. Bitte aktualisiere dein TBM so bald wie möglich und aktiviere die Zeichenfunktion wieder."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Deine Version von OAK Boss Mods ist veraltet.\n Version %s (r%d) ist hier zum Download verfügbar:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Deine Version von TOXICITY Boss Mods ist veraltet.\n Version %s (r%d) ist hier zum Download verfügbar:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Drücke Strg+C um den Download-Link in die Zwischenablage zu kopieren"
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Zeige Popup wenn eine neue Version verfügbar ist"
 
 DBM_CORE_MOVABLE_BAR				= "Zieh mich!"
 
-DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h hat dir einen OBM-Timer geschickt: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Diesen Timer abbrechen]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Pizza-Timer von %1$s ignorieren]|r|h"
-DBM_PIZZA_CONFIRM_IGNORE			= "Willst du wirklich OBM-Timer von %s für diese Session ignorieren?"
-DBM_PIZZA_ERROR_USAGE				= "Benutzung: /obm [broadcast] timer <Sekunden> <text>"
+DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h hat dir einen TBM-Timer geschickt: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Diesen Timer abbrechen]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Pizza-Timer von %1$s ignorieren]|r|h"
+DBM_PIZZA_CONFIRM_IGNORE			= "Willst du wirklich TBM-Timer von %s für diese Session ignorieren?"
+DBM_PIZZA_ERROR_USAGE				= "Benutzung: /tbm [broadcast] timer <Sekunden> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "OAK Boss Mods läuft doppelt, da du OBMv3 und OBMv4 installiert und aktiviert hast!\nKlick auf \"Okay\" um OBMv3 zu deaktivieren und dein Interface neu zu laden.\nAußerdem solltest du deinen AddOn-Ordner aufräumen, indem du alle OBMv3 Mods löschst."
+DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods läuft doppelt, da du TBMv3 und TBMv4 installiert und aktiviert hast!\nKlick auf \"Okay\" um TBMv3 zu deaktivieren und dein Interface neu zu laden.\nAußerdem solltest du deinen AddOn-Ordner aufräumen, indem du alle TBMv3 Mods löschst."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "OAK Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+Klick oder Rechtsklick zum Bewegen"
 
 DBM_CORE_RANGECHECK_HEADER			= "Abstandscheck (%d m)"
@@ -74,12 +74,12 @@ DBM_CORE_RANGECHECK_LOCK			= "Frame sperren"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"Verfügbare Slash-Commands:",
-	"/obm version: führt einen raidweiten Versionscheck durch (alias: ver)",
-	"/obm unlock: zeigt einen bewegbaren Timer an (alias: move)",
-	"/obm timer <x> <text>: startet einen <x> Sekunden langen OBM-Timer mit dem Namen <text>",
-	"/obm broadcast timer <x> <text>: schickt einen <x> Sekunden langen OBM-Timer mit dem Namen <text> an den Raid (benötigt (A) oder (L))",
-	"/obm break <min>: startet einen Pause-Timer für <min> Minuten. Schickt allen Raidmitgliedern mit OBM einen Pause-Timer (benötigt (A) oder (L)).",
-	"/obm help: zeigt diese Hilfe",
+	"/tbm version: führt einen raidweiten Versionscheck durch (alias: ver)",
+	"/tbm unlock: zeigt einen bewegbaren Timer an (alias: move)",
+	"/tbm timer <x> <text>: startet einen <x> Sekunden langen TBM-Timer mit dem Namen <text>",
+	"/tbm broadcast timer <x> <text>: schickt einen <x> Sekunden langen TBM-Timer mit dem Namen <text> an den Raid (benötigt (A) oder (L))",
+	"/tbm break <min>: startet einen Pause-Timer für <min> Minuten. Schickt allen Raidmitgliedern mit TBM einen Pause-Timer (benötigt (A) oder (L)).",
+	"/tbm help: zeigt diese Hilfe",
 }
 
 DBM_ERROR_NO_PERMISSION				= "Du hast nicht die benötigte Berechtigung für diesen Befehl!"
@@ -185,9 +185,9 @@ DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Eine %d-m-Abstacksprüfung wird in dies
 DBM_ARROW_MOVABLE					= "Pfeil beweglich"
 DBM_ARROW_NO_RAIDGROUP				= "Diese Funktion steht nur in Schlachtzügen und innerhalb von Instanzen zu Verfügung." 
 DBM_ARROW_ERROR_USAGE	= {
-	"Benutzung von OBM-Arrow:",
-	"/obm arrow <x> <y>  erzeugt einen Pfeil, der auf bestimmte Koordinaten zeigt (0 < x/y < 100)",
-	"/obm arrow <player>  erzeugt einen Pfeil, der auf einen bestimmten Spieler in deiner Gruppe oder deinem Schlachtzug zeigt",
-	"/obm arrow hide  versteckt den Pfeil",
-	"/obm arrow move  macht den Pfeil beweglich",
+	"Benutzung von TBM-Arrow:",
+	"/tbm arrow <x> <y>  erzeugt einen Pfeil, der auf bestimmte Koordinaten zeigt (0 < x/y < 100)",
+	"/tbm arrow <player>  erzeugt einen Pfeil, der auf einen bestimmten Spieler in deiner Gruppe oder deinem Schlachtzug zeigt",
+	"/tbm arrow hide  versteckt den Pfeil",
+	"/tbm arrow move  macht den Pfeil beweglich",
 }

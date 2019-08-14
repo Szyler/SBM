@@ -83,9 +83,9 @@ end
 
 function mod:SPELL_SUMMON(args)
 	if args:IsSpellID(29234) then
-		timerSpore:Start(30)
+		timerSpore:Start(15)
 		warnSporeNow:Show()
-		warnSporeSoon:Schedule(25)
+		warnSporeSoon:Schedule(10)
 	end
 end
 

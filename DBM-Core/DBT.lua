@@ -1,5 +1,5 @@
 -- *********************************************************
--- **                   OAK Boss Mods                     **
+-- **                   TOXICITY Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
 -- **        An addon by Sky @ Andorhal - No Risk         **
 -- *********************************************************

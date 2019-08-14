@@ -3,7 +3,7 @@
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods - Español"
+L.MainFrame = "TOXICITY Boss Mods - Español"
 
 L.TranslationBy 	= "Interplay, Snamor"
 
@@ -79,7 +79,7 @@ L.ShowWarningsInChat 	= "Mostrar avisos en el chat"
 L.ShowFakedRaidWarnings = "Mostrar avisos en el chat de banda"
 L.WarningIconLeft 	= "Mostrar icono en el lado izquierdo"
 L.WarningIconRight 	= "Mostrar icono en el lado derecho"
-L.RaidWarnMessage 	= "Gracias por usar OAK Boss Mods - Español"
+L.RaidWarnMessage 	= "Gracias por usar TOXICITY Boss Mods - Español"
 L.BarWhileMove 		= "Avisos de banda se pueden mover"
 L.RaidWarnSound		= "Reproducir sonido para aviso-banda"
 L.SpecialWarnSound	= "Reproducir sonido para aviso-especial"
@@ -130,7 +130,7 @@ L.Panel_SpamFilter		= "Filtro de Spam"
 L.Area_SpamFilter		= "Opciones de spam"
 L.HideBossEmoteFrame		= "Esconder lo que dice el boss"
 L.SpamBlockRaidWarning		= "Filtrar anuncios de otros Boss Mods" 
-L.SpamBlockBossWhispers		= "Filtrar los avisos de <OAK-BM> mientras estas en combate"
+L.SpamBlockBossWhispers		= "Filtrar los avisos de <TOXICITY-BM> mientras estas en combate"
 L.BlockVersionUpdatePopup	= "Desabilitar avisos de actualizaciones"
 L.ShowBigBrotherOnCombatStart	= "Comprobar los bufos con Big Brother al inicio del combate"
 L.BigBrotherAnnounceToRaid		= "Anunciar los resultados de Big Brother a la banda"

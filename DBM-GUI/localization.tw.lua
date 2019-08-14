@@ -3,7 +3,7 @@ if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods"
+L.MainFrame = "TOXICITY Boss Mods"
 
 L.TranslationBy 			= "Nightkiller@日落沼澤(kc10577)"
 
@@ -78,7 +78,7 @@ L.ShowWarningsInChat 			= "在聊天視窗中顯示警告"
 L.ShowFakedRaidWarnings 		= "以偽裝團隊警告資訊的方式顯示警告內容"
 L.WarningIconLeft 			= "左側顯示圖示"
 L.WarningIconRight 			= "右側顯示圖示"
-L.RaidWarnMessage 			= "感謝您使用OAK Boss Mods"
+L.RaidWarnMessage 			= "感謝您使用TOXICITY Boss Mods"
 L.BarWhileMove 				= "可移動的團隊警告"
 L.RaidWarnSound				= "發出團隊警告時播放音效"
 L.SpecialWarnSound			= "發出特別警告時播放音效"
@@ -129,7 +129,7 @@ L.Panel_SpamFilter			= "整體及垃圾過濾"
 L.Area_SpamFilter			= "垃圾過濾選項"
 L.HideBossEmoteFrame			= "隱藏團隊首領表情框"
 L.SpamBlockRaidWarning			= "過濾其他首領模組的警告" 
-L.SpamBlockBossWhispers			= "當戰鬥時過濾 <OAK-BM> 密語警告"
+L.SpamBlockBossWhispers			= "當戰鬥時過濾 <TOXICITY-BM> 密語警告"
 L.BlockVersionUpdatePopup		= "關閉彈出的更新通知"
 L.ShowBigBrotherOnCombatStart		= "戰鬥開始時顯示BigBrother(檢查團隊 增益/精煉UI)"
 

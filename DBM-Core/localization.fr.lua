@@ -36,26 +36,26 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s est occupé(e) à combattre contre %s (%s, 
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s a vaincu %s !"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s a wip sur %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "OAK Boss Mods - Versions"
+DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - Versions"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: OBM non installé"
-DBM_CORE_VERSIONCHECK_FOOTER		= "a trouvé %d joueurs avec OAK Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Votre version de OAK Boss Mods est périmé! Merci de visiter www.deadlybossmods.com pour avoir la dernière version."
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM non installé"
+DBM_CORE_VERSIONCHECK_FOOTER		= "a trouvé %d joueurs avec TOXICITY Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Votre version de TOXICITY Boss Mods est périmé! Merci de visiter www.deadlybossmods.com pour avoir la dernière version."
 DBM_CORE_DISABLED_ICON_FUNCTION		= "Votre version ne peut pas mettre les icones, car votre version est périmé. Merci de la mettre a jour dès que possible et réactiver la fonction icone."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Votre version de OAK Boss Mods est périmée.\n Version %s (r%d) disponible ici:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Votre version de TOXICITY Boss Mods est périmée.\n Version %s (r%d) disponible ici:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Faites Ctrl-C pour copier le lien votre presse-papier."
-DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Montre une annonce quand une nouvelle version de OBM est disponible."
+DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Montre une annonce quand une nouvelle version de TBM est disponible."
 
 DBM_CORE_MOVABLE_BAR				= "Déplace-moi!"
 
 DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h vous envoie un timer pizza: '%2$s'\n|HDBM:annuler:%2$s:nil|h|cff3588ff[Annuler ce timer]|r|h  |HDBM:ignorer:%2$s:%1$s|h|cff3588ff[Ignorer les timers de %1$s]|r|h"
 DBM_PIZZA_CONFIRM_IGNORE			= "Voulez vous vraiment ignorer les timers pizza de %s pour cette session?"
-DBM_PIZZA_ERROR_USAGE				= "Usage: /obm [broadcast] timer <time> <text>"
+DBM_PIZZA_ERROR_USAGE				= "Usage: /tbm [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "OAK Boss Mods est lancé en double car vous avez OBMv3 et OBMv4 d'installé et d'activé!\nCliquez sur \"Okay\" pour désactiver OBMv3 et recharger votre interfarce.\nVous pouvez aussi nettoyer votre fichier AddOns en supprimant l'ancien fichier OBMv3."
+DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods est lancé en double car vous avez TBMv3 et TBMv4 d'installé et d'activé!\nCliquez sur \"Okay\" pour désactiver TBMv3 et recharger votre interfarce.\nVous pouvez aussi nettoyer votre fichier AddOns en supprimant l'ancien fichier TBMv3."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "OAK Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+clic ou clic droit pour déplacer\nAlt+shift+click pour drag&drop librement"
 
 DBM_CORE_RANGECHECK_HEADER			= "Vérifie la portée (%d m)"
@@ -74,12 +74,12 @@ DBM_LFG_INVITE						= "LFG Invite"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"Commandes slash disponible:",
-	"/obm version: Vérifie la version du raid (alias: ver)",
-	"/obm unlock: Affiche un Timer Status déplacable (alias: move)",
-	"/obm timer <x> <text>: Commence un <x> second Timer Pizza avec le nom <text>",
-	"/obm broadcast timer <x> <text>: Diffuse un Timer Pizza de <x> secondes avec le nom <text> au raid (Nécessite d'être promu ou leader)",
-	"/obm break <min>: Démarre un timer de pause pour <min> minutes. Envoie à tous les membres du raid avec OBM ce timer de pause (Nécessite d'être promu ou leader).",
-	"/obm help: Affiche l'aide",
+	"/tbm version: Vérifie la version du raid (alias: ver)",
+	"/tbm unlock: Affiche un Timer Status déplacable (alias: move)",
+	"/tbm timer <x> <text>: Commence un <x> second Timer Pizza avec le nom <text>",
+	"/tbm broadcast timer <x> <text>: Diffuse un Timer Pizza de <x> secondes avec le nom <text> au raid (Nécessite d'être promu ou leader)",
+	"/tbm break <min>: Démarre un timer de pause pour <min> minutes. Envoie à tous les membres du raid avec TBM ce timer de pause (Nécessite d'être promu ou leader).",
+	"/tbm help: Affiche l'aide",
 }
 
 DBM_ERROR_NO_PERMISSION				= "Vous n'avez pas les permissions requises pour faire ceci."
@@ -186,9 +186,9 @@ DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Une %d vérification de distance n'est 
 DBM_ARROW_MOVABLE					= "Bouger la Flèche"
 
 DBM_ARROW_ERROR_USAGE	= {
-	"OBM-flèche usage:",
-	"/obm flèche <x> <y> crée une flèche qui pointe vers une locataion spécifiques (0 < x/y < 100)",
-	"/obm flèche <player> crée une flèche qui pointe vers un joueur précis dans votre groupe ou raid",
-	"/obm flèche cache la flèche",
-	"/obm flèche fait déplacer",
+	"TBM-flèche usage:",
+	"/tbm flèche <x> <y> crée une flèche qui pointe vers une locataion spécifiques (0 < x/y < 100)",
+	"/tbm flèche <player> crée une flèche qui pointe vers un joueur précis dans votre groupe ou raid",
+	"/tbm flèche cache la flèche",
+	"/tbm flèche fait déplacer",
 }

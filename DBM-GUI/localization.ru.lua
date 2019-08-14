@@ -3,7 +3,7 @@
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods"
+L.MainFrame = "TOXICITY Boss Mods"
 
 L.TranslationBy 			= "Игорь Бутвин & Vampik & Swix"
 
@@ -78,7 +78,7 @@ L.ShowWarningsInChat 		= "Показывать предупреждения в �
 L.ShowFakedRaidWarnings 	= "Показывать предупреждения в качестве \"Объявление рейду\""
 L.WarningIconLeft 			= "Отображать значок с левой стороны"
 L.WarningIconRight 			= "Отображать значок с правой стороны"
-L.RaidWarnMessage 			= "Спасибо за использование OAK Boss Mods"
+L.RaidWarnMessage 			= "Спасибо за использование TOXICITY Boss Mods"
 L.BarWhileMove 				= "Действие рейд-предупреждения"
 L.RaidWarnSound				= "Звук рейд-предупреждения"
 L.SpecialWarnSound			= "Звук спец-предупреждения"
@@ -129,7 +129,7 @@ L.Panel_SpamFilter				= "Общие и спам-фильтры"
 L.Area_SpamFilter				= "Параметры спам-фильтра"
 L.HideBossEmoteFrame			= "Скрывать эмоции рейдового босса"
 L.SpamBlockRaidWarning			= "Фильтрация предупреждений от других DBM" 
-L.SpamBlockBossWhispers			= "Фильтрация <OAK-BM> предупреждений шепотом в бою"
+L.SpamBlockBossWhispers			= "Фильтрация <TOXICITY-BM> предупреждений шепотом в бою"
 L.BlockVersionUpdatePopup		= "Отключить всплывающее сообщение об устаревшей версии"
 L.ShowBigBrotherOnCombatStart	= "Выполнять проверку положительных эффектов Big Brother в начале боя"
 L.BigBrotherAnnounceToRaid		= "Объявлять результаты проверки Big Brother в рейд"

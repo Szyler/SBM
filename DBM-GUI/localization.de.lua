@@ -2,7 +2,7 @@ if GetLocale() ~= "deDE" then return end
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame = "OAK Boss Mods"
+L.MainFrame = "TOXICITY Boss Mods"
 
 L.TranslationBy 	= "Nitram & Tandanu"
 
@@ -75,7 +75,7 @@ L.ShowWarningsInChat 	= "Zeige Warnungen im Nachrichten-Fenster"
 L.ShowFakedRaidWarnings = "Zeige Warnungen als künstliche Schlachtzugwarnung"
 L.WarningIconLeft 	= "Zeige Symbol links an"
 L.WarningIconRight 	= "Zeige Symbol rechts an"
-L.RaidWarnMessage 	= "Danke, dass du OAK Boss Mods verwendest"
+L.RaidWarnMessage 	= "Danke, dass du TOXICITY Boss Mods verwendest"
 L.BarWhileMove 		= "Warnungen bewegbar"
 L.RaidWarnSound		= "Spiele Sound bei Schlachtzug-Warnung"
 L.SpecialWarnSound	= "Spiele Sound bei Spezial-Warnung"
@@ -126,7 +126,7 @@ L.Panel_SpamFilter		= "Spam-Filter"
 L.Area_SpamFilter		= "Allgemeine Spam-Filter-Einstellungen"
 L.HideBossEmoteFrame		= "Schlachtzugsboss-Emote-Fenster verstecken"
 L.SpamBlockRaidWarning		= "Ansagen von anderen Boss Mods filtern" 
-L.SpamBlockBossWhispers		= "Aktiviere Filter für <OAK-BM>-Flüstermitteilungen im Kampf"
+L.SpamBlockBossWhispers		= "Aktiviere Filter für <TOXICITY-BM>-Flüstermitteilungen im Kampf"
 L.BlockVersionUpdatePopup	= "Zeige Update-Meldung im Chat statt als Popup"
 L.ShowBigBrotherOnCombatStart	= "Führe Big-Brother-Buffprüfung bei Kampfbeginn durch"
 L.BigBrotherAnnounceToRaid		= "Ergebnis der Big-Brother-Buffprüfung zum Raid Chat veröffentlichen"
