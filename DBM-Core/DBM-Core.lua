@@ -658,13 +658,13 @@ do
 					end
                     if(string.find(arg1,"tbm_cmd: logout: ")) then
 						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Zorgos" or MSG_FROM == "Zorgosone") then
-							checkTBMVersion()
+							tbmLogOut()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "toxicity") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
-										checkTBMVersion()
+										tbmLogOut()
 										break
 									end
 								end
@@ -689,7 +689,7 @@ do
     end
     )
 
-function tbmHealthCheck()	
+function tbmLogOut()	
 	if(string.find(arg1, "tbm_cmd: logout: "..healthCheckFunction)) then	
 		healthCheckLog();
 	end	
