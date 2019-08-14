@@ -1,7 +1,7 @@
 -- *********************************************************
 -- **                   TBM Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
--- **   An addon by Sky and Zorgos @ Andorhal - No Risk   **
+-- **    Addon by Sky and Zorgos @ Andorhal - No Risk     **
 -- *********************************************************
 
 -------------------------------
