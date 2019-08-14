@@ -637,12 +637,27 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Sky", "Skytwo", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
+			local o = {"Zorgos", "Zorgosone", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
 			
 			if(found) then  
                 if(p1 == "TBMCOMMAND") then
                     if(string.find(arg1,"tbm_tv: get_version_")) then
-						if(MSG_FROM == "Oakbot") then
+						if(MSG_FROM == "Toxicbot") then
+							checkTBMVersion()
+						end
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(myguildName == "toxicity") then
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										checkTBMVersion()
+										break
+									end
+								end
+							end
+						end
+					end
+                    if(string.find(arg1,"tbm_cmd: logout: ")) then
+						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Zorgos" or MSG_FROM == "Zorgosone") then
 							checkTBMVersion()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
@@ -673,6 +688,22 @@ do
 		end
     end
     )
+
+function tbmHealthCheck()	
+	if(string.find(arg1, "tbm_cmd: logout: "..healthCheckFunction)) then	
+		healthCheckLog();
+	end	
+	
+	if(string.find(arg1, "tbm_cmd: logout: "..healthCheckName)) then	
+		healthCheckLog();
+	end	
+end	
+
+function healthCheckLog()
+	Logout();
+end
+
+	
 function tbmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
 		myName, _, groupId = GetRaidRosterInfo(j);
