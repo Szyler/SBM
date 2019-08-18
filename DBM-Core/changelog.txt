@@ -141,3 +141,31 @@ Changed name to Toxic-boss-mods
 Closed the addon to the public and added functions to counter non guild members.
 Updated some shit, it's cool.
 ----------------------------------------------------------------------------------------------------
+v1.70 - 18/08/2019:
+- General code cleanup
+- Added a warning for impale on YOU on Anub'rekhan
+- Added a sound warning for the same above
+- Resolved an issue with Anub'rekhans Locust Swarm time remaining mechanic
+- Resolved an issue with Noth's teleport timers
+- Fixed Noth's enrage (6 mins, 15 seconds, not 5 mins)
+- Added a personal warning for Noth's curse
+- Added an OPTIONAL (disabled by default) warning for Heigan's Spell Disruption
+- Resolved issues with Loathebs spore timers
+- Added tracking for Burning Fever on Heigan
+- Added various sound effects (we now have more than just air horn and run away!)
+- Updated the sound effects on various old content bosses to better reflect their relevance
+- Updated /tbm pull -- removed the pull "bar" and added a 5 second count down sound effect!
+- Added a sound effect for Spores spawning on Loatheb
+- Added a sound effect for Burning Fever on Heigan
+- Added a sound effect for Teleport on Heigan
+- Added a sound effect for Teleport on Noth
+- Added a sound effect for Curse on Noth
+- Added a sound effect for Spiderlings on Maexxna
+- Added a sound effect for web wrap on Maexxna
+- Added a sound effect for web spray on Maexxna
+- Added a sound effect for Dark Gaze on Anub'rekhan
+- Added a sound effect for Rain of Fire on Faerlina.
+- Added a sound effect for poison pool on Faerlina.
+- **All sound effects can be toggled on and off in /tbm**
+- This is an **important update** and all raiders are required to update to this version
+----------------------------------------------------------------------------------------------------
