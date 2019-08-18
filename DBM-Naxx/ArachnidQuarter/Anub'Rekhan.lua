@@ -21,11 +21,16 @@ local timerLocust			= mod:NewTimer(90, "Next Locust Swarm", 28785)
 local timerLocustInitial	= mod:NewTimer(90, "Locust Swarm Initial CD", 28785)
 local timerLocustRemaining	= mod:NewTimer(15, "Locust Swarm: Time Remaining", 28785)
 local specWarnLocust		= mod:NewSpecialWarning("Locust Swarm", nil, "Special warning for Locust Swarm cast")
-local soundLocust			= mod:NewSound(28785)
+local soundLocust			= mod:SoundRunAway(28785)
 -----Dark Gaze-----
 local specWarnDarkGaze		= mod:NewSpecialWarning("Dark Gaze", nil, "Special warning for Dark Gaze on you")
+local soundDarkGaze			= mod:SoundAlarmLong(1003011)
+-----IMPALE------
+local specWarnImpale		= mod:NewSpecialWarning("Impale", nil, "Special warning for Impale on you")
+local soundImpale			= mod:SoundAirHorn(28783)
 -----Misc-----
 local berserkTimer			= mod:NewBerserkTimer(600)
+local target			 	= UnitName(15956 .. "target")
 -----Pre-Alert Functions-----
 function mod:preLocust()
 	prewarnLocust:Show()
@@ -62,17 +67,22 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(1003011) then 
 		if args:IsPlayer() then
 			specWarnDarkGaze:Show();
+			soundDarkGaze:Play();
 			SendChatMessage(L.YellDarkGaze, "YELL")
 		end
-	elseif args:IsSpellID(28786) then 
-		timerLocustRemaining:Show(15)
 	end	
 end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(28785) then
 		mod:locustRepeat()
-		specWarnLocust:Show(17)
+		specWarnLocust:Show(18)
+		timerLocustRemaining:Show(18)
+	elseif args:IsSpellID(28783) then
+		if target then 
+			specWarnImpale:Show(5)
+			soundTele:Play()
+			end
 	end
 end
 -----TBM CLEAN UP FUNCTIONS-----

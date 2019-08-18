@@ -32,7 +32,7 @@ local warnMortal	= mod:NewTargetAnnounce(24573)
 
 local timerMortal	= mod:NewTargetTimer(5, 24573)
 
-local soundEgg		= mod:NewSound2(100355, "Play Sound on Egg Spawn")
+local soundEgg		= mod:SoundAlarm(100355)
 
 function mod:preEgg()
 	prewarnEgg:Show()

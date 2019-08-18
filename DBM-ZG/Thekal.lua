@@ -31,6 +31,7 @@ end
 
 local warnHeal			= mod:NewCastAnnounce(24208, 3)
 local timerHeal			= mod:NewCastTimer(4, 24208)
+local soundHeal			= mod:SoundAlert(24208)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
@@ -43,7 +44,7 @@ function mod:vekHeal()
 end
 	
 function mod:alarmSound()
-	PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\AirHorn.mp3")
+	soundHeal:Play();
 end
 
 function mod:SPELL_CAST_START(args)

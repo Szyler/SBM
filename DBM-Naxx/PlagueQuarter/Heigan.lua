@@ -12,12 +12,15 @@ mod:RegisterEvents(
 
 mod:EnableModel()
 
-mod:RegisterEvents()
-
-local warnTeleportSoon	= mod:NewAnnounce("WarningTeleportSoon", 2, 46573)
-local warnTeleportNow	= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
-
-local timerTeleport		= mod:NewTimer(90, "TimerTeleport", 46573)
+-----Teleport-----
+local warnTeleportSoon			= mod:NewAnnounce("WarningTeleportSoon", 2, 46573)
+local warnTeleportNow			= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
+local timerTeleport				= mod:NewTimer(90, "TimerTeleport", 46573)
+local soundTeleport				= mod:SoundInfoLong(46573)
+-----HeiganEffects------
+local specWarnSpellDisruption	= mod:NewSpecialWarning("Spell Disruption on you!", false, "Special warning when Spell Disruption is applied to you", true)
+local specWarnBurningFever		= mod:NewSpecialWarning("Burning Fever on you!", true, "Special warning when Spell Disruption is applied to you", true)
+local soundBurningFever			= mod:SoundAirHorn(1003068)
 
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
@@ -28,6 +31,7 @@ function mod:DancePhase()
 	timerTeleport:Show(47)
 	warnTeleportSoon:Schedule(37, 10)
 	warnTeleportNow:Schedule(47)
+	soundTeleport:Schedule(47)
 	self:ScheduleMethod(47, "BackInRoom", 88)
 end
 
@@ -36,6 +40,34 @@ function mod:BackInRoom(time)
 	warnTeleportSoon:Schedule(time - 15, 15)
 	warnTeleportNow:Schedule(time)
 	self:ScheduleMethod(time, "DancePhase")
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(29310) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+		end
+	elseif args:IsSpellID(1003068) then 
+		if args:IsPlayer() then
+			specWarnBurningFever:Show();
+			SendChatMessage(L.YellBurningFever, "YELL")
+			soundBurningFever:Play();
+		end	
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(29310) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+		end
+	elseif args:IsSpellID(1003068) then 
+		if args:IsPlayer() then
+			specWarnBurningFever:Show();
+			SendChatMessage(L.YellBurningFever, "YELL")
+			soundBurningFever:Play();
+		end
+	end
 end
 
 function mod:OnCombatEnd(wipe)

@@ -123,6 +123,10 @@ L:SetOptionLocalization({
 	TimerTeleport		= "Show timer for Teleport"
 })
 
+L:SetMiscLocalization({
+	YellBurningFever = "Burning Fever on me!",
+})
+
 ---------------
 --  Loatheb  --
 ---------------

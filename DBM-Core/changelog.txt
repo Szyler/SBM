@@ -1,0 +1,143 @@
+v1.25 25/01/2019
+- Initial release
+----------------------------------------------------------------------------------------------------
+v1.26 25/01/2019
+- Added #deleted-channel 
+----------------------------------------------------------------------------------------------------
+v1.27 27/01/2019
+- Added a toggleable feature in /obm Options that clears your combat log every second (this will fix Combat Log bugs)
+- Added /obm cr to convert your group to a raid group
+- Added /obm aaa to grant all raid members the Assistant role
+- Added various development debug features for future boss development
+- Added various sound effect warnings to various bosses
+- Updates to the scripts for Chromaggus, Ysondre, Taerar, Lethon, Ossirian, Ouro, Sartura, Bug Trio, Twin Emps, Ragnaros, Broodlord
+----------------------------------------------------------------------------------------------------
+v1.28 & v1.29 - 12/02/2019
+- Fix to chromaggus enrage timer -> 270 seconds not 260
+- Fixes to Magmadar, Majordomo, Ragnaros, Sulfuron
+- Updates to Sartura, Ouro
+- Added a failsafe to end timers when combat ends
+- Attempted to resolve the DBMv4 Hi! message spam
+----------------------------------------------------------------------------------------------------
+v1.30 / v1.31 / 1.32 - 28/02/2019
+- Various updates and additions to C'thun
+----------------------------------------------------------------------------------------------------
+v1.33 - 18/03/2019
+- Added tracking of Rajaxx's Spell Reflect
+- Added tracking of Twin Emps Blizzard
+- Added base scripts for Naxxramas (development branch only)
+- Hotfix for C'thun
+----------------------------------------------------------------------------------------------------
+v1.34 - 29/03/2019
+- Updates to Rajaxx, Gehennas, Lucifron and Shazzrah
+- Updates to C'thun, Twin Emps
+----------------------------------------------------------------------------------------------------
+v1.4 & v1.41 - 03/04/2019
+- Added scripting to various Naxxramas bosses (development branch only)
+- Rescripted Twin Emps teleport
+- Added correct tracking for Ouro's deaths
+- Added warnings for Skeram at 80%/55%/30%
+- Added Huhuran soft enrage tracking
+- Tidied up Fankriss timers
+- Added Icons for various timers and alerts
+- Removed all debug functions and scripting warnings, as everything is now scripted to a competent level
+- Removed warnings from PvP content that has so far been released
+- Added scripting for Geddon
+- Added scripting for Mandokir
+- Added scripting for Azuregos
+- Added scripting for Kazzak
+- Rescripted the Nightmare Drakes
+- Rescripted Ayamiss, Buru, Onyxia
+- Cleanup and polish passes of Onyxia, ZG, MC, BWL, AQ20, AQ40
+- Cthun timer fixes for 25man
+----------------------------------------------------------------------------------------------------
+v1.50 - 05/05/2019
+- Added update warning to OBM
+- Created various backend systems to allow for future updates
+- Update to C'thun -- finally fixed the 10/25 timers properly 
+- Created a buff tracking system
+- Created a raid cooldown tracking system 
+- Resolved an issue with /obm pull in where it would not account for delay and lag
+- Resolved an issue with /obm break in where it would not account for delay and lag
+----------------------------------------------------------------------------------------------------
+v1.51 - 08/05/2019
+- Fixed shift-clicking on DBF
+- Added support for the Crystal Force Guardian Elixir
+- Resolved an issue with Timers caused by ascensions recent fix to backend comms
+- Resolved an issue where OBM would tell you to update to the latest version of DBM due to a recent fix to backend comms
+- Added mocking blow and last stand to default cooldown tracking (type /obm -> options -> spell/skill cooldowns -> Reset to defaults -> then in chat /reload
+- Added not in raid warnings to buff tracking when not in a raid group (they don't work when not in a raid, so we may as well tell you that rather than giving you false hope :frowning: )
+----------------------------------------------------------------------------------------------------
+v1.52 - 17/05/2019
+- Removed cfix command 
+- Prevent update popup from showing up more than once per session (until reload or relog)
+- Added various officer commands that can be ran by right clicking the OBM frame
+     - Ability checks (check who in your raid has what abilities -- locked behind guild ranks)
+     - /obm gl: Swap to Group Loot.
+     - /obm ml: Swap to Master Looter.
+     - /obm ffa: Swap to Free For All.
+     - /obm ri: Reset instance.
+     - /obm 5n: Swaps dungeon difficulty to Normal5.
+     - /obm 5h: Swaps dungeon difficulty to Heroic5.
+     - /obm 10n: Swaps raid difficulty to Normal10.
+     - /obm 10h: Swaps raid difficulty to Heroic10.
+     - /obm 25n: Swaps raid difficulty to Normal25.
+     - /obm 25h: Swaps raid difficulty to Heroic25.
+     - /obm disband: Disband party or raid group.
+     - /obm m <1-8>: Add a raid marker to your current target.
+- Fixed an issue where future addon versions (development versions) would be detected as out of date
+- Fixed an issue where OBMTV and OBMCOMMAND channels would be channel /1 and /2 -- this should now be the last channels to join and shouldn't affect your standard order anymore!
+- Cleaned up timer names for custom summons for SpellTimers module
+- Added support for OAK, HordeGuards, Long Live Cenarius and Exiled from Andorhal!
+- Fixed pull timers (AGAIN!)
+----------------------------------------------------------------------------------------------------
+v1.53 - 18/05/2019
+- Fixed new OBM commands (important)
+----------------------------------------------------------------------------------------------------
+v1.54 - 29/05/2019
+- Added an option to change the default timer to swap from small bar to huge bar style
+- Edited the update warning (will now show a button asking if you want the link, rather than showing you the link straight away, this will minimise impact on gameplay when this warning is shown) 
+- Improved backend functionality for OBMTV
+- Added a saved variable to the DBF (Deadly Buff Frames) -- if you toggle it or close it it will now persist as closed/toggled through relogs.
+- Changed /obm help to use the DBF help frame
+- Removed warning from Eye of the Storm (it works lul)
+----------------------------------------------------------------------------------------------------
+v1.55 - 22/06/2019
+- Removed the ability for non OAK officers to use the Ability Check commands (it wasn't working previously anyway, and I can't make it work in a generic fashion, sorry) as well as the Version Check command
+- Various minor bugfixes
+- Timer-sticking bug fix
+----------------------------------------------------------------------------------------------------
+v1.56 - 22/06/2019
+- Fast bugfix 
+----------------------------------------------------------------------------------------------------
+v1.57 - Unreleased
+- Development version
+----------------------------------------------------------------------------------------------------
+v1.58 - 27/06/2019
+- Various bug fixes
+- Update to OAK specific commands -> guild name update to toxicity
+----------------------------------------------------------------------------------------------------
+v1.59 - 03/07/2019
+- Bug fixes to certain bosses
+- Timers should now be less likely to bug out between fights (combat log bugs will still fuck you though)
+- Update to toxicity's officer list
+----------------------------------------------------------------------------------------------------
+v1.60 - 18/07/2019
+- Removed Jinjab, Jinjabo, Dreadsmell and Breadsmell from the list of toxicity officers allowed to run commands.
+- Removed the healthcheck command (it wasn't working as I'd hoped anyway)
+- Fully scripted the spider wing of Naxxramas (only available to toxicity members)
+----------------------------------------------------------------------------------------------------
+v1.61 - 03/08/2019
+- Added Mormentance and Monster to the list of toxicity officers allowed to run commands.
+- Made adjustments to the "Fastest Kill" function, you should no longer see a 5 second timer on bosses you have not killed before.
+- Added Plague Wing scripting (only available to toxicity members)
+- Minor scripting adjustments to Spider Wing (only available to toxicity members)
+----------------------------------------------------------------------------------------------------
+v1.62 - 09/08/2019 (toxicity version only, no update required for non guild members)
+- Added poison pool tracking for Faerlina
+----------------------------------------------------------------------------------------------------
+V1.63 -- 15/08/2019:
+Changed name to Toxic-boss-mods
+Closed the addon to the public and added functions to counter non guild members.
+Updated some shit, it's cool.
+----------------------------------------------------------------------------------------------------

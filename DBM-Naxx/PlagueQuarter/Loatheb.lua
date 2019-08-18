@@ -16,22 +16,21 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
-local warnSporeNow	= mod:NewSpellAnnounce(29234, 2)
-local warnSporeSoon	= mod:NewSoonAnnounce(29234, 1)
-local warnDoomNow	= mod:NewSpellAnnounce(29204, 3)
-local warnHealSoon	= mod:NewAnnounce("WarningHealSoon", 4, 48071)
-local warnHealNow	= mod:NewAnnounce("WarningHealNow", 1, 48071, false)
-
-
-local timerSpore	= mod:NewNextTimer(18, 29234)
-local timerDoom		= mod:NewNextTimer(180, 29204)
-local timerAura		= mod:NewBuffActiveTimer(17, 55593)
-
-local specWarnCloudOfBlight	= mod:NewSpecialWarningMove(79008, true, "Special warning when standing in Cloud of Blight", true)
-
-
+-----Spores-----
+local warnSporeNow					= mod:NewSpellAnnounce(29234, 2)
+local warnSporeSoon					= mod:NewSoonAnnounce(29234, 1)
+local timerSpore					= mod:NewNextTimer(18, 29234)
+local soundSpore					= mod:SoundInfo(29234)
+local specWarnCloudOfBlight			= mod:NewSpecialWarningMove(79008, true, "Special warning when standing in Cloud of Blight", true)
+-----Doom-----
+local warnDoomNow					= mod:NewSpellAnnounce(29204, 3)
+local timerDoom						= mod:NewNextTimer(180, 29204)
+-----Auras-----
+local warnHealSoon					= mod:NewAnnounce("WarningHealSoon", 4, 48071)
+local warnHealNow					= mod:NewAnnounce("WarningHealNow", 1, 48071, false)
+local timerAura						= mod:NewBuffActiveTimer(17, 55593)
+-----MISC-----
 mod:AddBoolOption("SporeDamageAlert", false)
-
 local doomCounter	= 0
 local sporeTimer	= 18
 
@@ -86,6 +85,7 @@ function mod:SPELL_SUMMON(args)
 		timerSpore:Start(15)
 		warnSporeNow:Show()
 		warnSporeSoon:Schedule(10)
+		soundSpore:Play();
 	end
 end
 

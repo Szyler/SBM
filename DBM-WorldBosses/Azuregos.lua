@@ -14,7 +14,7 @@ mod:RegisterEvents(
 
 local specWarnManastorm		= mod:NewSpecialWarningMove(21097, true, "Special warning when standing in Blizzard", true)
 local warnMagicReflection		= mod:NewSpellAnnounce(20223, 3)
-local soundMagicReflection		= mod:NewSound2(20223)
+local soundMagicReflection		= mod:SoundAirHorn(20223)
 
 
 function mod:OnCombatEnd(wipe)

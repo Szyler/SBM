@@ -47,7 +47,7 @@ local timerTime					= mod:NewCDTimer(20, 23312)
 
 local berserkTimer				= mod:NewBerserkTimer(270)
 
-local soundBronze		= mod:NewSound2(23170)
+local soundBronze		= mod:SoundAirHorn(23170)
 
 local isFirstCast
 local bronzeNoSpam

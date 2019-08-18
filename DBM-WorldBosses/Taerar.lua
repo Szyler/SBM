@@ -31,7 +31,7 @@ local warnShades				= mod:NewSpellAnnounce(24841, 2)
 local preshadesCount
 local shadesCount
 
-local soundShades		= mod:NewSound2(24841)
+local soundShades		= mod:SoundInfoLong(24841)
 
 function mod:preShades()
 	prewarnShades:Show()

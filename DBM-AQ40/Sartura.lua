@@ -60,8 +60,8 @@ local timerSOppression			= mod:NewCDTimer(30, 1002347)
 local timerDHunt				= mod:NewCDTimer(30, 1002325)
 local timerSDeath				= mod:NewCDTimer(30, 1002348)
 -----SOUND-----
-local soundMelee				= mod:NewSound(1002347)
-local soundKick					= mod:NewSound2(1766)
+local soundMelee				= mod:SoundRunAway(1002347)
+local soundKick					= mod:SoundAlert(1766)
 local castNumber
 local dancetimerFix
 local songtimerFix

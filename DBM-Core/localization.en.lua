@@ -41,13 +41,13 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s is busy fighting against %s (%s, %d/%d peop
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s has defeated %s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s has wiped on %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - Versions"
+DBM_CORE_VERSIONCHECK_HEADER		= "Toxicity Boss Mods - Versions"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
 DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM not installed"
-DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with TOXICITY Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of TOXICITY Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
+DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with Toxicity Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of Toxicity Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of TOXICITY Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of Toxicity Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Press Ctrl-C to copy the download link to your clipboard."
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Show popup when a new version is available"
 
@@ -57,9 +57,9 @@ DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a TBM timer: '%2$s'\
 DBM_PIZZA_CONFIRM_IGNORE			= "Do you really want to ignore TBM timers from %s for this session?"
 DBM_PIZZA_ERROR_USAGE				= "Usage: /tbm [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods is running twice because you have TBMv3 and TBMv4 installed and enabled!\nClick \"Okay\" to disable TBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old TBMv3 folders."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Toxicity Boss Mods is running twice because you have TBMv3 and TBMv4 installed and enabled!\nClick \"Okay\" to disable TBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old TBMv3 folders."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Toxicity Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+click or right-click to move\nAlt+shift+click for free drag and drop"
 
 DBM_CORE_RANGECHECK_HEADER			= "Range Check (%d yd)"
@@ -166,8 +166,18 @@ DBM_CORE_AUTO_SPEC_WARN_TEXTS = {
 
 
 DBM_CORE_AUTO_ICONS_OPTION_TEXT		= "Set icons on $spell:%d targets"
-DBM_CORE_AUTO_SOUND_OPTION_TEXT		= "Play sound on $spell:%d"
-
+DBM_CORE_AUTO_SOUND_OPTION_TEXT1	= "Play the 'Run Away' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT2	= "Play the 'Air Horn' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT3	= "Play the 'Alarm' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT4	= "Play the 'Long Alarm' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT5	= "Play the 'Alarm Beeps' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT6	= "Play the 'Alert' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT7	= "Play the 'Blip' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT8	= "Play the 'Info' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT9	= "Play the 'Long Info' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT10	= "Play the 'Short Countdown' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT11	= "Play the 'Medium Countdown' sound effect on $spell:%d"
+DBM_CORE_AUTO_SOUND_OPTION_TEXT12	= "Play the 'Long Countdown' sound effect on $spell:%d"
 
 -- New special warnings
 DBM_CORE_MOVE_SPECIAL_WARNING_BAR	= "Special warning movable"

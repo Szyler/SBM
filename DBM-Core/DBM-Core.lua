@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1630 $"):sub(12, -3),
-	Version = "1.63",
-	DisplayVersion = "1.63", -- the string that is shown as version
-	ReleaseRevision = 1630 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1700 $"):sub(12, -3),
+	Version = "1.70",
+	DisplayVersion = "1.70", -- the string that is shown as version
+	ReleaseRevision = 1700 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -638,6 +638,7 @@ do
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
 			local o = {"Zorgos", "Zorgosone", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
+			local tankwhitelist = {"Dreadsmell"}
 			
 			if(found) then  
                 if(p1 == "TBMCOMMAND") then
@@ -651,6 +652,38 @@ do
 									if(MSG_FROM == o[i]) then
 										checkTBMVersion()
 										break
+									end
+								end
+							end
+						end
+					end
+					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(myguildName == "toxicity") then
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+									end
+								end
+								for i=1, table.getn(tankwhitelist) do 
+									if(MSG_FROM == tankwhitelist[i]) then
+										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+									end
+								end
+							end
+						end
+					end
+					if(string.find(arg1,"tbm_cmd: pull_now")) then
+						if(REALM_NAME == "Andorhal - No-Risk") then
+							if(myguildName == "toxicity") then
+								for i=1, table.getn(o) do 
+									if(MSG_FROM == o[i]) then
+										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Alert.ogg")
+									end
+								end
+								for i=1, table.getn(tankwhitelist) do 
+									if(MSG_FROM == tankwhitelist[i]) then
+										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Alert.ogg")
 									end
 								end
 							end
@@ -1271,6 +1304,16 @@ end
 ----------------------
 SLASH_DEADLYBOSSMODS1 = "/tbm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
+	local function pullInFive()
+		local ChannelID = GetChannelName("TBMCOMMAND")
+		SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+	end
+
+	local function pullNow()
+		local ChannelID = GetChannelName("TBMCOMMAND")
+		SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+	end
+
 	local cmd = msg:lower()
 	if cmd == "unlock" or cmd == "move" then
 		DBM.Bars:ShowMovableBar()
@@ -1366,22 +1409,38 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		if timer/60 > 2 then DBM:Schedule(timer - 2*60, SendChatMessage, DBM_CORE_BREAK_MIN:format(2), channel) end
 		if timer/60 > 1 then DBM:Schedule(timer - 1*60, SendChatMessage, DBM_CORE_BREAK_MIN:format(1), channel) end
 		if timer > 30 then DBM:Schedule(timer - 30, SendChatMessage, DBM_CORE_BREAK_SEC:format(30), channel) end
-		DBM:Schedule(timer, SendChatMessage, DBM_CORE_ANNOUNCE_BREAK_OVER, channel)
+		DBM:Schedule(timer, SendChatMessage, DBM_CORE_ANNOUNCE_BREAK_OVER, channel)	
 	elseif cmd:sub(1, 4) == "pull" then
 		if DBM:GetRaidRank() == 0 then
 			return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 		end
-		local lag = select(3, GetNetStats()) / 1000
 		local timer = tonumber(cmd:sub(5)) or 10
 		local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-		DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 		SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-		if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-		if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-		if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-		if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-		if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-		DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+		if timer > 10 then 
+			DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+		end
+		if timer > 7 then 
+			DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+		end
+		if timer > 5 then 
+			DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+			DBM:Schedule(timer - 5, pullInFive)
+		end
+		if timer > 4 then 
+			DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+		end
+		if timer > 3 then 
+			DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+		end
+		if timer > 2 then 
+			DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+		end
+		if timer > 1 then 
+			DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+		end
+			DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+			DBM:Schedule(timer - 0, pullNow)
 	elseif cmd:sub(1, 5) == "arrow" then
 		if not DBM:IsInRaid() then
 			DBM:AddMsg(DBM_ARROW_NO_RAIDGROUP)
@@ -2533,12 +2592,15 @@ function DBM:EndCombat(mod, wipe)
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
 				SendChatMessage(TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
 				SendChatMessage(TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
 				SendChatMessage(TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
@@ -2776,7 +2838,6 @@ do
 		return onWhisper(msg, presenceId, true)
 	end
 end
-
 
 -------------------
 --  Chat Filter  --
@@ -3387,18 +3448,18 @@ do
 		return newAnnounce(self, "phase", phase, color or 1, icon or "Interface\\Icons\\Spell_Nature_WispSplode", ...)
 	end
 end
-
---------------------
---  Sound Object  --
---------------------
+-------------------------
+----------SOUNDS---------
+-------------------------
+------SoundRunAway-----
 do
 	local soundPrototype = {}
 	local mt = { __index = soundPrototype }
-	function bossModPrototype:NewSound(spellId, optionName, optionDefault)
+	function bossModPrototype:SoundRunAway(spellId, optionName, optionDefault)
 		self.numSounds = self.numSounds and self.numSounds + 1 or 1
 		local obj = setmetatable(
 			{
-				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT:format(spellId),
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT1:format(spellId),
 				mod = self,
 			},
 			mt
@@ -3410,7 +3471,7 @@ do
 		end
 		return obj
 	end
-	bossModPrototype.NewRunAwaySound = bossModPrototype.NewSound
+	bossModPrototype.NewRunAwaySound = bossModPrototype.SoundRunAway
 	
 	function soundPrototype:Play(file)
 		if not self.option or self.mod.Options[self.option] then
@@ -3426,18 +3487,15 @@ do
 		return unschedule(self.Play, self.mod, self, ...)
 	end	
 end
-
---------------------
---  ALERT  --
---------------------
+-----SoundAirHorn-----
 do
 	local soundPrototype2 = {}
 	local mt = { __index = soundPrototype2 }
-	function bossModPrototype:NewSound2(spellId, optionName, optionDefault)
+	function bossModPrototype:SoundAirHorn(spellId, optionName, optionDefault)
 		self.numSounds = self.numSounds and self.numSounds + 1 or 1
 		local obj = setmetatable(
 			{
-				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT:format(spellId),
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT2:format(spellId),
 				mod = self,
 			},
 			mt
@@ -3449,7 +3507,7 @@ do
 		end
 		return obj
 	end
-	bossModPrototype.NewRunAwaySound2 = bossModPrototype.NewSound2
+	bossModPrototype.NewRunAwaySound2 = bossModPrototype.SoundAirHorn
 	
 	function soundPrototype2:Play(file)
 		if not self.option or self.mod.Options[self.option] then
@@ -3462,6 +3520,376 @@ do
 	end
 
 	function soundPrototype2:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundAlarm-----
+do
+	local soundPrototype3 = {}
+	local mt = { __index = soundPrototype3 }
+	function bossModPrototype:SoundAlarm(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT3:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound3 = bossModPrototype.SoundAlarm
+	
+	function soundPrototype3:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\Alarm.ogg")
+		end
+	end
+
+	function soundPrototype3:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype3:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundAlarmLong-----
+do
+	local soundPrototype4 = {}
+	local mt = { __index = soundPrototype4 }
+	function bossModPrototype:SoundAlarmLong(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT4:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound4 = bossModPrototype.SoundAlarmLong
+	
+	function soundPrototype4:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\alarm1.wav")
+		end
+	end
+
+	function soundPrototype4:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype4:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundAlarmBeeps-----
+do
+	local soundPrototype5 = {}
+	local mt = { __index = soundPrototype5 }
+	function bossModPrototype:SoundAlarmBeeps(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT5:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound5 = bossModPrototype.SoundAlarmBeeps
+	
+	function soundPrototype5:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\alarmclockbeeps.ogg")
+		end
+	end
+
+	function soundPrototype5:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype5:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundAlert-----
+do
+	local soundPrototype6 = {}
+	local mt = { __index = soundPrototype6 }
+	function bossModPrototype:SoundAlert(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT6:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound6 = bossModPrototype.SoundAlert
+	
+	function soundPrototype6:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\Alert.ogg")
+		end
+	end
+
+	function soundPrototype6:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype6:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundBlip-----
+do
+	local soundPrototype7 = {}
+	local mt = { __index = soundPrototype7 }
+	function bossModPrototype:SoundBlip(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT7:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound7 = bossModPrototype.SoundBlip
+	
+	function soundPrototype7:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\blip_8.ogg")
+		end
+	end
+
+	function soundPrototype7:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype7:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundInfo-----
+do
+	local soundPrototype8 = {}
+	local mt = { __index = soundPrototype8 }
+	function bossModPrototype:SoundInfo(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT8:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound8 = bossModPrototype.SoundInfo
+	
+	function soundPrototype8:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+		end
+	end
+
+	function soundPrototype8:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype8:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundInfoLong-----
+do
+	local soundPrototype9 = {}
+	local mt = { __index = soundPrototype9 }
+	function bossModPrototype:SoundInfoLong(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT9:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound9 = bossModPrototype.SoundInfoLong
+	
+	function soundPrototype9:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\Long.ogg")
+		end
+	end
+
+	function soundPrototype9:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype9:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundCountdownShort-----
+do
+	local soundPrototype10 = {}
+	local mt = { __index = soundPrototype10 }
+	function bossModPrototype:SoundCountdownShort(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT10:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound10 = bossModPrototype.SoundCountdownShort
+	
+	function soundPrototype10:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Short.ogg")
+		end
+	end
+
+	function soundPrototype10:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype10:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundCountdownMedium-----
+do
+	local soundPrototype11 = {}
+	local mt = { __index = soundPrototype11 }
+	function bossModPrototype:SoundCountdownMedium(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT11:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound11 = bossModPrototype.SoundCountdownMedium
+	
+	function soundPrototype11:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Medium.ogg")
+		end
+	end
+
+	function soundPrototype11:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype11:Cancel(...)
+		return unschedule(self.Play, self.mod, self, ...)
+	end	
+end
+
+-----SoundCountdownLong-----
+do
+	local soundPrototype12 = {}
+	local mt = { __index = soundPrototype12 }
+	function bossModPrototype:SoundCountdownLong(spellId, optionName, optionDefault)
+		self.numSounds = self.numSounds and self.numSounds + 1 or 1
+		local obj = setmetatable(
+			{
+				option = optionName or DBM_CORE_AUTO_SOUND_OPTION_TEXT12:format(spellId),
+				mod = self,
+			},
+			mt
+		)
+		if optionName == false then
+			obj.option = nil
+		else
+			self:AddBoolOption(obj.option, optionDefault, "misc")
+		end
+		return obj
+	end
+	bossModPrototype.NewRunAwaySound12 = bossModPrototype.SoundCountdownLong
+	
+	function soundPrototype12:Play(file)
+		if not self.option or self.mod.Options[self.option] then
+			PlaySoundFile(file or "Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+		end
+	end
+
+	function soundPrototype12:Schedule(t, ...)
+		return schedule(t, self.Play, self.mod, self, ...)
+	end
+
+	function soundPrototype12:Cancel(...)
 		return unschedule(self.Play, self.mod, self, ...)
 	end	
 end

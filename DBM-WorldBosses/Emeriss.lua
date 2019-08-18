@@ -36,7 +36,7 @@ local corruptionCount
 local aspamOne
 local aspamTwo
 
-local soundCorruption		= mod:NewSound2(24910)
+local soundCorruption		= mod:SoundInfoLong(24910)
 
 function mod:preCorruption()
 	prewarnCorruption:Show()

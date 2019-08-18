@@ -33,7 +33,7 @@ local lethonHealth = 100
 local spiritCount
 local prespiritCount
 
-local soundSpirit		= mod:NewSound2(24811)
+local soundSpirit		= mod:SoundInfoLong(24811)
 
 function mod:preSpirit()
 	prewarnSpirit:Show()

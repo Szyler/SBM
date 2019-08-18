@@ -625,6 +625,17 @@ function DBF_Settings_Menuofdoom()
 			end		
 
 			if(UIDROPDOWNMENU_MENU_VALUE == "OfficerPTMenu") then
+			
+				local function pullInFive()
+					local ChannelID = GetChannelName("TBMCOMMAND")
+					SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+				end
+
+				local function pullNow()
+					local ChannelID = GetChannelName("TBMCOMMAND")
+					SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+				end				
+				
 				info = {};
 				info.text = "Pull Timers";
 				info.isTitle = 1;
@@ -633,51 +644,44 @@ function DBF_Settings_Menuofdoom()
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 	
 				info = {};
-				info.text = "5 Sec";
-				info.tooltipTitle = info.text;
-				info.tooltipText = "";
-				info.notCheckable = 1;
-				info.func = function() 
-				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
-				end
-				local lag = select(3, GetNetStats()) / 1000
-				local timer = 5
-				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
-				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
-				end
-				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
-	
-				info = {};
 				info.text = "10 Sec";
 				info.tooltipTitle = info.text;
 				info.tooltipText = "";
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
-				local lag = select(3, GetNetStats()) / 1000
 				local timer = 10
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
 				end
-				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
-
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
+				end
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
+	
 				info = {};
 				info.text = "15 Sec";
 				info.tooltipTitle = info.text;
@@ -685,19 +689,35 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
-				local lag = select(3, GetNetStats()) / 1000
 				local timer = 15
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+				end
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
 				end
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
 
@@ -708,19 +728,74 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
-				local lag = select(3, GetNetStats()) / 1000
 				local timer = 20
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+				end
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
+				end
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
+
+				info = {};
+				info.text = "25 Sec";
+				info.tooltipTitle = info.text;
+				info.tooltipText = "";
+				info.notCheckable = 1;
+				info.func = function() 
+				if DBM:GetRaidRank() == 0 then
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				end
+				local timer = 25
+				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
+				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+				end
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
 				end
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 
@@ -731,20 +806,37 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
-				local lag = select(3, GetNetStats()) / 1000
 				local timer = 30
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
-				end				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+				end
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
+				end
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 
 				info = {};
 				info.text = "60 Sec";
@@ -753,20 +845,37 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
-				local lag = select(3, GetNetStats()) / 1000
 				local timer = 60
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-				DBM:CreatePizzaTimer(timer, DBM_CORE_TIMER_PULL, true)
 				SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
-				if timer > 7 then DBM:Schedule(timer - 7 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) end
-				if timer > 5 then DBM:Schedule(timer - 5 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel) end
-				if timer > 3 then DBM:Schedule(timer - 3 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) end
-				if timer > 2 then DBM:Schedule(timer - 2 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) end
-				if timer > 1 then DBM:Schedule(timer - 1 - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) end
-				DBM:Schedule(timer - lag, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
-				end				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);					
+				if timer > 10 then 
+					DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
+				end
+				if timer > 7 then 
+					DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
+				end
+				if timer > 5 then 
+					DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
+					DBM:Schedule(timer - 5, pullInFive)
+				end
+				if timer > 4 then 
+					DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
+				end
+				if timer > 3 then 
+					DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
+				end
+				if timer > 2 then 
+					DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
+				end
+				if timer > 1 then 
+					DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
+				end
+					DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)
+					DBM:Schedule(timer - 0, pullNow)
+				end
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);					
 			end		
 
 			if(UIDROPDOWNMENU_MENU_VALUE == "OfficerMTMenu") then

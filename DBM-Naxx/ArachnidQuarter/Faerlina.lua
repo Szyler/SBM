@@ -24,8 +24,10 @@ local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
 local berserkTimer				= mod:NewBerserkTimer(300)
 
 local specWarnRainOfFire		= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
+local soundRainOfFire			= mod:SoundAlert(1003054)
 local specWarnPoisonPool		= mod:NewSpecialWarningMove(869762, true, "Special warning when standing in Poison Pool", true)
 local specWarnClingingPoison	= mod:NewSpecialWarningMove(1003060, true, "Special warning when standing in Clinging Poison", true)
+local soundPoison				= mod:SoundAirHorn(869762)
 
 local embraceSpam = 0
 local enraged = false
@@ -66,16 +68,19 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(1003054) then 
 		if args:IsPlayer() then
 			specWarnRainOfFire:Show();
+			soundRainOfFire:Play();
 		end
 	end
 	if args:IsSpellID(869762) then 
 		if args:IsPlayer() then
 			specWarnPoisonPool:Show();
+			soundPoison:Play();
 		end
 	end
 	if args:IsSpellID(1003060) then 
 		if args:IsPlayer() then
 			specWarnClingingPoison:Show();
+			soundPoison:Play();
 		end
 	end
 end
@@ -84,16 +89,19 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(1003054) then 
 		if args:IsPlayer() then
 			specWarnRainOfFire:Show();
+			soundRainOfFire:Play();
 		end
 	end
 	if args:IsSpellID(869762) then 
 		if args:IsPlayer() then
 			specWarnPoisonPool:Show();
+			soundPoison:Play();
 		end
 	end
 	if args:IsSpellID(1003060) then 
 		if args:IsPlayer() then
 			specWarnClingingPoison:Show();
+			soundPoison:Play();
 		end
 	end
 end

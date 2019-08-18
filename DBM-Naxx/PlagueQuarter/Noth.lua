@@ -8,22 +8,27 @@ mod:RegisterCombat("combat")
 
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
 
-local warnTeleportNow	= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
-local warnTeleportSoon	= mod:NewAnnounce("WarningTeleportSoon", 1, 46573)
-local warnCurse			= mod:NewSpellAnnounce(29213, 2)
-
-local timerTeleport		= mod:NewTimer(300, "Teleport to Balcony", 46573)
-local timerTeleportBack	= mod:NewTimer(300, "Teleport to Raid", 46573)
-
-local berserkTimer			= mod:NewBerserkTimer(300)
-
+-----Teleport-----
+local warnTeleportNow		= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
+local warnTeleportSoon		= mod:NewAnnounce("WarningTeleportSoon", 1, 46573)
+local timerTeleport			= mod:NewTimer(600, "Teleport to Balcony", 46573)
+local timerTeleportBack		= mod:NewTimer(600, "Teleport to Raid", 46573)
+local soundTeleport			= mod:SoundInfoLong(46573)
+-----Curse-----
+local warnCurse				= mod:NewSpellAnnounce(29213, 2))
+local specWarnCurse			= mod:NewSpecialWarning("Curse of the Plaguebringer on you!", true, "Special warning when Curse of the Plaguebringer is applied to you", true)
+local soundCurse			= mod:SoundAirHorn(29213)
+-----MISC-----
+local berserkTimer			= mod:NewBerserkTimer(375)
 local phase = 0
 
 function mod:OnCombatStart(delay)
-	berserkTimer:Start(300-delay)
+	berserkTimer:Start(375-delay)
 	self:ScheduleMethod(0, "getBestKill")
 	phase = 0
 	self:BackInRoom(delay)
@@ -31,10 +36,11 @@ end
 
 function mod:Balcony()
 	local timer
-	if phase == 1 then timer = 72
-	elseif phase == 2 then timer = 97
-	elseif phase == 3 then timer = 120
+	if phase == 1 then timer = 75 - delay
+	elseif phase == 2 then timer = 70 - delay
+	elseif phase == 3 then timer = 30 - delay
 	else return	end
+	soundTeleport:Show();
 	timerTeleportBack:Show(timer)
 	warnTeleportSoon:Schedule(timer - 10)
 	warnTeleportNow:Schedule(timer)
@@ -46,9 +52,10 @@ function mod:BackInRoom(delay)
 	phase = phase + 1
 	local timer
 	if phase == 1 then timer = 60 - delay
-	elseif phase == 2 then timer = 43 - delay
-	elseif phase == 3 then timer = 28 - delay
+	elseif phase == 2 then timer = 45 - delay
+	elseif phase == 3 then timer = 30 - delay
 	else return end
+	soundTeleport:Show();
 	timerTeleport:Show(timer)
 	warnTeleportSoon:Schedule(timer - 10)
 	warnTeleportNow:Schedule(timer)
@@ -60,6 +67,37 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnCurse:Show()
 	end
 end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(29213) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+			soundCurse:Play();
+		end
+	end
+	if args:IsSpellID(54835) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+			soundCurse:Play();
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(29213) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+			soundCurse:Play();
+		end
+	end
+	if args:IsSpellID(54835) then 
+		if args:IsPlayer() then
+			specWarnCurse:Show();
+			soundCurse:Play();
+		end
+	end
+end
+
 
 function mod:OnCombatEnd(wipe)
 	self:Stop();

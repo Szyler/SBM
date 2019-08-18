@@ -31,7 +31,7 @@ local warnDruids				= mod:NewSpellAnnounce(24795, 2)
 local predruidCount
 local druidCount
 
-local soundDruid		= mod:NewSound2(24795)
+local soundDruid		= mod:SoundInfoLong(24795)
 
 function mod:preDruid()
 	prewarnDruids:Show()

@@ -31,7 +31,7 @@ local maxShards
 local ouroHealth
 local shardNumber
 
-local soundShards					= mod:NewSound2(1002340, "Play Sound on Shard Spawn")
+local soundShards					= mod:SoundAlert(1002340)
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()

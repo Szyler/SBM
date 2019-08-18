@@ -25,7 +25,7 @@ end
 
 
 local warnInferno		= mod:NewSpellAnnounce(19695)
-local soundInferno					= mod:NewSound(19695)
+local soundInferno					= mod:SoundRunAway(19695)
 local warnIgnite		= mod:NewSpellAnnounce(19659)
 local warnBomb			= mod:NewTargetAnnounce(20475)
 local warnArmageddon	= mod:NewSpellAnnounce(20478)
