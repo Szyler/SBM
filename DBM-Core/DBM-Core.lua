@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1710 $"):sub(12, -3),
-	Version = "1.71",
-	DisplayVersion = "1.71", -- the string that is shown as version
-	ReleaseRevision = 1710 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1720 $"):sub(12, -3),
+	Version = "1.72",
+	DisplayVersion = "1.72", -- the string that is shown as version
+	ReleaseRevision = 1720 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -639,6 +639,7 @@ do
             local found,_,p1 = string.find(arg4, " (.+)")
 			local o = {"Zorgos", "Zorgosone", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
 			local tankwhitelist = {"Dreadsmell"}
+			local canRunSounds
 			
 			if(found) then  
                 if(p1 == "TBMCOMMAND") then
@@ -662,12 +663,16 @@ do
 							if(myguildName == "toxicity") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
-										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+										if canRunSounds == true then
+											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+										end
 									end
 								end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
-										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+										if canRunSounds == true then
+											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+										end
 									end
 								end
 							end
@@ -678,12 +683,16 @@ do
 							if(myguildName == "toxicity") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
-										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Alert.ogg")
+										if canRunSounds == true then
+											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+										end
 									end
 								end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
-										PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Alert.ogg")
+										if canRunSounds == true then
+											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+										end
 									end
 								end
 							end
