@@ -20,7 +20,7 @@ local timerTeleport			= mod:NewTimer(600, "Teleport to Balcony", 46573)
 local timerTeleportBack		= mod:NewTimer(600, "Teleport to Raid", 46573)
 local soundTeleport			= mod:SoundInfoLong(46573)
 -----Curse-----
-local warnCurse				= mod:NewSpellAnnounce(29213, 2))
+local warnCurse				= mod:NewSpellAnnounce(29213, 2)
 local specWarnCurse			= mod:NewSpecialWarning("Curse of the Plaguebringer on you!", true, "Special warning when Curse of the Plaguebringer is applied to you", true)
 local soundCurse			= mod:SoundAirHorn(29213)
 -----MISC-----

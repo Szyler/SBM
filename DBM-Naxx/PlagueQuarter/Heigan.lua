@@ -39,6 +39,7 @@ function mod:BackInRoom(time)
 	timerTeleport:Show(time)
 	warnTeleportSoon:Schedule(time - 15, 15)
 	warnTeleportNow:Schedule(time)
+	soundTeleport:Schedule(time)
 	self:ScheduleMethod(time, "DancePhase")
 end
 
