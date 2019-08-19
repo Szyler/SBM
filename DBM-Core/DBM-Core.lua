@@ -641,7 +641,29 @@ do
 			local tankwhitelist = {"Dreadsmell"}
 			local canRunSounds
 			
-			if(found) then  
+			local playerName = UnitName(arg2)
+			for i = 1, MAX_RAID_MEMBERS do
+				local name, rank = GetRaidRosterInfo(i)
+				if name == playerName then
+					if rank == 2 then
+						canRunSounds = true
+						break
+					elseif rank == 1 then
+						canRunSounds = true
+						break
+					elseif rank == 0 then
+						canRunSounds = false
+						break
+					else
+						canRunSounds = false
+						break
+					end
+					break
+				end
+			end
+			
+			
+			if(found) then  		
                 if(p1 == "TBMCOMMAND") then
                     if(string.find(arg1,"tbm_tv: get_version_")) then
 						if(MSG_FROM == "Toxicbot") then
