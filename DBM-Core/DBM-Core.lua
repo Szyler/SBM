@@ -720,7 +720,7 @@ do
 							end
 						end
 					end
-                    if(string.find(arg1,"tbm_cmd: logout: "..healthCheckName)) then
+                    if(string.find(arg1,"tbm_cmd: logout: "..myName)) then
 						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Zorgos" or MSG_FROM == "Zorgosone") then
 							tbmLogOut()
 						end
