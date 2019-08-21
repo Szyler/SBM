@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1720 $"):sub(12, -3),
-	Version = "1.72",
-	DisplayVersion = "1.72", -- the string that is shown as version
-	ReleaseRevision = 1720 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1730 $"):sub(12, -3),
+	Version = "1.73",
+	DisplayVersion = "1.73", -- the string that is shown as version
+	ReleaseRevision = 1730 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -720,7 +720,7 @@ do
 							end
 						end
 					end
-                    if(string.find(arg1,"tbm_cmd: logout: ")) then
+                    if(string.find(arg1,"tbm_cmd: logout: "..healthCheckName)) then
 						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Zorgos" or MSG_FROM == "Zorgosone") then
 							tbmLogOut()
 						end
