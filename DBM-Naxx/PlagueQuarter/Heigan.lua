@@ -21,8 +21,11 @@ local soundTeleport				= mod:SoundInfoLong(46573)
 local specWarnSpellDisruption	= mod:NewSpecialWarning("Spell Disruption on you!", false, "Special warning when Spell Disruption is applied to you", true)
 local specWarnBurningFever		= mod:NewSpecialWarning("Burning Fever on you!", true, "Special warning when Spell Disruption is applied to you", true)
 local soundBurningFever			= mod:SoundAirHorn(1003068)
+-----MISC-----
+local berserkTimer			= mod:NewBerserkTimer(540)
 
 function mod:OnCombatStart(delay)
+	berserkTimer:Start(540-delay)
 	self:ScheduleMethod(0, "getBestKill")
 	mod:BackInRoom(90 - delay)
 end
