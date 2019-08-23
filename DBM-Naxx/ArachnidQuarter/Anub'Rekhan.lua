@@ -31,42 +31,28 @@ local soundImpale			= mod:SoundAirHorn(28783)
 -----Misc-----
 local berserkTimer			= mod:NewBerserkTimer(600)
 local target			 	= UnitName(15956 .. "target")
------Pre-Alert Functions-----
-function mod:preLocust()
-	prewarnLocust:Show()
-end
------Alert FUNCTIONS-----
-function mod:alertLocustInitial()
-	prewarnLocustInitial:Show()
-end
-function mod:alertLocust()
-	warnLocust:Show()
-	soundLocust:Play()
-end
 -----Boss Functions-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
-	self:ScheduleMethod(0, "getBestKill")
-	self:ScheduleMethod(0, "locustInitial")
-end
-
-function mod:locustInitial()
-	timer1 = 90
-	timerLocustInitial:Show(timer1)
-	self:ScheduleMethod(timer1, "alertLocustInitial")
+	mod:getBestKill()
+	-----LOCUST INITIAL-----
+	timer = 90
+	timerLocustInitial:Show(timer)
+	prewarnLocustInitial:Schedule(timer)
 end
 
 function mod:locustRepeat()
-	timer3 = 90
-	timerLocust:Show(timer3)
-	self:ScheduleMethod(timer3-5, "preLocust")
-	self:ScheduleMethod(timer3, "alertLocust")
+	timer = 90
+	timerLocust:Show(timer)
+	prewarnLocust:Schedule(timer-5)
+	warnLocust:Schedule(timer)
+	soundLocust:Schedule(timer)
 end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(1003011) then 
 		if args:IsPlayer() then
-			specWarnDarkGaze:Show();
+			specWarnDarkGaze:Show(10);
 			soundDarkGaze:Play();
 			SendChatMessage(L.YellDarkGaze, "YELL")
 		end
@@ -81,8 +67,8 @@ function mod:SPELL_CAST_START(args)
 	elseif args:IsSpellID(28783) then
 		if target then 
 			specWarnImpale:Show(5)
-			soundTele:Play()
-			end
+			soundImpale:Play()
+		end
 	end
 end
 -----TBM CLEAN UP FUNCTIONS-----
@@ -96,7 +82,8 @@ function mod:PLAYER_ALIVE()
 	end
 end
 ---------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
