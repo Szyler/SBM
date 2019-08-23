@@ -35,7 +35,6 @@ local target			 	= UnitName(15956 .. "target")
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
 	mod:getBestKill()
-	-----LOCUST INITIAL-----
 	timer = 90
 	timerLocustInitial:Show(timer)
 	prewarnLocustInitial:Schedule(timer)
