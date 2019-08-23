@@ -31,31 +31,30 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(375-delay)
 	self:ScheduleMethod(0, "getBestKill")
 	phase = 0
-	self:BackInRoom(delay)
+	self:BackInRoom()
 end
 
 function mod:Balcony()
 	local timer
-	if phase == 1 then timer = 75 - delay
-	elseif phase == 2 then timer = 70 - delay
-	elseif phase == 3 then timer = 30 - delay
+	if phase == 1 then timer = 75
+	elseif phase == 2 then timer = 70
+	elseif phase == 3 then timer = 30 
 	else return	end
-	soundTeleport:Show();
+	soundTeleport:Schedule(timer)
 	timerTeleportBack:Show(timer)
 	warnTeleportSoon:Schedule(timer - 10)
 	warnTeleportNow:Schedule(timer)
 	self:ScheduleMethod(timer, "BackInRoom")
 end
 
-function mod:BackInRoom(delay)
-	delay = delay or 0
+function mod:BackInRoom()
 	phase = phase + 1
 	local timer
-	if phase == 1 then timer = 60 - delay
-	elseif phase == 2 then timer = 45 - delay
-	elseif phase == 3 then timer = 30 - delay
+	if phase == 1 then timer = 60
+	elseif phase == 2 then timer = 45 
+	elseif phase == 3 then timer = 30 
 	else return end
-	soundTeleport:Show();
+	soundTeleport:Schedule(timer)
 	timerTeleport:Show(timer)
 	warnTeleportSoon:Schedule(timer - 10)
 	warnTeleportNow:Schedule(timer)

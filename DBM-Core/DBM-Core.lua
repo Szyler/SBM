@@ -3381,7 +3381,7 @@ do
 					self.mod:AddMsg(text, nil)
 				end
 			end
-			PlaySoundFile(DBM.Options.RaidWarningSound)
+			--PlaySoundFile(DBM.Options.RaidWarningSound)
 		end
 	end
 
@@ -3978,7 +3978,7 @@ do
 			frame:SetAlpha(1)
 			frame.timer = 5
 			if self.sound then
-				PlaySoundFile(DBM.Options.SpecialWarningSound)
+				--PlaySoundFile(DBM.Options.SpecialWarningSound)
 			end
 		end
 	end
