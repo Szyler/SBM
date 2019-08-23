@@ -13,10 +13,15 @@ mod:RegisterEvents(
 mod:EnableModel()
 
 -----Teleport-----
-local warnTeleportSoon			= mod:NewAnnounce("WarningTeleportSoon", 2, 46573)
-local warnTeleportNow			= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
-local timerTeleport				= mod:NewTimer(90, "TimerTeleport", 46573)
+local warnTeleportSoon			= mod:NewAnnounce("Teleport to Platform Soon", 2, 46573)
+local warnTeleportNow			= mod:NewAnnounce("Teleport to Platform Now", 3, 46573)
+local timerTeleport				= mod:NewTimer(90, "Teleport to Platform", 46573)
 local soundTeleport				= mod:SoundInfoLong(46573)
+-----Dance Ends----
+local timerDanceEnds			= mod:NewTimer(47, "Dance Ends", 46573)
+local warnDanceEndsSoon			= mod:NewAnnounce("Dance Ends Soon", 2, 46573)
+local warnDanceEnds				= mod:NewAnnounce("Dance Ends Now", 3, 46573)
+local soundDanceEnds			= mod:SoundInfoLong(46573)
 -----HeiganEffects------
 local specWarnSpellDisruption	= mod:NewSpecialWarning("Spell Disruption on you!", false, "Special warning when Spell Disruption is applied to you", true)
 local specWarnBurningFever		= mod:NewSpecialWarning("Burning Fever on you!", true, "Special warning when Spell Disruption is applied to you", true)
@@ -24,32 +29,35 @@ local soundBurningFever			= mod:SoundAirHorn(1003068)
 -----MISC-----
 local berserkTimer			= mod:NewBerserkTimer(540)
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(540-delay)
-	self:ScheduleMethod(0, "getBestKill")
-	mod:BackInRoom(90 - delay)
+	mod:getBestKill()
+	mod:BackInRoom()
 end
 
 function mod:DancePhase()
-	timerTeleport:Show(47)
-	warnTeleportSoon:Schedule(37, 10)
-	warnTeleportNow:Schedule(47)
-	soundTeleport:Schedule(47)
-	self:ScheduleMethod(47, "BackInRoom", 88)
+	timer = 47
+	timerDanceEnds:Show(timer)
+	warnDanceEndsSoon:Schedule(timer-10, 10)
+	warnDanceEnds:Schedule(timer)
+	soundDanceEnds:Schedule(timer)
+	self:ScheduleMethod(timer, "BackInRoom", 88)
 end
 
-function mod:BackInRoom(time)
-	timerTeleport:Show(time)
-	warnTeleportSoon:Schedule(time - 15, 15)
-	warnTeleportNow:Schedule(time)
-	soundTeleport:Schedule(time)
-	self:ScheduleMethod(time, "DancePhase")
+function mod:BackInRoom()
+	timer = 90
+	timerTeleport:Show(timer)
+	warnTeleportSoon:Schedule(timer-15, 15)
+	warnTeleportNow:Schedule(timer)
+	soundTeleport:Schedule(timer)
+	self:ScheduleMethod(timer, "DancePhase")
 end
 
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(29310) then 
 		if args:IsPlayer() then
-			specWarnCurse:Show();
+			specWarnSpellDisruption:Show();
 		end
 	elseif args:IsSpellID(1003068) then 
 		if args:IsPlayer() then
@@ -63,7 +71,7 @@ end
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(29310) then 
 		if args:IsPlayer() then
-			specWarnCurse:Show();
+			specWarnSpellDisruption:Show();
 		end
 	elseif args:IsSpellID(1003068) then 
 		if args:IsPlayer() then
@@ -74,6 +82,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
+-----TBM CLEAN UP FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end

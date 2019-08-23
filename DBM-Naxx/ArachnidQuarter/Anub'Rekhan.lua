@@ -31,6 +31,7 @@ local soundImpale			= mod:SoundAirHorn(28783)
 -----Misc-----
 local berserkTimer			= mod:NewBerserkTimer(600)
 local target			 	= UnitName(15956 .. "target")
+
 -----Boss Functions-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
@@ -70,6 +71,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	end
 end
+
 -----TBM CLEAN UP FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
