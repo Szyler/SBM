@@ -176,3 +176,18 @@ v1.72 - 20/08/2019:
 - Fixed sounds for Teleporting on Heigan.
 - Fixed countdown timers playing when you are not in the group running the pull timer.
 ----------------------------------------------------------------------------------------------------
+v1.73 - 22/08/2019:
+- Urgent fix for tbm logout command.
+----------------------------------------------------------------------------------------------------
+v1.74 - 25/08/2019:
+- Fix noth teleport timers
+- Remove default DBM sounds -- sounds should ONLY play when asked for now
+- Added enrage to Heigan
+- Fixed Spell Disruption warning not working on Heigan
+- Code cleanup for Anub'Rekhan
+- Code cleanup for Faerlina
+- Code cleanup for Maexxna
+- Code cleanup for Noth
+- Code cleanup for Heigan
+- Code cleanup for Loatheb
+- Coded Razuvious
