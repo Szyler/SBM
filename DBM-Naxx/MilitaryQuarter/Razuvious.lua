@@ -7,37 +7,147 @@ mod:SetCreatureID(16061)
 mod:RegisterCombat("yell", L.Yell1, L.Yell2, L.Yell3, L.Yell4)
 
 mod:RegisterEvents(
+	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_SUCCESS",
+	"SPELL_CAST_START",
+	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
 
-local warnShoutNow		= mod:NewSpellAnnounce(55543, 1)
-local warnShoutSoon		= mod:NewSoonAnnounce(55543, 3)
-local warnShieldWall	= mod:NewAnnounce("WarningShieldWallSoon", 3, 29061)
-
-local timerShout		= mod:NewNextTimer(16, 55543)
-local timerTaunt		= mod:NewCDTimer(20, 29060)
-local timerShieldWall	= mod:NewCDTimer(20, 29061)
+-----Shout-----
+local warnShoutNow			= mod:NewSpellAnnounce(29107, 2)
+local warnShoutSoon			= mod:NewSoonAnnounce(29107, 3)
+local timerShout			= mod:NewNextTimer(10, 29107)
+local soundShout			= mod:SoundInfo(29107)
+local delayShout
+-----Shadow Burst-----
+local warnShadowBurstNow	= mod:NewSpellAnnounce(1003108, 2)
+local warnShadowBurstSoon	= mod:NewSoonAnnounce(1003108, 3)
+local timerShadowBurst		= mod:NewNextTimer(25, 1003108)
+local soundShadowBurst		= mod:SoundAlert(1003108)
+-----Jagged Knife-----
+local warnKnifeNow			= mod:NewTargetAnnounce(55550, 2)
+local specWarnKnife			= mod:NewSpecialWarning("Jagged Knife", nil, "Special warning for Jagged Knife on you")
+local soundKnife			= mod:SoundAlarmLong(55550)
+-----Bruising Blow-----
+local warnBlowNow			= mod:NewSpellAnnounce(26613, 2)
+local warnBlowSoon			= mod:NewSoonAnnounce(26613, 3)
+local timerBlow				= mod:NewNextTimer(15, 26613)
+local soundBlow				= mod:SoundInfo(26613)
+local delayBlow
+-----Phase 2-----
+local razHealth
+local phase
+local warnPhase2			= mod:NewPhaseAnnounce(2)
+local soundPhaseTwo			= mod:SoundInfoLong(29125, "Play the 'Long Info' sound effect on Phase Two.")
 
 function mod:OnCombatStart(delay)
-	self:ScheduleMethod(0, "getBestKill")
-	timerShout:Start(16 - delay)
+	mod:getBestKill()
+	phase = 1
+	-----Shout-----
+	warnShoutNow:Schedule(16 - delay)
 	warnShoutSoon:Schedule(11 - delay)
+	timerShout:Start(16 - delay)
+	soundShout:Schedule(16-delay)
+	delayShout = 0
+	-----Shadow Burst-----
+	warnShadowBurstNow:Schedule(25-delay)
+	warnShadowBurstSoon:Schedule(20-delay)
+	timerShadowBurst:Start(25-delay)
+	soundShadowBurst:Schedule(25-delay)
+	-----Bruising Blow-----
+	warnBlowNow:Schedule(15-delay)
+	warnBlowSoon:Schedule(10-delay)
+	timerBlow:Start(15-delay)
+	soundBlow:Schedule(15-delay)
+	delayBlow = 0
+end
+
+function mod:delayDShout()
+	delayShout = 1
+end
+
+function mod:delayBBlow()
+	delayBlow = 1
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(55550) then 
+		warnKnifeNow:Show(args.destName)
+		if args:IsPlayer() then
+			specWarnKnife:Show(10);
+			soundKnife:Play();
+			SendChatMessage(L.YellKnife, "YELL")
+		end
+	end	
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(55543, 29107) then  -- Disrupting Shout
-		timerShout:Start()
-		warnShoutNow:Show()
-		warnShoutSoon:Schedule(11)
-	elseif args:IsSpellID(29060) then -- Taunt
-		timerTaunt:Start()
-	elseif args:IsSpellID(29061) then -- ShieldWall
-		timerShieldWall:Start()
-		warnShieldWall:Schedule(15)
+		if delayShout == 0 then
+			timer = 10
+			warnShoutNow:Schedule(timer)
+			warnShoutSoon:Schedule(timer-5)
+			timerShout:Start(timer)
+			soundShout:Schedule(timer)
+		elseif delayShout == 1 then
+			timer = 20
+			warnShoutNow:Schedule(timer)
+			warnShoutSoon:Schedule(timer-5)
+			timerShout:Start(timer)
+			soundShout:Schedule(timer)
+			delayShout = 0
+		end
+	elseif args:IsSpellID(26613) then
+		if delayBBlow == 0 then
+			timer = 15
+			warnBlowNow:Schedule(timer)
+			warnBlowSoon:Schedule(timer-5)
+			timerBlow:Start(timer)
+			soundBlow:Schedule(timer)
+		elseif delayBBlow == 1 then
+			timer = 30
+			warnBlowNow:Schedule(timer)
+			warnBlowSoon:Schedule(timer-5)
+			timerBlow:Start(timer)
+			soundBlow:Schedule(timer)
+			delayBlow = 0
+		end
 	end
 end
 
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(1003108) then
+		timer = 25
+		warnShadowBurstNow:Schedule(timer)
+		warnShadowBurstSoon:Schedule(timer-5)
+		timerShadowBurst:Start(timer)
+		soundShadowBurst:Schedule(timer)
+		self:ScheduleMethod(timer-10, "delayDShout")
+		self:ScheduleMethod(timer-15, "delayBBlow")
+	end
+end
+
+function mod:UNIT_HEALTH(args)
+    razHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
+	
+	if razHealth > 50 and phase == 1 then
+		phase = 2
+		warnPhase2:Show()
+		soundPhaseTwo:Show()
+		-----Shadow Burst-----
+		warnShadowBurstNow:Cancel();
+		warnShadowBurstSoon:Cancel();
+		timerShadowBurst:Cancel();
+		soundShadowBurst:Cancel();
+	end
+end
+
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -48,8 +158,8 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------

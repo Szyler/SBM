@@ -30,7 +30,7 @@ local timerSpider			= mod:NewTimer(16, "Spiderlings Spawn", 17332)
 local soundSpider			= mod:SoundInfo(17332)
 
 function mod:OnCombatStart(delay)
-	self:ScheduleMethod(0, "getBestKill")
+	mod:getBestKill()
 	warnWebSpraySoon:Schedule(35 - delay)
 	timerWebSpray:Start(40 - delay)
 	timerWebWrapInitial:Start(20-delay)
@@ -65,6 +65,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -75,9 +76,8 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------

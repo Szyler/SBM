@@ -12,29 +12,30 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED_DOSE",
 	"PLAYER_ALIVE"
 )
-
-local warnEmbraceActive			= mod:NewSpellAnnounce(28732, 1)
-local warnEmbraceExpire			= mod:NewAnnounce("WarningEmbraceExpire", 2, 28732)
-local warnEmbraceExpired		= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
+-----ENRAGE-----
 local warnEnrageSoon			= mod:NewSoonAnnounce(28131, 3)
 local warnEnrageNow				= mod:NewSpellAnnounce(28131, 4)
-
+local warnEmbraceActive			= mod:NewSpellAnnounce(28732, 1)
+local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
+-----EMBRACE-----
+local warnEmbraceExpire			= mod:NewAnnounce("WarningEmbraceExpire", 2, 28732)
+local warnEmbraceExpired		= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
 local timerEmbrace				= mod:NewBuffActiveTimer(20, 28732)
 local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
-local berserkTimer				= mod:NewBerserkTimer(300)
-
+------AoE-----
 local specWarnRainOfFire		= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
 local soundRainOfFire			= mod:SoundAlert(1003054)
 local specWarnPoisonPool		= mod:NewSpecialWarningMove(869762, true, "Special warning when standing in Poison Pool", true)
 local specWarnClingingPoison	= mod:NewSpecialWarningMove(1003060, true, "Special warning when standing in Clinging Poison", true)
 local soundPoison				= mod:SoundAirHorn(869762)
-
+-----MISC-----
+local berserkTimer				= mod:NewBerserkTimer(300)
 local embraceSpam = 0
 local enraged = false
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(300-delay)
-	self:ScheduleMethod(0, "getBestKill")
+	mod:getBestKill()
 	timerEnrage:Start(60 - delay)
 	warnEnrageSoon:Schedule(55 - delay)
 	enraged = false
@@ -106,6 +107,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -116,9 +118,8 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------

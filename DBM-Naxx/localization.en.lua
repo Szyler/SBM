@@ -245,7 +245,8 @@ L:SetMiscLocalization({
 	Yell1 = "Show them no mercy!",
 	Yell2 = "The time for practice is over! Show me what you have learned!",
 	Yell3 = "Do as I taught you!",
-	Yell4 = "Sweep the leg... Do you have a problem with that?"
+	Yell4 = "Sweep the leg... Do you have a problem with that?",
+	YellKnife = "Jagged Knife on me!"
 })
 
 L:SetOptionLocalization({

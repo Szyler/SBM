@@ -36,7 +36,7 @@ end
 
 function mod:Balcony()
 	local timer
-	if phase == 1 then timer = 75
+	if phase == 1 then timer = 70
 	elseif phase == 2 then timer = 70
 	elseif phase == 3 then timer = 30 
 	else return	end
@@ -97,7 +97,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
-
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -108,9 +108,8 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
