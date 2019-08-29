@@ -38,7 +38,7 @@ local delayBlow
 -----Curse of Feebleness-----
 local warnCurseNow			= mod:NewSpellAnnounce(1003253, 2)
 local warnCurseEndSoon		= mod:NewSoonAnnounce(1003253, 3)
-local timerCurse			= mod:NewActiveTimer(120, 1003253)
+local timerCurse			= mod:NewBuffActiveTimer(120, 1003253)
 local soundCurse			= mod:SoundAlarmLong(1003253)
 -----Phase 2-----
 local razHealth
