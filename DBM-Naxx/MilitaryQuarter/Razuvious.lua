@@ -27,14 +27,19 @@ local timerShadowBurst		= mod:NewNextTimer(25, 1003108)
 local soundShadowBurst		= mod:SoundAlert(1003108)
 -----Jagged Knife-----
 local warnKnifeNow			= mod:NewTargetAnnounce(55550, 2)
-local specWarnKnife			= mod:NewSpecialWarning("Jagged Knife", nil, "Special warning for Jagged Knife on you")
-local soundKnife			= mod:SoundAlarmLong(55550)
+local specWarnKnife			= mod:NewSpecialWarningSpell(55550, nil, nil, nil, 10)
+local soundKnife			= mod:SoundAirHorn(55550)
 -----Bruising Blow-----
 local warnBlowNow			= mod:NewSpellAnnounce(26613, 2)
 local warnBlowSoon			= mod:NewSoonAnnounce(26613, 3)
 local timerBlow				= mod:NewNextTimer(15, 26613)
 local soundBlow				= mod:SoundInfo(26613)
 local delayBlow
+-----Curse of Feebleness-----
+local warnCurseNow			= mod:NewSpellAnnounce(1003253, 2)
+local warnCurseEndSoon		= mod:NewSoonAnnounce(1003253, 3)
+local timerCurse			= mod:NewActiveTimer(120, 1003253)
+local soundCurse			= mod:SoundAlarmLong(1003253)
 -----Phase 2-----
 local razHealth
 local phase
@@ -67,8 +72,18 @@ function mod:delayDShout()
 	delayShout = 1
 end
 
+function mod:shoutDelayTimer()
+	timer = 10
+	timerShout:Start(timer)
+end
+
 function mod:delayBBlow()
 	delayBlow = 1
+end
+
+function mod:blowDelayTimer()
+	timer = 15
+	timerBlow:Start(timer)
 end
 
 function mod:SPELL_AURA_APPLIED(args)
@@ -79,7 +94,12 @@ function mod:SPELL_AURA_APPLIED(args)
 			soundKnife:Play();
 			SendChatMessage(L.YellKnife, "YELL")
 		end
-	end	
+	elseif args:IsSpellID(55550) then 
+		timer = 120
+		warnCurseNow:Schedule(timer)
+		warnCurseEndSoon:Schedule(timer-10)
+		timerCurse:Start(timer)
+	end		
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -94,7 +114,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timer = 20
 			warnShoutNow:Schedule(timer)
 			warnShoutSoon:Schedule(timer-5)
-			timerShout:Start(timer)
+			self:ScheduleMethod(timer-10, "shoutDelayTimer")
 			soundShout:Schedule(timer)
 			delayShout = 0
 		end
@@ -109,7 +129,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timer = 30
 			warnBlowNow:Schedule(timer)
 			warnBlowSoon:Schedule(timer-5)
-			timerBlow:Start(timer)
+			self:ScheduleMethod(timer-15, "blowDelayTimer")
 			soundBlow:Schedule(timer)
 			delayBlow = 0
 		end
@@ -131,10 +151,10 @@ end
 function mod:UNIT_HEALTH(args)
     razHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
 	
-	if razHealth > 50 and phase == 1 then
+	if razHealth < 45 and phase == 1 then
 		phase = 2
-		warnPhase2:Show()
-		soundPhaseTwo:Show()
+		warnPhase2:Show();
+		soundPhaseTwo:Play();
 		-----Shadow Burst-----
 		warnShadowBurstNow:Cancel();
 		warnShadowBurstSoon:Cancel();
