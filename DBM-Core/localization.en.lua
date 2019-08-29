@@ -122,6 +122,9 @@ DBM_CORE_AUTO_ANNOUNCE_TEXTS = {
 	spell = "%s",
 	cast = "Casting %s: %.1f sec",
 	soon = "%s soon",
+	buffendsoon = "%s expires soon",
+	buffendnow = "%s expires now",
+	cooldown = "%s CD", 
 	prewarn = "%s in %s",
 	phase = "Phase %d",
 }
@@ -132,6 +135,9 @@ DBM_CORE_AUTO_ANNOUNCE_OPTIONS = {
 	spell = "Show warning for |cff71d5ff|Hspell:%d|h%s|h|r",
 	cast = "Show warning when |cff71d5ff|Hspell:%d|h%s|h|r is being cast",
 	soon = prewarnOption,
+	buffendsoon = "Show warning when |cff71d5ff|Hspell:%d|h%s|h|r is ending soon",
+	buffendnow = "Show warning end |cff71d5ff|Hspell:%d|h%s|h|r is ending now",
+	cooldown = "Show warning for |cff71d5ff|Hspell:%d|h%s|h|r cooldown",
 	prewarn = prewarnOption,
 	phase = "Announce Phase %d"
 }

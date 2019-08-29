@@ -13,20 +13,19 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 -----ENRAGE-----
-local warnEnrageSoon			= mod:NewSoonAnnounce(28131, 3)
-local warnEnrageNow				= mod:NewSpellAnnounce(28131, 4)
-local warnEmbraceActive			= mod:NewSpellAnnounce(28732, 1)
-local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
+local warnEnrageSoon			= mod:NewSoonAnnounce(28798, 3)
+local warnEnrageNow				= mod:NewSpellAnnounce(28798, 4)
+local timerEnrage				= mod:NewCDTimer(60, 28798)
 -----EMBRACE-----
-local warnEmbraceExpire			= mod:NewAnnounce("WarningEmbraceExpire", 2, 28732)
-local warnEmbraceExpired		= mod:NewAnnounce("WarningEmbraceExpired", 3, 28732)
+local warnEmbraceExpire			= mod:NewBuffEndSoonAnnounce(28732, 2)
+local warnEmbraceExpired		= mod:NewBuffEndNowAnnounce(28732, 3)
+local warnEmbraceActive			= mod:NewSpellAnnounce(28732, 1)
 local timerEmbrace				= mod:NewBuffActiveTimer(20, 28732)
-local timerEnrage				= mod:NewTimer(60, "Enrage CD", 28131)
 ------AoE-----
-local specWarnRainOfFire		= mod:NewSpecialWarningMove(1003054, true, "Special warning when standing in Rain of Fire", true)
+local specWarnRainOfFire		= mod:NewSpecialWarningMove(1003054, true, nil, true)
 local soundRainOfFire			= mod:SoundAlert(1003054)
-local specWarnPoisonPool		= mod:NewSpecialWarningMove(869762, true, "Special warning when standing in Poison Pool", true)
-local specWarnClingingPoison	= mod:NewSpecialWarningMove(1003060, true, "Special warning when standing in Clinging Poison", true)
+local specWarnPoisonPool		= mod:NewSpecialWarningMove(869762, true, nil, true)
+local specWarnClingingPoison	= mod:NewSpecialWarningMove(1003060, true, nil, true)
 local soundPoison				= mod:SoundAirHorn(869762)
 -----MISC-----
 local berserkTimer				= mod:NewBerserkTimer(300)
@@ -36,8 +35,9 @@ local enraged = false
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(300-delay)
 	mod:getBestKill()
-	timerEnrage:Start(60 - delay)
-	warnEnrageSoon:Schedule(55 - delay)
+	timer = 60
+	timerEnrage:Start(timer - delay)
+	warnEnrageSoon:Schedule(timer - 5 - delay)
 	enraged = false
 end
 
@@ -50,37 +50,39 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnEnrageSoon:Cancel()
 		timerEnrage:Stop()
 		if enraged then
-			timerEnrage:Start()
-			warnEnrageSoon:Schedule(55)
+			timer = 55
+			timerEnrage:Start(timer)
+			warnEnrageSoon:Schedule(timer)
 		end
-		timerEmbrace:Start()
+		timer = 20
+		timerEmbrace:Start(timer)
 		warnEmbraceActive:Show()
-		warnEmbraceExpire:Schedule(15)
-		warnEmbraceExpired:Schedule(20)
+		warnEmbraceExpire:Schedule(timer - 55)
+		warnEmbraceExpired:Schedule(timer)
 		enraged = false
 	end
 end
 
 function mod:SPELL_AURA_APPLIED(args)
-	if args:IsSpellID(28798, 54100) then			-- Frenzy
+	if args:IsSpellID(28798, 54100) then
 		warnEnrageNow:Show()
 		enraged = GetTime()
 	end
 	if args:IsSpellID(1003054) then 
 		if args:IsPlayer() then
-			specWarnRainOfFire:Show();
+			specWarnRainOfFire:Show(5);
 			soundRainOfFire:Play();
 		end
 	end
 	if args:IsSpellID(869762) then 
 		if args:IsPlayer() then
-			specWarnPoisonPool:Show();
+			specWarnPoisonPool:Show(5);
 			soundPoison:Play();
 		end
 	end
 	if args:IsSpellID(1003060) then 
 		if args:IsPlayer() then
-			specWarnClingingPoison:Show();
+			specWarnClingingPoison:Show(5);
 			soundPoison:Play();
 		end
 	end
@@ -89,19 +91,19 @@ end
 function mod:SPELL_AURA_APPLIED_DOSE(args)
 	if args:IsSpellID(1003054) then 
 		if args:IsPlayer() then
-			specWarnRainOfFire:Show();
+			specWarnRainOfFire:Show(5);
 			soundRainOfFire:Play();
 		end
 	end
 	if args:IsSpellID(869762) then 
 		if args:IsPlayer() then
-			specWarnPoisonPool:Show();
+			specWarnPoisonPool:Show(5);
 			soundPoison:Play();
 		end
 	end
 	if args:IsSpellID(1003060) then 
 		if args:IsPlayer() then
-			specWarnClingingPoison:Show();
+			specWarnClingingPoison:Show(5);
 			soundPoison:Play();
 		end
 	end

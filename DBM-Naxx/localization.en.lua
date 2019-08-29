@@ -142,8 +142,8 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	WarningHealSoon		= "Show pre-warning for 3-second healing window",
-	WarningHealNow		= "Show warning for 3-second healing window",
+	WarningHealSoon		= "Show pre-warning for the 3-second healing and mana regen window",
+	WarningHealNow		= "Show warning for the 3-second healing and mana regen window",
 	SporeDamageAlert	= "DISABLED"
 })
 

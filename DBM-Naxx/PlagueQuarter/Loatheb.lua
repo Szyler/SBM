@@ -13,15 +13,16 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
 	"SPELL_SUMMON",
+	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
 
 -----Spores-----
-local warnSporeNow					= mod:NewSpellAnnounce(29234, 2)
-local warnSporeSoon					= mod:NewSoonAnnounce(29234, 1)
+local warnSporeNow					= mod:NewSpellAnnounce(29234, 3)
+local warnSporeSoon					= mod:NewSoonAnnounce(29234, 2)
 local timerSpore					= mod:NewNextTimer(18, 29234)
 local soundSpore					= mod:SoundInfo(29234)
-local specWarnCloudOfBlight			= mod:NewSpecialWarningMove(79008, true, "Special warning when standing in Cloud of Blight", true)
+local specWarnCloudOfBlight			= mod:NewSpecialWarningMove(79008)
 -----Doom-----
 local warnDoomNow					= mod:NewSpellAnnounce(29204, 3)
 local timerDoom						= mod:NewNextTimer(180, 29204)
@@ -29,13 +30,20 @@ local timerDoom						= mod:NewNextTimer(180, 29204)
 local warnHealSoon					= mod:NewAnnounce("WarningHealSoon", 4, 48071)
 local warnHealNow					= mod:NewAnnounce("WarningHealNow", 1, 48071, false)
 local timerAura						= mod:NewBuffActiveTimer(17, 55593)
+-----Soft Enrage-----
+local warnSoftEnrageSoon			= mod:NewSpellAnnounce(79009, 3)
+local warnSoftEnrageNow				= mod:NewSoonAnnounce(79009, 2)
+local soundSoftEnrage				= mod:SoundInfoLong(79009)
+local loathebHealth
+local phase
 -----MISC-----
 mod:AddBoolOption("SporeDamageAlert", false)
 local doomCounter	= 0
 local sporeTimer	= 18
 
 function mod:OnCombatStart(delay)
-	self:ScheduleMethod(0, "getBestKill")
+	mod:getBestKill();
+	phase = 1
 	doomCounter = 0
 	if mod:IsDifficulty("heroic25") then
 		sporeTimer = 18
@@ -86,6 +94,19 @@ function mod:SPELL_SUMMON(args)
 		warnSporeNow:Show()
 		warnSporeSoon:Schedule(10)
 		soundSpore:Play();
+	end
+end
+
+function mod:UNIT_HEALTH(args)
+    loathebHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
+	
+	if loathebHealth < 25 and phase == 1 then
+		phase = 2
+		warnSoftEnrageSoon:Show()
+	elseif loathebHealth < 20 and phase == 2 then
+		phase = 3
+		warnSoftEnrageNow:Show()
+		soundSoftEnrage:Play()
 	end
 end
 

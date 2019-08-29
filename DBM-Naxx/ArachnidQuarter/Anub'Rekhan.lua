@@ -14,19 +14,19 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 -----Locust Swarm-----
-local prewarnLocustInitial	= mod:NewAnnounce("Locust Swarm Initial CD Now", 2, 28785)
-local prewarnLocust			= mod:NewAnnounce("Locust Swarm Soon", 2, 28785)
-local warnLocust			= mod:NewAnnounce("Locust Swarm", 3, 28785)
-local timerLocust			= mod:NewTimer(90, "Next Locust Swarm", 28785)
-local timerLocustInitial	= mod:NewTimer(90, "Locust Swarm Initial CD", 28785)
-local timerLocustRemaining	= mod:NewTimer(15, "Locust Swarm: Time Remaining", 28785)
-local specWarnLocust		= mod:NewSpecialWarning("Locust Swarm", nil, "Special warning for Locust Swarm cast")
+local prewarnLocustInitial	= mod:NewCooldownAnnounce(28785, 2)
+local prewarnLocust			= mod:NewSoonAnnounce(28785, 2)
+local warnLocust			= mod:NewCastAnnounce(28785, 3)
+local timerLocust			= mod:NewNextTimer(90, 28785)
+local timerLocustInitial	= mod:NewCDTimer(90, 28785)
+local timerLocustRemaining	= mod:NewBuffActiveTimer(15, 28785)
+local specWarnLocust		= mod:NewSpecialWarningSpell(28785)
 local soundLocust			= mod:SoundRunAway(28785)
 -----Dark Gaze-----
-local specWarnDarkGaze		= mod:NewSpecialWarning("Dark Gaze", nil, "Special warning for Dark Gaze on you")
+local specWarnDarkGaze		= mod:NewSpecialWarningYou(1003011)
 local soundDarkGaze			= mod:SoundAlarmLong(1003011)
 -----IMPALE------
-local specWarnImpale		= mod:NewSpecialWarning("Impale", nil, "Special warning for Impale on you")
+local specWarnImpale		= mod:NewSpecialWarningYou(28783)
 local soundImpale			= mod:SoundAirHorn(28783)
 -----Misc-----
 local berserkTimer			= mod:NewBerserkTimer(600)
@@ -52,7 +52,8 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(1003011) then 
 		if args:IsPlayer() then
-			specWarnDarkGaze:Show(10);
+			timer = 10
+			specWarnDarkGaze:Show(timer);
 			soundDarkGaze:Play();
 			SendChatMessage(L.YellDarkGaze, "YELL")
 		end
@@ -61,12 +62,14 @@ end
 
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(28785) then
+		timer = 18
 		mod:locustRepeat()
 		specWarnLocust:Show(18)
 		timerLocustRemaining:Show(18)
 	elseif args:IsSpellID(28783) then
 		if target then 
-			specWarnImpale:Show(5)
+			timer = 5
+			specWarnImpale:Show(timer)
 			soundImpale:Play()
 		end
 	end

@@ -12,12 +12,13 @@ mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_SUCCESS",
 	"PLAYER_ALIVE",
-	"CHAT_MSG_RAID_BOSS_EMOTE"
+	"CHAT_MSG_RAID_BOSS_EMOTE",
+	"UNIT_HEALTH"
 )
 -----WEB WRAP-----
 local warnWebWrap			= mod:NewTargetAnnounce(28622, 2)
-local timerWebWrapInitial	= mod:NewTimer(20, "Web Wrap", 28622)
-local timerWebWrap			= mod:NewTimer(40, "Web Wrap", 28622)
+local timerWebWrapInitial	= mod:NewNextTimer(20, 28622)
+local timerWebWrap			= mod:NewNextTimer(40, 28622)
 local soundWebWrap			= mod:SoundAlert(28622)
 -----WEB SPRAY-----
 local warnWebSpraySoon		= mod:NewSoonAnnounce(29484, 1)
@@ -25,9 +26,15 @@ local warnWebSprayNow		= mod:NewSpellAnnounce(29484, 3)
 local timerWebSpray			= mod:NewNextTimer(40, 29484)
 local soundWebSpray			= mod:SoundAlarm(29484)
 -----SPIDERLINGS-----
-local timerSpiderInitial	= mod:NewTimer(8, "Spiderlings Spawn", 17332)
-local timerSpider			= mod:NewTimer(16, "Spiderlings Spawn", 17332)
-local soundSpider			= mod:SoundInfo(17332)
+local timerSpiderInitial	= mod:NewNextTimer(8, 43134)
+local timerSpider			= mod:NewNextTimer(16, 43134)
+local soundSpider			= mod:SoundInfo(43134)
+-----SOFT ENRAGE-----
+local warnSoftEnrageSoon	= mod:NewSpellAnnounce(54123, 3)
+local warnSoftEnrageNow		= mod:NewSoonAnnounce(54123, 2)
+local soundSoftEnrage		= mod:SoundInfoLong(54123)
+local maexxnaHealth
+local phase
 
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
@@ -40,8 +47,9 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if msg:find(L.Spiderlings) then
-		timerSpider:Start()
-		soundSpider:Schedule(16)
+		timer = 16
+		timerSpider:Start(timer)
+		soundSpider:Schedule(timer)
 	end
 end
 
@@ -58,10 +66,24 @@ end
 
 function mod:SPELL_CAST_SUCCESS(args)
 	if args:IsSpellID(29484, 54125) then -- Web Spray
+		timer = 40
 		warnWebSprayNow:Show()
 		soundWebSpray:Play();
-		warnWebSpraySoon:Schedule(35)
-		timerWebSpray:Start()
+		warnWebSpraySoon:Schedule(timer-5)
+		timerWebSpray:Start(timer)
+	end
+end
+
+function mod:UNIT_HEALTH(args)
+    maexxnaHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
+	
+	if maexxnaHealth < 25 and phase == 1 then
+		phase = 2
+		warnSoftEnrageSoon:Show()
+	elseif maexxnaHealth < 20 and phase == 2 then
+		phase = 3
+		warnSoftEnrageNow:Show()
+		soundSoftEnrage:Play()
 	end
 end
 

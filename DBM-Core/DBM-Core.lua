@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1750 $"):sub(12, -3),
-	Version = "1.75",
-	DisplayVersion = "1.75", -- the string that is shown as version
-	ReleaseRevision = 1750 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1760 $"):sub(12, -3),
+	Version = "1.76",
+	DisplayVersion = "1.76", -- the string that is shown as version
+	ReleaseRevision = 1760 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -3470,6 +3470,18 @@ do
 	function bossModPrototype:NewSoonAnnounce(spellId, color, ...)
 		return newAnnounce(self, "soon", spellId, color or 1, ...)
 	end
+	
+	function bossModPrototype:NewBuffEndSoonAnnounce(spellId, color, ...)
+		return newAnnounce(self, "buffendsoon", spellId, color or 1, ...)
+	end
+	
+	function bossModPrototype:NewBuffEndNowAnnounce(spellId, color, ...)
+		return newAnnounce(self, "buffendnow", spellId, color or 1, ...)
+	end
+	
+	function bossModPrototype:NewCooldownAnnounce(spellId, color, ...)
+		return newAnnounce(self, "cooldown", spellId, color or 1, ...)
+	end	
 	
 	function bossModPrototype:NewPreWarnAnnounce(spellId, time, color, icon, optionDefault, optionName)
 		return newAnnounce(self, "prewarn", spellId, color or 1, icon, optionDefault, optionName, nil, time)

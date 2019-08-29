@@ -14,14 +14,14 @@ mod:RegisterEvents(
 )
 
 -----Teleport-----
-local warnTeleportNow		= mod:NewAnnounce("WarningTeleportNow", 3, 46573)
-local warnTeleportSoon		= mod:NewAnnounce("WarningTeleportSoon", 1, 46573)
-local timerTeleport			= mod:NewTimer(600, "Teleport to Balcony", 46573)
-local timerTeleportBack		= mod:NewTimer(600, "Teleport to Raid", 46573)
-local soundTeleport			= mod:SoundInfoLong(46573)
+local warnTeleportNow		= mod:NewAnnounce("Teleport Now", 3, 46573, nil, "Show warning for Noth teleporting to and from the balcony")
+local warnTeleportSoon		= mod:NewAnnounce("Teleport in 10 seconds", 1, 46573, nil, "Show pre-warning for Noth teleporting to and from the balcony")
+local timerTeleport			= mod:NewTimer(600, "Teleport to Balcony", 46573, nil, "Show timer for Noth teleporting to the balcony")
+local timerTeleportBack		= mod:NewTimer(600, "Teleport to Raid", 46573, nil, "Show timer for Noth teleporting from the balcony")
+local soundTeleport			= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effect for Noth teleporting to and from the balcony")
 -----Curse-----
 local warnCurse				= mod:NewSpellAnnounce(29213, 2)
-local specWarnCurse			= mod:NewSpecialWarning("Curse of the Plaguebringer on you!", true, "Special warning when Curse of the Plaguebringer is applied to you", true)
+local specWarnCurse			= mod:NewSpecialWarningYou(29213)
 local soundCurse			= mod:SoundAirHorn(29213)
 -----MISC-----
 local berserkTimer			= mod:NewBerserkTimer(375)
