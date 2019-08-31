@@ -143,8 +143,8 @@ function mod:SPELL_CAST_START(args)
 		warnShadowBurstSoon:Schedule(timer-5)
 		timerShadowBurst:Start(timer)
 		soundShadowBurst:Schedule(timer)
-		self:ScheduleMethod(timer-10, "delayDShout")
-		self:ScheduleMethod(timer-15, "delayBBlow")
+		self:ScheduleMethod(timer-11, "delayDShout")
+		self:ScheduleMethod(timer-16, "delayBBlow")
 	end
 end
 

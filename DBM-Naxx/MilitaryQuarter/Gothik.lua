@@ -17,7 +17,7 @@ local warnRiderDown		= mod:NewAnnounce("WarningRiderDown", 4)
 local warnKnightDown	= mod:NewAnnounce("WarningKnightDown", 2)
 local warnPhase2		= mod:NewPhaseAnnounce(2, 4)
 
-local timerPhase2		= mod:NewTimer(270, "TimerPhase2", 27082) 
+local timerPhase2		= mod:NewTimer(150, "TimerPhase2", 27082) 
 local timerWave			= mod:NewTimer(20, "TimerWave", 27082)
 
 local wavesNormal = {
@@ -30,16 +30,6 @@ local wavesNormal = {
 	{2, L.Trainee, next = 20},
 	{1, L.Knight, 2, L.Trainee, next = 10},
 	{1, L.Rider, next = 10},
-	{2, L.Trainee, next = 5},
-	{1, L.Knight, next = 15},
-	{2, L.Trainee, 1, L.Rider, next = 10},
-	{2, L.Knight, next = 10},
-	{2, L.Trainee, next = 10},
-	{1, L.Rider, next = 5},
-	{1, L.Knight, next = 5},
-	{2, L.Trainee, next = 20},
-	{1, L.Rider, 1, L.Knight, 2, L.Trainee, next = 15},
-	{2, L.Trainee},
 }
 
 local wavesHeroic = {
@@ -53,14 +43,6 @@ local wavesHeroic = {
 	{3, L.Trainee, 2, L.Knight, next = 10},
 	{3, L.Trainee, next = 10},
 	{1, L.Rider, next = 5},
-	{3, L.Trainee, next = 15},
-	{1, L.Rider, next = 10},
-	{2, L.Knight, next = 10},
-	{1, L.Rider, next = 10},
-	{1, L.Rider, 3, L.Trainee, next = 5},
-	{1, L.Knight, 3, L.Trainee, next = 5},
-	{1, L.Rider, 3, L.Trainee, next = 20},
-	{1, L.Rider, 2, L.Knight, 3, L.Trainee},
 }
 
 

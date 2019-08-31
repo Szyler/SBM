@@ -29,16 +29,16 @@ local phase = 0
 
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(375-delay)
-	self:ScheduleMethod(0, "getBestKill")
+	mod:getBestKill()
 	phase = 0
 	self:BackInRoom()
 end
 
 function mod:Balcony()
 	local timer
-	if phase == 1 then timer = 70
-	elseif phase == 2 then timer = 70
-	elseif phase == 3 then timer = 30 
+	if phase == 1 then timer = 72
+	elseif phase == 2 then timer = 72
+	elseif phase == 3 then timer = 72 
 	else return	end
 	soundTeleport:Schedule(timer)
 	timerTeleportBack:Show(timer)
@@ -51,8 +51,8 @@ function mod:BackInRoom()
 	phase = phase + 1
 	local timer
 	if phase == 1 then timer = 60
-	elseif phase == 2 then timer = 45 
-	elseif phase == 3 then timer = 30 
+	elseif phase == 2 then timer = 43 
+	elseif phase == 3 then timer = 28 
 	else return end
 	soundTeleport:Schedule(timer)
 	timerTeleport:Show(timer)

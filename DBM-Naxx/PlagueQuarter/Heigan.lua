@@ -32,20 +32,20 @@ local berserkTimer				= mod:NewBerserkTimer(540)
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(540-delay)
 	mod:getBestKill()
-	mod:BackInRoom()
+	self:ScheduleMethod(2, "BackInRoom")
 end
 
 function mod:DancePhase()
-	timer = 47
+	timer = 43
 	timerDanceEnds:Show(timer)
 	warnDanceEndsSoon:Schedule(timer-10, 10)
 	warnDanceEnds:Schedule(timer)
 	soundDanceEnds:Schedule(timer)
-	self:ScheduleMethod(timer, "BackInRoom", 88)
+	self:ScheduleMethod(timer, "BackInRoom")
 end
 
 function mod:BackInRoom()
-	timer = 90
+	timer = 88
 	timerTeleport:Show(timer)
 	warnTeleportSoon:Schedule(timer-15, 15)
 	warnTeleportNow:Schedule(timer)
