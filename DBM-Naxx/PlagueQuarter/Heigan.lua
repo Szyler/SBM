@@ -36,7 +36,7 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:DancePhase()
-	timer = 43
+	timer = 90
 	timerDanceEnds:Show(timer)
 	warnDanceEndsSoon:Schedule(timer-10, 10)
 	warnDanceEnds:Schedule(timer)

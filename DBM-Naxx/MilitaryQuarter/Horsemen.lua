@@ -16,8 +16,9 @@ mod:RegisterEvents(
 
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
-
 local specWarnMarkOnPlayer	= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
+local berserkTimer			= mod:NewBerserkTimer(600)
+
 
 mod:AddBoolOption("HealthFrame", true)
 
@@ -31,7 +32,8 @@ mod:SetBossHealthInfo(
 local markCounter = 0
 
 function mod:OnCombatStart(delay)
-	self:ScheduleMethod(0, "getBestKill")
+	mod:getBestKill()
+	berserkTimer:Start()
 	markCounter = 0
 end
 
@@ -62,7 +64,8 @@ function mod:PLAYER_ALIVE()
 end
 
 ---------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
 ---------- SPEED KILL FUNCTION ----------

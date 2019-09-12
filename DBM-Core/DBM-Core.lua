@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1760 $"):sub(12, -3),
-	Version = "1.76",
-	DisplayVersion = "1.76", -- the string that is shown as version
-	ReleaseRevision = 1760 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1780 $"):sub(12, -3),
+	Version = "1.78",
+	DisplayVersion = "1.78", -- the string that is shown as version
+	ReleaseRevision = 1780 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
