@@ -222,3 +222,14 @@ v1.78 - 12/09/2019
 - Adjusted the localisation for Four Horsemen, Mograine should now be named Mograine in the addon.
 - Resolved (and tested) any remaining issues with the timers for Razuvious.
 ----------------------------------------------------------------------------------------------------
+v1.79 - 16/09/2019
+
+- Grobbulus: Added the 'info' sound warning for when new poison pools are dropped
+- Grobbulus: Added tracking for Vivifying Poison (this mechanic spawns his adds)
+- Grobbulus: Cleaned up default code for Poison Cloud & added a prewarn
+- Grobbulus: Added a CD timer & spell announce for Slime Spray
+- Grobbulus: Adjusted enrage down from 12 to 8 minutes
+- Grobbulus: Cleaned up code relating to Mutating Injection
+- Grobbulus: Added two special warnings for if you are standing in poison cloud (it casts two different spells, so needs two different warnings.
+- Grobbulus: Adjusted the automatic marking system, only the Raid Leader will be able to use this function now, this prevents assistants and raid leaders applying multiple raid markers (and thus ending up with none placed at all)
+----------------------------------------------------------------------------------------------------
