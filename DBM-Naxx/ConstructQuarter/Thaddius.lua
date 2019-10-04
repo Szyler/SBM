@@ -63,7 +63,7 @@ function mod:SPELL_CAST_START(args)
 end
 
 function mod:UNIT_AURA(elapsed)
-	if not phase2 or (GetTime() - lastShift) > 5 or (GetTime() - lastShift) < 3 then return end
+	if not phase2 then return end
 	local charge
 	local i = 1
 	while UnitDebuff("player", i) do

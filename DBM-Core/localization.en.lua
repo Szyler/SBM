@@ -127,6 +127,7 @@ DBM_CORE_AUTO_ANNOUNCE_TEXTS = {
 	cooldown = "%s CD", 
 	prewarn = "%s in %s",
 	phase = "Phase %d",
+	phasesoon = "Phase %d soon",
 }
 
 local prewarnOption = "Show pre-warning for |cff71d5ff|Hspell:%d|h%s|h|r"
@@ -139,7 +140,8 @@ DBM_CORE_AUTO_ANNOUNCE_OPTIONS = {
 	buffendnow = "Show warning end |cff71d5ff|Hspell:%d|h%s|h|r is ending now",
 	cooldown = "Show warning for |cff71d5ff|Hspell:%d|h%s|h|r cooldown",
 	prewarn = prewarnOption,
-	phase = "Announce Phase %d"
+	phase = "Announce Phase %d",
+	phasesoon = "Announce Phase %d soon"
 }
 
 

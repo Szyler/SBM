@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1790 $"):sub(12, -3),
-	Version = "1.79",
-	DisplayVersion = "1.79", -- the string that is shown as version
-	ReleaseRevision = 1790 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1800 $"):sub(12, -3),
+	Version = "1.80",
+	DisplayVersion = "1.80", -- the string that is shown as version
+	ReleaseRevision = 1800 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -3467,6 +3467,8 @@ do
 			end
 		elseif announceType == "phase" then
 			text = DBM_CORE_AUTO_ANNOUNCE_TEXTS[announceType]:format(spellId)
+		elseif announceType == "phasesoon" then
+			text = DBM_CORE_AUTO_ANNOUNCE_TEXTS[announceType]:format(spellId)
 		else
 			text = DBM_CORE_AUTO_ANNOUNCE_TEXTS[announceType]:format(spellName)
 		end
@@ -3525,6 +3527,10 @@ do
 	
 	function bossModPrototype:NewPhaseAnnounce(phase, color, icon, ...)
 		return newAnnounce(self, "phase", phase, color or 1, icon or "Interface\\Icons\\Spell_Nature_WispSplode", ...)
+	end
+	
+	function bossModPrototype:NewPhaseSoonAnnounce(phasesoon, color, icon, ...)
+		return newAnnounce(self, "phasesoon", phasesoon, color or 1, icon or "Interface\\Icons\\Spell_Nature_WispSplode", ...)
 	end
 end
 -------------------------
