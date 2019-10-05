@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1800 $"):sub(12, -3),
-	Version = "1.80",
-	DisplayVersion = "1.80", -- the string that is shown as version
-	ReleaseRevision = 1800 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1810 $"):sub(12, -3),
+	Version = "1.81",
+	DisplayVersion = "1.81", -- the string that is shown as version
+	ReleaseRevision = 1810 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -1107,7 +1107,7 @@ function showDiscordLink()
         button2 = "Cancel",
         
         OnShow = function(self, data)
-            self.editBox:SetText("discord.gg/NQkgFbT");
+            self.editBox:SetText("discord.gg/q8dduwd");
             self.editBox:SetFocus();
         end,
             

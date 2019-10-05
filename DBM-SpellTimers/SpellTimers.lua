@@ -39,7 +39,7 @@ local default_settings = {
 	show_portal = true,
 	spells = {
 		{ spell = 33206, bartext = default_bartext, cooldown = 180 },	-- Pain Suppression
-		{ spell = 45182, bartext = default_bartext, cooldown = 60 },	-- Cheat Death
+		{ spell = 45182, bartext = default_bartext, cooldown = 120 },	-- Cheat Death
 		{ spell = 29166, bartext = default_bartext, cooldown = 180 },	-- Innervate
 		{ spell = 20608, bartext = default_bartext, cooldown = 1800 },	-- Reincarnation
 		{ spell = 66233, bartext = default_bartext, cooldown = 120 },	-- Ardent Defender

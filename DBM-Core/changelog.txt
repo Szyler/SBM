@@ -223,7 +223,6 @@ v1.78 - 12/09/2019
 - Resolved (and tested) any remaining issues with the timers for Razuvious.
 ----------------------------------------------------------------------------------------------------
 v1.79 - 16/09/2019
-
 - Grobbulus: Added the 'info' sound warning for when new poison pools are dropped
 - Grobbulus: Added tracking for Vivifying Poison (this mechanic spawns his adds)
 - Grobbulus: Cleaned up default code for Poison Cloud & added a prewarn
@@ -232,4 +231,20 @@ v1.79 - 16/09/2019
 - Grobbulus: Cleaned up code relating to Mutating Injection
 - Grobbulus: Added two special warnings for if you are standing in poison cloud (it casts two different spells, so needs two different warnings.
 - Grobbulus: Adjusted the automatic marking system, only the Raid Leader will be able to use this function now, this prevents assistants and raid leaders applying multiple raid markers (and thus ending up with none placed at all)
+----------------------------------------------------------------------------------------------------
+v1.80 - 05/10/2019
+- Temporary update for Kel'Thuzad progression
+----------------------------------------------------------------------------------------------------
+v1.81 - 05/10/2019
+- Thaddius: Added a fix for Polarity.
+- Kel'Thuzad: Added tracking for Major Add waves during Phase 1
+- Kel'Thuzad: Added tracking for Shade of Naxxramas spawns during Phase 2
+- Kel'Thuzad: Added a timer to track the duration of Phase 1.
+- Kel'Thuzad: Added tracking to Constricting Chains.
+- Kel'Thuzad: Added tracking to Wail of Souls.
+- Kel'Thuzad: Added tracking for Disrupting Shout.
+- Kel'Thuzad: Added tracking for Void Zone.
+- Kel'Thuzad: Added tracking for movement in phase 2.
+- Kel'Thuzad: Added tracking for Harvest Soul.
+- Kel'Thuzad: Added boss summons tracking.
 ----------------------------------------------------------------------------------------------------

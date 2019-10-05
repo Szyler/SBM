@@ -7,17 +7,24 @@ mod:SetCreatureID(15990)
 mod:RegisterCombat("yell", L.Yell)
 mod:EnableModel()
 mod:RegisterEvents(
+	"SPELL_AURA_APPLIED",
+	"SPELL_AURA_APPLIED_DOSE",
 	"SPELL_CAST_SUCCESS",
 	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
 ----------PHASE 1----------
+-----MAJOR ADD WAVE-----
+local warnMajorWave		= mod:NewAnnounce("Major Wave Spawned", 2, 1003064, nil, "Show warning for Major Wave spawn")
+local warnMajorWaveSoon	= mod:NewAnnounce("Major Wave Spawns Soon", 3, 1003064, nil, "Show pre-warning for Major Wave spawn")
+local timerMajorWave	= mod:NewTimer(30, "Next Major Wave", 1003064, nil, "Show timer for Major Wave spawn")
+local soundMajorWave	= mod:SoundInfo(1003064, "Play the 'Info' sound effect for Major Wave Spawn")
 -----CONSTRICTING CHAINS-----
 local warnChains		= mod:NewTargetAnnounce(1003114, 2)
 local soundChains		= mod:SoundAlert(1003114)
 -----WAIL OF SOULS-----
 local warnWailSoul		= mod:NewTargetAnnounce(1003115, 2)
-local soundWailSoul		= mod:SoundAirHorn(1003115)
+local soundWailSoul		= mod:SoundAlert(1003115)
 -----PHASE 1 -> 2 TRANSITION-----
 local warnPhase2		= mod:NewPhaseAnnounce(2, 3)
 local warnPhase2Soon	= mod:NewPhaseSoonAnnounce(2, 3)
@@ -30,20 +37,31 @@ local warnNaxxShadeSoon	= mod:NewAnnounce("Shade of Naxx Spawns Soon", 3, 25228,
 local timerNaxxShade	= mod:NewTimer(60, "Next Shade of Naxx", 25228, nil, "Show timer for Shade of Naxxramas spawn")
 local soundNaxxShade	= mod:SoundAlarm(25228, "Play the 'Alarm' sound effect for Shade of Naxxramas Spawn")
 -----DISRUPTING SHOUT-----
-local warnShoutNow		= mod:NewSpellAnnounce(29107, 2)
+local warnShout			= mod:NewSpellAnnounce(29107, 2)
 local warnShoutSoon		= mod:NewSoonAnnounce(29107, 3)
 local timerShout		= mod:NewCDTimer(16, 29107)
 local soundShout		= mod:SoundInfo(29107)
+-----SEEING RED-----
+local warnSeeingRed		= mod:NewSpellAnnounce(1003255, 2)
+-----GASTRIC AFFLICTION-----
+local warnGastric		= mod:NewTargetAnnounce(1003086, 2)
+local specWarnGastric	= mod:NewSpecialWarningYou(1003086)
+local soundGastric		= mod:SoundAlert(1003086)
+-----VOID ZONE-----
+local specWarnVoid		= mod:NewSpecialWarningYou(28865)
 -----SAFETY DANCE-----
-local timerDance		= mod:NewTimer(22, "Safety Dance Starts", 46573, nil, "Show timer for the Safety Dance")
 local warnDanceSoon		= mod:NewAnnounce("Safety Dance Soon", 2, 46573, nil, "Show pre-warning for the Safetyy Dance")
 local warnDance			= mod:NewAnnounce("Dance Ends Now", 3, 46573, nil, "Show warning for the Safety Dance")
+local timerDance		= mod:NewTimer(22, "Safety Dance Starts", 46573, nil, "Show timer for the Safety Dance")
 local soundDance		= mod:SoundAlarm(46573, "Play the 'Alarm' sound effect at the start of the Safety Dance")
 -----HARVEST SOUL-----
+local warnHarvestSoon	= mod:NewSoonAnnounce(28679, 3)
+local warnHarvest		= mod:NewSpellAnnounce(28679, 2)
+local timerHarvest		= mod:NewNextTimer(15, 28679)
 -----MAEXXNA SPIDERLINGS-----
 local timerSpider		= mod:NewNextTimer(16, 43134)
 local soundSpider		= mod:SoundInfo(43134)
------NOTH'S SHADE-----
+-----NOTH'S SHADE (UNSCRIPTED)-----
 local warnNothShade		= mod:NewAnnounce("Noth's Shade Spawned", 2, 1003072, nil, "Show warning for Noth's Shade spawn")
 local timerNothShade	= mod:NewTimer(60, "Next Noth's Shade", 1003072, nil, "Show timer for Noth's Shade spawn")
 local soundNothShade	= mod:SoundInfo(1003072, "Play the 'Info' sound effect for Noth's Shade")
@@ -75,19 +93,17 @@ local constructBoss
 local heiganDanceStart
 ----------MISC----------
 local phase 			= 0
+local shadesSpawned		= 0
 local berserkTimer		= mod:NewBerserkTimer(1140)
 -----CODE START-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
+	mod:phaseOne()
 	berserkTimer:Start(1140)
-	-----PHASE 1 -> 2 TRANSITION-----
-	phase1timer = 213
+end
+
+mod:phaseOne()
 	phase = 1
-	warnPhase2:Schedule(phase1timer)
-	warnPhase2Soon:Schedule(phase1timer-10)
-	timerPhase2:Start(phase1timer)
-	soundPhase2:Schedule(phase1timer)
-	self:ScheduleMethod(phase1timer, "phaseTwo")
 	anub = 0
 	faerlina = 0
 	maexx = 0
@@ -106,52 +122,134 @@ function mod:OnCombatStart(delay)
 	militaryBoss = 0
 	constructBoss = 0
 	heiganDanceStart = 0
+	shadesSpawned = 0
+	mod:phase2Transition()
+end
+
+mod:timerMajorWaveRepeat()
+	timer = 30
+	warnMajorWave:Schedule(timer)
+	warnMajorWaveSoon:Schedule(timer-5)
+	timerMajorWave:Start(timer)
+	soundMajorWave:Schedule(timer)
+end
+
+mod:phase2Transition()
+	timer = 213
+	warnPhase2:Schedule(timer)
+	warnPhase2Soon:Schedule(timer-10)
+	timerPhase2:Start(timer)
+	soundPhase2:Schedule(timer)
+	self:ScheduleMethod(timer, "phaseTwo")
 end
 
 function mod:phaseTwo()
 	phase = 2	
-	-----FIRST  SHADE-----
-	shade1timer = 34
-	warnNaxxShade:Schedule(shade1timer)
-	warnNaxxShadeSoon:Schedule(shade1timer-10)
-	soundNaxxShade:Schedule(shade1timer)
-	-----SECOND SHADE-----
-	shade2timer = 94
-	warnNaxxShade:Schedule(shade2timer)
-	warnNaxxShadeSoon:Schedule(shade2timer-10)
-	soundNaxxShade:Schedule(shade2timer)
-	-----THIRD SHADE-----
-	shade3timer = 154
-	warnNaxxShade:Schedule(shade3timer)
-	warnNaxxShadeSoon:Schedule(shade3timer-10)
-	soundNaxxShade:Schedule(shade3timer)
-	-----FOURTH SHADE-----
-	shade4timer = 214
-	warnNaxxShade:Schedule(shade4timer)
-	warnNaxxShadeSoon:Schedule(shade4timer-10)
-	soundNaxxShade:Schedule(shade4timer)
-	-----SHADE TIMERS-----
-	timerNaxxShade:Start(shade1timer)
-	self:ScheduleMethod(shade1timer, "timerNaxxShadeRepeat")
-	self:ScheduleMethod(shade2timer, "timerNaxxShadeRepeat")
-	self:ScheduleMethod(shade3timer, "timerNaxxShadeRepeat")
-	-----DEBUG-----
-	if phase == 2 then
-		local shade1 = UnitGUID("boss1")
-		local shade2 = UnitGUID("boss2")
-		local shade3 = UnitGUID("boss3")
-		local shade4 = UnitGUID("boss4")
-	end
+	-----SHADE SPAWNS-----
+	mod:timerNaxxShadeRepeat()
+	self:ScheduleMethod(timer, "timerNaxxShadeRepeat")
+	self:ScheduleMethod(timer+60, "timerNaxxShadeRepeat")
+	self:ScheduleMethod(timer+120, "timerNaxxShadeRepeat")
+	-----HEALTH CHECK DEBUGS-----
+	local shade1 = UnitGUID("boss1")
+	local shade2 = UnitGUID("boss2")
+	local shade3 = UnitGUID("boss3")
+	local shade4 = UnitGUID("boss4")
+	mod:checkHealth()
 end
 
 function mod:timerNaxxShadeRepeat()
-	timerNaxxShade:Start(60)
+	if shadesSpawned == 0 then
+		timer = 34
+		warnNaxxShade:Schedule(timer)
+		warnNaxxShadeSoon:Schedule(timer-10)
+		soundNaxxShade:Schedule(timer)
+		timerNaxxShade:Start(timer)
+		shadesSpawned == shadesSpawned+1
+	else
+		timer = 60
+		warnNaxxShade:Schedule(timer)
+		warnNaxxShadeSoon:Schedule(timer-10)
+		soundNaxxShade:Schedule(timer)
+		timerNaxxShade:Start(timer)
+		shadesSpawned == shadesSpawned+1
+	end
+end
+
+function mod:SPELL_AURA_APPLIED(args)
+	-----CONSTRICTING CHAINS-----
+	if args:IsSpellID(1003114) then
+		warnChains:Show(args.destName)
+		if args.destName == UnitName("player") then
+			soundChains:Play()
+		end
+	end
+	-----HARVEST SOUL-----
+	if args:IsSpellID(28679) then 
+		if args:IsPlayer() then
+			timer = 15
+			warnHarvestSoon:Schedule(timer-5)
+			warnHarvest:Schedule(timer)
+			timerHarvest:Start(timer)
+		end
+	end
+	-----SEEING RED-----
+	if args:IsSpellID(1003255) then
+		warnSeeingRed:Show()
+	end
+	-----GASTRIC AFFLICTION-----
+	if args:IsSpellID(1003086) then
+		warnGastric:Show(args.destName)
+		if args.destName == UnitName("player") then
+			specWarnGastric:Show()
+			soundGastric:Play()
+		end
+	end
+	-----VOID ZONE-----
+	if args:IsSpellID(28865) then
+		if args.destName == UnitName("player") then
+			specWarnVoid:Show()
+		end
+	end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	-----HARVEST SOUL-----
+	if args:IsSpellID(28679) then 
+		if args:IsPlayer() then
+			timer = 15
+			warnHarvestSoon:Schedule(timer-5)
+			warnHarvest:Schedule(timer)
+			timerHarvest:Start(timer)
+		end
+	end
+	-----GASTRIC AFFLICTION-----
+	if args:IsSpellID(1003086) then
+		warnGastric:Show(args.destName)
+		if args.destName == UnitName("player") then
+			specWarnGastric:Show()
+			soundGastric:Play()
+		end
+	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
+	----------SPELL TRACKING----------
+	-----DISRUPTING SHOUT-----
 	if args:IsSpellID(29107) then
 		timer = 16
-		warnShoutNow:Show()
+		warnShout:Show()
+		warnShoutSoon:Schedule(timer-5)
+		timerShout:Start(timer)
+		soundShout:Play()
+	end
+	-----WAIL OF SOULS-----
+	if args:IsSpellID(1003115) then
+		warnWailSoul:Show()
+		soundWailSoul:Play()
+	end
+	if args:IsSpellID(29107) then
+		warnShout:Show()
 		warnShoutSoon:Schedule(timer-5)
 		timerShout:Start(timer)
 		soundShout:Play()
@@ -217,7 +315,6 @@ end
 
 function mod:UNIT_HEALTH(uId)
 	if phase == 2 then
-	mod:checkHealth()
 		-----SPIDER WING-----
 		if spiderBoss == 1 then
 			spiderHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
@@ -262,6 +359,7 @@ function mod:UNIT_HEALTH(uId)
 end
 
 function mod:checkHealth()
+	self:ScheduleMethod(1, checkHealth)
 	-----SPIDER WING-----
 	if spiderHealth < 67 then
 		anub = spiderBoss
@@ -271,6 +369,10 @@ function mod:checkHealth()
 	elseif spiderHealth > 34 and spiderHealth < 1 then
 		faerlina = 0
 		maexx = spiderBoss
+		timer = 8
+		timerSpider:Start(timer)
+		soundSpider:Schedule(timer)
+		self:ScheduleMethod(timer, "spiderTimerRepeat)
 	elseif spiderHealth == 0 then
 		maexx = 0
 	end
@@ -282,7 +384,7 @@ function mod:checkHealth()
 		heigan = plagueBoss
 		if heiganDanceStart == 0 then
 			heiganDanceStart = 1
-			timer = 22
+			timer = 21
 			timerDance:Start(timer)
 			warnDance:Schedule(timer)
 			warnDanceSoon:Schedule(timer-5)
@@ -300,9 +402,16 @@ function mod:checkHealth()
 	elseif militaryHealth > 67 and militaryHealth < 34 then
 		razuv = 0 
 		gothik = militaryBoss
+		timer = 15
+		warnHarvestSoon:Schedule(timer-5)
+		warnHarvest:Schedule(timer)
+		timerHarvest:Start(timer)
 	elseif militaryHealth > 34 and militaryHealth < 1 then
 		gothik = 0
 		horse = militaryBoss
+		warnHarvestSoon:Cancel()
+		warnHarvest:Cancel()
+		timerHarvest:Stop()
 	elseif militaryHealth == 0 then
 		horse = 0
 	end
@@ -320,6 +429,16 @@ function mod:checkHealth()
 		thadd = constructBoss
 	elseif constructHealth == 0 then
 		thadd = 0
+	end
+end
+
+mod:spiderTimerRepeat()
+	if maexx == 0 then
+	else
+		timer = 16
+		timerSpider:Start(timer)
+		soundSpider:Schedule(timer)
+		self:ScheduleMethod(timer, "spiderTimerRepeat")
 	end
 end
 
