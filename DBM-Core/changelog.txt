@@ -247,4 +247,7 @@ v1.81 - 05/10/2019
 - Kel'Thuzad: Added tracking for movement in phase 2.
 - Kel'Thuzad: Added tracking for Harvest Soul.
 - Kel'Thuzad: Added boss summons tracking.
+- SpellTimers: Changed Cheat Death to 120 seconds.
+- Core: Fixed the link to correctly link to the TBM discord.
+
 ----------------------------------------------------------------------------------------------------
