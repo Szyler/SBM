@@ -102,7 +102,7 @@ function mod:OnCombatStart(delay)
 	berserkTimer:Start(1140)
 end
 
-mod:phaseOne()
+function mod:phaseOne()
 	phase = 1
 	anub = 0
 	faerlina = 0
@@ -126,7 +126,7 @@ mod:phaseOne()
 	mod:phase2Transition()
 end
 
-mod:timerMajorWaveRepeat()
+function mod:timerMajorWaveRepeat()
 	timer = 30
 	warnMajorWave:Schedule(timer)
 	warnMajorWaveSoon:Schedule(timer-5)
@@ -134,7 +134,7 @@ mod:timerMajorWaveRepeat()
 	soundMajorWave:Schedule(timer)
 end
 
-mod:phase2Transition()
+function mod:phase2Transition()
 	timer = 213
 	warnPhase2:Schedule(timer)
 	warnPhase2Soon:Schedule(timer-10)
@@ -432,7 +432,7 @@ function mod:checkHealth()
 	end
 end
 
-mod:spiderTimerRepeat()
+function mod:spiderTimerRepeat()
 	if maexx == 0 then
 	else
 		timer = 16
