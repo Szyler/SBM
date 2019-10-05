@@ -165,14 +165,14 @@ function mod:timerNaxxShadeRepeat()
 		warnNaxxShadeSoon:Schedule(timer-10)
 		soundNaxxShade:Schedule(timer)
 		timerNaxxShade:Start(timer)
-		shadesSpawned == shadesSpawned+1
+		shadesSpawned = shadesSpawned+1
 	else
 		timer = 60
 		warnNaxxShade:Schedule(timer)
 		warnNaxxShadeSoon:Schedule(timer-10)
 		soundNaxxShade:Schedule(timer)
 		timerNaxxShade:Start(timer)
-		shadesSpawned == shadesSpawned+1
+		shadesSpawned = shadesSpawned+1
 	end
 end
 
@@ -372,7 +372,7 @@ function mod:checkHealth()
 		timer = 8
 		timerSpider:Start(timer)
 		soundSpider:Schedule(timer)
-		self:ScheduleMethod(timer, "spiderTimerRepeat)
+		self:ScheduleMethod(timer, "spiderTimerRepeat")
 	elseif spiderHealth == 0 then
 		maexx = 0
 	end
