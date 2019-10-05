@@ -637,7 +637,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Zorgos", "Zorgosone", "Skray", "Namelessness", "Junior", "Fug", "Dang", "Turncoat", "Smjte", "Rookie", "Arwya", "Alternate", "Haddeqi", "Monster", "Mormentance"}
+			local o = {"Sky", "Zorgosone", "Skray", "Namelessness", "Junior", "Turncoat", "Alternate", "Haddeqi"}
 			local tankwhitelist = {"Dreadsmell"}
 			local canRunSounds
 			
