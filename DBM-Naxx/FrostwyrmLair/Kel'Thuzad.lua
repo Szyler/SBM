@@ -28,7 +28,7 @@ local soundWailSoul		= mod:SoundAlert(1003115)
 -----PHASE 1 -> 2 TRANSITION-----
 local warnPhase2		= mod:NewPhaseAnnounce(2, 3)
 local warnPhase2Soon	= mod:NewPhaseSoonAnnounce(2, 3)
-local timerPhase2		= mod:NewTimer(213, "Phase Two", 29485, nil, "Show timer for Phase Two")
+local timerPhase2		= mod:NewTimer(153, "Phase Two", 29485, nil, "Show timer for Phase Two")
 local soundPhase2		= mod:SoundInfoLong(29485, "Play the 'Long Info' sound effect for Phase Two")
 ----------PHASE 2----------
 -----SHADE OF NAXXRAMAS-----
@@ -141,7 +141,7 @@ function mod:timerMajorWaveRepeat()
 end
 
 function mod:phase2Transition()
-	timer = 213
+	timer = 153
 	warnPhase2:Schedule(timer)
 	warnPhase2Soon:Schedule(timer-10)
 	timerPhase2:Start(timer)
