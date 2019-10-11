@@ -124,6 +124,12 @@ function mod:phaseOne()
 	heiganDanceStart = 0
 	shadesSpawned = 0
 	mod:phase2Transition()
+	mod:timerMajorWaveRepeat()
+	self:ScheduleMethod(30, "timerMajorWaveRepeat")
+	self:ScheduleMethod(60, "timerMajorWaveRepeat")
+	self:ScheduleMethod(90, "timerMajorWaveRepeat")
+	self:ScheduleMethod(120, "timerMajorWaveRepeat")
+	self:ScheduleMethod(150, "timerMajorWaveRepeat")
 end
 
 function mod:timerMajorWaveRepeat()
@@ -359,7 +365,9 @@ function mod:UNIT_HEALTH(uId)
 end
 
 function mod:checkHealth()
-	self:ScheduleMethod(1, checkHealth)
+	if phase == 2 then
+		self:ScheduleMethod(1, checkHealth)
+	end
 	-----SPIDER WING-----
 	if spiderHealth < 67 then
 		anub = spiderBoss
