@@ -249,5 +249,10 @@ v1.81 - 05/10/2019
 - Kel'Thuzad: Added boss summons tracking.
 - SpellTimers: Changed Cheat Death to 120 seconds.
 - Core: Fixed the link to correctly link to the TBM discord.
-
+----------------------------------------------------------------------------------------------------
+v1.82 - 11/10/2019
+- Add configuration for the Method guild on LS for DBF.
+- Add default configuration for Laughing Skull and Season 4 for DBF.
+- Change Phase 1 timer on Kel'Thuzad from 3:33 to 2:33 (in line with changes made to the fight)
+- Fix for add spawn timers for KT phase 1
 ----------------------------------------------------------------------------------------------------
