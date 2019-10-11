@@ -161,7 +161,7 @@ function DBF_Settings_Menuofdoom()
 					ShowOfficer = true;
 					amnt = 1;
 				end			
-			elseif(myguildName == "Horde Guards") then
+			elseif(myguildName == "HordeGuards") then
 				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
 					ShowOfficer = true;
 					amnt = 1;
@@ -174,7 +174,32 @@ function DBF_Settings_Menuofdoom()
 					end
 				end
 			end	
-		end				
+		elseif(REALM_NAME == "Laughing Skull - High-Risk") then
+			if(myguildName == "Method") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
+					ShowOfficer = true;
+					amnt = 1;
+				end
+			elseif(ShowOfficer == false) then
+				if(myguildName) then
+					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+						ShowOfficer = true;
+						amnt = 1;
+					end
+				end
+			end	
+		else
+		-----DEBUG-----
+			if(ShowOfficer == false) then
+				if(myguildName) then
+					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+						ShowOfficer = true;
+						amnt = 1;
+					end
+				end
+			end	
+		end
+	
 			 
 		if(ShowTOXICITYOfficer) then
 			info = {};
