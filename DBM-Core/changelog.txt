@@ -256,3 +256,14 @@ v1.82 - 11/10/2019
 - Change Phase 1 timer on Kel'Thuzad from 3:33 to 2:33 (in line with changes made to the fight)
 - Fix for add spawn timers for KT phase 1
 ----------------------------------------------------------------------------------------------------
+v1.83 - 20/10/2019
+- Kel'Thuzad: Added a range check for Phase 3
+- Kel'Thuzad: Added tracking for Phase 3
+- Kel'Thuzad: Added tracking for Frost Blast
+- Kel'Thuzad: Added tracking for Detonate Mana
+- Kel'Thuzad: Added tracking for Chains of Kel'Thuzad
+- Kel'Thuzad: Added tracking for Death and Decay
+- Kel'Thuzad: Disabled a major function, as it wasn't working anyway
+- Disabled wave timers for add waves on Gothik (I need to see how the new fight works before I can rescript this)
+- Heigan: Fixed dance timers
+----------------------------------------------------------------------------------------------------

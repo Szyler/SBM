@@ -76,14 +76,14 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:NextWave()
-	wave = wave + 1
+	--[[wave = wave + 1
 	warnWaveNow:Show(wave, getWaveString(wave))
 	local next = waves[wave].next
 	if next then
 		timerWave:Start(next, wave + 1)
 		warnWaveSoon:Schedule(next - 3, wave + 1, getWaveString(wave + 1))
 		self:ScheduleMethod(next, "NextWave")
-	end
+	end]]--
 end
 
 function mod:UNIT_DIED(args)

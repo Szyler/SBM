@@ -30,6 +30,11 @@ local warnPhase2		= mod:NewPhaseAnnounce(2, 3)
 local warnPhase2Soon	= mod:NewPhaseSoonAnnounce(2, 3)
 local timerPhase2		= mod:NewTimer(153, "Phase Two", 29485, nil, "Show timer for Phase Two")
 local soundPhase2		= mod:SoundInfoLong(29485, "Play the 'Long Info' sound effect for Phase Two")
+-----PHASE 2 -> 3 TRANSITION-----
+local warnPhase3		= mod:NewPhaseAnnounce(3, 3)
+local warnPhase3Soon	= mod:NewPhaseSoonAnnounce(3, 3)
+local timerPhase3		= mod:NewTimer(378, "Phase Three", 29485, nil, "Show timer for Phase Three")
+local soundPhase3		= mod:SoundInfoLong(29485, "Play the 'Long Info' sound effect for Phase Three")
 ----------PHASE 2----------
 -----SHADE OF NAXXRAMAS-----
 local warnNaxxShade		= mod:NewAnnounce("Shade of Naxx Spawned", 2, 25228, nil, "Show warning for Shade of Naxxramas spawn")
@@ -65,6 +70,22 @@ local soundSpider		= mod:SoundInfo(43134)
 local warnNothShade		= mod:NewAnnounce("Noth's Shade Spawned", 2, 1003072, nil, "Show warning for Noth's Shade spawn")
 local timerNothShade	= mod:NewTimer(60, "Next Noth's Shade", 1003072, nil, "Show timer for Noth's Shade spawn")
 local soundNothShade	= mod:SoundInfo(1003072, "Play the 'Info' sound effect for Noth's Shade")
+-----FROST BLAST-----
+local warnBlast			= mod:NewSpellAnnounce(29879, 2)
+local timerBlast		= mod:NewCDTimer(16, 29879)
+local soundBlast		= mod:SoundInfo(29879)
+-----DETONATE MANA-----
+local warnMana			= mod:NewSpellAnnounce(27819, 2)
+local timerMana			= mod:NewCDTimer(30, 27819)
+local soundMana			= mod:SoundAlert(27819)
+-----DEATH AND DECAY-----
+local specWarnDnD		= mod:NewSpecialWarningYou(1003113)
+-----CHAINS OF KEL'THUZAD-----
+local warnChains		= mod:NewSpellAnnounce(28410, 2)
+local timerChains		= mod:NewCDTimer(16, 28410)
+local soundChains		= mod:SoundInfo(28410)
+-----RANGE CHECK-----
+mod:AddBoolOption("ShowRange", true)
 ----------BOSS TRACKING----------
 local anub
 local faerlina
@@ -128,8 +149,6 @@ function mod:phaseOne()
 	self:ScheduleMethod(30, "timerMajorWaveRepeat")
 	self:ScheduleMethod(60, "timerMajorWaveRepeat")
 	self:ScheduleMethod(90, "timerMajorWaveRepeat")
-	self:ScheduleMethod(120, "timerMajorWaveRepeat")
-	self:ScheduleMethod(150, "timerMajorWaveRepeat")
 end
 
 function mod:timerMajorWaveRepeat()
@@ -153,6 +172,8 @@ function mod:phaseTwo()
 	phase = 2	
 	-----SHADE SPAWNS-----
 	mod:timerNaxxShadeRepeat()
+	mod:phase3Transition()
+	timer = 34
 	self:ScheduleMethod(timer, "timerNaxxShadeRepeat")
 	self:ScheduleMethod(timer+60, "timerNaxxShadeRepeat")
 	self:ScheduleMethod(timer+120, "timerNaxxShadeRepeat")
@@ -162,6 +183,25 @@ function mod:phaseTwo()
 	local shade3 = UnitGUID("boss3")
 	local shade4 = UnitGUID("boss4")
 	mod:checkHealth()
+end
+
+function mod:phase3Transition()
+	timer = 378
+	warnPhase3:Schedule(timer)
+	warnPhase3Soon:Schedule(timer-10)
+	timerPhase3:Start(timer)
+	soundPhase3:Schedule(timer)
+	self:ScheduleMethod(timer, "phaseThree")
+end
+
+function mod:phaseThree()
+	phase = 3
+	if self.Options.ShowRange then
+		mod:RangeToggle()
+	end
+	timerBlast:Start(45)
+	timerMana:Start(30)
+	timerChains:Start(90)
 end
 
 function mod:timerNaxxShadeRepeat()
@@ -217,6 +257,12 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnVoid:Show()
 		end
 	end
+	-----DEATH AND DECAY-----
+	if args:IsSpellID(1003113) then
+		if args.destName == UnitName("player") then
+			specWarnDnD:Show()
+		end
+	end
 end
 
 function mod:SPELL_AURA_APPLIED_DOSE(args)
@@ -237,6 +283,18 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			soundGastric:Play()
 		end
 	end
+	-----VOID ZONE-----
+	if args:IsSpellID(28865) then
+		if args.destName == UnitName("player") then
+			specWarnVoid:Show()
+		end
+	end
+	-----DEATH AND DECAY-----
+	if args:IsSpellID(1003113) then
+		if args.destName == UnitName("player") then
+			specWarnDnD:Show()
+		end
+	end
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -254,12 +312,25 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnWailSoul:Show()
 		soundWailSoul:Play()
 	end
-	if args:IsSpellID(29107) then
-		warnShout:Show()
-		warnShoutSoon:Schedule(timer-5)
-		timerShout:Start(timer)
-		soundShout:Play()
+	-----FROST BLAST-----
+	if args:IsSpellID(29879) then 
+		warnBlast:Show()
+		soundBlast:Play()
+		timerBlast:Start(45)
+	end 
+	-----MANA DETONATION-----
+	if args:IsSpellID(27819) then
+		warnMana:Show()
+		soundMana:Play()
+		timerMana:Start(30)
 	end
+	-----CHAINS-----
+	if args:IsSpellID(28410) then
+		warnChains:Show()
+		soundChains:Play()
+		timerChains:Start(90)
+	end
+	--[[
 	----------BOSS CHECKING TOOLS----------
 	-----ANUB-----
 	if args:IsSpellID(28783) and args:sourceGUID(shade1) and spiderBoss == 0 then
@@ -317,9 +388,11 @@ function mod:SPELL_CAST_SUCCESS(args)
 		constructBoss = 4
 		patch = 4
 	end
+	]]--
 end
 
 function mod:UNIT_HEALTH(uId)
+	--[[
 	if phase == 2 then
 		-----SPIDER WING-----
 		if spiderBoss == 1 then
@@ -362,9 +435,11 @@ function mod:UNIT_HEALTH(uId)
 			constructHealth = math.max(0, UnitHealth("boss4")) / math.max(1, UnitHealthMax("boss4")) * 100;
 		end
 	end
+	]]--
 end
 
 function mod:checkHealth()
+	--[[
 	if phase == 2 then
 		self:ScheduleMethod(1, checkHealth)
 	end
@@ -438,6 +513,7 @@ function mod:checkHealth()
 	elseif constructHealth == 0 then
 		thadd = 0
 	end
+	]]--
 end
 
 function mod:spiderTimerRepeat()
@@ -450,10 +526,21 @@ function mod:spiderTimerRepeat()
 	end
 end
 
+function mod:RangeToggle(show)
+	if show then
+		DBM.RangeCheck:Show(10)
+	else
+		DBM.RangeCheck:Hide()
+	end
+end
+
 ---------- TBM FUNCTIONS ----------
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 	phase = 0
+	if self.Options.ShowRange then
+		self:RangeToggle(false)
+	end
 end
 
 function mod:PLAYER_ALIVE()
