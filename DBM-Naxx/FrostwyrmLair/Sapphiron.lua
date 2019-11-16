@@ -3,11 +3,8 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2248 $"):sub(12, -3))
 mod:SetCreatureID(15989)
-
 mod:RegisterCombat("combat")
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"CHAT_MSG_MONSTER_EMOTE",
@@ -16,24 +13,24 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
+-----DRAIN LIFE-----
 local warnDrainLifeNow	= mod:NewSpellAnnounce(28542, 2)
 local warnDrainLifeSoon	= mod:NewSoonAnnounce(28542, 1)
+local timerDrainLife	= mod:NewCDTimer(22, 28542)
+-----DEEP BREATH-----
 local warnAirPhaseSoon	= mod:NewAnnounce("WarningAirPhaseSoon", 3, "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local warnAirPhaseNow	= mod:NewAnnounce("WarningAirPhaseNow", 4, "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local warnLanded		= mod:NewAnnounce("WarningLanded", 4, "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendBurrow.blp")
-
 local warnDeepBreath	= mod:NewSpecialWarning("WarningDeepBreath")
-
-mod:AddBoolOption("WarningIceblock", true, "announce")
-
-local timerDrainLife	= mod:NewCDTimer(22, 28542)
-local timerAirPhase		= mod:NewTimer(66, "TimerAir", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local timerLanding		= mod:NewTimer(28.5, "TimerLanding", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendBurrow.blp")
+local timerAirPhase		= mod:NewTimer(66, "TimerAir", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local timerIceBlast		= mod:NewTimer(9.3, "TimerIceBlast", 15876)
-
+mod:AddBoolOption("WarningIceblock", true, "announce")
+-----MISC-----
 local noTargetTime = 0
 local isFlying = false
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 	noTargetTime = 0
@@ -111,6 +108,7 @@ mod:RegisterOnUpdateHandler(function(self, elapsed)
 		end
 end, 0.2)
 
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -121,8 +119,9 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

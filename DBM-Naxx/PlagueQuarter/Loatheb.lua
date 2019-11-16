@@ -3,11 +3,8 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2568 $"):sub(12, -3))
 mod:SetCreatureID(16011)
-
 mod:RegisterCombat("combat")
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
@@ -17,20 +14,20 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
------Spores-----
+-----SPORES-----
 local warnSporeNow					= mod:NewSpellAnnounce(29234, 3)
 local warnSporeSoon					= mod:NewSoonAnnounce(29234, 2)
 local timerSpore					= mod:NewNextTimer(18, 29234)
 local soundSpore					= mod:SoundInfo(29234)
 local specWarnCloudOfBlight			= mod:NewSpecialWarningMove(79008)
------Doom-----
+-----IMPENDING DOOM-----
 local warnDoomNow					= mod:NewSpellAnnounce(29204, 3)
 local timerDoom						= mod:NewNextTimer(180, 29204)
------Auras-----
+-----HEALING AURA-----
 local warnHealSoon					= mod:NewAnnounce("WarningHealSoon", 4, 48071)
 local warnHealNow					= mod:NewAnnounce("WarningHealNow", 1, 48071, false)
 local timerAura						= mod:NewBuffActiveTimer(17, 55593)
------Soft Enrage-----
+-----SOFT ENRAGE-----
 local warnSoftEnrageSoon			= mod:NewSpellAnnounce(79009, 3)
 local warnSoftEnrageNow				= mod:NewSoonAnnounce(79009, 2)
 local soundSoftEnrage				= mod:SoundInfoLong(79009)
@@ -41,6 +38,7 @@ mod:AddBoolOption("SporeDamageAlert", false)
 local doomCounter	= 0
 local sporeTimer	= 18
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill();
 	phase = 1
@@ -126,3 +124,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----

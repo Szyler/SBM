@@ -3,11 +3,8 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2943 $"):sub(12, -3))
 mod:SetCreatureID(15952)
-
 mod:RegisterCombat("combat")
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_SUCCESS",
@@ -15,6 +12,7 @@ mod:RegisterEvents(
 	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"UNIT_HEALTH"
 )
+
 -----WEB WRAP-----
 local warnWebWrap			= mod:NewTargetAnnounce(28622, 2)
 local timerWebWrapInitial	= mod:NewNextTimer(20, 28622)
@@ -36,6 +34,7 @@ local soundSoftEnrage		= mod:SoundInfoLong(54123)
 local maexxnaHealth
 local phase
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	warnWebSpraySoon:Schedule(35 - delay)
@@ -103,3 +102,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----

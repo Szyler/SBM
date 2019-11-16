@@ -3,11 +3,8 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2869 $"):sub(12, -3))
 mod:SetCreatureID(16028)
-
 mod:RegisterCombat("yell", L.yell1, L.yell2)
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_DAMAGE",
@@ -16,13 +13,14 @@ mod:RegisterEvents(
 )
 
 mod:AddBoolOption("WarningHateful", false, "announce")
------Gastric Affliction-----
+-----GASTRIC AFFLICTION-----
 local specWarnGastric		= mod:NewSpecialWarningYou(1003086)
 local soundGastric			= mod:SoundAlert(1003086)
 -----MISC-----
 local enrageTimer	= mod:NewBerserkTimer(360)
 local timerAchieve	= mod:NewAchievementTimer(180, 1857, "TimerSpeedKill")
 
+-----BOSS FUNCTIONS-----
 local function announceStrike(target, damage)
 	SendChatMessage(L.HatefulStrike:format(target, damage), "RAID")
 end
@@ -65,9 +63,20 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
 local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
-function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

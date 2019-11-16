@@ -3,7 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2574 $"):sub(12, -3))
 mod:SetCreatureID(15990)
---mod:SetUsedIcons(1, 2, 3, 4, 5, 6, 7, 8)
+mod:SetUsedIcons(8)
 mod:RegisterCombat("yell", L.Yell)
 mod:EnableModel()
 mod:RegisterEvents(
@@ -13,6 +13,7 @@ mod:RegisterEvents(
 	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
+
 ----------PHASE 1----------
 -----MAJOR ADD WAVE-----
 local warnMajorWave		= mod:NewAnnounce("Major Wave Spawned", 2, 1003064, nil, "Show warning for Major Wave spawn")
@@ -23,8 +24,7 @@ local soundMajorWave	= mod:SoundInfo(1003064, "Play the 'Info' sound effect for 
 local warnChains		= mod:NewTargetAnnounce(1003114, 2)
 local soundChains		= mod:SoundAlert(1003114)
 -----WAIL OF SOULS-----
-local warnWailSoul		= mod:NewTargetAnnounce(1003115, 2)
-local soundWailSoul		= mod:SoundAlert(1003115)
+local warnWailSoul		= mod:NewSpellAnnounce(1003115, 2)
 -----PHASE 1 -> 2 TRANSITION-----
 local warnPhase2		= mod:NewPhaseAnnounce(2, 3)
 local warnPhase2Soon	= mod:NewPhaseSoonAnnounce(2, 3)
@@ -113,6 +113,7 @@ local constructBoss
 
 local heiganDanceStart
 ----------MISC----------
+local notRealRazuv		= 0
 local phase 			= 0
 local shadesSpawned		= 0
 local berserkTimer		= mod:NewBerserkTimer(1140)
@@ -121,6 +122,7 @@ function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	mod:phaseOne()
 	berserkTimer:Start(1140)
+	notRealRazuv = 1
 end
 
 function mod:phaseOne()
@@ -301,16 +303,17 @@ function mod:SPELL_CAST_SUCCESS(args)
 	----------SPELL TRACKING----------
 	-----DISRUPTING SHOUT-----
 	if args:IsSpellID(29107) then
-		timer = 16
-		warnShout:Show()
-		warnShoutSoon:Schedule(timer-5)
-		timerShout:Start(timer)
-		soundShout:Play()
+		if notRealRazuv == 1 then
+			timer = 16
+			warnShout:Show()
+			warnShoutSoon:Schedule(timer-5)
+			timerShout:Start(timer)
+			soundShout:Play()
+		end
 	end
 	-----WAIL OF SOULS-----
 	if args:IsSpellID(1003115) then
 		warnWailSoul:Show()
-		soundWailSoul:Play()
 	end
 	-----FROST BLAST-----
 	if args:IsSpellID(29879) then 
@@ -534,13 +537,9 @@ function mod:RangeToggle(show)
 	end
 end
 
----------- TBM FUNCTIONS ----------
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
-	phase = 0
-	if self.Options.ShowRange then
-		self:RangeToggle(false)
-	end
 end
 
 function mod:PLAYER_ALIVE()
@@ -548,10 +547,10 @@ function mod:PLAYER_ALIVE()
 		self:Stop();
 	end
 end
----------- SPEED KILL FUNCTION ----------
+
 local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
-function mod:getBestKill()	
-local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

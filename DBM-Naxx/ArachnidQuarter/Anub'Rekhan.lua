@@ -3,17 +3,15 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2943 $"):sub(12, -3))
 mod:SetCreatureID(15956)
-
 mod:RegisterCombat("combat")
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_CAST_START",
 	"PLAYER_ALIVE"
 )
------Locust Swarm-----
+
+-----LOCUST SWARM-----
 local prewarnLocustInitial	= mod:NewCooldownAnnounce(28785, 2)
 local prewarnLocust			= mod:NewSoonAnnounce(28785, 2)
 local warnLocust			= mod:NewCastAnnounce(28785, 3)
@@ -22,17 +20,16 @@ local timerLocustInitial	= mod:NewCDTimer(90, 28785)
 local timerLocustRemaining	= mod:NewBuffActiveTimer(15, 28785)
 local specWarnLocust		= mod:NewSpecialWarningSpell(28785)
 local soundLocust			= mod:SoundRunAway(28785)
------Dark Gaze-----
+-----DARK GAZE-----
 local specWarnDarkGaze		= mod:NewSpecialWarningYou(1003011)
 local soundDarkGaze			= mod:SoundAlarmLong(1003011)
 -----IMPALE------
-local specWarnImpale		= mod:NewSpecialWarningYou(28783)
-local soundImpale			= mod:SoundAirHorn(28783)
------Misc-----
+local warnImpale			= mod:NewTargetAnnounce(28783, 2)
+local soundImpale			= mod:SoundInfo(28783)
+-----MISC-----
 local berserkTimer			= mod:NewBerserkTimer(600)
-local target			 	= UnitName(15956 .. "target")
 
------Boss Functions-----
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start()
 	mod:getBestKill()
@@ -66,11 +63,20 @@ function mod:SPELL_CAST_START(args)
 		mod:locustRepeat()
 		specWarnLocust:Show(18)
 		timerLocustRemaining:Show(18)
-	elseif args:IsSpellID(28783) then
-		if target then 
-			timer = 5
-			specWarnImpale:Show(timer)
-			soundImpale:Play()
+	elseif args:IsSpellID(1003010) then
+		local target = mod:GetBossTarget(15956)
+		if target then
+			warnImpale:Show(target)
+			if target == UnitName("player") then 
+				soundImpale:Play()
+			end
+		end
+		local targetShade = mod:GetBossTarget(1003012)
+		if targetShade then
+			warnImpale:Show(targetShade)
+			if targetShade == UnitName("player") then 
+				soundImpale:Play()
+			end
 		end
 	end
 end
@@ -91,3 +97,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----

@@ -3,9 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2248 $"):sub(12, -3))
 mod:SetCreatureID(15954)
-
 mod:RegisterCombat("combat")
-
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
@@ -13,13 +11,13 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
------Teleport-----
+-----TELEPORT-----
 local warnTeleportNow		= mod:NewAnnounce("Teleport Now", 3, 46573, nil, "Show warning for Noth teleporting to and from the balcony")
 local warnTeleportSoon		= mod:NewAnnounce("Teleport in 10 seconds", 1, 46573, nil, "Show pre-warning for Noth teleporting to and from the balcony")
 local timerTeleport			= mod:NewTimer(600, "Teleport to Balcony", 46573, nil, "Show timer for Noth teleporting to the balcony")
 local timerTeleportBack		= mod:NewTimer(600, "Teleport to Raid", 46573, nil, "Show timer for Noth teleporting from the balcony")
 local soundTeleport			= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effect for Noth teleporting to and from the balcony")
------Curse-----
+-----CURSE-----
 local warnCurse				= mod:NewSpellAnnounce(29213, 2)
 local specWarnCurse			= mod:NewSpecialWarningYou(29213)
 local soundCurse			= mod:SoundAirHorn(29213)
@@ -27,6 +25,7 @@ local soundCurse			= mod:SoundAirHorn(29213)
 local berserkTimer			= mod:NewBerserkTimer(375)
 local phase = 0
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(375-delay)
 	mod:getBestKill()
@@ -113,3 +112,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----

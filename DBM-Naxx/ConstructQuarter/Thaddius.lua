@@ -1,46 +1,41 @@
--- this file uses the texture Textures/arrow.tga. This image was created by Everaldo Coelho and is licensed under the GNU Lesser General Public License. See Textures/lgpl.txt.
 local mod	= DBM:NewMod("Thaddius", "DBM-Naxx", 2)
 local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2869 $"):sub(12, -3))
 mod:SetCreatureID(15928)
-
 mod:RegisterCombat("yell", L.Yell)
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_CAST_START",
 	"CHAT_MSG_RAID_BOSS_EMOTE",
 	"UNIT_AURA",
 	"PLAYER_ALIVE"
 )
-
+-----POLARITY SHIFT-----
+local timerShiftCast		= mod:NewCastTimer(3, 28089)
+local timerNextShift		= mod:NewNextTimer(30, 28089)
 local warnShiftCasting		= mod:NewCastAnnounce(28089, 3)
-local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
-local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
+-----THROW-----
 local warnThrow				= mod:NewSpellAnnounce(28338, 2)
 local warnThrowSoon			= mod:NewSoonAnnounce(28338, 1)
-
-local enrageTimer			= mod:NewBerserkTimer(365)
-local timerNextShift		= mod:NewNextTimer(30, 28089)
-local timerShiftCast		= mod:NewCastTimer(3, 28089)
 local timerThrow			= mod:NewNextTimer(20.6, 28338)
-
+-----MISC-----
+local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
+local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
+local enrageTimer			= mod:NewBerserkTimer(365)
 mod:AddBoolOption("ArrowsEnabled", false, "Arrows")
 mod:AddBoolOption("ArrowsRightLeft", false, "Arrows")
 mod:AddBoolOption("ArrowsInverse", false, "Arrows")
 mod:AddBoolOption("HealthFrame", true)
-
 mod:SetBossHealthInfo(
 	15930, L.Boss1,
 	15929, L.Boss2
 )
-
 local currentCharge
 local phase2
 local down = 0
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
 	phase2 = false
@@ -188,6 +183,7 @@ function mod:ShowUpArrow()
 	arrowUp:Show()
 end
 
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -198,8 +194,9 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

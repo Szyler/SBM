@@ -3,12 +3,9 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 4154 $"):sub(12, -3))
 mod:SetCreatureID(15931)
-mod:SetUsedIcons(5, 6, 7, 8)
-
+mod:SetUsedIcons(8)
 mod:RegisterCombat("combat")
-
 mod:EnableModel()
-
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
@@ -16,31 +13,33 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"PLAYER_ALIVE"
 )
------Mutating Injection-----
+
+-----MUTATING INJECTION-----
 local warnInjection		= mod:NewTargetAnnounce(28169, 2)
 local specWarnInjection	= mod:NewSpecialWarningYou(28169)
 local timerInjection	= mod:NewTargetTimer(10, 28169)
 local soundInjection	= mod:SoundInfo(28169)
------Poison Cloud-----
+-----POISON CLOUD-----
 local timerCloud		= mod:NewNextTimer(15, 28240)
 local warnCloud			= mod:NewSpellAnnounce(28240, 2)
 local prewarnCloud		= mod:NewSoonAnnounce(28240, 3)
 local soundCloud		= mod:SoundInfo(28240)
 local specWarnPoison1	= mod:NewSpecialWarningMove(28241, true, nil, true)
 local specWarnPoison2	= mod:NewSpecialWarningMove(28158, true, nil, true)
------Vivifying Toxin-----
+-----VIVIFYING TOXIN-----
 local timerToxin		= mod:NewNextTimer(45, 79012)
 local warnToxin			= mod:NewSpellAnnounce(79012, 2)
 local prewarnToxin		= mod:NewSoonAnnounce(79012, 3)
 local soundToxin		= mod:SoundInfoLong(79012)
------Slime Spray-----
+-----SLIME SPRAY-----
 local timerSpray		= mod:NewCDTimer(15, 28157)
 local warnSpray			= mod:NewSpellAnnounce(28157, 2)
------Misc-----
+-----MISC-----
 local enrageTimer		= mod:NewBerserkTimer(480)
 mod:AddBoolOption("SetIconOnInjectionTarget", true)
 local mutateIcons = {}
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	table.wipe(mutateIcons)
@@ -144,13 +143,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	end
 end
 
-function mod:OnCombatEnd()
-    for i,j in ipairs(mutateIcons) do
-       mod:SetIcon(j, 0)
-    end
-	self:Stop();
-end
-
+-----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -161,9 +154,9 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
 local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
-function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

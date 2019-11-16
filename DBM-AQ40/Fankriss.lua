@@ -132,8 +132,20 @@ function mod:spawnofFankriss()
 	self:ScheduleMethod(timerc, "spawnWarning")
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+-----TBM GLOBAL FUNCTIONS-----
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

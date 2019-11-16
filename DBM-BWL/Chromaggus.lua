@@ -4,23 +4,13 @@ local L		= mod:GetLocalizedStrings()
 mod:SetRevision(("$Revision: 188 $"):sub(12, -3))
 mod:SetCreatureID(14020)
 mod:RegisterCombat("combat")
-
 mod:RegisterEvents(
-	"SPELL_CAST_START",
+	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_REMOVED",
 	"PLAYER_ALIVE"
 )
 
-function mod:OnCombatEnd(wipe)
-	self:Stop();
-end
-
-function mod:PLAYER_ALIVE()
-	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
-		self:Stop();
-	end
-end
 local warnBronze				= mod:NewSpellAnnounce(23170, 2)
 local warnEnrage				= mod:NewSpellAnnounce(23128)
 local timerEnrage				= mod:NewBuffActiveTimer(8, 23128)
@@ -46,12 +36,11 @@ local timerCorrosive			= mod:NewCDTimer(20, 23313)
 local timerTime					= mod:NewCDTimer(20, 23312)
 
 local berserkTimer				= mod:NewBerserkTimer(270)
-
 local soundBronze		= mod:SoundAirHorn(23170)
-
 local isFirstCast
 local bronzeNoSpam
 
+-----BOSS FUNCTIONS-----
 function mod:preFirst()
 	prewarnFirstBreath:Show()
 end
@@ -157,7 +146,7 @@ function mod:nextTime()
 	self:ScheduleMethod(timer6, "nextIncinerate")
 end
 
-function mod:SPELL_CAST_START(args)
+function mod:SPELL_CAST_SUCCESS(args)
 	if isFirstCast == 1 then	
 		if args:IsSpellID(23309) then --INCINERATE
 			self:ScheduleMethod(0, "alertIncinerate")
@@ -207,8 +196,20 @@ function mod:SPELL_AURA_REMOVED(args)
 	end
 end
 
----------- SPEED KILL FUNCTION ----------
-local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)function mod:getBestKill()	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
+-----TBM GLOBAL FUNCTIONS-----
+function mod:OnCombatEnd(wipe)
+	self:Stop();
+end
+
+function mod:PLAYER_ALIVE()
+	if UnitIsDeadOrGhost("PLAYER") and self.Options.ResetOnRelease then
+		self:Stop();
+	end
+end
+
+local timerSpeedKill		= mod:NewTimer(0, "Fastest Kill", 48266)
+function mod:getBestKill()
+	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
----------- SPEED KILL FUNCTION ----------
+-----TBM GLOBAL FUNCTIONS-----

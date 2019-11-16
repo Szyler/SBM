@@ -3,26 +3,23 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2248 $"):sub(12, -3))
 mod:SetCreatureID(15936)
-
 mod:RegisterCombat("combat")
-
+mod:EnableModel()
 mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
-mod:EnableModel()
-
------Teleport-----
+-----TELEPORT-----
 local warnTeleportSoon			= mod:NewAnnounce("Teleport to Platform Soon", 2, 46573, nil, "Show pre-warning for Heigan teleporting to the platform")
 local warnTeleportNow			= mod:NewAnnounce("Teleport to Platform Now", 3, 46573, nil, "Show warning for Heigan teleporting to the platform")
 local timerTeleport				= mod:NewTimer(90, "Teleport to Platform", 46573, nil, "Show timer for Heigan teleporting to the platform")
 local soundTeleport				= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effect when Heigan teleports to the platform")
------Dance Ends----
+-----DANCE ENDS----
 local timerDanceEnds			= mod:NewTimer(47, "Dance Ends", 46573, nil, "Show timer for the end of the Safety Dance")
 local warnDanceEndsSoon			= mod:NewAnnounce("Dance Ends Soon", 2, 46573, nil, "Show pre-warning for the end of the Safety Dance")
 local warnDanceEnds				= mod:NewAnnounce("Dance Ends Now", 3, 46573, nil, "Show warning for the end of the Safety Dance")
 local soundDanceEnds			= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effect at the end of the Safety Dance")
------HeiganEffects------
+-----SPELL DISRUPTION------
 local specWarnSpellDisruption	= mod:NewSpecialWarningYou(29310, false)
 local specWarnBurningFever		= mod:NewSpecialWarningYou(1003068)
 -----MISC-----
@@ -97,3 +94,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----

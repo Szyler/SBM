@@ -14,36 +14,37 @@ mod:RegisterEvents(
 	"PLAYER_ALIVE"
 )
 
------Shout-----
+-----DISRUPTING SHOUT-----
 local warnShoutNow			= mod:NewSpellAnnounce(29107, 2)
 local warnShoutSoon			= mod:NewSoonAnnounce(29107, 3)
 local timerShout			= mod:NewCDTimer(10, 29107)
 local soundShout			= mod:SoundInfo(29107)
------Shadow Burst-----
+-----SHADOW BURST-----
 local warnShadowBurstNow	= mod:NewSpellAnnounce(1003108, 2)
 local warnShadowBurstSoon	= mod:NewSoonAnnounce(1003108, 3)
 local timerShadowBurst		= mod:NewNextTimer(25, 1003108)
 local soundShadowBurst		= mod:SoundAlert(1003108)
------Jagged Knife-----
+-----JAGGED KNIFE-----
 local warnKnifeNow			= mod:NewTargetAnnounce(55550, 2)
 local specWarnKnife			= mod:NewSpecialWarningSpell(55550, nil, nil, nil, 10)
 local soundKnife			= mod:SoundAirHorn(55550)
------Bruising Blow-----
+-----BRUISING BLOW-----
 local warnBlowNow			= mod:NewSpellAnnounce(26613, 2)
 local warnBlowSoon			= mod:NewSoonAnnounce(26613, 3)
 local timerBlow				= mod:NewNextTimer(15, 26613)
 local soundBlow				= mod:SoundInfo(26613)
------Curse of Feebleness-----
+-----CURSE OF FEEBLENESS-----
 local warnCurseNow			= mod:NewSpellAnnounce(1003253, 2)
 local warnCurseEndSoon		= mod:NewSoonAnnounce(1003253, 3)
 local timerCurse			= mod:NewBuffActiveTimer(120, 1003253)
 local soundCurse			= mod:SoundAlarmLong(1003253)
------Phase 2-----
+-----MISC-----
 local razHealth
 local phase
 local warnPhase2			= mod:NewPhaseAnnounce(2)
 local soundPhaseTwo			= mod:SoundInfoLong(29125, "Play the 'Long Info' sound effect on Phase Two.")
 
+-----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	phase = 1
@@ -234,3 +235,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
+-----TBM GLOBAL FUNCTIONS-----
