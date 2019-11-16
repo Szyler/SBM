@@ -63,7 +63,7 @@ function mod:SPELL_CAST_START(args)
 		mod:locustRepeat()
 		specWarnLocust:Show(18)
 		timerLocustRemaining:Show(18)
-	elseif args:IsSpellID(1003010) then
+	elseif args:IsSpellID(28783) then
 		local target = mod:GetBossTarget(15956)
 		if target then
 			warnImpale:Show(target)

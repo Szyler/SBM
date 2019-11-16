@@ -275,3 +275,6 @@ v1.84 - 16/11/2019
 - Polish updates to multiple bosses
 - Chromaggus: Attempted a fix for his breaths.
 ----------------------------------------------------------------------------------------------------
+v1.85 - 16/11/2019
+- Anub'Rekhan: Fixed an issue where impale was still set to track shadow bolts (this was my debug testing SORRY!)
+----------------------------------------------------------------------------------------------------
