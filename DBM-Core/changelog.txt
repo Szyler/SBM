@@ -267,3 +267,11 @@ v1.83 - 20/10/2019
 - Disabled wave timers for add waves on Gothik (I need to see how the new fight works before I can rescript this)
 - Heigan: Fixed dance timers
 ----------------------------------------------------------------------------------------------------
+v1.84 - 16/11/2019
+- Anub'Rekhan: Added a warning for Impale, this will play the 'Info' sound effect if it targets you. 
+- Faerlina: Changed SoundAirHorn to SoundInfo (The AirHorn sound effect is obnoxious and I will remove it when possible)
+- Kel'Thuzad: Anub'Rekhan Shade: Added a warning for Impale, this will play the 'Info' sound effect if it targets you. 
+- Kel'Thuzad: Added a check for Razuvious Shade's Disrupting Shout to ensure the related timers, warnings and sounds only play during the Kel'Thuzad encounter (this will prevent two Disrupting Shouts playing when fighting Razuvious)
+- Polish updates to multiple bosses
+- Chromaggus: Attempted a fix for his breaths.
+----------------------------------------------------------------------------------------------------
