@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1850 $"):sub(12, -3),
-	Version = "1.85",
-	DisplayVersion = "1.85", -- the string that is shown as version
-	ReleaseRevision = 1850 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1860 $"):sub(12, -3),
+	Version = "1.86",
+	DisplayVersion = "1.86", -- the string that is shown as version
+	ReleaseRevision = 1860 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -98,7 +98,7 @@ local updateFunctions = {}
 local raid = {}
 local modSyncSpam = {}
 local autoRespondSpam = {}
-local chatPrefix = "<TOXICITY BOSS MODS> "
+local chatPrefix = "<TOXIC BOSS MODS> "
 local chatPrefixShort = "<TBM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
@@ -637,8 +637,8 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Sky", "Zorgosone", "Skray", "Namelessness", "Junior", "Turncoat", "Alternate", "Haddeqi"}
-			local tankwhitelist = {"Dreadsmell"}
+			local o = {"Sky", "Zorgosone", "Skray", "Junior", "Hemophiliac", "Coagulated"}
+			local tankwhitelist = {"Nato"}
 			local canRunSounds
 			
 			local playerName = UnitName(arg2)
@@ -670,7 +670,7 @@ do
 							checkTBMVersion()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity") then
+							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										checkTBMVersion()
@@ -682,7 +682,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity") then
+							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
@@ -702,7 +702,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_now")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity") then
+							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
@@ -721,11 +721,11 @@ do
 						end
 					end
                     if(string.find(arg1,"tbm_cmd: logout: "..myName)) then
-						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Zorgos" or MSG_FROM == "Zorgosone") then
+						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Sky" or MSG_FROM == "Zorgosone") then
 							tbmLogOut()
 						end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity") then
+							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										tbmLogOut()
@@ -737,7 +737,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity") then
+							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										tbmAbilityCheck()

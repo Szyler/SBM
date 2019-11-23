@@ -9,6 +9,7 @@ mod:EnableModel()
 mod:RegisterEvents(
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
+	"SPELL_CAST_START", --This should allow the addon to process this Event using the scripting from Anub'Rekhan for Impale.
 	"SPELL_CAST_SUCCESS",
 	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
@@ -310,25 +311,21 @@ function mod:SPELL_CAST_SUCCESS(args)
 			timerShout:Start(timer)
 			soundShout:Play()
 		end
-	end
 	-----WAIL OF SOULS-----
-	if args:IsSpellID(1003115) then
+	elseif args:IsSpellID(1003115) then
 		warnWailSoul:Show()
-	end
 	-----FROST BLAST-----
-	if args:IsSpellID(29879) then 
+	elseif args:IsSpellID(29879) then 
 		warnBlast:Show()
 		soundBlast:Play()
 		timerBlast:Start(45)
-	end 
 	-----MANA DETONATION-----
-	if args:IsSpellID(27819) then
+	elseif args:IsSpellID(27819) then
 		warnMana:Show()
 		soundMana:Play()
 		timerMana:Start(30)
-	end
 	-----CHAINS-----
-	if args:IsSpellID(28410) then
+	elseif args:IsSpellID(28410) then
 		warnChains:Show()
 		soundChains:Play()
 		timerChains:Start(90)

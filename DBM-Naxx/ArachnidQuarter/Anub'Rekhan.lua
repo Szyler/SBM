@@ -64,22 +64,28 @@ function mod:SPELL_CAST_START(args)
 		specWarnLocust:Show(18)
 		timerLocustRemaining:Show(18)
 	elseif args:IsSpellID(28783) then
-		local target = mod:GetBossTarget(15956)
-		if target then
-			warnImpale:Show(target)
-			if target == UnitName("player") then 
-				soundImpale:Play()
-			end
+		self:ScheduleMethod(0.1, "anubImpale")
+	end
+end
+
+function mod:anubImpale()
+	local target = mod:GetBossTarget(15956)
+	if target then
+		warnImpale:Show(target)
+		if target == UnitName("player") then 
+			soundImpale:Play()
 		end
-		local targetShade = mod:GetBossTarget(1003012)
-		if targetShade then
-			warnImpale:Show(targetShade)
-			if targetShade == UnitName("player") then 
-				soundImpale:Play()
-			end
+	end
+	local targetShade = mod:GetBossTarget(1003012)
+	if targetShade then
+		warnImpale:Show(targetShade)
+		if targetShade == UnitName("player") then 
+			soundImpale:Play()
 		end
 	end
 end
+
+
 
 -----TBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)

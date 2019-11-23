@@ -15,12 +15,12 @@ local warnDecimateSoon	= mod:NewSoonAnnounce(54426, 2)
 local warnDecimateNow	= mod:NewSpellAnnounce(54426, 3)
 local timerDecimate		= mod:NewCDTimer(104, 54426)
 -----MISC-----
-local enrageTimer		= mod:NewBerserkTimer(420)
+local enrageTimer		= mod:NewBerserkTimer(480)
 
 -----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
-	enrageTimer:Start(420 - delay)
+	enrageTimer:Start(480 - delay)
 	timerDecimate:Start(110 - delay)
 	warnDecimateSoon:Schedule(100 - delay)
 end
