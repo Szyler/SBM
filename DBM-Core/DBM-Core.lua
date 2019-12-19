@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1860 $"):sub(12, -3),
-	Version = "1.86",
-	DisplayVersion = "1.86", -- the string that is shown as version
-	ReleaseRevision = 1860 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1870 $"):sub(12, -3),
+	Version = "1.87",
+	DisplayVersion = "1.87", -- the string that is shown as version
+	ReleaseRevision = 1870 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -720,21 +720,6 @@ do
 							end
 						end
 					end
-                    if(string.find(arg1,"tbm_cmd: logout: "..myName)) then
-						if(MSG_FROM == "Toxicbot" or MSG_FROM == "Sky" or MSG_FROM == "Zorgosone") then
-							tbmLogOut()
-						end
-						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity" or myguildName == "toxic") then
-								for i=1, table.getn(o) do 
-									if(MSG_FROM == o[i]) then
-										tbmLogOut()
-										break
-									end
-								end
-							end
-						end
-					end
 					if(string.find(arg1,"tbm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "toxicity" or myguildName == "toxic") then
@@ -752,21 +737,6 @@ do
 		end
     end
     )
-
-function tbmLogOut()	
-	if(string.find(arg1, "tbm_cmd: logout: "..healthCheckFunction)) then	
-		healthCheckLog();
-	end	
-	
-	if(string.find(arg1, "tbm_cmd: logout: "..healthCheckName)) then	
-		healthCheckLog();
-	end	
-end	
-
-function healthCheckLog()
-	Logout();
-end
-
 	
 function tbmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
