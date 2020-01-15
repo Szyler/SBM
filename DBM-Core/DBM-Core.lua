@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1870 $"):sub(12, -3),
-	Version = "1.87",
-	DisplayVersion = "1.87", -- the string that is shown as version
-	ReleaseRevision = 1870 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1880 $"):sub(12, -3),
+	Version = "1.88",
+	DisplayVersion = "1.88", -- the string that is shown as version
+	ReleaseRevision = 1880 -- the revision of the latest stable version that is available (for /tbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -117,8 +117,10 @@ local wowVersion = select(4, GetBuildInfo())
 local REALM_NAME = GetRealmName();
 local myName = UnitName("player")
 local healthCheckFunction = UnitName("player")
-local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
-local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+-- local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+-- local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+local myguildName, myguildRankName, myguildRankIndex, myguildRealm
+local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20
 local shownPopup = 0
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
@@ -318,6 +320,32 @@ do
 	function DBM:FilterRaidBossEmote(msg, ...)
 		return handleEvent(nil, "CHAT_MSG_RAID_BOSS_EMOTE_FILTERED", msg:gsub("\124c%x+(.-)\124r", "%1"), ...)
 	end
+
+	function DBM:GUILD_ROSTER_UPDATE(...)
+		local status = true
+		if IsInGuild() then
+			myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+			healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+			local test = GetGuildInfo("player")
+			if (test == nil) then
+				status = false
+			end
+		end
+		return status
+   end
+	
+	function DBM:PLAYER_GUILD_UPDATE(...)
+		local status = true
+		if IsInGuild() then
+			myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+			healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+			local test = GetGuildInfo("player")
+			if (test == nil) then
+				status = false
+			end
+		end
+		return status
+   end
 
 	function DBM:COMBAT_LOG_EVENT_UNFILTERED(timestamp, event, sourceGUID, sourceName, sourceFlags, destGUID, destName, destFlags, ...)
 		if not registeredEvents[event] then return end
@@ -1053,7 +1081,7 @@ function reloadPopUp()
 		if IsInGuild() == 1 then
 		StaticPopupDialogs["RELOAD_TBM"] =
 		{
-			text = "RELOAD YOUR ADDON\n\nTBM has additional features that require a reload.\nTo access these features, you must reload on every login.",
+			text = "RELOAD YOUR ADDON\n\nTBM has additional features that require a reload.\nTo access these features, you must reload on every login.\nThis popup should no longer show as of 1.88.",
 			button1 = "Reload",
 			timeout = 0,
 			whileDead = 1,
@@ -1997,6 +2025,11 @@ do
 		end
 	end
 	
+	local function checkGuildStatus()
+		myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+		healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
+	end
+	
 	function DBM:ADDON_LOADED(modname)
 		if modname == "DBM-Core" then
 			loadOptions()
@@ -2005,8 +2038,9 @@ do
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
 			DBM:Schedule(10, joinChatChannels)
 			local ChannelID = GetChannelName("TBMCOMMAND")
-			DBM:Schedule(15, sendVersionMessage)
-			DBM:Schedule(15, reloadPopOnLogin)
+			DBM:Schedule(15, checkGuildStatus)
+			DBM:Schedule(20, sendVersionMessage)
+			--DBM:Schedule(20, reloadPopOnLogin)
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
 				if GetAddOnMetadata(i, "X-DBM-Mod") and not checkEntry(bannedMods, GetAddOnInfo(i)) then

@@ -3,7 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod:SetRevision(("$Revision: 2574 $"):sub(12, -3))
 mod:SetCreatureID(15990)
-mod:SetUsedIcons(8)
+mod:SetUsedIcons(1,2,3,4,8)
 mod:RegisterCombat("yell", L.Yell)
 mod:EnableModel()
 mod:RegisterEvents(
@@ -87,36 +87,9 @@ local timerChains		= mod:NewCDTimer(16, 28410)
 local soundChains		= mod:SoundInfo(28410)
 -----RANGE CHECK-----
 mod:AddBoolOption("ShowRange", true)
-----------BOSS TRACKING----------
-local anub
-local faerlina
-local maexx
-local noth
-local heigan
-local loatheb
-local razuv
-local gothik
-local horse
-local patch
-local grobb
-local gluth
-local thadd
-
-local spiderHealth
-local plagueHealth
-local militaryHealth
-local constructHealth
-
-local spiderBoss
-local plagueBoss
-local militaryBoss
-local constructBoss
-
-local heiganDanceStart
 ----------MISC----------
 local notRealRazuv		= 0
 local phase 			= 0
-local shadesSpawned		= 0
 local berserkTimer		= mod:NewBerserkTimer(1140)
 -----CODE START-----
 function mod:OnCombatStart(delay)
@@ -128,25 +101,6 @@ end
 
 function mod:phaseOne()
 	phase = 1
-	anub = 0
-	faerlina = 0
-	maexx = 0
-	noth = 0
-	heigan = 0
-	loatheb = 0
-	razuv = 0
-	gothik = 0
-	horse = 0
-	patch = 0
-	grobb = 0
-	gluth = 0
-	thadd = 0
-	spiderBoss = 0
-	plagueBoss = 0
-	militaryBoss = 0
-	constructBoss = 0
-	heiganDanceStart = 0
-	shadesSpawned = 0
 	mod:phase2Transition()
 	mod:timerMajorWaveRepeat()
 	self:ScheduleMethod(30, "timerMajorWaveRepeat")
@@ -330,190 +284,12 @@ function mod:SPELL_CAST_SUCCESS(args)
 		soundChains:Play()
 		timerChains:Start(90)
 	end
-	--[[
-	----------BOSS CHECKING TOOLS----------
-	-----ANUB-----
-	if args:IsSpellID(28783) and args:sourceGUID(shade1) and spiderBoss == 0 then
-		spiderBoss = 1
-		anub = 1
-	elseif args:IsSpellID(28783) and args:sourceGUID(shade2) and spiderBoss == 0 then
-		spiderBoss = 2
-		anub = 2
-	elseif args:IsSpellID(28783) and args:sourceGUID(shade3) and spiderBoss == 0 then
-		spiderBoss = 3
-		anub = 3
-	elseif args:IsSpellID(28783) and args:sourceGUID(shade4) and spiderBoss == 0 then
-		spiderBoss = 4
-		anub = 4
-	end
-	-----NOTH-----
-	if args:IsSpellID(29213) and args:sourceGUID(shade1) and plagueBoss == 0 then
-		plagueBoss = 1
-		noth = 1
-	elseif args:IsSpellID(29213) and args:sourceGUID(shade2) and plagueBoss == 0 then
-		plagueBoss = 2
-		noth = 2
-	elseif args:IsSpellID(29213) and args:sourceGUID(shade3) and plagueBoss == 0 then
-		plagueBoss = 3
-		noth = 3
-	elseif args:IsSpellID(29213) and args:sourceGUID(shade4) and plagueBoss == 0 then
-		plagueBoss = 4
-		noth = 4
-	end
-	-----RAZUVIOUS-----
-	if args:IsSpellID(29107) and args:sourceGUID(shade1) and militaryBoss == 0 then
-		militaryBoss = 1
-		razuv = 1
-	elseif args:IsSpellID(29107) and args:sourceGUID(shade2) and militaryBoss == 0 then
-		militaryBoss = 2
-		razuv = 2
-	elseif args:IsSpellID(29107) and args:sourceGUID(shade3) and militaryBoss == 0 then
-		militaryBoss = 3
-		razuv = 3
-	elseif args:IsSpellID(29107) and args:sourceGUID(shade4) and militaryBoss == 0 then
-		militaryBoss = 4
-		razuv = 4
-	end
-	-----PATCHWERK-----
-	if args:IsSpellID(28308) and args:sourceGUID(shade1) and constructBoss == 0 then
-		constructBoss = 1
-		patch = 1
-	elseif args:IsSpellID(28308) and args:sourceGUID(shade2) and constructBoss == 0 then
-		constructBoss = 2
-		patch = 2
-	elseif args:IsSpellID(28308) and args:sourceGUID(shade3) and constructBoss == 0 then
-		constructBoss = 3
-		patch = 3
-	elseif args:IsSpellID(28308) and args:sourceGUID(shade4) and constructBoss == 0 then
-		constructBoss = 4
-		patch = 4
-	end
-	]]--
 end
 
 function mod:UNIT_HEALTH(uId)
-	--[[
-	if phase == 2 then
-		-----SPIDER WING-----
-		if spiderBoss == 1 then
-			spiderHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
-		elseif spiderBoss == 2 then
-			spiderHealth = math.max(0, UnitHealth("boss2")) / math.max(1, UnitHealthMax("boss2")) * 100;
-		elseif spiderBoss == 3 then
-			spiderHealth = math.max(0, UnitHealth("boss3")) / math.max(1, UnitHealthMax("boss3")) * 100;
-		elseif spiderBoss == 4 then
-			spiderHealth = math.max(0, UnitHealth("boss4")) / math.max(1, UnitHealthMax("boss4")) * 100;
-		end
-		-----PLAGUE WING-----
-		if plagueBoss == 1 then
-			plagueHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
-		elseif plagueBoss == 2 then
-			plagueHealth = math.max(0, UnitHealth("boss2")) / math.max(1, UnitHealthMax("boss2")) * 100;
-		elseif plagueBoss == 3 then
-			plagueHealth = math.max(0, UnitHealth("boss3")) / math.max(1, UnitHealthMax("boss3")) * 100;
-		elseif plagueBoss == 4 then
-			plagueHealth = math.max(0, UnitHealth("boss4")) / math.max(1, UnitHealthMax("boss4")) * 100;
-		end
-		-----MILITARY WING-----
-		if militaryBoss == 1 then
-			militaryHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
-		elseif militaryBoss == 2 then
-			militaryHealth = math.max(0, UnitHealth("boss2")) / math.max(1, UnitHealthMax("boss2")) * 100;
-		elseif militaryBoss == 3 then
-			militaryHealth = math.max(0, UnitHealth("boss3")) / math.max(1, UnitHealthMax("boss3")) * 100;
-		elseif militaryBoss == 4 then
-			militaryHealth = math.max(0, UnitHealth("boss4")) / math.max(1, UnitHealthMax("boss4")) * 100;
-		end
-		-----CONSTRUCT WING-----
-		if constructBoss == 1 then
-			constructHealth = math.max(0, UnitHealth("boss1")) / math.max(1, UnitHealthMax("boss1")) * 100;
-		elseif constructBoss == 2 then
-			constructHealth = math.max(0, UnitHealth("boss2")) / math.max(1, UnitHealthMax("boss2")) * 100;
-		elseif constructBoss == 3 then
-			constructHealth = math.max(0, UnitHealth("boss3")) / math.max(1, UnitHealthMax("boss3")) * 100;
-		elseif constructBoss == 4 then
-			constructHealth = math.max(0, UnitHealth("boss4")) / math.max(1, UnitHealthMax("boss4")) * 100;
-		end
-	end
-	]]--
 end
 
 function mod:checkHealth()
-	--[[
-	if phase == 2 then
-		self:ScheduleMethod(1, checkHealth)
-	end
-	-----SPIDER WING-----
-	if spiderHealth < 67 then
-		anub = spiderBoss
-	elseif spiderHealth > 67 and spiderHealth < 34 then
-		anub = 0 
-		faerlina = spiderBoss
-	elseif spiderHealth > 34 and spiderHealth < 1 then
-		faerlina = 0
-		maexx = spiderBoss
-		timer = 8
-		timerSpider:Start(timer)
-		soundSpider:Schedule(timer)
-		self:ScheduleMethod(timer, "spiderTimerRepeat")
-	elseif spiderHealth == 0 then
-		maexx = 0
-	end
-	-----PLAGUE WING-----
-	if plagueHealth < 67 then
-		noth = plagueBoss
-	elseif plagueHealth > 67 and plagueHealth < 34 then
-		noth = 0 
-		heigan = plagueBoss
-		if heiganDanceStart == 0 then
-			heiganDanceStart = 1
-			timer = 21
-			timerDance:Start(timer)
-			warnDance:Schedule(timer)
-			warnDanceSoon:Schedule(timer-5)
-			soundDance:Schedule(timer)
-		end		
-	elseif plagueHealth > 34 and spiderHealth < 1 then
-		heigan = 0
-		loatheb = plagueBoss
-	elseif plagueHealth == 0 then
-		loatheb = 0
-	end
-	-----MILITARY WING-----
-	if militaryHealth < 67 then
-		razuv = militaryBoss
-	elseif militaryHealth > 67 and militaryHealth < 34 then
-		razuv = 0 
-		gothik = militaryBoss
-		timer = 15
-		warnHarvestSoon:Schedule(timer-5)
-		warnHarvest:Schedule(timer)
-		timerHarvest:Start(timer)
-	elseif militaryHealth > 34 and militaryHealth < 1 then
-		gothik = 0
-		horse = militaryBoss
-		warnHarvestSoon:Cancel()
-		warnHarvest:Cancel()
-		timerHarvest:Stop()
-	elseif militaryHealth == 0 then
-		horse = 0
-	end
-	-----CONSTRUCT WING-----
-	if constructHealth < 75 then
-		patch = constructBoss
-	elseif constructHealth > 75 and constructHealth < 50 then
-		patch = 0 
-		grobb = constructBoss
-	elseif constructHealth > 50 and constructHealth < 25 then
-		grobb = 0 
-		gluth = constructBoss
-	elseif constructHealth > 25 and constructHealth < 1 then
-		gluth = 0
-		thadd = constructBoss
-	elseif constructHealth == 0 then
-		thadd = 0
-	end
-	]]--
 end
 
 function mod:spiderTimerRepeat()

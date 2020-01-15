@@ -295,3 +295,7 @@ v1.86 - 23/11/2019
 v1.87 - 19/12/2019
 - 4 Horsemen: Resolved issues with the enrage timer.
 ----------------------------------------------------------------------------------------------------
+v1.88 - 15/01/2019
+- FINALLY fixed the guild check function. The popup that requires you to reload on login will no longer fire!
+- Some KT updates.
+----------------------------------------------------------------------------------------------------
