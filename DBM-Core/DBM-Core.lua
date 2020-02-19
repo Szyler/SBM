@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1880 $"):sub(12, -3),
-	Version = "1.88",
-	DisplayVersion = "1.88", -- the string that is shown as version
-	ReleaseRevision = 1880 -- the revision of the latest stable version that is available (for /tbm ver2)
+	Revision = ("$Revision: 1890 $"):sub(12, -3),
+	Version = "1.89",
+	DisplayVersion = "1.89", -- the string that is shown as version
+	ReleaseRevision = 1890 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -98,8 +98,8 @@ local updateFunctions = {}
 local raid = {}
 local modSyncSpam = {}
 local autoRespondSpam = {}
-local chatPrefix = "<TOXIC BOSS MODS> "
-local chatPrefixShort = "<TBM> "
+local chatPrefix = "<SKY BOSS MODS> "
+local chatPrefixShort = "<SBM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
 local newFrame = CreateFrame("Frame")
@@ -665,8 +665,8 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Sky", "Zorgosone", "Skray", "Junior", "Hemophiliac", "Coagulated"}
-			local tankwhitelist = {"Nato"}
+			local o = {"Zorgos"}
+			local tankwhitelist = {"123"}
 			local canRunSounds
 			
 			local playerName = UnitName(arg2)
@@ -1051,7 +1051,7 @@ function popUp()
 	shownPopup = 1
 	StaticPopupDialogs["UPDATE_TBM"] =
     {
-		text = "Please update TBM",
+		text = "Please update SBM",
 		button1 = "Cancel",
 		button2 = "Show link",
 		timeout = 0,
@@ -1343,7 +1343,7 @@ end
 ----------------------
 --  Slash Commands  --
 ----------------------
-SLASH_DEADLYBOSSMODS1 = "/tbm"
+SLASH_DEADLYBOSSMODS1 = "/sbm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	local function pullInFive()
 		local ChannelID = GetChannelName("TBMCOMMAND")
@@ -2019,9 +2019,9 @@ do
 	local function sendVersionMessage()
 		local ChannelID = GetChannelName("TBMCOMMAND")
 		if myguildName == nil then
-			SendChatMessage("<NO-GUILD> My version of TBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
+			SendChatMessage("<NO-GUILD> My version of SBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 		else
-			SendChatMessage("<"..myguildName.."> My version of TBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
+			SendChatMessage("<"..myguildName.."> My version of SBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 		end
 	end
 	
@@ -2996,7 +2996,7 @@ end
 --  Misc. Functions  --
 -----------------------
 function DBM:AddMsg(text, prefix)
-	prefix = prefix or (self.localization and self.localization.general.name) or "TBM Boss Mods"
+	prefix = prefix or (self.localization and self.localization.general.name) or "Sky Boss Mods"
 	DEFAULT_CHAT_FRAME:AddMessage(("|cffffffff<|r|cff009600%s|r|cffffffff>|r %s"):format(tostring(prefix), tostring(text)), 1, 1, 1)
 end
 
