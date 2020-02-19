@@ -299,3 +299,6 @@ v1.88 - 15/01/2019
 - FINALLY fixed the guild check function. The popup that requires you to reload on login will no longer fire!
 - Some KT updates.
 ----------------------------------------------------------------------------------------------------
+v1.89 - 20/02/2019
+- Renamed to Sky Boss Mods, removed some unused features.
+----------------------------------------------------------------------------------------------------
