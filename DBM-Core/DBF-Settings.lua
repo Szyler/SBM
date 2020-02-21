@@ -135,8 +135,8 @@ function DBF_Settings_Menuofdoom()
 		     /////// FIRST MENU \\\\\\\\
 		     ***************************************]]--
 		
-		local ShowTOXICITYOfficer = false;
-		local ShowOfficer = false;
+		local ShowTOXICITYOfficer = true;
+		local ShowOfficer = true;
 		amnt = 1; -- amount of white spaces
 		guildName,_,guildRankIndex = GetGuildInfo("player");
 		

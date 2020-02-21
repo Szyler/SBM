@@ -2559,11 +2559,11 @@ function DBM:StartCombat(mod, delay, synced)
 		end
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
-		if myguildName == nil then
-			SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-		else
-			SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-		end
+		-- if myguildName == nil then
+		-- 	SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		-- else
+		-- 	SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		-- end
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
 		elseif mod:IsDifficulty("normal5", "heroic10") then
@@ -2624,11 +2624,11 @@ function DBM:EndCombat(mod, wipe)
 				end
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
-			if myguildName == nil then
-				SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-			else
-				SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-			end
+			-- if myguildName == nil then
+			-- 	SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			-- else
+			-- 	SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			-- end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
 				msg = msg or chatPrefixShort..DBM_CORE_WHISPER_COMBAT_END_WIPE:format(UnitName("player"), (mod.combatInfo.name or ""))
