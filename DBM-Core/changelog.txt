@@ -292,13 +292,16 @@ v1.86 - 23/11/2019
 - Guild Specific: Updated the guild officer list for toxic to match the current officer roster.
 - Guild Specific: Updated the tank whitelist to include Nato.
 ----------------------------------------------------------------------------------------------------
-v1.87 - 19/12/2019
+v1.87 - 19/12/2020
 - 4 Horsemen: Resolved issues with the enrage timer.
 ----------------------------------------------------------------------------------------------------
-v1.88 - 15/01/2019
+v1.88 - 15/01/2020
 - FINALLY fixed the guild check function. The popup that requires you to reload on login will no longer fire!
 - Some KT updates.
 ----------------------------------------------------------------------------------------------------
-v1.89 - 20/02/2019
-- Renamed to Szyler Boss Mods, removed some unused features.
+v1.89 - 20/02/2020
+- Renamed to Sky Boss Mods, removed some unused features.
+----------------------------------------------------------------------------------------------------
+v8.01 - 21/02/2020
+- Renamed to Szyler Boss Mods, removed Toxic stuff.
 ----------------------------------------------------------------------------------------------------

@@ -38,7 +38,7 @@ function DBF_StatusFrame_Init()
 	SlashCmdList["DeadlyBuffFrames_Statustoggle"] = DBF_SF_Toggle;
 	SLASH_DeadlyBuffFrames_Statustoggle1 = "/dbf";
 	
-	DBFStatusFrameHeaderText:SetText("SkyBossMods v"..DBM.Version);
+	DBFStatusFrameHeaderText:SetText("SzylerBossMods v"..DBM.Version);
 	DBF_SF_SetBorder();
 	
 	DBF_CreateExtraMenuFrames(4,15);

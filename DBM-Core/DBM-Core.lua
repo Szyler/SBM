@@ -698,7 +698,7 @@ do
 						-- 	checkTBMVersion()
 						-- end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity" or myguildName == "toxic") then
+							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										checkTBMVersion()
@@ -710,7 +710,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity" or myguildName == "toxic") then
+							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
@@ -730,7 +730,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_now")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity" or myguildName == "toxic") then
+							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
@@ -750,7 +750,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "toxicity" or myguildName == "toxic") then
+							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										tbmAbilityCheck()
