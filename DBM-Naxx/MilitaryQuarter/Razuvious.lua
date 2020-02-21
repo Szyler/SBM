@@ -219,7 +219,7 @@ function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
 
------TBM GLOBAL FUNCTIONS-----
+-----SBM GLOBAL FUNCTIONS-----
 function mod:OnCombatEnd(wipe)
 	self:Stop();
 end
@@ -235,4 +235,4 @@ function mod:getBestKill()
 	local bestkillTime = (mod:IsDifficulty("heroic5", "heroic25") and mod.stats.heroicBestTime) or mod:IsDifficulty("normal5", "heroic10") and mod.stats.bestTime
 	timerSpeedKill:Show(bestkillTime)
 end
------TBM GLOBAL FUNCTIONS-----
+-----SBM GLOBAL FUNCTIONS-----

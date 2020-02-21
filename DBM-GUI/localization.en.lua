@@ -2,7 +2,7 @@ DBM_GUI_Translations = {}
 
 local L = DBM_GUI_Translations
 
-L.MainFrame = "TOXICITY Boss Mods"
+L.MainFrame = "Szyler Boss Mods"
 
 L.TranslationBy 			= "N/A"
 
@@ -45,8 +45,8 @@ L.Statistic_BestKill		= "Best Kill:"
 L.Statistic_Heroic			= "Heroic"
 
 -- Tab: General Options
-L.General 					= "General TBM Options"
-L.EnableDBM 				= "Enable TBM"
+L.General 					= "General SBM Options"
+L.EnableDBM 				= "Enable SBM"
 L.EnableStatus 				= "Reply to 'status' whispers"
 L.AutoRespond 				= "Enable auto-respond while fighting"
 L.CombatLogRepeat 			= "Clear combat log cache every second"
@@ -80,7 +80,7 @@ L.ShowWarningsInChat 		= "Show warnings in chat frame"
 L.ShowFakedRaidWarnings 	= "Show warnings as faked raid warning messages"
 L.WarningIconLeft 			= "Show icon on left side"
 L.WarningIconRight 			= "Show icon on right side"
-L.RaidWarnMessage 			= "Thanks for using TOXICITY Boss Mods"
+L.RaidWarnMessage 			= "Thanks for using Szyler Boss Mods"
 L.BarWhileMove 				= "Raid warning movable"
 L.RaidWarnSound				= "Play sound on raid warning"
 L.SpecialWarnSound			= "Play sound on special warning"

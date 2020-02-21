@@ -41,13 +41,13 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s is busy fighting against %s (%s, %d/%d peop
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s has defeated %s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s has wiped on %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "Sky Boss Mods - Versions"
+DBM_CORE_VERSIONCHECK_HEADER		= "Szyler Boss Mods - Versions"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
 DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: SBM not installed"
-DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with Sky Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of Sky Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
+DBM_CORE_VERSIONCHECK_FOOTER		= "Found %d players with Szyler Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Your version of Szyler Boss Mods is out-of-date. Please visit www.deadlybossmods.com to get the latest version."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of Sky Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Your version of Szyler Boss Mods is out-of-date.\n Version %s (r%d) is available for download here:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Press Ctrl-C to copy the download link to your clipboard."
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Show popup when a new version is available"
 
@@ -57,9 +57,9 @@ DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a SBM timer: '%2$s'\
 DBM_PIZZA_CONFIRM_IGNORE			= "Do you really want to ignore SBM timers from %s for this session?"
 DBM_PIZZA_ERROR_USAGE				= "Usage: /sbm [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "Sky Boss Mods is running twice because you have SBMv3 and SBMv4 installed and enabled!\nClick \"Okay\" to disable SBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old SBMv3 folders."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods is running twice because you have SBMv3 and SBMv4 installed and enabled!\nClick \"Okay\" to disable SBMv3 and reload your interface.\nYou should also clean up your AddOns folder by deleting the old SBMv3 folders."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Sky Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+click or right-click to move\nAlt+shift+click for free drag and drop"
 
 DBM_CORE_RANGECHECK_HEADER			= "Range Check (%d yd)"

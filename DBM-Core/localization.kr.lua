@@ -1,6 +1,6 @@
 if (GetLocale() == "koKR") then
 
-DBM_CORE_NEED_SUPPORT				= "안녕하세요. TBM Team입니다. 만약 프로그래밍 또는 언어에 대해 잘 아신다면, TBM Team에 어떤 도움이든 주실 수 있습니다. 만약, 한글화 혹은 코드 수정에 관해 건의/수정 사항이 있다면 wow.somegate.com 또는 에이그윈(호드) 흑묘서희에게 연락바랍니다. TBM BossMods Team에 참가하고 싶다면 www.deadlybossmods.com 또는 tandanu@deadlybossmods.com 또는 nitram@deadlybossmods.com에 연락 바랍니다. 물론, 영어를 매우 잘하셔야겠죠?"
+DBM_CORE_NEED_SUPPORT				= "안녕하세요. SBM Team입니다. 만약 프로그래밍 또는 언어에 대해 잘 아신다면, SBM Team에 어떤 도움이든 주실 수 있습니다. 만약, 한글화 혹은 코드 수정에 관해 건의/수정 사항이 있다면 wow.somegate.com 또는 에이그윈(호드) 흑묘서희에게 연락바랍니다. SBM BossMods Team에 참가하고 싶다면 www.deadlybossmods.com 또는 tandanu@deadlybossmods.com 또는 nitram@deadlybossmods.com에 연락 바랍니다. 물론, 영어를 매우 잘하셔야겠죠?"
 
 DBM_CORE_LOAD_MOD_ERROR				= "%s 보스 모드 로딩중 에러 발생: %s"
 DBM_CORE_LOAD_MOD_SUCCESS			= "'%s' 보스 모드가 로드되었습니다.!"
@@ -42,7 +42,7 @@ DBM_CORE_VERSIONCHECK_HEADER		= "죽이는 보스 모드 - 버젼"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
 DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: 죽이는 보스 모드가 설치 되어있지 않습니다."
 DBM_CORE_VERSIONCHECK_FOOTER		= "%d 명의 플레이어가 설치되어 있는 것을 찾았습니다."
-DBM_CORE_YOUR_VERSION_OUTDATED      = "당신의 TBM 버전이 오래되었습니다! www.deadlybossmods.com 또는 wow.somegate.com(korean)에 접속하셔셔 마지막 버전을 다운로드 받으셔요."
+DBM_CORE_YOUR_VERSION_OUTDATED      = "당신의 SBM 버전이 오래되었습니다! www.deadlybossmods.com 또는 wow.somegate.com(korean)에 접속하셔셔 마지막 버전을 다운로드 받으셔요."
 
 DBM_CORE_UPDATEREMINDER_HEADER		= "당신의 죽이는 보스 모드 버전이 옛날 버전입니다.\n Version %s (r%d) 가 새로운 버전이며, 최신 버전 위치:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Ctrl-C 를 누르면 클립보드에 복사가 됩니다."
@@ -50,11 +50,11 @@ DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "새로운 버전이 검색되면 관련 창�
 
 DBM_CORE_MOVABLE_BAR				= "나를 움직이세요~_~"
 
-DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h님이 당신에게 TBM 타이머 보냄: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[타이머 취소]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[%1$s 타이머 무시]|r|h"
-DBM_PIZZA_CONFIRM_IGNORE			= "현재 세션에서 %s님이 보낸 TBM 타이머를 무시하도록 하겠습니까?"
-DBM_PIZZA_ERROR_USAGE				= "사용법: /tbm [broadcast] timer <시간> <글자>"
+DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h님이 당신에게 SBM 타이머 보냄: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[타이머 취소]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[%1$s 타이머 무시]|r|h"
+DBM_PIZZA_CONFIRM_IGNORE			= "현재 세션에서 %s님이 보낸 SBM 타이머를 무시하도록 하겠습니까?"
+DBM_PIZZA_ERROR_USAGE				= "사용법: /SBM [broadcast] timer <시간> <글자>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods 가 실행중에 있습니다.\n당신께서 TBMv3 와 TBMv4를 동시에 설치하여 이런 상황이 발생한 것 같습니다.\n\"수락\"을 클릭하시면 TBMv3를 차단하고, UI가 다시시작 될 것입니다.\n또한, 애드온 폴더내에 존재하고 있는 TBMv3 폴더를 삭제하시길 권장합니다."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods 가 실행중에 있습니다.\n당신께서 TBMv3 와 TBMv4를 동시에 설치하여 이런 상황이 발생한 것 같습니다.\n\"수락\"을 클릭하시면 TBMv3를 차단하고, UI가 다시시작 될 것입니다.\n또한, 애드온 폴더내에 존재하고 있는 TBMv3 폴더를 삭제하시길 권장합니다."
 
 DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "죽이는 보스 모드"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+click 또는 right-click 으로 움직이세요.\nAlt+shift+click 으로 움직이면 자유롭게 배치할 수 있습니다."
@@ -75,12 +75,12 @@ DBM_LFG_INVITE						= "던전 입장"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"사용 가능한 명령어:",
-	"/tbm version: 공격대 전체 버전 체크 (줄임말: ver)",
-	"/tbm unlock: 상태 바 타이머를 움직일 수 있도록 보여줍니다.(줄임말: move)",
-	"/tbm timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바가 생성 됨.",
-	"/tbm broadcast timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바를 공격대에 알립니다.(공격대 권한이 있을 경우만 작동)",
-	"/tbm break <min>: <min>분 동안 타이머를 작동합니다.  모든 공격대원에게 TBM이 발송하는 쉬는 시간 타이머를 보냅니다.",	
-	"/tbm help: 현재 보고 있는 도움말.",
+	"/SBM version: 공격대 전체 버전 체크 (줄임말: ver)",
+	"/SBM unlock: 상태 바 타이머를 움직일 수 있도록 보여줍니다.(줄임말: move)",
+	"/SBM timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바가 생성 됨.",
+	"/SBM broadcast timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바를 공격대에 알립니다.(공격대 권한이 있을 경우만 작동)",
+	"/SBM break <min>: <min>분 동안 타이머를 작동합니다.  모든 공격대원에게 TBM이 발송하는 쉬는 시간 타이머를 보냅니다.",	
+	"/SBM help: 현재 보고 있는 도움말.",
 }
 
 DBM_ERROR_NO_PERMISSION				= "해당 명령어를 실행하기 위한 권한을 가지고 있지 않습니다."
@@ -175,13 +175,13 @@ DBM_ARROW_MOVABLE						= "화살표 움직이기"
 DBM_ARROW_NO_RAIDGROUP					= "공격대 던전에서만 사용"
 
 DBM_ARROW_ERROR_USAGE	= {
-	"TBM-Arrow 사용법:",
-	"/tbm arrow <x> <y>  특정 좌표(X/Y)에 화살표를 만듭니다.(0 < x/y < 100)",
-	"/tbm arrow <player>  당신이 속한 파티 또는 공격대의 특정 플레이어를 가르키는 화살표를 만듭니다.",
-	"/tbm arrow hide  화살표를 숨깁니다.",
-	"/tbm arrow move  화살표를 움직이도록 합니다.",
-	"/tbm arrow target 대상을 가르키는 화살표를 만듭니다.",
-	"/tbm arrow focus  주시대상을 가르키는 화살표를 만듭니다.",
+	"SBM-Arrow 사용법:",
+	"/SBM arrow <x> <y>  특정 좌표(X/Y)에 화살표를 만듭니다.(0 < x/y < 100)",
+	"/SBM arrow <player>  당신이 속한 파티 또는 공격대의 특정 플레이어를 가르키는 화살표를 만듭니다.",
+	"/SBM arrow hide  화살표를 숨깁니다.",
+	"/SBM arrow move  화살표를 움직이도록 합니다.",
+	"/SBM arrow target 대상을 가르키는 화살표를 만듭니다.",
+	"/SBM arrow focus  주시대상을 가르키는 화살표를 만듭니다.",
 }
 
 end

@@ -38,7 +38,7 @@ DBM_CORE_AUTO_RESPOND_WHISPER			= "%s正在與%s交戰（當前%s，%d/%d存活�
 DBM_CORE_WHISPER_COMBAT_END_KILL		= "%s已經擊敗%s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE		= "%s在%s的戰鬥中滅團了。"
 
-DBM_CORE_VERSIONCHECK_HEADER			= "TOXICITY Boss Mods - 版本檢測"
+DBM_CORE_VERSIONCHECK_HEADER			= "Szyler Boss Mods - 版本檢測"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s：%s(r%d)"
 DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM		= "%s：尚未安裝TBM"
 DBM_CORE_VERSIONCHECK_FOOTER			= "團隊中有%d名成員正在使用TOXICITY Boss Mods"
@@ -52,11 +52,11 @@ DBM_CORE_MOVABLE_BAR				= "拖動我!"
 
 DBM_PIZZA_SYNC_INFO				= "|Hplayer:%1$s|h[%1$s]|h向你發送了一個倒數計時：'%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[取消該計時]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[忽略來自%1$s的計時]|r|h"
 DBM_PIZZA_CONFIRM_IGNORE			= "是否要在該次遊戲連結中忽略來自%s的計時？"
-DBM_PIZZA_ERROR_USAGE				= "命令：/tbm [broadcast] timer <時間（秒）> <文字>"
+DBM_PIZZA_ERROR_USAGE				= "命令：/SBM [broadcast] timer <時間（秒）> <文字>"
 
 DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2個版本的TOXICITY Boss Mods正在運行：TBMv3和TBMv4。\n按一下“確定”按鈕可將TBMv3關閉並重載插件。\n我們建議將插件目錄下的TBMv3刪除。"
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER			= "TOXICITY Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER			= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER			= "Shift+左鍵或右鍵點擊即可移動"
 
 DBM_CORE_RANGECHECK_HEADER			= "距離監視（%d碼）"
@@ -75,12 +75,12 @@ DBM_LFG_INVITE					= "地城準備確認"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"可用命令：",
-	"/tbm version：進行團隊範圍內的版本檢測（也可使用：ver）。",
-	"/tbm unlock：顯示一個可移動的計時器（也可使用：move）。",
-	"/tbm timer <x> <文字>：開始一個以<文字>為名稱的時間為<x>秒的計時器。",
-	"/tbm broadcast timer <x> <文字>：向團隊廣播一個以<文字>為名稱，時間為<x>秒的計時器（需開啟團隊廣播及助理權限）。",
-	"/tbm break <分鐘>: 開始休息計時器<分鐘>。向所有團隊成員發送一個TBM休息計時器（需開啟團隊廣播及助理權限）。",
-	"/tbm help：顯示可用命令的說明。",
+	"/SBM version：進行團隊範圍內的版本檢測（也可使用：ver）。",
+	"/SBM unlock：顯示一個可移動的計時器（也可使用：move）。",
+	"/SBM timer <x> <文字>：開始一個以<文字>為名稱的時間為<x>秒的計時器。",
+	"/SBM broadcast timer <x> <文字>：向團隊廣播一個以<文字>為名稱，時間為<x>秒的計時器（需開啟團隊廣播及助理權限）。",
+	"/SBM break <分鐘>: 開始休息計時器<分鐘>。向所有團隊成員發送一個TBM休息計時器（需開啟團隊廣播及助理權限）。",
+	"/SBM help：顯示可用命令的說明。",
 }
 
 DBM_ERROR_NO_PERMISSION				= "無權進行此操作。"
@@ -183,9 +183,9 @@ DBM_ARROW_MOVABLE				= "可移動箭頭"
 
 DBM_ARROW_NO_RAIDGROUP				= "此功能僅作用於團隊副本中的團隊小隊。"
 DBM_ARROW_ERROR_USAGE	= {
-	"TBM-Arrow 用法:",
-	"/tbm arrow <x> <y>  建立一個箭頭在特定的位置(0 < x/y < 100)",
-	"/tbm arrow <玩家>  建立並箭頭指向你的隊伍或團隊中特定的玩家",
-	"/tbm arrow hide  隱藏箭頭",
-	"/tbm arrow move  可移動箭頭",
+	"SBM-Arrow 用法:",
+	"/SBM arrow <x> <y>  建立一個箭頭在特定的位置(0 < x/y < 100)",
+	"/SBM arrow <玩家>  建立並箭頭指向你的隊伍或團隊中特定的玩家",
+	"/SBM arrow hide  隱藏箭頭",
+	"/SBM arrow move  可移動箭頭",
 }

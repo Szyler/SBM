@@ -1,9 +1,9 @@
 ﻿if GetLocale() ~= "ruRU" then return end
 
-DBM_CORE_NEED_SUPPORT				= "Вы - программист или хороший переводчик? Команда разработчиков TBM нуждается в вашей помощи. Присоединяйтесь к нам -  зайдите на www.deadlybossmods.com или отправьте сообщение на tandanu@deadlybossmods.com или nitram@deadlybossmods.com."
+DBM_CORE_NEED_SUPPORT				= "Вы - программист или хороший переводчик? Команда разработчиков SBM нуждается в вашей помощи. Присоединяйтесь к нам -  зайдите на www.deadlybossmods.com или отправьте сообщение на tandanu@deadlybossmods.com или nitram@deadlybossmods.com."
 
-DBM_CORE_LOAD_MOD_ERROR				= "Ошибка при загрузке TBM для %s: %s"
-DBM_CORE_LOAD_MOD_SUCCESS			= "Загружен TBM для \"%s\", введите /tbm для вызова настроек!"
+DBM_CORE_LOAD_MOD_ERROR				= "Ошибка при загрузке SBM для %s: %s"
+DBM_CORE_LOAD_MOD_SUCCESS			= "Загружен SBM для \"%s\", введите /SBM для вызова настроек!"
 DBM_CORE_LOAD_GUI_ERROR				= "Не удалось загрузить GUI: %s"
 
 DBM_CORE_COMBAT_STARTED				= "%s вступает в бой. Удачи! :)";
@@ -38,25 +38,25 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s сейчас не может ответит
 DBM_CORE_WHISPER_COMBAT_END_KILL	= "%s одержал победу над %s!"
 DBM_CORE_WHISPER_COMBAT_END_WIPE	= "%s потерпел поражение от %s"
 
-DBM_CORE_VERSIONCHECK_HEADER		= "TOXICITY Boss Mods - версии"
+DBM_CORE_VERSIONCHECK_HEADER		= "Szyler Boss Mods - версии"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s: %s (r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: TBM не установлен"
-DBM_CORE_VERSIONCHECK_FOOTER		= "Найдено %d |4игрок:игрока:игроков; с установленным TOXICITY Boss Mods"
-DBM_CORE_YOUR_VERSION_OUTDATED      = "Ваша версия TOXICITY Boss Mods устарела! Пожалуйста, посетите www.deadlybossmods.com для загрузки последней версии."
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s: SBM не установлен"
+DBM_CORE_VERSIONCHECK_FOOTER		= "Найдено %d |4игрок:игрока:игроков; с установленным Szyler Boss Mods"
+DBM_CORE_YOUR_VERSION_OUTDATED      = "Ваша версия Szyler Boss Mods устарела! Пожалуйста, посетите www.deadlybossmods.com для загрузки последней версии."
 
-DBM_CORE_UPDATEREMINDER_HEADER		= "Ваша версия TOXICITY Boss Mods устарела.\n Версия %s (r%d) доступна для загрузки здесь:"
+DBM_CORE_UPDATEREMINDER_HEADER		= "Ваша версия Szyler Boss Mods устарела.\n Версия %s (r%d) доступна для загрузки здесь:"
 DBM_CORE_UPDATEREMINDER_FOOTER		= "Нажмите CTRL+C, чтобы скопировать ссылку загрузки в буфер обмена."
 DBM_CORE_UPDATEREMINDER_NOTAGAIN	= "Всплывающее сообщение при наличии новой версии"
 
 DBM_CORE_MOVABLE_BAR				= "Перетащите!"
 
-DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует TBM Timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Отменить этот DBM Timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Игнорировать DBM Timer от %1$s]|r|h"
-DBM_PIZZA_CONFIRM_IGNORE			= "Вы действительно хотите проигнорировать TBM Timer данного сеанса от %s?"
-DBM_PIZZA_ERROR_USAGE				= "Использование: /tbm [broadcast] timer <time> <text>"
+DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует SBM Timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Отменить этот DBM Timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Игнорировать DBM Timer от %1$s]|r|h"
+DBM_PIZZA_CONFIRM_IGNORE			= "Вы действительно хотите проигнорировать SBM Timer данного сеанса от %s?"
+DBM_PIZZA_ERROR_USAGE				= "Использование: /SBM [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "TOXICITY Boss Mods запущен дважды, поскольку установлены TBMv3 и TBMv4 и включены!\nНажмите кнопку \"ОК\" для отключения TBMv3 и перезагрузки интерфейса.\nНаведите порядок в вашей папке AddOns, удалите старые папки TBMv3."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods запущен дважды, поскольку установлены TBMv3 и TBMv4 и включены!\nНажмите кнопку \"ОК\" для отключения TBMv3 и перезагрузки интерфейса.\nНаведите порядок в вашей папке AddOns, удалите старые папки TBMv3."
 
-DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "TOXICITY Boss Mods"
+DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+щелчок или щелкните правой кнопкой мыши, чтобы переместить"
 
 DBM_CORE_RANGECHECK_HEADER			= "Проверка дистанции (%d м)"
@@ -75,12 +75,12 @@ DBM_LFG_INVITE						= "Приглашение в подземелье"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"Доступные (/) команды:",
-	"/tbm version: выполнение проверки используемой рейдом версии (псевдоним: ver)",
-	"/tbm unlock: отображение перемещаемой строки состояния таймера (псевдоним: move)",
-	"/tbm timer <x> <text>: начинает отсчет <x> сек. Pizza Timer с именем <text>",
-	"/tbm broadcast timer <x> <text>: транслирует <x> сек. Pizza Timer с именем <text> в рейд (требуются права лидера или помощника)",
-	"/tbm break <min>: начинает отсчет отдыха на <min> мин., транслирует отсчет отдыха всем членам рейда с TBM (требуются права лидера или помощника).",
-	"/tbm help: вывод этой справки",
+	"/SBM version: выполнение проверки используемой рейдом версии (псевдоним: ver)",
+	"/SBM unlock: отображение перемещаемой строки состояния таймера (псевдоним: move)",
+	"/SBM timer <x> <text>: начинает отсчет <x> сек. Pizza Timer с именем <text>",
+	"/SBM broadcast timer <x> <text>: транслирует <x> сек. Pizza Timer с именем <text> в рейд (требуются права лидера или помощника)",
+	"/SBM break <min>: начинает отсчет отдыха на <min> мин., транслирует отсчет отдыха всем членам рейда с SBM (требуются права лидера или помощника).",
+	"/SBM help: вывод этой справки",
 }
 
 DBM_ERROR_NO_PERMISSION				= "У вас недостаточно прав, для выполнение этой операции."
@@ -186,11 +186,11 @@ DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Проверка дистанции %d 
 DBM_ARROW_MOVABLE					= "Стрелку можно перемещать"
 DBM_ARROW_NO_RAIDGROUP				= "Данная функция работает только в рейд-группах и внутри рейдовых подземелий."
 DBM_ARROW_ERROR_USAGE	= {
-	"Использование TBM-Arrow:",
-	"/tbm arrow <x> <y>: создает стрелку, указывающую в определенную точку (0 < x/y < 100)",
-	"/tbm arrow <player>: создает стрелку, указывающую на определенного игрока в вашей группе или рейде",
-	"/tbm arrow hide: скрывает стрелку",
-	"/tbm arrow move: разрешает перемещение стрелки",
+	"Использование SBM-Arrow:",
+	"/SBM arrow <x> <y>: создает стрелку, указывающую в определенную точку (0 < x/y < 100)",
+	"/SBM arrow <player>: создает стрелку, указывающую на определенного игрока в вашей группе или рейде",
+	"/SBM arrow hide: скрывает стрелку",
+	"/SBM arrow move: разрешает перемещение стрелки",
 }
 
 

@@ -4,7 +4,7 @@
 ## LoadOnDemand: 0
 ## RequiredDeps: DBM-Core
 ## DefaultState: enabled
-## Author: Sky
+## Author: Szyler
 ## URL: http://www.deadlybossmods.com
 ## SavedVariables: DBM_SpellTimers_Settings
 localization.en.lua

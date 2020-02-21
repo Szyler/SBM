@@ -2,7 +2,7 @@ if GetLocale() ~= "deDE" then return end
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame = "TOXICITY Boss Mods"
+L.MainFrame = "Szyler Boss Mods"
 
 L.TranslationBy 	= "Nitram & Tandanu"
 
@@ -75,7 +75,7 @@ L.ShowWarningsInChat 	= "Zeige Warnungen im Nachrichten-Fenster"
 L.ShowFakedRaidWarnings = "Zeige Warnungen als künstliche Schlachtzugwarnung"
 L.WarningIconLeft 	= "Zeige Symbol links an"
 L.WarningIconRight 	= "Zeige Symbol rechts an"
-L.RaidWarnMessage 	= "Danke, dass du TOXICITY Boss Mods verwendest"
+L.RaidWarnMessage 	= "Danke, dass du Szyler Boss Mods verwendest"
 L.BarWhileMove 		= "Warnungen bewegbar"
 L.RaidWarnSound		= "Spiele Sound bei Schlachtzug-Warnung"
 L.SpecialWarnSound	= "Spiele Sound bei Spezial-Warnung"

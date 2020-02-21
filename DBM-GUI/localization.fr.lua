@@ -3,7 +3,7 @@ if GetLocale() ~= "frFR" then return end
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame 		= "TOXICITY Boss Mods"
+L.MainFrame 		= "Szyler Boss Mods"
 
 L.TranslationBy 	= "Psyco Alias Exodius & Vranwen@EU-Kirin Tor"
 
@@ -76,7 +76,7 @@ L.ShowWarningsInChat 	= "Afficher les alertes dans la fenêtre de dialogue"
 L.ShowFakedRaidWarnings = "Afficher les alertes comme de faux avertissements de raid"
 L.WarningIconLeft 	= "Afficher l'icône à gauche"
 L.WarningIconRight 	= "Afficher l'icône à droite"
-L.RaidWarnMessage 	= "Merci d'utiliser TOXICITY Boss Mods"
+L.RaidWarnMessage 	= "Merci d'utiliser Szyler Boss Mods"
 L.BarWhileMove 		= "Alerte-raid déplaçable"
 L.RaidWarnSound		= "Jouer un son pour les alertes raid"
 L.SpecialWarnSound	= "Jouer un son pour les alertes spéciales"

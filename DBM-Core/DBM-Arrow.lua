@@ -1,7 +1,7 @@
 -- *********************************************************
--- **                   TOXICITY Boss Mods                     **
+-- **                   Szyler Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
--- **        An addon by Sky @ Andorhal - No Risk         **
+-- **        An addon by Szyler @ Andorhal - No Risk         **
 -- *********************************************************
 
 ----------------------------

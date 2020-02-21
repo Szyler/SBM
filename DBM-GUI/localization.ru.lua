@@ -3,7 +3,7 @@
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
-L.MainFrame = "TOXICITY Boss Mods"
+L.MainFrame = "Szyler Boss Mods"
 
 L.TranslationBy 			= "Игорь Бутвин & Vampik & Swix"
 
@@ -78,7 +78,7 @@ L.ShowWarningsInChat 		= "Показывать предупреждения в �
 L.ShowFakedRaidWarnings 	= "Показывать предупреждения в качестве \"Объявление рейду\""
 L.WarningIconLeft 			= "Отображать значок с левой стороны"
 L.WarningIconRight 			= "Отображать значок с правой стороны"
-L.RaidWarnMessage 			= "Спасибо за использование TOXICITY Boss Mods"
+L.RaidWarnMessage 			= "Спасибо за использование Szyler Boss Mods"
 L.BarWhileMove 				= "Действие рейд-предупреждения"
 L.RaidWarnSound				= "Звук рейд-предупреждения"
 L.SpecialWarnSound			= "Звук спец-предупреждения"

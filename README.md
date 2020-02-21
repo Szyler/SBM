@@ -1,2 +1,2 @@
 # OBM
-Developed by Sky - Andorhal @ Project Ascension
+Developed by Szyler - Andorhal @ Project Ascension

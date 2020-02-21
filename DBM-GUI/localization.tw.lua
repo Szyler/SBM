@@ -3,7 +3,7 @@ if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 
 local L = DBM_GUI_Translations
 
-L.MainFrame = "TOXICITY Boss Mods"
+L.MainFrame = "Szyler Boss Mods"
 
 L.TranslationBy 			= "Nightkiller@日落沼澤(kc10577)"
 

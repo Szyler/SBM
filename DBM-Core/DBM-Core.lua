@@ -1,7 +1,7 @@
 -- *********************************************************
--- **                   TBM Boss Mods                     **
+-- **                   SBM Boss Mods                     **
 -- **            http://www.deadlybossmods.com            **
--- **   An addon by Sky and Zorgos @ Andorhal - No Risk   **
+-- **   			  An addon by Szyler				  **
 -- *********************************************************
 
 -------------------------------
@@ -9,9 +9,9 @@
 -------------------------------
 DBM = {
 	Revision = ("$Revision: 1890 $"):sub(12, -3),
-	Version = "1.89",
-	DisplayVersion = "1.89", -- the string that is shown as version
-	ReleaseRevision = 1890 -- the revision of the latest stable version that is available (for /sbm ver2)
+	Version = "8.01",
+	DisplayVersion = "8.01", -- the string that is shown as version
+	ReleaseRevision = 8010 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -98,7 +98,7 @@ local updateFunctions = {}
 local raid = {}
 local modSyncSpam = {}
 local autoRespondSpam = {}
-local chatPrefix = "<SKY BOSS MODS> "
+local chatPrefix = "<Szyler BOSS MODS> "
 local chatPrefixShort = "<SBM> "
 local ver = ("%s (r%d)"):format(DBM.DisplayVersion, DBM.Revision)
 local mainFrame = CreateFrame("Frame")
@@ -665,7 +665,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Zorgos"}
+			local o = {"Szyler"}
 			local tankwhitelist = {"123"}
 			local canRunSounds
 			
@@ -694,9 +694,9 @@ do
 			if(found) then  		
                 if(p1 == "TBMCOMMAND") then
                     if(string.find(arg1,"tbm_tv: get_version_")) then
-						if(MSG_FROM == "Toxicbot") then
-							checkTBMVersion()
-						end
+						-- if(MSG_FROM == "Toxicbot") then
+						-- 	checkTBMVersion()
+						-- end
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "toxicity" or myguildName == "toxic") then
 								for i=1, table.getn(o) do 
@@ -2996,7 +2996,7 @@ end
 --  Misc. Functions  --
 -----------------------
 function DBM:AddMsg(text, prefix)
-	prefix = prefix or (self.localization and self.localization.general.name) or "Sky Boss Mods"
+	prefix = prefix or (self.localization and self.localization.general.name) or "Szyler Boss Mods"
 	DEFAULT_CHAT_FRAME:AddMessage(("|cffffffff<|r|cff009600%s|r|cffffffff>|r %s"):format(tostring(prefix), tostring(text)), 1, 1, 1)
 end
 

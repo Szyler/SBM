@@ -1,6 +1,6 @@
 ﻿## Interface: 30300
 ## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffClassic World Bosses|r
-## Notes: TOXICITY Boss Mods for Project Ascension, made by Sky @ Andorhal
+## Notes: Szyler Boss Mods for Project Ascension, made by Szyler @ Andorhal
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
 ## SavedVariablesPerCharacter: DBMWorldBosses_SavedVars, DBMWorldBosses_SavedStats
