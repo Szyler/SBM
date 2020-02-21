@@ -1,0 +1,597 @@
+[33mcommit 60d6217de5958e946666401c8c4d15dc189598dd[m[33m ([m[1;36mHEAD -> [m[1;32mSzyler[m[33m, [m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Feb 20 04:00:23 2020 +0800
+
+    a
+
+[33mcommit 90f0a7630221b022cb47f5c341933c2751fe934d[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Feb 20 03:56:13 2020 +0800
+
+    Update changelog.txt
+
+[33mcommit b1f55fbf410dfc4e7c3deb9091fee33900cfc5c2[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Feb 20 03:55:25 2020 +0800
+
+    123
+
+[33mcommit e614e9719be65ef2b1816c3b697eb9de10d49eb2[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Jan 15 10:18:04 2020 +0800
+
+    1.88
+
+[33mcommit 53669a883a582b827e6d331ed63d8c638c022546[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Dec 19 23:07:52 2019 +0800
+
+    1.87
+
+[33mcommit f486ab66e35ccdf218f470beeaae841b2b563084[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Nov 23 15:11:00 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit 552cdc1efd3fb0a63e08002e744f2ba62c853079[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Nov 23 15:10:26 2019 +0800
+
+    1.86
+
+[33mcommit 77bed19c4e4ad7057526ba365a6a51f5ec4ea86e[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Nov 16 20:25:07 2019 +0800
+
+    1.85
+
+[33mcommit 318bdae04f98302b62fb0ed2efe63ca33dcbde24[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Nov 16 15:01:16 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit 96224d1185fbd336999af1be476c9e8e2c1d6447[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Nov 16 14:49:39 2019 +0800
+
+    1
+
+[33mcommit 54e41160ae171f58017db3d103a81f39b2c593e6[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun Oct 20 17:48:37 2019 +0800
+
+    v1.83
+
+[33mcommit 0a2275cb3d291c68a1cfd55ea759de09fea38af4[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Oct 11 09:09:15 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit e1aa2139cc405d48f696967c3ff0b8f985d0885a[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Oct 11 09:07:58 2019 +0800
+
+    123
+
+[33mcommit 2449e8566a9590f176cf54d6565b6c80a1a8441e[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Oct 11 09:04:16 2019 +0800
+
+    Update Kel'Thuzad.lua
+
+[33mcommit 180e361aa3ebbece797f3ac0337a88143f482df7[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Oct 11 09:03:49 2019 +0800
+
+    Update DBF-Settings.lua
+
+[33mcommit 4ab37205268d196c472b2b2111aefd3fbe708765[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 09:45:00 2019 +0800
+
+    Update Kel'Thuzad.lua
+
+[33mcommit 4f27435b64dbe6531b87844f6938f3f8846d136a[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 09:43:03 2019 +0800
+
+    Update Kel'Thuzad.lua
+
+[33mcommit c4fc7f78fd29a41ae9a5e3a55b74499283438d33[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 09:24:30 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit 5fdd7b42902ff11e425aead02e8f43c3efdec558[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 09:18:01 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit 667842fe5bd952ee2c8c4119ce51fe81b5bfccba[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 09:16:40 2019 +0800
+
+    1.81
+
+[33mcommit 2c09d97f91e49a00963007aa868a02c030aad4cd[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Oct 5 00:37:11 2019 +0800
+
+    v1.8 - thaddius + kt
+
+[33mcommit 8ff632f1468bdb125b5ec15386065f09e9147099[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Mon Sep 16 17:20:13 2019 +0800
+
+    1.79
+
+[33mcommit adad6d60ca98c6636fa21c846b59665cb7079298[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Sep 12 12:34:24 2019 +0800
+
+    v1.78
+
+[33mcommit 20c27aaa1437f5f739bdfcccb4e1dbd43e76f912[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 31 21:31:11 2019 +0800
+
+    v1.76
+
+[33mcommit df77385e2d9b8045b05550b3c18c004f3c7418a1[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 23:29:48 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit 9696a19a49557fd5d68df57a6d3a0dd19ee5a844[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 23:13:23 2019 +0800
+
+    v1.76
+
+[33mcommit f00d7254880d279bd7b3c29287f2df8a2ec7a898[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 22:07:12 2019 +0800
+
+    Update Razuvious.lua
+
+[33mcommit b56a1e305684e7e5e1da658233f740abc953d783[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 20:52:34 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit 791d6ae3807094df80adc099814f3706dbac25e5[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 20:51:28 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit e4a96d546d60e16058c2041e176b3a1014615bdc[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 29 20:51:10 2019 +0800
+
+    razuvious updates
+
+[33mcommit e44a1b29332c5558978824039a4a1fc36af4d3b6[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun Aug 25 17:14:28 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit 93f3cec208af609c2aef55d0f8fe51df56b48100[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun Aug 25 17:12:37 2019 +0800
+
+    v1.74 yuuuge update
+
+[33mcommit 66b9fbd38083743f97263dfe04c88c6b92e0adcb[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 23 11:30:43 2019 +0800
+
+    123
+
+[33mcommit 06e0cd286f725e982970ea7705e87b3069f3ef39[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 23 10:50:12 2019 +0800
+
+    Update Anub'Rekhan.lua
+
+[33mcommit facb299d949f6109e66991f7eaa07dd153f881ce[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 23 10:48:58 2019 +0800
+
+    Anub'Rekhan cleanup
+
+[33mcommit 3677bf8f6734c1373d2cbc44945106ff7c755b60[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 23 10:42:18 2019 +0800
+
+    added enrage to heigan
+
+[33mcommit d3e7458c77f6993fb499530d0124447a323d0964[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 23 10:40:46 2019 +0800
+
+    fix noth
+
+[33mcommit 7f58d9e30c2a2a14e5323085d05a59320b01e087[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 22 04:49:00 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit 77799803578da11336bea30873060d62593f9006[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 22 04:46:37 2019 +0800
+
+    v1.73
+
+[33mcommit 8f94ae7612b5359e4f6d15873747a596a783d6c4[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Tue Aug 20 06:06:02 2019 +0800
+
+    1.72
+
+[33mcommit 2dadcb354040179ba448b1977057236c0e5cb00a[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Tue Aug 20 06:05:23 2019 +0800
+
+    v1.72
+
+[33mcommit 911fc23520be6abb7e1d146a49d0140bde9f79c4[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Mon Aug 19 12:20:22 2019 +0800
+
+    fixed heigan teleport sounds
+
+[33mcommit 359735f6c6c7a542d42f7383b98e046d00862399[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun Aug 18 13:26:14 2019 +0800
+
+    Update changelog.txt
+
+[33mcommit ffe3f89b3018d7a8d8adf581f44589cec063b695[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun Aug 18 13:25:53 2019 +0800
+
+    v1.70 update
+
+[33mcommit b65c088cbf5706710940628f4adc813fa127a0d7[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:45:41 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit 2077b48b6670c974dc940020c4670040f88d4274[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:39:52 2019 +0800
+
+    v1.63
+
+[33mcommit 9340386a4fbb69db9a2588ae4c8351614f1c8d33[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:38:58 2019 +0800
+
+    v1.63
+
+[33mcommit 61eb0892fc3ecc7b41ea9202f1882caf925aa2cd[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:37:32 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit a9ca6f339dce54b132d4001df0fbda3368a21e6d[m[33m ([m[1;31morigin/master-oak[m[33m, [m[1;32mmaster-oak[m[33m)[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:34:51 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit d7a0b0df8cf5b7df5be913e7ca02363ae41dc532[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Aug 15 03:27:48 2019 +0800
+
+    TBM
+
+[33mcommit 7a179c2cbb2afb6b227c80794bd597f3b9c4441e[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri Aug 9 14:21:52 2019 +0800
+
+    v1.62
+
+[33mcommit c9c45503004bd792174036490928b0f2ff3709f0[m
+Merge: c8ed6a4 461049e
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 22:01:40 2019 +0800
+
+    Merge branch 'master' into master-oak
+
+[33mcommit 461049ecf508ad67b934ade9ebe95054db6efe85[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 22:01:18 2019 +0800
+
+    v1.61 final
+
+[33mcommit c8ed6a4dfdd00f54c3d4b396260e278a8de32d24[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 22:00:40 2019 +0800
+
+    fastest kill fix naxx
+
+[33mcommit b2d5d46b560845a890ffa172a2d2bcd9b322cff0[m
+Merge: 91a2592 0f67970
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 21:59:56 2019 +0800
+
+    Merge branch 'master' into master-oak
+
+[33mcommit 0f67970a9cf4aba13b4c4f781db830db71205e22[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 21:59:34 2019 +0800
+
+    toxic officers update
+
+[33mcommit 7b382d8cc23f152b46abb4cc821b4d02f10887cc[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 21:58:20 2019 +0800
+
+    1.61 update
+
+[33mcommit 91a25920a2bf8f0e193d927fa47b2fd6755bb1d6[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 21:53:45 2019 +0800
+
+    naxx#3
+
+[33mcommit a2be231eb8ea72710a1fa8724d274f8181938811[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Aug 3 21:52:32 2019 +0800
+
+    1.61 - toxicity naxx update
+
+[33mcommit d22d15c26443c6a28d307ac79b68456723daed39[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Jul 18 01:17:34 2019 +0800
+
+    v1.60 - SPIDER WING
+
+[33mcommit 3dbde380fa6a0c14432ab58117d30bb1af96a292[m
+Merge: 2a27c1c 1eb9a71
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Jul 18 01:16:42 2019 +0800
+
+    Merge branch 'master' into master-oak
+
+[33mcommit 1eb9a7158a2847e5870820d85ddab28a591f57b6[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Jul 18 01:16:20 2019 +0800
+
+    v1.60 - remove healthcheck command
+
+[33mcommit a016ed8295de83f0cf0756a7b43e96f9744dbe88[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Jul 18 01:13:26 2019 +0800
+
+    Remove Dreadsmell + Jinjab from commands list (toxicity only) & remove healthcheck command
+
+[33mcommit a4776f5b2b64ffec58f6445a1471656cd7f370ae[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Jul 3 11:52:20 2019 +0800
+
+    v1.59
+
+[33mcommit c01572fb3ae0495d729546add13dc1cd425076a0[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu Jun 27 12:49:05 2019 +0800
+
+    v1.57 and v1.58
+
+[33mcommit dd8eb96f5eddcc09084bed6a38033582e06355d8[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Jun 22 13:20:01 2019 +0800
+
+    v1.56 - bugfix
+
+[33mcommit e21f3b6921d14b47901454ba89d52692baa1b851[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat Jun 22 13:02:58 2019 +0800
+
+    v1.55 - update
+
+[33mcommit 7951641b0fddf37996575f150a581a4c8ec14dc1[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Mon Jun 3 20:10:54 2019 +0800
+
+    hotfix
+
+[33mcommit a6ef024bba4c0accee27b94857b9968ec9288457[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 29 21:03:08 2019 +0800
+
+    v1.54
+
+[33mcommit 1e7672a143dab01bba440af6a8a0a3fca9c06018[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sat May 18 03:49:49 2019 +0800
+
+    1.53 bugfix
+
+[33mcommit 4558271942f08875f816aa6d19e8fcf5b0b67443[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri May 17 08:26:22 2019 +0800
+
+    VERSION 1.52
+
+[33mcommit 38ae208dc815201651a05864158ff06efd33dbd3[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu May 16 22:25:55 2019 +0800
+
+    remove cfix command
+
+[33mcommit eeace81778077098857032ace33bd49cac2b2fa8[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 8 23:39:27 2019 +0800
+
+    UPDATE V1.51
+
+[33mcommit 40edc7667dd96a68bc9e49ff1d61ba6ce0d20a07[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun May 5 04:56:51 2019 +0800
+
+    Update DBF-StatusFrame.lua
+
+[33mcommit 74f6dfb718aec0060f017cca7f3c62b8f5094492[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun May 5 04:51:45 2019 +0800
+
+    Update DBF-DeadlyBuffFrames.lua
+
+[33mcommit 26a9a29e2f28c62fce1452c37f28f90909d0892b[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun May 5 04:14:39 2019 +0800
+
+    BUGFIX
+
+[33mcommit 5d3e59acdf7e6a412a67a8510b5f3ea8c2baa451[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun May 5 04:01:42 2019 +0800
+
+    Deadly Buff Frames implementation
+
+[33mcommit 0560b99ae740359fb9f3fe0460969c503e281be8[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Sun May 5 00:44:12 2019 +0800
+
+    Update SpellTimers.lua
+
+[33mcommit 38815568462073971bec6072c14904a46bd1421a[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Fri May 3 00:17:28 2019 +0800
+
+    Resolved an issue with OBM Pull and OBM Break
+
+[33mcommit 9a49aaa6e6f4092db47562311fbceb751b553d79[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu May 2 19:56:20 2019 +0800
+
+    Create Raid Cooldown tracking system
+
+[33mcommit cd04d71f69f03244e6ed1683dc6f944e0ed52ca2[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu May 2 10:20:20 2019 +0800
+
+    Backend systems update
+
+[33mcommit 2a27c1c054a4f45c813353bec9d0f61644e85def[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Thu May 2 08:52:06 2019 +0800
+
+    Add naxx files
+
+[33mcommit 2a5b5d84fc428613064ba39142727cee9d5633f6[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 23:28:21 2019 +0800
+
+    Update DBM-Core.lua
+
+[33mcommit a10c34bdd1df5f9f4763a4b095f1af2968845936[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:11:40 2019 +0800
+
+    Remove naxxramas from public release
+
+[33mcommit 9241497438521ad38e0c0be65c6390d10cb978da[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:10:26 2019 +0800
+
+    VERSION 1.50
+
+[33mcommit a2a0e87e37f2d0c6d8515466d2504e12b13ec422[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:10:07 2019 +0800
+
+    Update localization.en.lua
+
+[33mcommit 5f7d265cd0d013b3ec5e12dfddfda4b28f582a84[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:09:32 2019 +0800
+
+    Ysondre: Remove debug functionality
+
+[33mcommit ea4d0572a4eeaa7a88c63bd72a9c50f61f9cb39e[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:09:23 2019 +0800
+
+    Taerar: Remove debug functionality
+
+[33mcommit f41bd3724a65216e71f43e1c64b7c60a2f7ead5c[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed May 1 22:09:10 2019 +0800
+
+    Cthun10/25 Bugfix
+
+[33mcommit 6638b10d759d9dc204e3350b739f1c729a8a3406[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Mon Apr 8 09:21:50 2019 +0800
+
+    cthun 10/25 hotfix
+
+[33mcommit 2b73b381ae15e9aa15b5059aaa866e7446ec953f[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 21:19:23 2019 +0800
+
+    Full scripting of Anub'Rekhan
+
+[33mcommit 08dbb4128b702ab585f7b17e9ff1536f0149b505[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 20:24:59 2019 +0800
+
+    naxx-remember commas plz
+
+[33mcommit 0df5bae52abadf8d65cab7e89f042fe0ddc58c5c[m
+Merge: 6af2303 74318bd
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 20:22:13 2019 +0800
+
+    Merge branch 'master' into development-naxx
+
+[33mcommit 74318bd3a78738db439244c5425db8dc5a12f81b[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 20:21:40 2019 +0800
+
+    1.41 - Cthun stomach timer fix for 25man
+
+[33mcommit 6af230311820c80d836c1841535ee84aa30c6940[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 20:10:23 2019 +0800
+
+    OBM-Naxx
+
+[33mcommit 9cd0efc40c9fabcb62239fc487fe1d9650044e05[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 01:00:56 2019 +0800
+
+    Delete Anub'Rekhan.lua
+
+[33mcommit f738060290f7558165c0fad7735e85d4fb969b4b[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 01:00:47 2019 +0800
+
+    Remove naxx from master
+
+[33mcommit c19604998aaba35a4023defdf1e507eaaa7ef3e7[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 01:00:09 2019 +0800
+
+    Clean and Polish - BWL
+
+[33mcommit a58254569360ab011fdc5593bf0231e7516039c4[m
+Author: neptune <tadhgbgblackman@gmail.com>
+Date:   Wed Apr 3 00:58:06 2019 +0800
+
+    Clean and Polish: AQ40
