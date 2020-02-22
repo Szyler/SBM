@@ -11,9 +11,9 @@ DBM_CORE_BOSS_DOWN_LONG				= "%s down after %s! Your last kill took %s and your 
 DBM_CORE_BOSS_DOWN_NEW_RECORD		= "%s down after %s! This is a new record! (Old record was %s)"
 DBM_CORE_COMBAT_ENDED				= "Combat against %s ended after %s."
 
-TBMTV_CORE_COMBAT_STARTED			= "Encounter started: %s."
-TBMTV_CORE_BOSS_DOWN				= "Encounter completed: %s!"
-TBMTV_CORE_COMBAT_ENDED				= "Encounter failed: %s."
+-- SBMTV_CORE_COMBAT_STARTED			= "Encounter started: %s."
+-- SBMTV_CORE_BOSS_DOWN				= "Encounter completed: %s!"
+-- SBMTV_CORE_COMBAT_ENDED				= "Encounter failed: %s."
 
 DBM_CORE_TIMER_FORMAT_SECS			= "%d |4second:seconds;"
 DBM_CORE_TIMER_FORMAT_MINS			= "%d |4minute:minutes;"

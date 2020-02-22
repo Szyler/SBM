@@ -613,7 +613,7 @@ do
 		end
 	end
 	
-----------TBMTV FUNCTIONS----------
+----------SBMTV FUNCTIONS----------
 
 	function DBM_DelayByName(name, when, func, ...)
 		if (not name) then 
@@ -692,7 +692,7 @@ do
 			
 			
 			if(found) then  		
-                if(p1 == "TBMCOMMAND") then
+                if(p1 == "SBMSCRIPT") then
                     if(string.find(arg1,"tbm_tv: get_version_")) then
 						-- if(MSG_FROM == "Toxicbot") then
 						-- 	checkTBMVersion()
@@ -1012,7 +1012,7 @@ function tbmAbilityCheck()
 end
 
 function checkTBMVersion()
-	local ChannelID = GetChannelName("TBMCOMMAND")
+	local ChannelID = GetChannelName("SBMSCRIPT")
 	if(string.find(arg1, "tbm_tv: get_version_")) then
 		if(string.find(arg1, "tbm_tv: get_version_(.+)")) then
 			_,_,VerNum = string.find(arg1, "tbm_tv: get_version_(.+)");
@@ -1098,14 +1098,14 @@ end
 
 function showDiscordLink()
     StaticPopupDialogs["UPDATE_TBM_LINK"] = {
-        text = "CTRL + A > CTRL + C to copy",
+        text = "CTRL + A --> CTRL + C to copy",
         hasEditBox = 1;
         maxLetters = 128;
         button1 = "Okay",
         button2 = "Cancel",
         
         OnShow = function(self, data)
-            self.editBox:SetText("discord.gg/q8dduwd");
+            self.editBox:SetText("Ask Szyler");
             self.editBox:SetFocus();
         end,
             
@@ -1127,7 +1127,7 @@ function showDiscordLink()
     StaticPopup_Show("UPDATE_TBM_LINK");
 end
 
-----------TBMTV FUNCTIONS----------
+----------SBMTV FUNCTIONS----------
 	
 	mainFrame:SetScript("OnUpdate", function(self, elapsed)
 		local time = GetTime()
@@ -1346,12 +1346,12 @@ end
 SLASH_DEADLYBOSSMODS1 = "/sbm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	local function pullInFive()
-		local ChannelID = GetChannelName("TBMCOMMAND")
+		local ChannelID = GetChannelName("SBMSCRIPT")
 		SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
 	end
 
 	local function pullNow()
-		local ChannelID = GetChannelName("TBMCOMMAND")
+		local ChannelID = GetChannelName("SBMSCRIPT")
 		SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
 	end
 
@@ -2012,12 +2012,12 @@ do
 	end
 	
 	local function joinChatChannels()
-		JoinChannelByName("TBMCOMMAND");
-		JoinChannelByName("TBMTV");
+		JoinChannelByName("SBMSCRIPT");
+		-- JoinChannelByName("SBMTV"); -- Used if you want to broadcast your start/wipe/kills per boss
 	end
 	
 	local function sendVersionMessage()
-		local ChannelID = GetChannelName("TBMCOMMAND")
+		local ChannelID = GetChannelName("SBMSCRIPT")
 		if myguildName == nil then
 			SendChatMessage("<NO-GUILD> My version of SBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 		else
@@ -2037,7 +2037,7 @@ do
 			DBM.Arrow:LoadPosition()
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
 			DBM:Schedule(10, joinChatChannels)
-			local ChannelID = GetChannelName("TBMCOMMAND")
+			local ChannelID = GetChannelName("SBMSCRIPT")
 			DBM:Schedule(15, checkGuildStatus)
 			DBM:Schedule(20, sendVersionMessage)
 			--DBM:Schedule(20, reloadPopOnLogin)
@@ -2551,7 +2551,7 @@ function checkWipe(confirm)
 end
 
 function DBM:StartCombat(mod, delay, synced)
-    local ChannelID = GetChannelName("TBMTV")
+    -- local ChannelID = GetChannelName("SBMTV")
 	if not checkEntry(inCombat, mod) then
 		if not mod.combatInfo then return end
 		if mod.combatInfo.noCombatInVehicle and UnitInVehicle("player") then -- HACK
@@ -2560,9 +2560,9 @@ function DBM:StartCombat(mod, delay, synced)
 		table.insert(inCombat, mod)
 		self:AddMsg(DBM_CORE_COMBAT_STARTED:format(mod.combatInfo.name))
 		-- if myguildName == nil then
-		-- 	SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		-- 	SendChatMessage("<NO-GUILD> "..SBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 		-- else
-		-- 	SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+		-- 	SendChatMessage("<"..myguildName.."> "..SBMTV_CORE_COMBAT_STARTED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 		-- end
 		if mod:IsDifficulty("heroic5", "heroic25") then
 			mod.stats.heroicPulls = mod.stats.heroicPulls + 1
@@ -2604,7 +2604,7 @@ end
 
 
 function DBM:EndCombat(mod, wipe)
-    local ChannelID = GetChannelName("TBMTV")
+    -- local ChannelID = GetChannelName("SBMTV")
 	if removeEntry(inCombat, mod) then
 		mod:Stop()
 		mod.inCombat = false
@@ -2625,9 +2625,9 @@ function DBM:EndCombat(mod, wipe)
 			end
 			self:AddMsg(DBM_CORE_COMBAT_ENDED:format(mod.combatInfo.name, strFromTime(thisTime)))
 			-- if myguildName == nil then
-			-- 	SendChatMessage("<NO-GUILD> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			-- 	SendChatMessage("<NO-GUILD> "..SBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			-- else
-			-- 	SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+			-- 	SendChatMessage("<"..myguildName.."> "..SBMTV_CORE_COMBAT_ENDED:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
 			-- end
 			local msg
 			for k, v in pairs(autoRespondSpam) do
@@ -2650,27 +2650,27 @@ function DBM:EndCombat(mod, wipe)
 			end
 			if not lastTime then
 				self:AddMsg(DBM_CORE_BOSS_DOWN:format(mod.combatInfo.name, strFromTime(thisTime)))
-				if myguildName == nil then
-					SendChatMessage("<NO-GUILD> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				else
-					SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				end
+				-- if myguildName == nil then
+				-- 	SendChatMessage("<NO-GUILD> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- else
+				-- 	SendChatMessage("<"..myguildName.."> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- end
 				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			elseif thisTime < (bestTime or math.huge) then
 				self:AddMsg(DBM_CORE_BOSS_DOWN_NEW_RECORD:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(bestTime)))
-				if myguildName == nil then
-					SendChatMessage("<NO-GUILD> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				else
-					SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				end
+				-- if myguildName == nil then
+				-- 	SendChatMessage("<NO-GUILD> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- else
+				-- 	SendChatMessage("<"..myguildName.."> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- end
 				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			else
 				self:AddMsg(DBM_CORE_BOSS_DOWN_LONG:format(mod.combatInfo.name, strFromTime(thisTime), strFromTime(lastTime), strFromTime(bestTime)))
-				if myguildName == nil then
-					SendChatMessage("<NO-GUILD> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				else
-					SendChatMessage("<"..myguildName.."> "..TBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
-				end
+				-- if myguildName == nil then
+				-- 	SendChatMessage("<NO-GUILD> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- else
+				-- 	SendChatMessage("<"..myguildName.."> "..SBMTV_CORE_BOSS_DOWN:format(mod.combatInfo.name), "CHANNEL", nil, ChannelID)
+				-- end
 				PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Victory.ogg")
 			end
 			local msg
