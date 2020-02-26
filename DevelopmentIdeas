@@ -1,0 +1,12 @@
+
+--- Skeram : 
+--- If addon detects add, say "attack adds"
+--- Automark skull - Cross - Circle
+
+Add FM to ability tracker
+ - Open FM tab, anyone who has FM will be added
+ - - Click the target to cast FM, and close window
+ - - - Send info through channel everyone else will have that target blocked out, 
+
+Add guild name to channel name as a variable to enable multiple guilds to have individual commands (ability check)
+
