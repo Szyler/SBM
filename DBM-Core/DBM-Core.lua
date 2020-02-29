@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1890 $"):sub(12, -3),
-	Version = "8.01",
-	DisplayVersion = "8.01", -- the string that is shown as version
-	ReleaseRevision = 8010 -- the revision of the latest stable version that is available (for /sbm ver2)
+	Revision = ("$Revision: 1802 $"):sub(12, -3),
+	Version = "8.02",
+	DisplayVersion = "8.02", -- the string that is shown as version
+	ReleaseRevision = 8020 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -714,12 +714,12 @@ do
 					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
-								for i=1, table.getn(o) do 
-									if(MSG_FROM == o[i]) then
+								-- for i=1, table.getn(o) do 
+								-- 	if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
 											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										end
-									end
+									-- 	end
+									-- end
 								end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
@@ -734,13 +734,13 @@ do
 					if(string.find(arg1,"tbm_cmd: pull_now")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
-								for i=1, table.getn(o) do 
-									if(MSG_FROM == o[i]) then
+								-- for i=1, table.getn(o) do 
+									-- if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
 											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
 										end
-									end
-								end
+									-- end
+								-- end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
 										if canRunSounds == true then
@@ -2052,8 +2052,6 @@ do
 		guildChannel = noSpaceGuildName.."SBM"
 	end
 	
-
-
 	function DBM:ADDON_LOADED(modname)
 		if modname == "DBM-Core" then
 			loadOptions()
