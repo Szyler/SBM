@@ -1,0 +1,15 @@
+
+--- Skeram : 
+--- If addon detects add, say "attack adds"
+--- Automark skull - Cross - Circle
+
+Add FM to ability tracker
+ - Open FM tab, anyone who has FM will be added
+ - - Click the target to cast FM, and close window
+ - - - Send info through channel everyone else will have that target blocked out, 
+
+Add guild name to channel name as a variable to enable multiple guilds to have individual commands (ability check)
+
+Onyxia 
+ - if args:IsSpellID(17086, 18351, 18564, 18576) or args:IsSpellID(18584, 18596, 18609, 18617) then	-- 1 ID for each direction
+ - - Add text for letting players know which direction blast is comming from

@@ -20,7 +20,7 @@ function mod:PLAYER_ALIVE()
 	end
 end
 
-local berserkTimer	=	mod:NewBerserkTimer(540)
+local berserkTimer					= mod:NewBerserkTimer(540)
 local prewarnClones					= mod:NewAnnounce("Skeram Clones Soon", 3, 1002181)
 
 local check1
