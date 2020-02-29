@@ -937,6 +937,7 @@ function tbmAbilityCheck()
 		end
 	end	
 	-----UTILITY-----
+	local focusMagic = "Focus Magic"
 	local cleanse = "Cleanse"
 	local rcurse = "Remove Curse"
 	local tranq = "Tranquilizing Shot"
@@ -946,6 +947,13 @@ function tbmAbilityCheck()
 	local purge = "Purge"
 	local ctongues = "Curse of Tongues"
 	local celements = "Curse of the Elements"
+	if(string.find(arg1, "tbm_cmd: check: "..focusMagic)) then	
+		if(spellName == focusMagic) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
 	if(string.find(arg1, "tbm_cmd: check: "..cleanse)) then	
 		if(spellName == cleanse) then
 			if(myName == GetUnitName("player")) then

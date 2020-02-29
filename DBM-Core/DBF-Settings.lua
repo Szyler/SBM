@@ -1209,6 +1209,17 @@ function DBF_Settings_Menuofdoom()
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 			
 				info = {};
+				info.text = "Focus Magic";
+				info.tooltipTitle = info.text;
+				info.tooltipText = "Ability check for: "..info.text;
+				info.notCheckable = 1;
+				info.func = function() 
+					local ChanID = GetChannelName(guildChannel);
+					SendChatMessage("tbm_cmd: check: Focus Magic", "CHANNEL", nil, ChanID) 
+				end;
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
+
+				info = {};
 				info.text = "Cleanse";
 				info.tooltipTitle = info.text;
 				info.tooltipText = "Ability check for: "..info.text;
