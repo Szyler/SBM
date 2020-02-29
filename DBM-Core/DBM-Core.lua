@@ -124,6 +124,7 @@ local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20
 local shownPopup = 0
 local noSpaceGuildName
 local guildChannel
+local channelToJoin
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
 
@@ -2014,7 +2015,6 @@ do
 	end
 	
 	local function joinChatChannels()
-		local channelToJoin
 		if myguildName == nil then
 			channelToJoin = "SBMSCRIPT"
 		else
