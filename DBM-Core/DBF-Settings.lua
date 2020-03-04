@@ -128,6 +128,14 @@ UIDROPDOWNMENU_MENU_LEVEL
 UIDROPDOWNMENU_MENU_VALUE
 ]]--
 
+local function createChannelName()
+	myguildName,_,_,_ = GetGuildInfo("player");
+	noSpaceGuildName = gsub(myguildName, "%s+", "")
+	guildChannel = noSpaceGuildName.."SBM"
+end
+
+DBM:Schedule(19, createChannelName)
+
 function DBF_Settings_Menuofdoom()
 	local info = {};
 	if(UIDROPDOWNMENU_MENU_LEVEL==1) then
@@ -135,7 +143,7 @@ function DBF_Settings_Menuofdoom()
 		     /////// FIRST MENU \\\\\\\\
 		     ***************************************]]--
 		
-		local ShowTOXICITYOfficer = true;
+		local ShowEXTRAOfficer = true;
 		local ShowOfficer = true;
 		amnt = 1; -- amount of white spaces
 		guildName,_,guildRankIndex = GetGuildInfo("player");
@@ -143,17 +151,18 @@ function DBF_Settings_Menuofdoom()
 		local myName = UnitName("player")
 		local REALM_NAME = GetRealmName();
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
-		
+	
 		if(REALM_NAME == "Andorhal - No-Risk") then
 			if(myguildName == "toxicity") then
 				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
 					ShowOfficer = true;
-					ShowTOXICITYOfficer = true;
+					ShowEXTRAOfficer = false;
 					amnt = 1;
 				end
 			elseif(myguildName == "Long Live Cenarius") then
 				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
 					ShowOfficer = true;
+					ShowEXTRAOfficer = true;
 					amnt = 1;
 				end
 			elseif(myguildName == "Exiled") then
@@ -201,7 +210,7 @@ function DBF_Settings_Menuofdoom()
 		end
 	
 			 
-		if(ShowTOXICITYOfficer) then
+		if(ShowEXTRAOfficer) then
 			info = {};
 			info.text = "Ability Checks";
 			info.hasArrow = 1;
@@ -226,13 +235,13 @@ function DBF_Settings_Menuofdoom()
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 		end
 		
-		if(ShowTOXICITYOfficer) then
+		if(ShowEXTRAOfficer) then
 			info = {};
 			info.text = "Check versions";
 			info.tooltipTitle = info.text;
 			info.tooltipText = "People who have a different version than you will get a warning to update their addon.";
 			info.notCheckable = 1;
-			info.func = function() ChanID = GetChannelName("SBMSCRIPT");
+			info.func = function() ChanID = GetChannelName(guildChannel);
 			SendChatMessage("tbm_tv: get_version_"..DBM.Version, "CHANNEL", nil, ChanID) end;
 			info.value = "CheckVersions";
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -652,12 +661,12 @@ function DBF_Settings_Menuofdoom()
 			if(UIDROPDOWNMENU_MENU_VALUE == "OfficerPTMenu") then
 			
 				local function pullInFive()
-					local ChannelID = GetChannelName("SBMSCRIPT")
+					local ChannelID = GetChannelName(guildChannel)
 					SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
 				end
 
 				local function pullNow()
-					local ChannelID = GetChannelName("SBMSCRIPT")
+					local ChannelID = GetChannelName(guildChannel)
 					SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
 				end				
 				
@@ -993,7 +1002,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Disarms", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
@@ -1004,7 +1013,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Disorients", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1015,7 +1024,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Fears", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1033,7 +1042,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Incapacitation", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
@@ -1044,7 +1053,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Interrupts", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
@@ -1055,7 +1064,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Mana Drains", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
@@ -1066,7 +1075,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Roots", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);						
@@ -1077,7 +1086,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Slows", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);					
@@ -1088,7 +1097,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "Ability check for: "..info.text;
 			info.notCheckable = 1;
 			info.func = function() 
-				local ChanID = GetChannelName("SBMSCRIPT");
+				local ChanID = GetChannelName(guildChannel);
 				SendChatMessage("tbm_cmd: check: Stuns", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);								
@@ -1122,7 +1131,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Deterrence", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
@@ -1133,7 +1142,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Divine Shield", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1144,7 +1153,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Ice Block", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1164,7 +1173,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Cleansing Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1175,7 +1184,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Grounding Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1186,7 +1195,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Tremor Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1200,12 +1209,23 @@ function DBF_Settings_Menuofdoom()
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 			
 				info = {};
+				info.text = "Focus Magic";
+				info.tooltipTitle = info.text;
+				info.tooltipText = "Ability check for: "..info.text;
+				info.notCheckable = 1;
+				info.func = function() 
+					local ChanID = GetChannelName(guildChannel);
+					SendChatMessage("tbm_cmd: check: Focus Magic", "CHANNEL", nil, ChanID) 
+				end;
+				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
+
+				info = {};
 				info.text = "Cleanse";
 				info.tooltipTitle = info.text;
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Cleanse", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
@@ -1216,7 +1236,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Curse of the Elements", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
@@ -1227,7 +1247,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Curse of Tongues", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
@@ -1238,7 +1258,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Disarm Trap", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
@@ -1249,7 +1269,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Fade", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
@@ -1260,7 +1280,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function()
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Feign Death", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
@@ -1271,7 +1291,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Purge", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
@@ -1282,7 +1302,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Remove Curse", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
@@ -1293,7 +1313,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipText = "Ability check for: "..info.text;
 				info.notCheckable = 1;
 				info.func = function() 
-					local ChanID = GetChannelName("SBMSCRIPT");
+					local ChanID = GetChannelName(guildChannel);
 					SendChatMessage("tbm_cmd: check: Tranquilizing Shot", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);						

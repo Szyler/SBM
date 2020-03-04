@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1890 $"):sub(12, -3),
-	Version = "8.01",
-	DisplayVersion = "8.01", -- the string that is shown as version
-	ReleaseRevision = 8010 -- the revision of the latest stable version that is available (for /sbm ver2)
+	Revision = ("$Revision: 1802 $"):sub(12, -3),
+	Version = "8.02",
+	DisplayVersion = "8.02", -- the string that is shown as version
+	ReleaseRevision = 8020 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -122,6 +122,9 @@ local healthCheckFunction = UnitName("player")
 local myguildName, myguildRankName, myguildRankIndex, myguildRealm
 local healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20
 local shownPopup = 0
+local noSpaceGuildName
+local guildChannel
+local channelToJoin
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
 
@@ -692,13 +695,13 @@ do
 			
 			
 			if(found) then  		
-                if(p1 == "SBMSCRIPT") then
-                    if(string.find(arg1,"tbm_tv: get_version_")) then
+				if(p1 == channelToJoin) then
+					if(string.find(arg1,"tbm_tv: get_version_")) then
 						-- if(MSG_FROM == "Toxicbot") then
 						-- 	checkTBMVersion()
 						-- end
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
+							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										checkTBMVersion()
@@ -710,13 +713,13 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
-								for i=1, table.getn(o) do 
-									if(MSG_FROM == o[i]) then
+							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
+								-- for i=1, table.getn(o) do 
+								-- 	if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
 											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										end
-									end
+									-- 	end
+									-- end
 								end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
@@ -730,14 +733,14 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: pull_now")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
-								for i=1, table.getn(o) do 
-									if(MSG_FROM == o[i]) then
+							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
+								-- for i=1, table.getn(o) do 
+									-- if(MSG_FROM == o[i]) then
 										if canRunSounds == true then
 											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
 										end
-									end
-								end
+									-- end
+								-- end
 								for i=1, table.getn(tankwhitelist) do 
 									if(MSG_FROM == tankwhitelist[i]) then
 										if canRunSounds == true then
@@ -750,7 +753,7 @@ do
 					end
 					if(string.find(arg1,"tbm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
-							if(myguildName == "Long Live Cenarious" or myguildName == "Tilted") then
+							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
 										tbmAbilityCheck()
@@ -759,7 +762,7 @@ do
 								end
 							end
 						end
-                    end
+					end
                 end
             end
 		end
@@ -934,6 +937,7 @@ function tbmAbilityCheck()
 		end
 	end	
 	-----UTILITY-----
+	local focusMagic = "Focus Magic"
 	local cleanse = "Cleanse"
 	local rcurse = "Remove Curse"
 	local tranq = "Tranquilizing Shot"
@@ -943,6 +947,13 @@ function tbmAbilityCheck()
 	local purge = "Purge"
 	local ctongues = "Curse of Tongues"
 	local celements = "Curse of the Elements"
+	if(string.find(arg1, "tbm_cmd: check: "..focusMagic)) then	
+		if(spellName == focusMagic) then
+			if(myName == GetUnitName("player")) then
+				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+			end
+		end
+	end	
 	if(string.find(arg1, "tbm_cmd: check: "..cleanse)) then	
 		if(spellName == cleanse) then
 			if(myName == GetUnitName("player")) then
@@ -1012,7 +1023,7 @@ function tbmAbilityCheck()
 end
 
 function checkTBMVersion()
-	local ChannelID = GetChannelName("SBMSCRIPT")
+	local ChannelID = GetChannelName(guildChannel)
 	if(string.find(arg1, "tbm_tv: get_version_")) then
 		if(string.find(arg1, "tbm_tv: get_version_(.+)")) then
 			_,_,VerNum = string.find(arg1, "tbm_tv: get_version_(.+)");
@@ -1346,12 +1357,12 @@ end
 SLASH_DEADLYBOSSMODS1 = "/sbm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	local function pullInFive()
-		local ChannelID = GetChannelName("SBMSCRIPT")
+		local ChannelID = GetChannelName(guildChannel)
 		SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
 	end
 
 	local function pullNow()
-		local ChannelID = GetChannelName("SBMSCRIPT")
+		local ChannelID = GetChannelName(guildChannel)
 		SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
 	end
 
@@ -2012,12 +2023,17 @@ do
 	end
 	
 	local function joinChatChannels()
-		JoinChannelByName("SBMSCRIPT");
+		if myguildName == nil then
+			channelToJoin = "SBMSCRIPT"
+		else
+			channelToJoin = guildChannel
+		end
+		JoinChannelByName(channelToJoin);
 		-- JoinChannelByName("SBMTV"); -- Used if you want to broadcast your start/wipe/kills per boss
 	end
 	
 	local function sendVersionMessage()
-		local ChannelID = GetChannelName("SBMSCRIPT")
+		local ChannelID = GetChannelName(channelToJoin)
 		if myguildName == nil then
 			SendChatMessage("<NO-GUILD> My version of SBM is "..DBM.Version, "CHANNEL", nil, ChannelID)
 		else
@@ -2029,6 +2045,12 @@ do
 		myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
 		healthCheckName, myguildRankName20, myguildRankIndex20, myguildRealm20 = GetGuildInfo(myName)
 	end
+
+	local function createChannelName()
+		checkGuildStatus()
+		noSpaceGuildName = gsub(myguildName, "%s+", "")
+		guildChannel = noSpaceGuildName.."SBM"
+	end
 	
 	function DBM:ADDON_LOADED(modname)
 		if modname == "DBM-Core" then
@@ -2036,10 +2058,11 @@ do
 			DBM.Bars:LoadOptions("DBM")
 			DBM.Arrow:LoadPosition()
 			if not DBM.Options.ShowMinimapButton then DBM:HideMinimapButton() end
-			DBM:Schedule(10, joinChatChannels)
-			local ChannelID = GetChannelName("SBMSCRIPT")
 			DBM:Schedule(15, checkGuildStatus)
-			DBM:Schedule(20, sendVersionMessage)
+			DBM:Schedule(19, createChannelName)
+			DBM:Schedule(22, joinChatChannels)
+			DBM:Schedule(25, sendVersionMessage)
+			-- local ChannelID = GetChannelName(guildChannel)
 			--DBM:Schedule(20, reloadPopOnLogin)
 			self.AddOns = {}
 			for i = 1, GetNumAddOns() do
