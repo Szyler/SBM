@@ -104,7 +104,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		specWarnMutateBug:Show();
 		if(GetRaidTargetIndex(args.destName) == 0) then
 			iconsUsed = iconsUsed + 1 or 1;
-			mod:SetIcon(args.destName, iconsUsed)
+			mod:SetIcon(args.destName, iconsUsed);
 		end
 	end
 end
@@ -112,7 +112,8 @@ end
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(802, 804) then -- Mutate Bug 802 -- Explode Bug 804
 		if(GetRaidTargetIndex(args.destName) > 0) then
-			mod:SetIcon(args.destName, 0)
+			mod:SetIcon(args.destName, 0);
+			iconsUsed = iconsUsed - 1;
 		end
 	end
 	-- if args:IsSpellID(804) then -- Explode Bug 804
