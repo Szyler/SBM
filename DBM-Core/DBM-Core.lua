@@ -8,9 +8,9 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1802 $"):sub(12, -3),
-	Version = "8.02",
-	DisplayVersion = "8.02", -- the string that is shown as version
+	Revision = ("$Revision: 1803 $"):sub(12, -3),
+	Version = "8.03",
+	DisplayVersion = "8.03", -- the string that is shown as version
 	ReleaseRevision = 8020 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 

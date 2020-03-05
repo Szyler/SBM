@@ -305,10 +305,13 @@ v1.89 - 20/02/2020
 v8.01 - 21/02/2020
 - Renamed to Szyler Boss Mods, removed Toxic spy channels stuff.
 ----------------------------------------------------------------------------------------------------
-v8.01 - 29/02/2020
+v8.02 - 29/02/2020
 - Added Focus magic ability check
 - Removed limitations on pulltimerSound
 - Added guild variable SBM channels 
 - Enabled officer menu for everyone
 - pulltimerSound, checkversion and ability checks only work with guildSBM channels, onLoginVersion still sent in SBMSCRIPT.
+----------------------------------------------------------------------------------------------------
+v8.03 - 05/03/2020
+- Added raid marks on adds on TwinEmperors
 ----------------------------------------------------------------------------------------------------
