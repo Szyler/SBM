@@ -1,6 +1,6 @@
 ﻿## Interface: 30300
-## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffBlackwing Lair|r
-## Notes: Szyler Boss Mods for Project Ascension, made by Szyler @ Andorhal
+## Title:|cffffffff<|r|cffff7d0aSBM|r|cffffffff>|r |cffffffffBlackwing Lair|r
+## Notes: Szyler Boss Mods for Project Ascension, made by Sky @ Andorhal, Continued by Szyler
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core
 ## SavedVariablesPerCharacter: DBMBWL_SavedVars, DBMBWL_SavedStats

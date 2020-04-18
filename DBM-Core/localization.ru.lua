@@ -54,7 +54,7 @@ DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует SBM Ti
 DBM_PIZZA_CONFIRM_IGNORE			= "Вы действительно хотите проигнорировать SBM Timer данного сеанса от %s?"
 DBM_PIZZA_ERROR_USAGE				= "Использование: /SBM [broadcast] timer <time> <text>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods запущен дважды, поскольку установлены TBMv3 и TBMv4 и включены!\nНажмите кнопку \"ОК\" для отключения TBMv3 и перезагрузки интерфейса.\nНаведите порядок в вашей папке AddOns, удалите старые папки TBMv3."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods запущен дважды, поскольку установлены SBMv3 и SBMv4 и включены!\nНажмите кнопку \"ОК\" для отключения SBMv3 и перезагрузки интерфейса.\nНаведите порядок в вашей папке AddOns, удалите старые папки SBMv3."
 
 DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+щелчок или щелкните правой кнопкой мыши, чтобы переместить"

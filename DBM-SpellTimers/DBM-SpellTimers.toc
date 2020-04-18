@@ -1,5 +1,5 @@
 ## Interface: 30300
-## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffRaid Cooldowns|r
+## Title:|cffffffff<|r|cffff7d0aSBM|r|cffffffff>|r |cffffffffRaid Cooldowns|r
 ## Notes: Creates bars for Long term cooldowns or durations
 ## LoadOnDemand: 0
 ## RequiredDeps: DBM-Core

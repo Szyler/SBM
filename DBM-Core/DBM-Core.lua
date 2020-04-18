@@ -696,22 +696,22 @@ do
 			
 			if(found) then  		
 				if(p1 == channelToJoin) then
-					if(string.find(arg1,"tbm_tv: get_version_")) then
+					if(string.find(arg1,"sbm_tv: get_version_")) then
 						-- if(MSG_FROM == "Toxicbot") then
-						-- 	checkTBMVersion()
+						-- 	checkSBMVersion()
 						-- end
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
-										checkTBMVersion()
+										checkSBMVersion()
 										break
 									end
 								end
 							end
 						end
 					end
-					if(string.find(arg1,"tbm_cmd: pull_5_remaining")) then
+					if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								-- for i=1, table.getn(o) do 
@@ -731,7 +731,7 @@ do
 							end
 						end
 					end
-					if(string.find(arg1,"tbm_cmd: pull_now")) then
+					if(string.find(arg1,"sbm_cmd: pull_now")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								-- for i=1, table.getn(o) do 
@@ -751,12 +751,12 @@ do
 							end
 						end
 					end
-					if(string.find(arg1,"tbm_cmd: check: ")) then
+					if(string.find(arg1,"sbm_cmd: check: ")) then
 						if(REALM_NAME == "Andorhal - No-Risk") then
 							if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								for i=1, table.getn(o) do 
 									if(MSG_FROM == o[i]) then
-										tbmAbilityCheck()
+										sbmAbilityCheck()
 										break
 									end
 								end
@@ -769,7 +769,7 @@ do
     end
     )
 	
-function tbmAbilityCheck()
+function sbmAbilityCheck()
 	for j = 1, GetNumRaidMembers() do
 		myName, _, groupId = GetRaidRosterInfo(j);
 	end
@@ -784,7 +784,7 @@ function tbmAbilityCheck()
 	-----DISARM (GROUPED)-----
 	local disarm = "Disarm"
 	local phorror = "Psychic Horror"
-	if(string.find(arg1, "tbm_cmd: check: Disarms")) then	
+	if(string.find(arg1, "sbm_cmd: check: Disarms")) then	
 		if(spellName == disarm or spellName == phorror) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -794,7 +794,7 @@ function tbmAbilityCheck()
 	-----DISORIENTS (GROUPED)----
 	local dbreath = "Dragon's Breath"
 	local scattershot = "Scatter Shot"	
-	if(string.find(arg1, "tbm_cmd: check: Disorients")) then	
+	if(string.find(arg1, "sbm_cmd: check: Disorients")) then	
 		if(spellName == dbreath or spellName == scattershot) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -806,7 +806,7 @@ function tbmAbilityCheck()
 	local ishout = "Intimidating Shout"
 	local hterror = "Howl of Terror"
 	local dcoil = "Death Coil"
-	if(string.find(arg1, "tbm_cmd: check: Fears")) then	
+	if(string.find(arg1, "sbm_cmd: check: Fears")) then	
 		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -817,21 +817,21 @@ function tbmAbilityCheck()
 	local dshield = "Divine Shield"
 	local iblock = "Ice Block"
 	local deterr = "Deterrence" 
-	if(string.find(arg1, "tbm_cmd: check: "..dshield)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..dshield)) then	
 		if(spellName == dshield) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..iblock)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..iblock)) then	
 		if(spellName == iblock) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..deterr)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..deterr)) then	
 		if(spellName == deterr) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -842,7 +842,7 @@ function tbmAbilityCheck()
 	local wysting = "Wyvern Sting"
 	local repent = "Repentance"
 	local poly = "Polymorph"
-	if(string.find(arg1, "tbm_cmd: check: Incapacitation")) then	
+	if(string.find(arg1, "sbm_cmd: check: Incapacitation")) then	
 		if(spellName == wysting or spellName == repent or spellName == poly) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -857,7 +857,7 @@ function tbmAbilityCheck()
 	local kickspell = "Kick"
 	local silencespell = "Silence"
 	local silenceshot = "Silencing Shot"
-	if(string.find(arg1, "tbm_cmd: check: Interrupts")) then	
+	if(string.find(arg1, "sbm_cmd: check: Interrupts")) then	
 		if(spellName == cspell or spellName == sbash or spellName == pummel or spellName == wshear or spellName == kickspell or spellName == silencespell or spellName == silenceshot) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -867,7 +867,7 @@ function tbmAbilityCheck()
 	-----MANA Drains (GROUPED)-----
 	local mburn = "Mana Burn"
 	local dmana = "Drain Mana"	
-	if(string.find(arg1, "tbm_cmd: check: Mana Drains")) then	
+	if(string.find(arg1, "sbm_cmd: check: Mana Drains")) then	
 		if(spellName == mburn or spellName == dmana) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -876,7 +876,7 @@ function tbmAbilityCheck()
 	end		
 	-----ROOTS (GROUPED)-----
 	local eroots = "Entangling Roots"
-	if(string.find(arg1, "tbm_cmd: check: Roots")) then	
+	if(string.find(arg1, "sbm_cmd: check: Roots")) then	
 		if(spellName == eroots) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -889,7 +889,7 @@ function tbmAbilityCheck()
 	local slow = "Slow"
 	local cexhaust = "Curse of Exhaustion"
 	local ebtotem = "Earthbind Totem"
-	if(string.find(arg1, "tbm_cmd: check: Slows")) then	
+	if(string.find(arg1, "sbm_cmd: check: Slows")) then	
 		if(spellName == fbrandwep or spellName == hamstring or spellName == slow or spellName == cexhaust or spellName == ebtotem) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -904,7 +904,7 @@ function tbmAbilityCheck()
 	local sfury = "Shadow Fury"
 	local swave = "Shockwave"
 	local icept = "Intercept"
-	if(string.find(arg1, "tbm_cmd: check: Stuns")) then	
+	if(string.find(arg1, "sbm_cmd: check: Stuns")) then	
 		if(spellName == dfreeze or spellName == hoj or spellName == bearbash or spellName == kshot or spellName == sfury or spellName == swave or spellName == icept) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -915,21 +915,21 @@ function tbmAbilityCheck()
 	local ctotem = "Cleansing Totem"
 	local ttotem = "Tremor Totem"
 	local gtotem = "Grounding Totem"	
-	if(string.find(arg1, "tbm_cmd: check: "..ctotem)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..ctotem)) then	
 		if(spellName == ctotem) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..ttotem)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..ttotem)) then	
 		if(spellName == ttotem) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..gtotem)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..gtotem)) then	
 		if(spellName == gtotem) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("Group "..groupId..": I have "..spellName, "RAID", nil, nil);
@@ -947,70 +947,70 @@ function tbmAbilityCheck()
 	local purge = "Purge"
 	local ctongues = "Curse of Tongues"
 	local celements = "Curse of the Elements"
-	if(string.find(arg1, "tbm_cmd: check: "..focusMagic)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..focusMagic)) then	
 		if(spellName == focusMagic) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..cleanse)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..cleanse)) then	
 		if(spellName == cleanse) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..rcurse)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..rcurse)) then	
 		if(spellName == rcurse) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..tranq)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..tranq)) then	
 		if(spellName == tranq) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..fade)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..fade)) then	
 		if(spellName == fade) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..fdeath)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..fdeath)) then	
 		if(spellName == fdeath) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..dtrap)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..dtrap)) then	
 		if(spellName == dtrap) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..purge)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..purge)) then	
 		if(spellName == purge) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..ctongues)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..ctongues)) then	
 		if(spellName == ctongues) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
 			end
 		end
 	end	
-	if(string.find(arg1, "tbm_cmd: check: "..celements)) then	
+	if(string.find(arg1, "sbm_cmd: check: "..celements)) then	
 		if(spellName == celements) then
 			if(myName == GetUnitName("player")) then
 				SendChatMessage("I have "..spellName, "RAID", nil, nil);
@@ -1022,11 +1022,11 @@ function tbmAbilityCheck()
 	end	
 end
 
-function checkTBMVersion()
+function checkSBMVersion()
 	local ChannelID = GetChannelName(guildChannel)
-	if(string.find(arg1, "tbm_tv: get_version_")) then
-		if(string.find(arg1, "tbm_tv: get_version_(.+)")) then
-			_,_,VerNum = string.find(arg1, "tbm_tv: get_version_(.+)");
+	if(string.find(arg1, "sbm_tv: get_version_")) then
+		if(string.find(arg1, "sbm_tv: get_version_(.+)")) then
+			_,_,VerNum = string.find(arg1, "sbm_tv: get_version_(.+)");
 			VerNumInt = tonumber(VerNum);
 			MyVerNumInt = tonumber(DBM.Version);
 			if(MyVerNumInt < VerNumInt) then
@@ -1060,7 +1060,7 @@ end
 function popUp()
 	if shownPopup == 0 then
 	shownPopup = 1
-	StaticPopupDialogs["UPDATE_TBM"] =
+	StaticPopupDialogs["UPDATE_SBM"] =
     {
 		text = "Please update SBM",
 		button1 = "Cancel",
@@ -1082,7 +1082,7 @@ function popUp()
 			self:GetParent():Hide();
 		end,
 	};
-	StaticPopup_Show("UPDATE_TBM");
+	StaticPopup_Show("UPDATE_SBM");
 	end
 end
 
@@ -1090,9 +1090,9 @@ function reloadPopUp()
 	if(myguildName) then
 	else
 		if IsInGuild() == 1 then
-		StaticPopupDialogs["RELOAD_TBM"] =
+		StaticPopupDialogs["RELOAD_SBM"] =
 		{
-			text = "RELOAD YOUR ADDON\n\nTBM has additional features that require a reload.\nTo access these features, you must reload on every login.\nThis popup should no longer show as of 1.88.",
+			text = "RELOAD YOUR ADDON\n\nSBM has additional features that require a reload.\nTo access these features, you must reload on every login.\nThis popup should no longer show as of 1.88.",
 			button1 = "Reload",
 			timeout = 0,
 			whileDead = 1,
@@ -1102,13 +1102,13 @@ function reloadPopUp()
 				ReloadUI();
 			end,
 		};
-		StaticPopup_Show("RELOAD_TBM");
+		StaticPopup_Show("RELOAD_SBM");
 		end
 	end
 end
 
 function showDiscordLink()
-    StaticPopupDialogs["UPDATE_TBM_LINK"] = {
+    StaticPopupDialogs["UPDATE_SBM_LINK"] = {
         text = "CTRL + A --> CTRL + C to copy",
         hasEditBox = 1;
         maxLetters = 128;
@@ -1135,7 +1135,7 @@ function showDiscordLink()
         whileDead = 1,
         hideOnEscape = 1,
         };
-    StaticPopup_Show("UPDATE_TBM_LINK");
+    StaticPopup_Show("UPDATE_SBM_LINK");
 end
 
 ----------SBMTV FUNCTIONS----------
@@ -1213,7 +1213,7 @@ function DBM:ForceUpdate()
 	mainFrame:GetScript("OnUpdate")(mainFrame, 0)
 end
 
-function DBM:PromoteAllRaidTBM()
+function DBM:PromoteAllRaidSBM()
 	if(IsRaidLeader()) then
 		local i;
 		for i=1,GetNumRaidMembers() do
@@ -1282,7 +1282,7 @@ end
 
 function DBM:DisbandGroup()
 	if(IsRaidLeader()) then
-		StaticPopupDialogs["TBM_DISBAND_RAID"] = {
+		StaticPopupDialogs["SBM_DISBAND_RAID"] = {
 		  text = "Disband this group?",
 		  button1 = "Yes",
 		  button2 = "No",
@@ -1297,7 +1297,7 @@ function DBM:DisbandGroup()
 		  whileDead = 1,
 		  hideOnEscape = 1,
 		};
-		StaticPopup_Show("TBM_DISBAND_RAID");
+		StaticPopup_Show("SBM_DISBAND_RAID");
 	else
 		DBM:AddMsg("You are not the Raid Leader.")
 	end
@@ -1358,19 +1358,19 @@ SLASH_DEADLYBOSSMODS1 = "/sbm"
 SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 	local function pullInFive()
 		local ChannelID = GetChannelName(guildChannel)
-		SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+		SendChatMessage("sbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
 	end
 
 	local function pullNow()
 		local ChannelID = GetChannelName(guildChannel)
-		SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+		SendChatMessage("sbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
 	end
 
 	local cmd = msg:lower()
 	if cmd == "unlock" or cmd == "move" then
 		DBM.Bars:ShowMovableBar()
 	elseif cmd == "aaa" then
-		DBM:PromoteAllRaidTBM()
+		DBM:PromoteAllRaidSBM()
 	elseif cmd == "cr" then
 		DBM:ConvertRaid()
 	elseif cmd == "gl" then
@@ -3020,7 +3020,7 @@ end
 -----------------------
 function DBM:AddMsg(text, prefix)
 	prefix = prefix or (self.localization and self.localization.general.name) or "Szyler Boss Mods"
-	DEFAULT_CHAT_FRAME:AddMessage(("|cffffffff<|r|cff009600%s|r|cffffffff>|r %s"):format(tostring(prefix), tostring(text)), 1, 1, 1)
+	DEFAULT_CHAT_FRAME:AddMessage(("|cffffffff<|r|cffff7d0a%s|r|cffffffff>|r %s"):format(tostring(prefix), tostring(text)), 1, 1, 1)
 end
 
 do
