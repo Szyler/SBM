@@ -1,6 +1,6 @@
 ﻿## Interface: 30300
-## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffCore|r
-## Notes: Szyler Boss Mods for Project Ascension, made by Szyler @ Andorhal
+## Title:|cffffffff<|r|cffff7d0aSBM|r|cffffffff>|r |cffffffffCore|r
+## Notes: Szyler Boss Mods for Project Ascension, made by Sky @ Andorhal, Continued by Szyler
 ## SavedVariables: DBFSettings, DBF_RC_Settings, DBF_BGJ_S, DBF_Timers_Settings, DBF_TV, DBF_ARROW, CustomInviteKeywords, AutoPromoteNames
 ## SavedVariablesPerCharacter: DBM_SavedOptions, DBT_SavedOptions, DBFRB, DBF_CHAR_SAV
 ## LoadOnDemand: 0

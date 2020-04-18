@@ -18,6 +18,7 @@ local warnKnightDown			= mod:NewAnnounce("Unrelenting Death Knight Killed", 2, 3
 local warnHarvestSoon			= mod:NewSoonAnnounce(28679, 3)
 local warnHarvest				= mod:NewSpellAnnounce(28679, 2)
 local timerHarvest				= mod:NewNextTimer(15, 28679)
+local soundTeleport				= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effect when Heigan teleports to the platform")
 -----COMBAT START----
 local timerCombatStart			= mod:NewTimer(25, "Combat Starts", 2457, nil, "Show timer for the start of combat")
 local warnCombatStartSoon		= mod:NewAnnounce("Combat Starts Soon", 2, 2457, nil, "Show pre-warning for the end of the Safety Dance")
@@ -31,6 +32,7 @@ local soundGothik				= mod:SoundInfoLong(46573, "Play the 'Long Info' sound effe
 -----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
+	self:ScheduleMethod(60, "HarvestSoul")
 	-----HARVEST SOUL-----
 	harvestSoulIntiialTimer = 60
 	warnHarvestSoon:Schedule(harvestSoulIntiialTimer-5)
@@ -49,6 +51,16 @@ function mod:OnCombatStart(delay)
 	soundGothik:Schedule(gothikTimer)
 
 end
+
+function mod:HarvestSoul()
+	timer = 15
+	timerHarvest:Start(timer)
+	warnHarvestSoon:Schedule(timer-3, 15)
+	warnHarvest:Schedule(timer)
+	soundTeleport:Schedule(timer-3)
+	self:ScheduleMethod(timer, "HarvestSoul")
+end
+
 
 function mod:UNIT_DIED(args)
 	if bit.band(args.destGUID:sub(0, 5), 0x00F) == 3 then

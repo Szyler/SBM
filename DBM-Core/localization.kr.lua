@@ -54,7 +54,7 @@ DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h님이 당신에게 SBM 타이
 DBM_PIZZA_CONFIRM_IGNORE			= "현재 세션에서 %s님이 보낸 SBM 타이머를 무시하도록 하겠습니까?"
 DBM_PIZZA_ERROR_USAGE				= "사용법: /SBM [broadcast] timer <시간> <글자>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods 가 실행중에 있습니다.\n당신께서 TBMv3 와 TBMv4를 동시에 설치하여 이런 상황이 발생한 것 같습니다.\n\"수락\"을 클릭하시면 TBMv3를 차단하고, UI가 다시시작 될 것입니다.\n또한, 애드온 폴더내에 존재하고 있는 TBMv3 폴더를 삭제하시길 권장합니다."
+DBM_CORE_ERROR_DBMV3_LOADED			= "Szyler Boss Mods 가 실행중에 있습니다.\n당신께서 SBMv3 와 SBMv4를 동시에 설치하여 이런 상황이 발생한 것 같습니다.\n\"수락\"을 클릭하시면 SBMv3를 차단하고, UI가 다시시작 될 것입니다.\n또한, 애드온 폴더내에 존재하고 있는 SBMv3 폴더를 삭제하시길 권장합니다."
 
 DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "죽이는 보스 모드"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+click 또는 right-click 으로 움직이세요.\nAlt+shift+click 으로 움직이면 자유롭게 배치할 수 있습니다."
@@ -79,7 +79,7 @@ DBM_CORE_SLASHCMD_HELP				= {
 	"/SBM unlock: 상태 바 타이머를 움직일 수 있도록 보여줍니다.(줄임말: move)",
 	"/SBM timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바가 생성 됨.",
 	"/SBM broadcast timer <숫자> <글자>: <숫자> 초만큼 진행되는 <글자>바를 공격대에 알립니다.(공격대 권한이 있을 경우만 작동)",
-	"/SBM break <min>: <min>분 동안 타이머를 작동합니다.  모든 공격대원에게 TBM이 발송하는 쉬는 시간 타이머를 보냅니다.",	
+	"/SBM break <min>: <min>분 동안 타이머를 작동합니다.  모든 공격대원에게 SBM이 발송하는 쉬는 시간 타이머를 보냅니다.",	
 	"/SBM help: 현재 보고 있는 도움말.",
 }
 

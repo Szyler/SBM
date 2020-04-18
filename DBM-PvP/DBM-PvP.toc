@@ -1,6 +1,6 @@
 ﻿## Interface: 30300
-## Title:|cffffffff<|r|cff009600TBM|r|cffffffff>|r |cffffffffPvP|r
-## Notes: Szyler Boss Mods for Project Ascension, made by Szyler @ Andorhal
+## Title:|cffffffff<|r|cffff7d0aSBM|r|cffffffff>|r |cffffffffPvP|r
+## Notes: Szyler Boss Mods for Project Ascension, made by Sky @ Andorhal, Continued by Szyler
 ## Author: Nitram/Tandanu
 ## LoadOnDemand: 1
 ## RequiredDeps: DBM-Core

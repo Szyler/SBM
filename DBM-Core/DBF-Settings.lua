@@ -242,7 +242,7 @@ function DBF_Settings_Menuofdoom()
 			info.tooltipText = "People who have a different version than you will get a warning to update their addon.";
 			info.notCheckable = 1;
 			info.func = function() ChanID = GetChannelName(guildChannel);
-			SendChatMessage("tbm_tv: get_version_"..DBM.Version, "CHANNEL", nil, ChanID) end;
+			SendChatMessage("sbm_tv: get_version_"..DBM.Version, "CHANNEL", nil, ChanID) end;
 			info.value = "CheckVersions";
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 		end
@@ -384,7 +384,7 @@ function DBF_Settings_Menuofdoom()
 				info.tooltipTitle = info.text;
 				info.tooltipText = "";
 				info.notCheckable = 1;
-				info.func = function() DBM:PromoteAllRaidTBM() end
+				info.func = function() DBM:PromoteAllRaidSBM() end
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 	
 				info = {};
@@ -662,12 +662,12 @@ function DBF_Settings_Menuofdoom()
 			
 				local function pullInFive()
 					local ChannelID = GetChannelName(guildChannel)
-					SendChatMessage("tbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+					SendChatMessage("sbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
 				end
 
 				local function pullNow()
 					local ChannelID = GetChannelName(guildChannel)
-					SendChatMessage("tbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+					SendChatMessage("sbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
 				end				
 				
 				info = {};
@@ -1003,7 +1003,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Disarms", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Disarms", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 			
@@ -1014,7 +1014,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Disorients", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Disorients", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 		
@@ -1025,7 +1025,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Fears", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Fears", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 		
@@ -1043,7 +1043,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Incapacitation", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Incapacitation", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
 		
@@ -1054,7 +1054,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Interrupts", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Interrupts", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 			
@@ -1065,7 +1065,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Mana Drains", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Mana Drains", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
 			
@@ -1076,7 +1076,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Roots", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Roots", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);						
 
@@ -1087,7 +1087,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Slows", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Slows", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);					
 			
@@ -1098,7 +1098,7 @@ function DBF_Settings_Menuofdoom()
 			info.notCheckable = 1;
 			info.func = function() 
 				local ChanID = GetChannelName(guildChannel);
-				SendChatMessage("tbm_cmd: check: Stuns", "CHANNEL", nil, ChanID) 
+				SendChatMessage("sbm_cmd: check: Stuns", "CHANNEL", nil, ChanID) 
 			end;
 			UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);								
 			
@@ -1132,7 +1132,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Deterrence", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Deterrence", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);				
 				
@@ -1143,7 +1143,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Divine Shield", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Divine Shield", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 				
@@ -1154,7 +1154,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Ice Block", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Ice Block", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 			end
@@ -1174,7 +1174,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Cleansing Totem", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Cleansing Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 				
@@ -1185,7 +1185,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Grounding Totem", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Grounding Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 				
@@ -1196,7 +1196,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Tremor Totem", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Tremor Totem", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 			end
@@ -1215,7 +1215,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Focus Magic", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Focus Magic", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 
@@ -1226,7 +1226,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Cleanse", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Cleanse", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);
 
@@ -1237,7 +1237,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Curse of the Elements", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Curse of the Elements", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
 
@@ -1248,7 +1248,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Curse of Tongues", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Curse of Tongues", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
 
@@ -1259,7 +1259,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Disarm Trap", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Disarm Trap", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 
@@ -1270,7 +1270,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Fade", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Fade", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 
@@ -1281,7 +1281,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function()
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Feign Death", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Feign Death", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);	
 
@@ -1292,7 +1292,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Purge", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Purge", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
 
@@ -1303,7 +1303,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Remove Curse", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Remove Curse", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);		
 
@@ -1314,7 +1314,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 					local ChanID = GetChannelName(guildChannel);
-					SendChatMessage("tbm_cmd: check: Tranquilizing Shot", "CHANNEL", nil, ChanID) 
+					SendChatMessage("sbm_cmd: check: Tranquilizing Shot", "CHANNEL", nil, ChanID) 
 				end;
 				UIDropDownMenu_AddButton(info,UIDROPDOWNMENU_MENU_LEVEL);						
 			end

@@ -1,9 +1,9 @@
 ﻿if GetLocale() ~= "zhTW" then return end
 
-DBM_CORE_NEED_SUPPORT				= "嘿, 你是否擁有良好的程式開發或語言能力? 如果是的話, TBM團隊真的需要你的幫助以保持成為WOW入面最佳的首領模組。觀看 www.deadlybossmods.com 或發送郵件到 tandanu@deadlybossmods.com 或 nitram@deadlybossmods.com 來加入團隊。"
+DBM_CORE_NEED_SUPPORT				= "嘿, 你是否擁有良好的程式開發或語言能力? 如果是的話, SBM團隊真的需要你的幫助以保持成為WOW入面最佳的首領模組。觀看 www.deadlybossmods.com 或發送郵件到 tandanu@deadlybossmods.com 或 nitram@deadlybossmods.com 來加入團隊。"
 
 DBM_CORE_LOAD_MOD_ERROR				= "載入%s模組時發生錯誤：%s"
-DBM_CORE_LOAD_MOD_SUCCESS			= "成功載入%s模組。輸入/tbm有更多選項。"
+DBM_CORE_LOAD_MOD_SUCCESS			= "成功載入%s模組。輸入/sbm有更多選項。"
 DBM_CORE_LOAD_GUI_ERROR				= "無法載入圖形介面：%s"
 
 DBM_CORE_COMBAT_STARTED				= "%s開戰。祝好運與盡興! :)";
@@ -40,7 +40,7 @@ DBM_CORE_WHISPER_COMBAT_END_WIPE		= "%s在%s的戰鬥中滅團了。"
 
 DBM_CORE_VERSIONCHECK_HEADER			= "Szyler Boss Mods - 版本檢測"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s：%s(r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM		= "%s：尚未安裝TBM"
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM		= "%s：尚未安裝SBM"
 DBM_CORE_VERSIONCHECK_FOOTER			= "團隊中有%d名成員正在使用TOXICITY Boss Mods"
 DBM_CORE_YOUR_VERSION_OUTDATED			= "你的 TOXICITY Boss Mod 已經過期。請到 www.deadlybossmods.com 下載最新版本。"
 
@@ -54,7 +54,7 @@ DBM_PIZZA_SYNC_INFO				= "|Hplayer:%1$s|h[%1$s]|h向你發送了一個倒數計�
 DBM_PIZZA_CONFIRM_IGNORE			= "是否要在該次遊戲連結中忽略來自%s的計時？"
 DBM_PIZZA_ERROR_USAGE				= "命令：/SBM [broadcast] timer <時間（秒）> <文字>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2個版本的TOXICITY Boss Mods正在運行：TBMv3和TBMv4。\n按一下“確定”按鈕可將TBMv3關閉並重載插件。\n我們建議將插件目錄下的TBMv3刪除。"
+DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2個版本的TOXICITY Boss Mods正在運行：SBMv3和SBMv4。\n按一下“確定”按鈕可將SBMv3關閉並重載插件。\n我們建議將插件目錄下的SBMv3刪除。"
 
 DBM_CORE_MINIMAP_TOOLTIP_HEADER			= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER			= "Shift+左鍵或右鍵點擊即可移動"
@@ -79,7 +79,7 @@ DBM_CORE_SLASHCMD_HELP				= {
 	"/SBM unlock：顯示一個可移動的計時器（也可使用：move）。",
 	"/SBM timer <x> <文字>：開始一個以<文字>為名稱的時間為<x>秒的計時器。",
 	"/SBM broadcast timer <x> <文字>：向團隊廣播一個以<文字>為名稱，時間為<x>秒的計時器（需開啟團隊廣播及助理權限）。",
-	"/SBM break <分鐘>: 開始休息計時器<分鐘>。向所有團隊成員發送一個TBM休息計時器（需開啟團隊廣播及助理權限）。",
+	"/SBM break <分鐘>: 開始休息計時器<分鐘>。向所有團隊成員發送一個SBM休息計時器（需開啟團隊廣播及助理權限）。",
 	"/SBM help：顯示可用命令的說明。",
 }
 

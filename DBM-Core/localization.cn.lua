@@ -42,7 +42,7 @@ DBM_CORE_AUTO_RESPOND_WHISPER		= "%s正在与%s交战，（当前%s，%d/%d存�
 
 DBM_CORE_VERSIONCHECK_HEADER		= "Szyler Boss Mods - 版本检测"
 DBM_CORE_VERSIONCHECK_ENTRY			= "%s：%s(r%d)"
-DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s：尚未安装TBM"
+DBM_CORE_VERSIONCHECK_ENTRY_NO_DBM	= "%s：尚未安装SBM"
 DBM_CORE_VERSIONCHECK_FOOTER		= "团队中有%d名成员正在使用TOXICITY Boss Mods"
 
 DBM_CORE_UPDATEREMINDER_HEADER		= "你的TOXICITY Boss Mods版本已过期。\n你可以在如下地址下载到新版本%s(r%d)："
@@ -55,7 +55,7 @@ DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h向你发送了一个倒计时
 DBM_PIZZA_CONFIRM_IGNORE			= "是否要在该次游戏连接中屏蔽来自%s的计时？"
 DBM_PIZZA_ERROR_USAGE				= "命令：/SBM [broadcast] timer <时间（秒）> <文本>"
 
-DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2个版本的TOXICITY Boss Mods正在运行：TBMv3和TBMv4。\n单击“确定”按钮可将TBMv3关闭并重载用户界面。\n我们建议将插件目录下的TBMv3删除。"
+DBM_CORE_ERROR_DBMV3_LOADED			= "目前有2个版本的TOXICITY Boss Mods正在运行：SBMv3和SBMv4。\n单击“确定”按钮可将SBMv3关闭并重载用户界面。\n我们建议将插件目录下的SBMv3删除。"
 
 DBM_CORE_MINIMAP_TOOLTIP_HEADER		= "Szyler Boss Mods"
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+单击或右键点击即可移动"
@@ -73,8 +73,8 @@ DBM_CORE_RANGECHECK_SETRANGE_TO		= "%d码"
 
 DBM_CORE_SLASHCMD_HELP				= {
 	"可用命令：",
-	"/SBM version：进行团队范围的TBM版本检测（也可使用：ver）",
-	"/SBM unlock：显示一个可移动的计时条，可通过对它来移动所有TBM计时条的位置（也可使用：move）",
+	"/SBM version：进行团队范围的SBM版本检测（也可使用：ver）",
+	"/SBM unlock：显示一个可移动的计时条，可通过对它来移动所有SBM计时条的位置（也可使用：move）",
 	"/SBM timer <x> <文本>：开始一个以<文本>为名称的时间为<x>秒的倒计时",
 	"/SBM broadcast timer <x> <文本>：向团队广播一个以<文本>为名称的时间为<x>秒的倒计时（需要团队领袖或助理权限）",
 	"/SBM help：显示该帮助信息",
