@@ -282,6 +282,8 @@ function DBF_ScanForbuff(name)
 	addto = "Greater Blessing of Sanctuary";
 	elseif(string.find(name,"Blessing of Might",1,true)) then
 	addto = "Greater Blessing of Might";
+	elseif(string.find(name,"Prayer of Spirit",1,true)) then
+	addto = "Prayer of Spirit";
 	elseif(string.find(name,"Blessing of Wisdom", 1, true)) then
 	addto = "Greater Blessing of Wisdom";
 	elseif(string.find(name,"Battle Shout",1,true)) then

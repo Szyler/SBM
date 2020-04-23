@@ -312,3 +312,6 @@ v8.02 - 29/02/2020
 - Enabled officer menu for everyone
 - pulltimerSound, checkversion and ability checks only work with guildSBM channels, onLoginVersion still sent in SBMSCRIPT.
 ----------------------------------------------------------------------------------------------------
+v8.03 - 05/03/2020
+- Added raid marks on adds on TwinEmperors
+----------------------------------------------------------------------------------------------------

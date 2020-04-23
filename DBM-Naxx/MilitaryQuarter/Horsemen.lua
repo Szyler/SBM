@@ -15,6 +15,9 @@ mod:RegisterEvents(
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 local specWarnMarkOnPlayer	= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
+-----Void Zone-----
+local specWarnVoidZone		= mod:NewSpecialWarningMove("64235", true, nil, true)
+local soundVoidZone			= mod:SoundAlert(64235)
 -----MISC-----
 local berserkTimer			= mod:NewBerserkTimer(510)
 mod:AddBoolOption("HealthFrame", true)
@@ -47,6 +50,23 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			specWarnMarkOnPlayer:Show(args.spellName, args.amount)
 		end
 	end
+end
+
+
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(64235) then 
+		if args:IsPlayer() then
+			specWarnVoidZone:Show(5);
+			soundVoidZone:Play();
+		end
+end
+
+function mod:SPELL_AURA_APPLIED_DOSE(args)
+	if args:IsSpellID(64235) then 
+		if args:IsPlayer() then
+			specWarnVoidZone:Show(5);
+			soundVoidZone:Play();
+		end
 end
 
 -----SBM GLOBAL FUNCTIONS-----
