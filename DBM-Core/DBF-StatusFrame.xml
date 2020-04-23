@@ -33,7 +33,7 @@
 			</OnMouseDown>
 		</Scripts>
 		<Size>
-			<AbsDimension x="125" y="70"/>
+			<AbsDimension x="145" y="70"/>
 		</Size>
 		<Anchors>
 			<Anchor point="CENTER">
@@ -57,7 +57,7 @@
 			<Layer level="ARTWORK">
 				<FontString name="$parentHeaderText" inherits="GameFontNormal" text="DeadlyBuffFrames" maxLines="1">
 					<Size>
-						<AbsDimension x="125" y="16"/>
+						<AbsDimension x="145" y="16"/>
 					</Size>
 					<Anchors>
 						<Anchor point="TOP">
@@ -384,6 +384,44 @@
 						this.lastupdate = GetTime();
 						if(GameTooltip:GetOwner()==self) then
 							DBF_PopulateSpellTooltip("Blessing of Might");
+						end
+					</OnUpdate>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Icons\spell_holy_greaterblessingofkings" />
+				<HighlightTexture alphaMode="ADD">
+					<Color a="0.3" r="0" g="1" b="0" />
+				</HighlightTexture>
+			</Button>
+			
+			<Button name="$parentBuffsPrayerofSpirit">
+				<Size>
+					<AbsDimension x="20" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentBuffsBlessingOfMight" relativePoint="LEFT">
+						<Offset x="-2" y="0"/>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						if(IsShiftKeyDown()) then
+							dbf_sendchat(this.texttochat);
+						end
+					</OnClick>
+					<OnEnter>
+						DBF_PopulateSpellTooltip("Prayer of Spirit");
+					</OnEnter>
+					<OnUpdate>
+						--dont update to fast
+						if(this.lastupdate and this.lastupdate + 1 &gt; GetTime()) then
+							return;
+						end
+						this.lastupdate = GetTime();
+						if(GameTooltip:GetOwner()==self) then
+							DBF_PopulateSpellTooltip("Prayer of Spirit");
 						end
 					</OnUpdate>
 					<OnLeave>
