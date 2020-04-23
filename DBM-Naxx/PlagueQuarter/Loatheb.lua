@@ -49,7 +49,7 @@ function mod:OnCombatStart(delay)
 		sporeTimer = 18
 	end
 	timerSpore:Start(sporeTimer - delay)
-	warnSporeSoon:Schedule(sporeTimer - 5 - delay)
+	warnSporeSoon:Schedule(sporeTimer - 3 - delay)
 	timerDoom:Start(120 - delay, doomCounter + 1)
 end
 
@@ -88,11 +88,17 @@ end
 
 function mod:SPELL_SUMMON(args)
 	if args:IsSpellID(29234) then
-		timerSpore:Start(15)
-		warnSporeNow:Show()
-		warnSporeSoon:Schedule(10)
-		soundSpore:Play();
+		self:ScheduleMethod(timer, "SporeSpawn")
 	end
+end
+
+function mod:SporeSpawn(args)
+	warnSporeNow:Show()
+	soundSpore:Play();
+	timer = 18
+	timerSpore:Start(timer)
+	warnSporeSoon:Schedule(timer-3)
+	self:ScheduleMethod(timer, "SporeSpawn")
 end
 
 function mod:UNIT_HEALTH(args)
