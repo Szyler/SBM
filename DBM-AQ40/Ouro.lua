@@ -100,9 +100,12 @@ end
 
 function mod:UNIT_DIED(args)
 	local recapID = self:GetCIDFromGUID(args.destGUID)
+	if (shardsDead==nil) then
+		shardsDead = 0;
+	end
 	if recapID == 19045 then
 		shardsDead = shardsDead + 1  
-end
+	end
 end
 
 ---------- SPEED KILL FUNCTION ----------
