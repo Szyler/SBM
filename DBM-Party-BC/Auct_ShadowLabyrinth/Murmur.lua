@@ -18,7 +18,7 @@ local timerBoomCast     = mod:NewCastTimer(5, 33923)
 local timerTouch        = mod:NewTargetTimer(14, 33711)
 local specWarnTouch		= mod:NewSpecialWarningMove(33711)
 
-local soundBoom = mod:NewSound(33923)
+local soundBoom = mod:SoundAlert(33923)
 mod:AddBoolOption("SetIconOnTouchTarget", true)
 
 function mod:SPELL_CAST_START(args)
