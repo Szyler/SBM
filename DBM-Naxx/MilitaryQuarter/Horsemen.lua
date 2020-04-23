@@ -59,6 +59,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			specWarnVoidZone:Show(5);
 			soundVoidZone:Play();
 		end
+	end
 end
 
 function mod:SPELL_AURA_APPLIED_DOSE(args)
@@ -67,6 +68,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			specWarnVoidZone:Show(5);
 			soundVoidZone:Play();
 		end
+	end
 end
 
 -----SBM GLOBAL FUNCTIONS-----
