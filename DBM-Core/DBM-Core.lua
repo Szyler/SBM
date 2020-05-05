@@ -2047,9 +2047,14 @@ do
 	end
 
 	local function createChannelName()
-		checkGuildStatus()
+		myguildName,_,_,_ = GetGuildInfo("player");
+		if (myguildName == nil) then
+			guildChannel="NoGuildSBM" 
+			return;
+		else	
 		noSpaceGuildName = gsub(myguildName, "%s+", "")
 		guildChannel = noSpaceGuildName.."SBM"
+		end
 	end
 	
 	function DBM:ADDON_LOADED(modname)
