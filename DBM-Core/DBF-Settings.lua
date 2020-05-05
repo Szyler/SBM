@@ -131,7 +131,7 @@ UIDROPDOWNMENU_MENU_VALUE
 local function createChannelName()
 	myguildName,_,_,_ = GetGuildInfo("player");
 	if (myguildName == nil) then
-		guildChannel="NoGuildSBM" 
+		guildChannel="SBMSCRIPT" 
 		return;
 	else	
 	noSpaceGuildName = gsub(myguildName, "%s+", "")
@@ -156,13 +156,18 @@ function DBF_Settings_Menuofdoom()
 		local myName = UnitName("player")
 		local REALM_NAME = GetRealmName();
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
+		local name, rank = GetRaidRosterInfo(i)
+				
+		if (name == myName) then
+			if (rank == 1 or rank == 2) then
+				ShowOfficer = true;
+			end
+		end
 	
-		if (myguildName ~= "NoGuildSBM") then
-			ShowOfficer = true;
+		if (myguildName ~= "SBMSCRIPT") then
 			ShowEXTRAOfficer = true;
 			amnt = 1;
 		end
-	
 			 
 		if(ShowEXTRAOfficer) then
 			info = {};
