@@ -694,7 +694,7 @@ do
 						-- for i=1, table.getn(o) do 
 							-- if(MSG_FROM == o[i]) then
 								checkSBMVersion()
-								break
+								-- break
 							-- end
 						-- end
 					end
@@ -736,7 +736,7 @@ do
 								-- for i=1, table.getn(o) do 
 									-- if(MSG_FROM == o[i]) then
 										sbmAbilityCheck()
-										break
+										-- break
 									-- end
 								-- end
 							-- end

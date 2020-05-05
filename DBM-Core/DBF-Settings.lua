@@ -156,7 +156,9 @@ function DBF_Settings_Menuofdoom()
 		local myName = UnitName("player")
 		local REALM_NAME = GetRealmName();
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
-		local name, rank = GetRaidRosterInfo(i)
+		for j = 1, GetNumRaidMembers() do
+			name, rank = GetRaidRosterInfo(j);
+		end
 				
 		if (name == myName) then
 			if (rank == 1 or rank == 2) then
