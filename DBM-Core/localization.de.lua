@@ -180,7 +180,7 @@ DBM_CORE_MOVE_SPECIAL_WARNING_BAR	= "Spezialwarnung beweglich"
 DBM_CORE_MOVE_SPECIAL_WARNING_TEXT	= "Spezialwarnung"
 
 
-DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Eine %d-m-Abstacksprüfung wird in dieser Zone nicht unterstützt.\nUnterstützte Abstände sind 10, 11, 15 und 28 m."
+DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Eine %d-m-Abstacksprüfung wird in dieser Zone nicht unterstützt.\nUnterstützte Abstände sind 10, 13, 15 und 28 m."
 
 DBM_ARROW_MOVABLE					= "Pfeil beweglich"
 DBM_ARROW_NO_RAIDGROUP				= "Diese Funktion steht nur in Schlachtzügen und innerhalb von Instanzen zu Verfügung." 
