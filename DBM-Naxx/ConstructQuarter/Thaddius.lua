@@ -26,6 +26,7 @@ local enrageTimer			= mod:NewBerserkTimer(365)
 mod:AddBoolOption("ArrowsEnabled", false, "Arrows")
 mod:AddBoolOption("ArrowsRightLeft", false, "Arrows")
 mod:AddBoolOption("ArrowsInverse", false, "Arrows")
+mod:AddBoolOption("ArrowsGoToSide", false, "Arrows")
 mod:AddBoolOption("HealthFrame", true)
 mod:SetBossHealthInfo(
 	15930, L.Boss1,
@@ -85,7 +86,13 @@ function mod:UNIT_AURA(elapsed)
 			end
 		else
 			warnChargeChanged:Show(charge)
-			if self.Options.ArrowsEnabled then
+			if self.Options.ArrowsEnabled and self.Options.ArrowsGoToSide then
+				if charge == L.Charge1 or (charge == L.Charge2 and self.Options.ArrowsInverse) then
+					self:ShowLeftArrow()
+				elseif charge == L.Charge2 or (charge == L.Charge1 and self.Options.ArrowsInverse)  then
+					self:ShowRightArrow()
+				end
+			elseif self.Options.ArrowsEnabled then
 				if self.Options.ArrowsRightLeft and self.Options.ArrowsInverse then
 					self:ShowRightArrow()
 				elseif self.Options.ArrowsRightLeft then

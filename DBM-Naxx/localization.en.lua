@@ -218,9 +218,11 @@ L:SetMiscLocalization({
 L:SetOptionLocalization({
 	WarningChargeChanged	= "Show special warning when your polarity changed",
 	WarningChargeNotChanged	= "Show special warning when your polarity did not change",
-	ArrowsEnabled			= "Show arrows (normal \"2 camp\" strategy)",
+	ArrowsEnabled			= "Show arrows",
+	ArrowsUpToChange		= "Shows Arrow Up for changed polarity",
+	ArrowsGoToSide			= "Normal \"2 camp\" strategy, Left negative/Right positive",
 	ArrowsRightLeft			= "Show left/right arrows for the \"4 camp\" strategy (show left arrow if polarity changed, right if not)",
-	ArrowsInverse			= "Inverse \"4 camp\" strategy (show right arrow if polarity changed, left if not)"
+	ArrowsInverse			= "Inverse strategy (swaps the arrow directions from the two above settings)"
 })
 
 L:SetWarningLocalization({
