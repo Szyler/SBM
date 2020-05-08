@@ -181,7 +181,7 @@ DBM_CORE_MOVE_SPECIAL_WARNING_BAR	= "Alerte spéciale déplaçable"
 DBM_CORE_MOVE_SPECIAL_WARNING_TEXT	= "Alerte spéciale"
 
 
-DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Une %d vérification de distance n'est pas supporté dans cette zone.\nLes distances autorisés est 10, 13, 15 et 28 yard."
+DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= "Une %d vérification de distance n'est pas supporté dans cette zone.\nLes distances autorisés est 10, 11, 15 et 28 yard."
 
 DBM_ARROW_MOVABLE					= "Bouger la Flèche"
 

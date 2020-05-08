@@ -130,13 +130,8 @@ UIDROPDOWNMENU_MENU_VALUE
 
 local function createChannelName()
 	myguildName,_,_,_ = GetGuildInfo("player");
-	if (myguildName == nil) then
-		guildChannel="SBMSCRIPT" 
-		return;
-	else	
 	noSpaceGuildName = gsub(myguildName, "%s+", "")
 	guildChannel = noSpaceGuildName.."SBM"
-	end
 end
 
 DBM:Schedule(19, createChannelName)
@@ -148,28 +143,72 @@ function DBF_Settings_Menuofdoom()
 		     /////// FIRST MENU \\\\\\\\
 		     ***************************************]]--
 		
-		local ShowEXTRAOfficer = false;
-		local ShowOfficer = false;
+		local ShowEXTRAOfficer = true;
+		local ShowOfficer = true;
 		amnt = 1; -- amount of white spaces
 		guildName,_,guildRankIndex = GetGuildInfo("player");
 		
 		local myName = UnitName("player")
 		local REALM_NAME = GetRealmName();
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
-		for j = 1, GetNumRaidMembers() do
-			name, rank = GetRaidRosterInfo(j);
-		end
-				
-		if (name == myName) then
-			if (rank == 1 or rank == 2) then
-				ShowOfficer = true;
-			end
+	
+		if(REALM_NAME == "Andorhal - No-Risk") then
+			if(myguildName == "toxicity") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
+					ShowOfficer = true;
+					ShowEXTRAOfficer = false;
+					amnt = 1;
+				end
+			elseif(myguildName == "Long Live Cenarius") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+					ShowOfficer = true;
+					ShowEXTRAOfficer = true;
+					amnt = 1;
+				end
+			elseif(myguildName == "Exiled") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2 or myguildRankIndex == 3) then
+					ShowOfficer = true;
+					amnt = 1;
+				end			
+			elseif(myguildName == "HordeGuards") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+					ShowOfficer = true;
+					amnt = 1;
+				end
+			elseif(ShowOfficer == false) then
+				if(myguildName) then
+					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+						ShowOfficer = true;
+						amnt = 1;
+					end
+				end
+			end	
+		elseif(REALM_NAME == "Laughing Skull - High-Risk") then
+			if(myguildName == "Method") then
+				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
+					ShowOfficer = true;
+					amnt = 1;
+				end
+			elseif(ShowOfficer == false) then
+				if(myguildName) then
+					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+						ShowOfficer = true;
+						amnt = 1;
+					end
+				end
+			end	
+		else
+		-----DEBUG-----
+			if(ShowOfficer == false) then
+				if(myguildName) then
+					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
+						ShowOfficer = true;
+						amnt = 1;
+					end
+				end
+			end	
 		end
 	
-		if (myguildName ~= "SBMSCRIPT") then
-			ShowEXTRAOfficer = true;
-			amnt = 1;
-		end
 			 
 		if(ShowEXTRAOfficer) then
 			info = {};
@@ -189,7 +228,7 @@ function DBF_Settings_Menuofdoom()
 		
 		if(ShowOfficer) then
 			info = {};
-			info.text = "Raid Assistant";
+			info.text = "Officer";
 			info.hasArrow = 1;
 			info.notCheckable = 1;
 			info.value = "OfficerMenu";
@@ -276,7 +315,7 @@ function DBF_Settings_Menuofdoom()
 					
 		if(UIDROPDOWNMENU_MENU_VALUE == "OfficerMenu") then			
 			info = {};
-			info.text = "Raid Assistant Commands";
+			info.text = "Officer Commands";
 			info.isTitle = 1;
 			info.notCheckable = 1;
 			info.disabled = 1;
