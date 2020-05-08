@@ -37,6 +37,8 @@ local specWarnBlizzard		= mod:NewSpecialWarningMove(26607, true, "Special warnin
 local specWarnMutateBug		= mod:NewSpecialWarningMove(802, true, "Special warning for add with Mutate Bug", true)
 local specWarnExplodeBug		= mod:NewSpecialWarningMove(804, true, "Special warning for add with Explode Bug", true)
 
+mod:AddBoolOption("SetIconOnBugTarget", true)
+
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	self:ScheduleMethod(-delay, "twinTeleport")
@@ -83,20 +85,25 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(802, 804) then -- Mutate Bug 802 -- Explode Bug 804
 		specWarnMutateBug:Show();
-		if (mark == nil) or (mark < 0) then
-			mark=9;
+		if (mark == nil) or (mark < 1) or (mark > 8) then
+			mark=8;
 		end
 		if(GetRaidTargetIndex(args.destName) == nil) then 
-			SetRaidTarget(args.destName, mark);
-			mark=mark-1;
+			if self.Options.SetIconOnBugTarget then
+				self:SetIcon(args.destName, mark, 8)
+				mark=mark-1;
+			end
 		end
 	end
 end
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(802, 804) then -- Mutate Bug 802 -- Explode Bug 804
-		if(GetRaidTargetIndex(args.destName) > 0) then
-			SetRaidTarget(args.destName, 0);
+		if(self:GetIcon(args.destName)) then
+			if self.Options.SetIconOnBugTarget then
+				self:SetIcon(args.destName, 0, 0)
+				mark=mark+1;
+			end
 		end
 	end
 end
