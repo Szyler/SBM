@@ -39,6 +39,8 @@ local enrageTimer		= mod:NewBerserkTimer(480)
 mod:AddBoolOption("SetIconOnInjectionTarget", true)
 local mutateIcons = {}
 
+mod:AddBoolOption("SetIconOnMutatingInjectionTarget", true)
+
 -----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
@@ -83,6 +85,9 @@ function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(28169) then
 		warnInjection:Show(args.destName)
 		timerInjection:Start(args.destName)
+		if self.Options.SetIconOnMutatingInjectionTarget then
+			self:SetIcon(args.destName, 8, 8)
+		end
 		if args:IsPlayer() then
 			specWarnInjection:Show()
 		end
