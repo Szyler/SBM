@@ -39,10 +39,13 @@ local specWarnExplodeBug		= mod:NewSpecialWarningMove(804, true, "Special warnin
 
 mod:AddBoolOption("SetIconOnBugTarget", true)
 
+local mark = 8
+
 function mod:OnCombatStart(delay)
 	berserkTimer:Start(-delay)
 	self:ScheduleMethod(-delay, "twinTeleport")
 	self:ScheduleMethod(0, "getBestKill")
+	mark = 8
 end
 
 function mod:alarmSound()
@@ -88,23 +91,23 @@ function mod:SPELL_AURA_APPLIED(args)
 		if (mark == nil) or (mark < 1) or (mark > 8) then
 			mark=8;
 		end
-		if(GetRaidTargetIndex(args.destName) == nil) then 
-			if self.Options.SetIconOnBugTarget then
-				self:SetIcon(args.destName, mark, 8)
-				mark=mark-1;
-			end
+		-- if(GetRaidTargetIndex(args.destName) == nil) then 
+		if self.Options.SetIconOnBugTarget then
+			self:SetIcon(args.destName, mark)
+			mark=mark-1;
 		end
+		-- end
 	end
 end
 
 function mod:SPELL_AURA_REMOVED(args)
 	if args:IsSpellID(802, 804) then -- Mutate Bug 802 -- Explode Bug 804
-		if(self:GetIcon(args.destName)) then
-			if self.Options.SetIconOnBugTarget then
-				self:SetIcon(args.destName, 0, 0)
-				mark=mark+1;
-			end
+		-- if(self:GetIcon(args.destName)) then
+		if self.Options.SetIconOnBugTarget then
+			self:SetIcon(args.destName, 0)
+			mark=mark+1;
 		end
+		-- end
 	end
 end
 
