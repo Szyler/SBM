@@ -169,7 +169,7 @@ DBM_CORE_AUTO_SOUND_OPTION_TEXT			= "$spell:%d 특수 소리 재생"
 DBM_CORE_MOVE_SPECIAL_WARNING_BAR		= "특수 경고 움직이기"
 DBM_CORE_MOVE_SPECIAL_WARNING_TEXT		= "특수 경고"
 
-DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= " %dm 거리 체크를 지원하지 않는 지역입니다. 10, 11, 15 그리고 28m를 지원합니다."
+DBM_CORE_RANGE_CHECK_ZONE_UNSUPPORTED	= " %dm 거리 체크를 지원하지 않는 지역입니다. 10, 13, 15 그리고 28m를 지원합니다."
 
 DBM_ARROW_MOVABLE						= "화살표 움직이기"
 DBM_ARROW_NO_RAIDGROUP					= "공격대 던전에서만 사용"
