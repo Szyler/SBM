@@ -322,3 +322,11 @@ v8.03 - 05/05/2020
 - Removed officer for people without guilds. 
 - Renamed officer tab in DBF to Raid Assistant
 ----------------------------------------------------------------------------------------------------
+v8.04 - 22/05/2020
+- Added marker on Grobbulus
+- fixed error for people without guilds
+- Added pull voice on 5s pull
+- Changed /sbm pull timer to 5s
+- Fixed width of command window
+- CanRunSounds now on sender, not reciever
+----------------------------------------------------------------------------------------------------
