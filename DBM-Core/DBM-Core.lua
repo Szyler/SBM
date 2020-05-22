@@ -670,22 +670,22 @@ do
             local found,_,p1 = string.find(arg4, " (.+)")
 			local o = {"Szyler"}
 			local tankwhitelist = {"123"}
-			local canRunSounds
+			-- local canRunSounds
 			
-			local playerName = UnitName(arg2)
-			for i = 1, MAX_RAID_MEMBERS do
-				local name, rank = GetRaidRosterInfo(i)
-				if (name == playerName) then
-					if (rank == 2 or rank == 1) then
-						canRunSounds = true
-						break
-					else
-						canRunSounds = false
-						break
-					end
-					break
-				end
-			end
+			-- local playerName = UnitName(arg2)
+			-- for i = 1, MAX_RAID_MEMBERS do
+			-- 	local name, rank = GetRaidRosterInfo(i)
+			-- 	if (name == playerName) then
+			-- 		if (rank == 2 or rank == 1) then
+			-- 			canRunSounds = true
+			-- 			break
+			-- 		else
+			-- 			canRunSounds = false
+			-- 			break
+			-- 		end
+			-- 		break
+			-- 	end
+			-- end
 			
 			
 			if(found) then  		
@@ -701,9 +701,9 @@ do
 					if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
 						-- for i=1, table.getn(o) do 
 							-- if(MSG_FROM == o[i]) then
-								if canRunSounds == true then
+								-- if canRunSounds == true then
 									PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-								end
+								-- end
 							-- end
 						-- end
 						-- for i=1, table.getn(tankwhitelist) do 
@@ -717,9 +717,9 @@ do
 					if(string.find(arg1,"sbm_cmd: pull_now")) then
 								-- for i=1, table.getn(o) do 
 									-- if(MSG_FROM == o[i]) then
-										if canRunSounds == true then
+										-- if canRunSounds == true then
 											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
-										end
+										-- end
 									-- end
 								-- end
 								-- for i=1, table.getn(tankwhitelist) do 
@@ -1445,29 +1445,31 @@ SlashCmdList["DEADLYBOSSMODS"] = function(msg)
 		if DBM:GetRaidRank() == 0 then
 			return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 		end
-		local timer = tonumber(cmd:sub(5)) or 10
+		local timer = tonumber(cmd:sub(5)) or 5
 		local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
-		SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
 		if timer > 10 then 
+			SendChatMessage(DBM_CORE_ANNOUNCE_PULL:format(timer), channel)
+		end
+		if timer >= 10 then 
 			DBM:Schedule(timer - 10, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(10), channel) 
 		end
-		if timer > 7 then 
+		if timer >= 7 then 
 			DBM:Schedule(timer - 7, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(7), channel) 
 		end
-		if timer > 5 then 
+		if timer >= 5 then 
 			DBM:Schedule(timer - 5, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(5), channel)
 			DBM:Schedule(timer - 5, pullInFive)
 		end
-		if timer > 4 then 
+		if timer >= 4 then 
 			DBM:Schedule(timer - 4, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(4), channel)
 		end
-		if timer > 3 then 
+		if timer >= 3 then 
 			DBM:Schedule(timer - 3, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(3), channel) 
 		end
-		if timer > 2 then 
+		if timer >= 2 then 
 			DBM:Schedule(timer - 2, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(2), channel) 
 		end
-		if timer > 1 then 
+		if timer >= 1 then 
 			DBM:Schedule(timer - 1, SendChatMessage, DBM_CORE_ANNOUNCE_PULL:format(1), channel) 
 		end
 			DBM:Schedule(timer - 0, SendChatMessage, DBM_CORE_ANNOUNCE_PULL_NOW, channel)

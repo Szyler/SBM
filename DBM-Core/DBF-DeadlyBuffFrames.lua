@@ -51,7 +51,7 @@ function DeadlyBuffFrames_PrintOfficerInfo()
 	DeadlyBuffFrames_TextBoxTT:SetText("sbm commands");
 	DeadlyBuffFrames_TextBoxTT:AddLine(text, NORMAL_FONT_COLOR.r, NORMAL_FONT_COLOR.g, NORMAL_FONT_COLOR.b, 1);
 	
-	DeadlyBuffFrames_TextBoxTT:SetWidth(550);
+	DeadlyBuffFrames_TextBoxTT:SetWidth(750);
 	DeadlyBuffFrames_TextBoxTT:SetHeight(350);
 end
 
