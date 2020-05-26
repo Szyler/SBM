@@ -1196,7 +1196,10 @@ function DBM:PromoteAllRaidSBM()
 	if(IsRaidLeader()) then
 		local i;
 		for i=1,GetNumRaidMembers() do
-			PromoteToAssistant("raid"..i)
+			_, _, _, isOnline = GetRaidRosterInfo(j);
+			if (isOnline) then
+				PromoteToAssistant("raid"..i)
+			end
 		end
 		DBM:AddMsg("Granted all raid members assistant status.")
 	else
