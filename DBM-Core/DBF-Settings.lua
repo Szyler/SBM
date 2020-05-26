@@ -130,8 +130,13 @@ UIDROPDOWNMENU_MENU_VALUE
 
 local function createChannelName()
 	myguildName,_,_,_ = GetGuildInfo("player");
+	if (myguildName == nil) then
+		guildChannel="SBMSCRIPT" 
+		return;
+	else	
 	noSpaceGuildName = gsub(myguildName, "%s+", "")
 	guildChannel = noSpaceGuildName.."SBM"
+	end
 end
 
 DBM:Schedule(19, createChannelName)
@@ -143,72 +148,31 @@ function DBF_Settings_Menuofdoom()
 		     /////// FIRST MENU \\\\\\\\
 		     ***************************************]]--
 		
-		local ShowEXTRAOfficer = true;
-		local ShowOfficer = true;
+		local ShowEXTRAOfficer = false;
+		local ShowOfficer = false;
 		amnt = 1; -- amount of white spaces
 		guildName,_,guildRankIndex = GetGuildInfo("player");
-		
+		local canRunSounds
 		local myName = UnitName("player")
 		local REALM_NAME = GetRealmName();
 		local myguildName, myguildRankName, myguildRankIndex, myguildRealm = GetGuildInfo(myName)
-	
-		if(REALM_NAME == "Andorhal - No-Risk") then
-			if(myguildName == "toxicity") then
-				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
-					ShowOfficer = true;
-					ShowEXTRAOfficer = false;
-					amnt = 1;
-				end
-			elseif(myguildName == "Long Live Cenarius") then
-				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
-					ShowOfficer = true;
-					ShowEXTRAOfficer = true;
-					amnt = 1;
-				end
-			elseif(myguildName == "Exiled") then
-				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2 or myguildRankIndex == 3) then
-					ShowOfficer = true;
-					amnt = 1;
-				end			
-			elseif(myguildName == "HordeGuards") then
-				if(myguildRankIndex == 0 or myguildRankIndex == 1) then
-					ShowOfficer = true;
-					amnt = 1;
-				end
-			elseif(ShowOfficer == false) then
-				if(myguildName) then
-					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
-						ShowOfficer = true;
-						amnt = 1;
-					end
-				end
-			end	
-		elseif(REALM_NAME == "Laughing Skull - High-Risk") then
-			if(myguildName == "Method") then
-				if(myguildRankIndex == 0 or myguildRankIndex == 1 or myguildRankIndex == 2) then
-					ShowOfficer = true;
-					amnt = 1;
-				end
-			elseif(ShowOfficer == false) then
-				if(myguildName) then
-					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
-						ShowOfficer = true;
-						amnt = 1;
-					end
-				end
-			end	
-		else
-		-----DEBUG-----
-			if(ShowOfficer == false) then
-				if(myguildName) then
-					if(myguildRankIndex == 0 or myguildRankIndex == 1) then
-						ShowOfficer = true;
-						amnt = 1;
-					end
-				end
-			end	
+		for j = 1, GetNumRaidMembers() do
+			name, rank = GetRaidRosterInfo(j);
+		end
+		ShowEXTRAOfficer = true;
+				
+		if (name == myName) then
+			if (rank == 1 or rank == 2) then
+				ShowOfficer = true;
+				canRunSounds = true;
+			end
 		end
 	
+		if (myguildName == "SBMSCRIPT") then -- Only show ability checks if in a guild
+			ShowEXTRAOfficer = false;
+			canRunSounds = false;
+			amnt = 1;
+		end
 			 
 		if(ShowEXTRAOfficer) then
 			info = {};
@@ -228,7 +192,7 @@ function DBF_Settings_Menuofdoom()
 		
 		if(ShowOfficer) then
 			info = {};
-			info.text = "Officer";
+			info.text = "Raid Assistant";
 			info.hasArrow = 1;
 			info.notCheckable = 1;
 			info.value = "OfficerMenu";
@@ -315,7 +279,7 @@ function DBF_Settings_Menuofdoom()
 					
 		if(UIDROPDOWNMENU_MENU_VALUE == "OfficerMenu") then			
 			info = {};
-			info.text = "Officer Commands";
+			info.text = "Raid Assistant Commands";
 			info.isTitle = 1;
 			info.notCheckable = 1;
 			info.disabled = 1;
@@ -662,12 +626,16 @@ function DBF_Settings_Menuofdoom()
 			
 				local function pullInFive()
 					local ChannelID = GetChannelName(guildChannel)
-					SendChatMessage("sbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+					if canRunSounds == true then
+						SendChatMessage("sbm_cmd: pull_5_remaining", "CHANNEL", nil, ChannelID)
+					end
 				end
 
 				local function pullNow()
 					local ChannelID = GetChannelName(guildChannel)
-					SendChatMessage("sbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+					if canRunSounds == true then
+						SendChatMessage("sbm_cmd: pull_now", "CHANNEL", nil, ChannelID)
+					end
 				end				
 				
 				info = {};
@@ -684,7 +652,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 10
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
@@ -723,7 +691,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 15
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
@@ -762,7 +730,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 20
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
@@ -801,7 +769,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 25
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
@@ -840,7 +808,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 30
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
@@ -879,7 +847,7 @@ function DBF_Settings_Menuofdoom()
 				info.notCheckable = 1;
 				info.func = function() 
 				if DBM:GetRaidRank() == 0 then
-				return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
+					return DBM:AddMsg(DBM_ERROR_NO_PERMISSION)
 				end
 				local timer = 60
 				local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
