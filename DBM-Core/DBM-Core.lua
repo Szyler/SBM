@@ -1196,7 +1196,7 @@ function DBM:PromoteAllRaidSBM()
 	if(IsRaidLeader()) then
 		local i;
 		for i=1,GetNumRaidMembers() do
-			_, _, _, isOnline = GetRaidRosterInfo(j);
+			_, _, _, isOnline = GetRaidRosterInfo(i);
 			if (isOnline) then
 				PromoteToAssistant("raid"..i)
 			end
