@@ -781,14 +781,36 @@ function sbmAbilityCheck()
 		end
 	end	
 	-----FEARS (GROUPED)-----
-	local pscream = "Psychic Scream"
+	-----FEARS (GROUPED)-----
+	local pscream = {"Psychic Scream", "Rank 4"}
 	local ishout = "Intimidating Shout"
 	local hterror = "Howl of Terror"
-	local dcoil = "Death Coil"
+	local dcoil = {"Death Coil","Rank 3"}
+	local fearfear = {"Fear", "Rank 3"}
+	local phorror = "Psychic Horror"
 	if(string.find(arg1, "sbm_cmd: check: Fears")) then	
-		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil) then
+		if(spellArray == fearfear) then
+			SendChatMessage("spellArray "..spellArray[1], "RAID", nil, nil);
+		end
+	end
+	if(string.find(arg1, "sbm_cmd: check: Fears")) then	
+		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil or spellArray[1] == fearfear[1] or spellName == phorror) then
 			if(myName == GetUnitName("player")) then
-				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+				if(spellArray[2]) then 
+					if(
+						(spellArray[1] == pscream[1] and spellArray[2] == pscream[2]) or
+						(spellArray[1] == fearfear[1] and spellArray[2] == fearfear[2]) or
+						(spellArray[1] == pscream[1] and spellArray[2] == pscream[2])
+					) then
+						DBM:Unschedule(SendChatMessage, "I have "..spellName.." but not max rank")
+						SendChatMessage("I have "..spellName.." at max rank", "RAID", nil, nil); 
+					else
+						DBM:Unschedule(SendChatMessage, "I have "..spellName.." but not max rank")
+						DBM:Schedule(2, SendChatMessage, "I have "..spellName.." but not max rank", "RAID")
+					end
+				else
+					SendChatMessage("I have "..spellName, "RAID", nil, nil);
+				end
 			end
 		end
 	end	
