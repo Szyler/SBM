@@ -39,10 +39,11 @@ local down = 0
 -----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
+	enrageTimer:Start(-delay)
 	phase2 = false
 	currentCharge = nil
 	down = 0
-	self:ScheduleMethod(20.6 - delay, "TankThrow")
+	-- self:ScheduleMethod(20.6 - delay, "TankThrow")
 	timerThrow:Start(-delay)
 	warnThrowSoon:Schedule(17.6 - delay)
 end
@@ -110,7 +111,7 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	if msg == L.Emote or msg == L.Emote2 then
 		down = down + 1
 		if down >= 2 then
-			self:UnscheduleMethod("TankThrow")
+			-- self:UnscheduleMethod("TankThrow")
 			timerThrow:Cancel()
 			warnThrowSoon:Cancel()
 			DBM.BossHealth:Hide()
@@ -119,15 +120,15 @@ function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
 	end
 end
 
-function mod:TankThrow()
-	if not self:IsInCombat() or phase2 then
-		DBM.BossHealth:Hide()
-		return
-	end
-	timerThrow:Start()
-	warnThrowSoon:Schedule(17.6)
-	self:ScheduleMethod(20.6, "TankThrow")
-end
+-- function mod:TankThrow() --- Not currently working on Ascension
+-- 	if not self:IsInCombat() or phase2 then
+-- 		DBM.BossHealth:Hide()
+-- 		return
+-- 	end
+-- 	timerThrow:Start()
+-- 	warnThrowSoon:Schedule(17.6)
+-- 	self:ScheduleMethod(20.6, "TankThrow")
+-- end
 
 local function arrowOnUpdate(self, elapsed)
 	self.elapsed = (self.elapsed or 0) + elapsed
