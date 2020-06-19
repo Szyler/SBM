@@ -36,7 +36,7 @@ local timerChains			= mod:NewTargetTimer(10, 29991)
 
 local berserkTimer			= mod:NewBerserkTimer(900)
 
-local soundArcane			= mod:NewSound(29973)
+local soundArcane			= mod:SoundAlarm(29973)
 
 mod:AddBoolOption("WreathIcons", true)
 mod:AddBoolOption("ElementalIcons", true)
