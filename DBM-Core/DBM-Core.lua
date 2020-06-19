@@ -1219,7 +1219,7 @@ function DBM:PromoteAllRaidSBM()
 	local raiderNumberInverval = 1
 	local function PromoteRaidAssist()
 		numberOfRaiders = max(raiderNumberInverval, GetNumRaidMembers())
-		for i=raiderNumberInverval,raiderNumberInverval+10 do
+		for i=raiderNumberInverval,raiderNumberInverval+9 do
 			_, _, _, isOnline = GetRaidRosterInfo(i);
 			if (isOnline > 0) then
 				PromoteToAssistant("raid"..i)
@@ -1236,13 +1236,13 @@ function DBM:PromoteAllRaidSBM()
 			DBM:Schedule(1, PromoteRaidAssist)
 		end
 		if(numberOfRaiders > 10) then
-			DBM:Schedule(2, PromoteRaidAssist)
-		end
-		if(numberOfRaiders > 20) then
 			DBM:Schedule(3, PromoteRaidAssist)
 		end
+		if(numberOfRaiders > 20) then
+			DBM:Schedule(5, PromoteRaidAssist)
+		end
 		if(numberOfRaiders > 30) then
-			DBM:Schedule(4, PromoteRaidAssist)
+			DBM:Schedule(7, PromoteRaidAssist)
 		end
 		DBM:AddMsg("Granted all raid members assistant status.")
 	else
