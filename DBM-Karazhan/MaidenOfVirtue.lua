@@ -17,14 +17,14 @@ local warningRepentance		= mod:NewSpellAnnounce(29511, 3)
 local warningHolyFire		= mod:NewTargetAnnounce(29522, 3)
 
 local timerRepentance		= mod:NewBuffActiveTimer(12.6, 29511)
-local timerRepentanceCD		= mod:NewCDTimer(33, 29511)
+local timerRepentanceCD		= mod:NewCDTimer(25, 29511)
 local timerHolyFire			= mod:NewTargetTimer(12, 29522)
 
 mod:AddBoolOption("RangeFrame", true)
 
 function mod:OnCombatStart(delay)
-	timerRepentanceCD:Start(45-delay)
-	warningRepentanceSoon:Schedule(40-delay)
+	timerRepentanceCD:Start(25-delay)
+	warningRepentanceSoon:Schedule(20-delay)
 	if self.Options.RangeFrame then
 		DBM.RangeCheck:Show(10)
 	end
@@ -42,7 +42,7 @@ function mod:SPELL_CAST_START(args)
 		warningRepentance:Show()
 		timerRepentance:Start()
 		timerRepentanceCD:Start()
-		warningRepentanceSoon:Schedule(28)
+		warningRepentanceSoon:Schedule(23)
 	end
 end
 
