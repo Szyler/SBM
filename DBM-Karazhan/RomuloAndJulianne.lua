@@ -27,7 +27,7 @@ local warningPosion		= mod:NewAnnounce("warningPosion", 2, 30830, mod:IsHealer()
 local timerHeal			= mod:NewCastTimer(2.5, 30878)
 local timerDaring		= mod:NewTargetTimer(8, 30841)
 local timerDevotion		= mod:NewTargetTimer(10, 30887)
-local timerCombatStart	= mod:NewTimer(55, "TimerCombatStart", 2457)
+local timerCombatStart	= mod:NewTimer(48, "TimerCombatStart", 2457)
 
 mod:AddBoolOption("HealthFrame", true)
 
