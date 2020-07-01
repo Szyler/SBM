@@ -672,20 +672,20 @@ do
 			local tankwhitelist = {"123"}
 			-- local canRunSounds
 			
-			-- local playerName = UnitName(arg2)
-			-- for i = 1, MAX_RAID_MEMBERS do
-			-- 	local name, rank = GetRaidRosterInfo(i)
-			-- 	if (name == playerName) then
-			-- 		if (rank == 2 or rank == 1) then
-			-- 			canRunSounds = true
-			-- 			break
-			-- 		else
-			-- 			canRunSounds = false
-			-- 			break
-			-- 		end
-			-- 		break
-			-- 	end
-			-- end
+			local playerName = UnitName(arg2)
+			for i = 1, MAX_RAID_MEMBERS do
+				local name, rank = GetRaidRosterInfo(i)
+				if (name == playerName) then
+					if (rank == 2 or rank == 1) then
+						canRunSounds = true
+						break
+					else
+						canRunSounds = false
+						break
+					end
+					break
+				end
+			end
 			
 			
 			if(found) then  		
@@ -702,7 +702,12 @@ do
 						-- for i=1, table.getn(o) do 
 							-- if(MSG_FROM == o[i]) then
 								-- if canRunSounds == true then
-									PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+									for i = 1, MAX_RAID_MEMBERS do
+										local name = GetRaidRosterInfo(i)
+										if (name == MSG_FROM) then
+											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+										end
+									end
 								-- end
 							-- end
 						-- end
@@ -718,7 +723,12 @@ do
 								-- for i=1, table.getn(o) do 
 									-- if(MSG_FROM == o[i]) then
 										-- if canRunSounds == true then
-											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+											for i = 1, MAX_RAID_MEMBERS do
+												local name = GetRaidRosterInfo(i)
+												if (name == MSG_FROM) then
+													PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+												end
+											end
 										-- end
 									-- end
 								-- end
@@ -735,7 +745,12 @@ do
 							-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
 								-- for i=1, table.getn(o) do 
 									-- if(MSG_FROM == o[i]) then
-										sbmAbilityCheck()
+										for i = 1, MAX_RAID_MEMBERS do
+											local name = GetRaidRosterInfo(i)
+											if (name == MSG_FROM) then
+												sbmAbilityCheck()
+											end
+										end
 										-- break
 									-- end
 								-- end
