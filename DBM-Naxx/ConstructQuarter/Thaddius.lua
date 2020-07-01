@@ -27,7 +27,7 @@ local timerStaticOverload	= mod:NewTargetTimer(5, 1003130)
 -----MISC-----
 local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
 local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
-local enrageTimer			= mod:NewBerserkTimer(425)
+local enrageTimer			= mod:NewBerserkTimer(365)
 mod:AddBoolOption("ArrowsEnabled", false, "Arrows")
 mod:AddBoolOption("ArrowsRightLeft", false, "Arrows")
 mod:AddBoolOption("ArrowsInverse", false, "Arrows")
