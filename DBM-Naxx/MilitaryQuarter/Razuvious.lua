@@ -19,6 +19,10 @@ local warnShoutNow			= mod:NewSpellAnnounce(29107, 2)
 local warnShoutSoon			= mod:NewSoonAnnounce(29107, 3)
 local timerShout			= mod:NewCDTimer(10, 29107)
 local soundShout			= mod:SoundInfo(29107)
+local warnShoutNowBackup	= mod:NewSpellAnnounce(29107, 2)
+local warnShoutSoonBackup	= mod:NewSoonAnnounce(29107, 3)
+local timerShoutBackup		= mod:NewCDTimer(10, 29107)
+local soundShoutBackup		= mod:SoundInfo(29107)
 -----SHADOW BURST-----
 local warnShadowBurstNow	= mod:NewSpellAnnounce(1003108, 2)
 local warnShadowBurstSoon	= mod:NewSoonAnnounce(1003108, 3)
@@ -64,16 +68,6 @@ function mod:OnCombatStart(delay)
 	soundBlow:Schedule(15-delay)
 end
 
-function mod:SPELL_DAMAGE()
-	if args:IsSpellID(29107) then
-		timer = 10
-		warnShoutNow:Schedule(timer)
-		warnShoutSoon:Schedule(timer-5)
-		timerShout:Start(timer)
-		soundShout:Schedule(timer)
-	end
-end
-
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(55550) then 
 		warnKnifeNow:Show(args.destName)
@@ -97,6 +91,23 @@ function mod:SPELL_CAST_SUCCESS(args)
 		warnBlowSoon:Schedule(timer-5)
 		timerBlow:Start(timer)
 		soundBlow:Schedule(timer)
+	elseif args:IsSpellID(29107) then
+		timer = 10
+
+		self:Unschedule("warnShoutNowBackup")
+		self:Unschedule("warnShoutSoonBackup")
+		self:Unschedule("soundShoutBackup")
+		timerShoutBackup:Stop()
+
+		warnShoutNow:Schedule(timer)
+		warnShoutSoon:Schedule(timer-3)
+		timerShout:Start(timer)
+		soundShout:Schedule(timer-1)
+		
+		warnShoutNowBackup:Schedule(timer*2)
+		warnShoutSoonBackup:Schedule(timer*2-3)
+		timerShoutBackup:Start(timer*2)
+		soundShoutBackup:Schedule(timer*2-1)
 	end
 end
 
