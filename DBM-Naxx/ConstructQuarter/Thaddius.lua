@@ -20,10 +20,10 @@ local warnThrow				= mod:NewSpellAnnounce(28338, 2)
 local warnThrowSoon			= mod:NewSoonAnnounce(28338, 1)
 local timerThrow			= mod:NewNextTimer(20.6, 28338)
 -----Static Overload-----
-local warnStaticPrimer		= mod:NewSpecialWarning("WarnStaticPrimer")
-local timerStaticPrimer		= mod:NewTargetTimer(3, 1003130)
-local warnStaticOverload	= mod:NewSpecialWarning("WarningStaticOverload")
-local timerStaticOverload	= mod:NewTargetTimer(5, 1003130)
+local warnStaticPrimer		= mod:NewTargetTimer(3, 1003130)
+local warnStaticPrimer		= mod:NewTargetAnnounce(1003130, 3)
+local soundStaticPrimer		= mod:SoundAirHorn(1003130)
+local timerStaticOverload	= mod:NewTargetTimer(4, 1003130)
 -----MISC-----
 local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
 local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
@@ -117,8 +117,12 @@ end
 function mod:SPELL_AURA_APPLIED(args)
 	if args:IsSpellID(1003130) then
 		warnStaticPrimer:Show(args.destName)
-		timerStaticOverload:Schedule(3)
 		timerStaticPrimer:Start(args.destName)
+		timerStaticOverload:Schedule(3)
+		if args:IsPlayer() then
+			soundStaticPrimer:Play();
+			SendChatMessage(L.YellStaticOverload, "YELL")
+		end
 		if self.Options.SetIconOnStaticOverloadTarget then
 			self:SetIcon(args.destName, 8, 8)
 		end
