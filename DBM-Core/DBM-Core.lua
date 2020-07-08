@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1804 $"):sub(12, -3),
-	Version = "8.04",
-	DisplayVersion = "8.04", -- the string that is shown as version
-	ReleaseRevision = 8040 -- the revision of the latest stable version that is available (for /sbm ver2)
+	Revision = ("$Revision: 2050 $"):sub(12, -3),
+	Version = "2.05",
+	DisplayVersion = "2.05", -- the string that is shown as version
+	ReleaseRevision = 2050 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
@@ -670,9 +670,14 @@ do
             local found,_,p1 = string.find(arg4, " (.+)")
 			local o = {"Szyler"}
 			local tankwhitelist = {"123"}
+			local numberOfRaidorPartyMembers
 			-- local canRunSounds
 			
-			-- local playerName = UnitName(arg2)
+			local playerName = UnitName(arg2)
+
+
+
+
 			-- for i = 1, MAX_RAID_MEMBERS do
 			-- 	local name, rank = GetRaidRosterInfo(i)
 			-- 	if (name == playerName) then
@@ -690,6 +695,7 @@ do
 			
 			if(found) then  		
 				if(p1 == channelToJoin) then
+
 					if(string.find(arg1,"sbm_tv: get_version_")) then
 						-- for i=1, table.getn(o) do 
 							-- if(MSG_FROM == o[i]) then
@@ -698,52 +704,67 @@ do
 							-- end
 						-- end
 					end
-					if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
-						-- for i=1, table.getn(o) do 
-							-- if(MSG_FROM == o[i]) then
-								-- if canRunSounds == true then
-									PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-								-- end
-							-- end
-						-- end
-						-- for i=1, table.getn(tankwhitelist) do 
-							-- if(MSG_FROM == tankwhitelist[i]) then
-								-- if canRunSounds == true then
-									-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-								-- end
-							-- end
-						-- end
+
+					if (GetNumRaidMembers() > 0) then
+						numberOfRaidorPartyMembers = MAX_RAID_MEMBERS
+					elseif (GetNumPartyMembers() > 0) then
+						numberOfRaidorPartyMembers = GetNumPartyMembers()
+					else
+						numberOfRaidorPartyMembers = 1
 					end
-					if(string.find(arg1,"sbm_cmd: pull_now")) then
+
+
+					for i = 1, numberOfRaidorPartyMembers do
+						local name = GetRaidRosterInfo(i) or UnitName('party'..i)
+						if (MSG_FROM == name or MSG_FROM == UnitName("player")) then
+							if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
 								-- for i=1, table.getn(o) do 
 									-- if(MSG_FROM == o[i]) then
 										-- if canRunSounds == true then
-											PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+													PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
 										-- end
 									-- end
 								-- end
 								-- for i=1, table.getn(tankwhitelist) do 
 									-- if(MSG_FROM == tankwhitelist[i]) then
 										-- if canRunSounds == true then
-											-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+											-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
 										-- end
 									-- end
 								-- end
-					end
-					if(string.find(arg1,"sbm_cmd: check: ")) then
-						-- if(REALM_NAME == "Andorhal - No-Risk") then
-							-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
-								-- for i=1, table.getn(o) do 
-									-- if(MSG_FROM == o[i]) then
-										sbmAbilityCheck()
-										-- break
+							end
+							if(string.find(arg1,"sbm_cmd: pull_now")) then
+										-- for i=1, table.getn(o) do 
+											-- if(MSG_FROM == o[i]) then
+												-- if canRunSounds == true then
+															PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+												-- end
+											-- end
+										-- end
+										-- for i=1, table.getn(tankwhitelist) do 
+											-- if(MSG_FROM == tankwhitelist[i]) then
+												-- if canRunSounds == true then
+													-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+												-- end
+											-- end
+										-- end
+							end
+							if(string.find(arg1,"sbm_cmd: check: ")) then
+								-- if(REALM_NAME == "Andorhal - No-Risk") then
+									-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
+										-- for i=1, table.getn(o) do 
+											-- if(MSG_FROM == o[i]) then
+														sbmAbilityCheck()
+												-- break
+											-- end
+										-- end
 									-- end
 								-- end
-							-- end
-						-- end
+							end
+						end
 					end
-                end
-            end
+				end
+			end
 		end
     end
     )
@@ -781,14 +802,36 @@ function sbmAbilityCheck()
 		end
 	end	
 	-----FEARS (GROUPED)-----
-	local pscream = "Psychic Scream"
+	-----FEARS (GROUPED)-----
+	local pscream = {"Psychic Scream", "Rank 4"}
 	local ishout = "Intimidating Shout"
 	local hterror = "Howl of Terror"
-	local dcoil = "Death Coil"
+	local dcoil = {"Death Coil","Rank 3"}
+	local fearfear = {"Fear", "Rank 3"}
+	local phorror = "Psychic Horror"
 	if(string.find(arg1, "sbm_cmd: check: Fears")) then	
-		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil) then
+		if(spellArray == fearfear) then
+			SendChatMessage("spellArray "..spellArray[1], "RAID", nil, nil);
+		end
+	end
+	if(string.find(arg1, "sbm_cmd: check: Fears")) then	
+		if(spellName == pscream or spellName == ishout or spellName == hterror or spellName == dcoil or spellArray[1] == fearfear[1] or spellName == phorror) then
 			if(myName == GetUnitName("player")) then
-				SendChatMessage("I have "..spellName, "RAID", nil, nil);
+				if(spellArray[2]) then 
+					if(
+						(spellArray[1] == pscream[1] and spellArray[2] == pscream[2]) or
+						(spellArray[1] == fearfear[1] and spellArray[2] == fearfear[2]) or
+						(spellArray[1] == pscream[1] and spellArray[2] == pscream[2])
+					) then
+						DBM:Unschedule(SendChatMessage, "I have "..spellName.." but not max rank")
+						SendChatMessage("I have "..spellName.." at max rank", "RAID", nil, nil); 
+					else
+						DBM:Unschedule(SendChatMessage, "I have "..spellName.." but not max rank")
+						DBM:Schedule(2, SendChatMessage, "I have "..spellName.." but not max rank", "RAID")
+					end
+				else
+					SendChatMessage("I have "..spellName, "RAID", nil, nil);
+				end
 			end
 		end
 	end	
@@ -1193,13 +1236,34 @@ function DBM:ForceUpdate()
 end
 
 function DBM:PromoteAllRaidSBM()
-	if(IsRaidLeader()) then
-		local i;
-		for i=1,GetNumRaidMembers() do
-			_, _, _, isOnline = GetRaidRosterInfo(j);
-			if (isOnline) then
+	
+	local raiderNumberInverval = 1
+	local function PromoteRaidAssist()
+		numberOfRaiders = max(raiderNumberInverval, GetNumRaidMembers())
+		for i=raiderNumberInverval,raiderNumberInverval+9 do
+			_, _, _, isOnline = GetRaidRosterInfo(i);
+			if (isOnline > 0) then
 				PromoteToAssistant("raid"..i)
 			end
+		end
+		raiderNumberInverval = raiderNumberInverval + 10
+		DBM:AddMsg("ran sub function")
+	end
+
+	if(IsRaidLeader()) then
+		numberOfRaiders = GetNumRaidMembers()
+		local channel = ((GetNumRaidMembers() == 0) and "PARTY") or "RAID_WARNING"
+		if(numberOfRaiders > 1) then
+			DBM:Schedule(1, PromoteRaidAssist)
+		end
+		if(numberOfRaiders > 10) then
+			DBM:Schedule(3, PromoteRaidAssist)
+		end
+		if(numberOfRaiders > 20) then
+			DBM:Schedule(5, PromoteRaidAssist)
+		end
+		if(numberOfRaiders > 30) then
+			DBM:Schedule(7, PromoteRaidAssist)
 		end
 		DBM:AddMsg("Granted all raid members assistant status.")
 	else

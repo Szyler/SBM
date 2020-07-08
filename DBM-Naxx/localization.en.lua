@@ -212,7 +212,8 @@ L:SetMiscLocalization({
 	Boss1	= "Feugen",
 	Boss2	= "Stalagg",
 	Charge1 = "negative",
-	Charge2 = "positive"
+	Charge2 = "positive",
+	YellStaticOverload = "Static Overload on me!"
 })
 
 L:SetOptionLocalization({

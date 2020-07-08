@@ -302,17 +302,17 @@ v1.88 - 15/01/2020
 v1.89 - 20/02/2020
 - Renamed to Sky Boss Mods, removed some unused features.
 ----------------------------------------------------------------------------------------------------
-v8.01 - 21/02/2020
+v2.01 - 21/02/2020
 - Renamed to Szyler Boss Mods, removed Toxic spy channels stuff.
 ----------------------------------------------------------------------------------------------------
-v8.02 - 29/02/2020
+v2.02 - 29/02/2020
 - Added Focus magic ability check
 - Removed limitations on pulltimerSound
 - Added guild variable SBM channels 
 - Enabled officer menu for everyone
 - pulltimerSound, checkversion and ability checks only work with guildSBM channels, onLoginVersion still sent in SBMSCRIPT.
 ----------------------------------------------------------------------------------------------------
-v8.03 - 05/05/2020
+v2.03 - 05/05/2020
 - Added raid marks on adds on TwinEmperors
 - Added Void Zone warning to 4h
 - Added Soul Harvest timer (Gothic)
@@ -322,11 +322,18 @@ v8.03 - 05/05/2020
 - Removed officer for people without guilds. 
 - Renamed officer tab in DBF to Raid Assistant
 ----------------------------------------------------------------------------------------------------
-v8.04 - 22/05/2020
+v2.04 - 22/05/2020
 - Added marker on Grobbulus
 - fixed error for people without guilds
 - Added pull voice on 5s pull
 - Changed /sbm pull timer to 5s
 - Fixed width of command window
 - CanRunSounds now on sender, not reciever
+----------------------------------------------------------------------------------------------------
+v2.05 - 19/06/2020
+- Razuvious shout timer on damage taken (similar to WA)
+- Added enrage and Static overload on Thaddius
+- Pulltimer voice now checks if you are in the caller's party/raid group
+- fixed DC when using /sbm aaa (Assign all assist)
+- fixed ability checks to only state highest rank instead of multiple lines
 ----------------------------------------------------------------------------------------------------
