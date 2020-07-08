@@ -331,5 +331,9 @@ v2.04 - 22/05/2020
 - CanRunSounds now on sender, not reciever
 ----------------------------------------------------------------------------------------------------
 v2.05 - 19/06/2020
-- 
+- Razuvious shout timer on damage taken (similar to WA)
+- Added enrage and Static overload on Thaddius
+- Pulltimer voice now checks if you are in the caller's party/raid group
+- fixed DC when using /sbm aaa (Assign all assist)
+- fixed ability checks to only state highest rank instead of multiple lines
 ----------------------------------------------------------------------------------------------------
