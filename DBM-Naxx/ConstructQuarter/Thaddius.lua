@@ -19,6 +19,11 @@ local warnShiftCasting		= mod:NewCastAnnounce(28089, 3)
 local warnThrow				= mod:NewSpellAnnounce(28338, 2)
 local warnThrowSoon			= mod:NewSoonAnnounce(28338, 1)
 local timerThrow			= mod:NewNextTimer(20.6, 28338)
+-----Static Overload-----
+local warnStaticPrimer		= mod:NewTargetTimer(3, 1003130)
+local warnStaticPrimer		= mod:NewTargetAnnounce(1003130, 3)
+local soundStaticPrimer		= mod:SoundAirHorn(1003130)
+local timerStaticOverload	= mod:NewTargetTimer(4, 1003130)
 -----MISC-----
 local warnChargeChanged		= mod:NewSpecialWarning("WarningChargeChanged")
 local warnChargeNotChanged	= mod:NewSpecialWarning("WarningChargeNotChanged", false)
@@ -36,15 +41,18 @@ local currentCharge
 local phase2
 local down = 0
 
+mod:AddBoolOption("SetIconOnStaticOverloadTarget", true)
+
 -----BOSS FUNCTIONS-----
 function mod:OnCombatStart(delay)
 	self:ScheduleMethod(0, "getBestKill")
+	enrageTimer:Start(-delay)
 	phase2 = false
 	currentCharge = nil
 	down = 0
-	self:ScheduleMethod(20.6 - delay, "TankThrow")
-	timerThrow:Start(-delay)
-	warnThrowSoon:Schedule(17.6 - delay)
+	-- self:ScheduleMethod(20.6 - delay, "TankThrow")
+	-- timerThrow:Start(-delay)
+	-- warnThrowSoon:Schedule(17.6 - delay)
 end
 
 local lastShift = 0
@@ -106,28 +114,44 @@ function mod:UNIT_AURA(elapsed)
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
-	if msg == L.Emote or msg == L.Emote2 then
-		down = down + 1
-		if down >= 2 then
-			self:UnscheduleMethod("TankThrow")
-			timerThrow:Cancel()
-			warnThrowSoon:Cancel()
-			DBM.BossHealth:Hide()
-			enrageTimer:Start()
+function mod:SPELL_AURA_APPLIED(args)
+	if args:IsSpellID(1003130) then
+		warnStaticPrimer:Show(args.destName)
+		timerStaticPrimer:Start(args.destName)
+		timerStaticOverload:Schedule(3)
+		if args:IsPlayer() then
+			soundStaticPrimer:Play();
+			SendChatMessage(L.YellStaticOverload, "YELL")
+		end
+		if self.Options.SetIconOnStaticOverloadTarget then
+			self:SetIcon(args.destName, 8, 8)
 		end
 	end
 end
 
-function mod:TankThrow()
-	if not self:IsInCombat() or phase2 then
-		DBM.BossHealth:Hide()
-		return
-	end
-	timerThrow:Start()
-	warnThrowSoon:Schedule(17.6)
-	self:ScheduleMethod(20.6, "TankThrow")
-end
+
+-- function mod:CHAT_MSG_RAID_BOSS_EMOTE(msg)
+-- 	if msg == L.Emote or msg == L.Emote2 then
+-- 		down = down + 1
+-- 		if down >= 2 then
+-- 			-- self:UnscheduleMethod("TankThrow")
+-- 			timerThrow:Cancel()
+-- 			warnThrowSoon:Cancel()
+-- 			DBM.BossHealth:Hide()
+-- 			enrageTimer:Start()
+-- 		end
+-- 	end
+-- end
+
+-- function mod:TankThrow() --- Not currently working on Ascension
+-- 	if not self:IsInCombat() or phase2 then
+-- 		DBM.BossHealth:Hide()
+-- 		return
+-- 	end
+-- 	timerThrow:Start()
+-- 	warnThrowSoon:Schedule(17.6)
+-- 	self:ScheduleMethod(20.6, "TankThrow")
+-- end
 
 local function arrowOnUpdate(self, elapsed)
 	self.elapsed = (self.elapsed or 0) + elapsed
