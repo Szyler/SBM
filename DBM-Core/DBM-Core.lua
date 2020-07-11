@@ -8,10 +8,10 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = ("$Revision: 1804 $"):sub(12, -3),
-	Version = "8.04",
-	DisplayVersion = "8.04", -- the string that is shown as version
-	ReleaseRevision = 8040 -- the revision of the latest stable version that is available (for /sbm ver2)
+	Revision = ("$Revision: 2050 $"):sub(12, -3),
+	Version = "2.05",
+	DisplayVersion = "2.05", -- the string that is shown as version
+	ReleaseRevision = 2050 -- the revision of the latest stable version that is available (for /sbm ver2)
 }
 
 DBM_SavedOptions = {}
