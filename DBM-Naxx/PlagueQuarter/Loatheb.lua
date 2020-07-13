@@ -88,7 +88,7 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 end
 
 function mod:SporeSpawn(args)
-	timer = 15
+	timer = 14
 	warnSporeNow:Show()
 	soundSpore:Play();
 	timerSpore:Start(timer)
