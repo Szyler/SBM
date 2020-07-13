@@ -9,7 +9,7 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
-	"SPELL_SUMMON",
+	"UNIT_DIED",
 	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
@@ -86,8 +86,9 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
-function mod:SPELL_SUMMON(args)
-	if args:IsSpellID(29234) then
+function mod:UNIT_DIED(args)
+	local cid = self:GetCIDFromGUID(args.destGUID)
+	if cid == 16286 then
 		self:ScheduleMethod(timer, "SporeSpawn")
 	end
 end
@@ -95,7 +96,7 @@ end
 function mod:SporeSpawn(args)
 	warnSporeNow:Show()
 	soundSpore:Play();
-	timer = 18
+	timer = 15
 	timerSpore:Start(timer)
 	warnSporeSoon:Schedule(timer-3)
 	self:ScheduleMethod(timer, "SporeSpawn")
