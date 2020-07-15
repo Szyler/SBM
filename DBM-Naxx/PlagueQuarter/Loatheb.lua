@@ -51,6 +51,7 @@ function mod:OnCombatStart(delay)
 	timerSpore:Start(sporeTimer - delay)
 	warnSporeSoon:Schedule(sporeTimer - 3 - delay)
 	timerDoom:Start(120 - delay, doomCounter + 1)
+	self:ScheduleMethod(sporeTimer, "SporeSpawn")
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -86,17 +87,10 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
-function mod:UNIT_DIED(args)
-	local cid = self:GetCIDFromGUID(args.destGUID)
-	if cid == 16286 then
-		self:ScheduleMethod(timer, "SporeSpawn")
-	end
-end
-
 function mod:SporeSpawn(args)
+	timer = 14
 	warnSporeNow:Show()
 	soundSpore:Play();
-	timer = 15
 	timerSpore:Start(timer)
 	warnSporeSoon:Schedule(timer-3)
 	self:ScheduleMethod(timer, "SporeSpawn")
