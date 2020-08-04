@@ -52,6 +52,7 @@ local soundPhaseTwo			= mod:SoundInfoLong(29125, "Play the 'Long Info' sound eff
 function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	phase = 1
+	RealRazuv = 1
 	-----Shout-----
 	warnShoutNow:Schedule(16 - delay)
 	warnShoutSoon:Schedule(11 - delay)
@@ -69,45 +70,47 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:SPELL_AURA_APPLIED(args)
-	if args:IsSpellID(55550) then 
-		warnKnifeNow:Show(args.destName)
-		if args:IsPlayer() then
-			specWarnKnife:Show(10);
-			soundKnife:Play();
-			SendChatMessage(L.YellKnife, "YELL")
-		end
-	elseif args:IsSpellID(1003253) then 
-		timer = 120
-		warnCurseNow:Schedule(timer)
-		warnCurseEndSoon:Schedule(timer-10)
-		timerCurse:Start(timer)
-	end		
+		if args:IsSpellID(55550) then 
+			warnKnifeNow:Show(args.destName)
+			if args:IsPlayer() then
+				specWarnKnife:Show(10);
+				soundKnife:Play();
+				SendChatMessage(L.YellKnife, "YELL")
+			end
+		elseif args:IsSpellID(1003253) then 
+			timer = 120
+			warnCurseNow:Schedule(timer)
+			warnCurseEndSoon:Schedule(timer-10)
+			timerCurse:Start(timer)
+		end		
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
-	if args:IsSpellID(26613) then
-		timer = 15
-		warnBlowNow:Schedule(timer)
-		warnBlowSoon:Schedule(timer-5)
-		timerBlow:Start(timer)
-		soundBlow:Schedule(timer)
-	elseif args:IsSpellID(29107) then
-		timer = 10
+	if RealRazuv then
+		if args:IsSpellID(26613) then
+			timer = 15
+			warnBlowNow:Schedule(timer)
+			warnBlowSoon:Schedule(timer-5)
+			timerBlow:Start(timer)
+			soundBlow:Schedule(timer)
+		elseif args:IsSpellID(29107) then
+			timer = 10
 
-		self:Unschedule("warnShoutNowBackup")
-		self:Unschedule("warnShoutSoonBackup")
-		self:Unschedule("soundShoutBackup")
-		timerShoutBackup:Stop()
+			self:Unschedule("warnShoutNowBackup")
+			self:Unschedule("warnShoutSoonBackup")
+			self:Unschedule("soundShoutBackup")
+			timerShoutBackup:Stop()
 
-		warnShoutNow:Schedule(timer)
-		warnShoutSoon:Schedule(timer-3)
-		timerShout:Start(timer)
-		soundShout:Schedule(timer-1)
-		
-		warnShoutNowBackup:Schedule(timer*2)
-		warnShoutSoonBackup:Schedule(timer*2-3)
-		timerShoutBackup:Start(timer*2)
-		soundShoutBackup:Schedule(timer*2-1)
+			warnShoutNow:Schedule(timer)
+			warnShoutSoon:Schedule(timer-3)
+			timerShout:Start(timer)
+			soundShout:Schedule(timer-1)
+			
+			warnShoutNowBackup:Schedule(timer*2)
+			warnShoutSoonBackup:Schedule(timer*2-3)
+			timerShoutBackup:Start(timer*2)
+			soundShoutBackup:Schedule(timer*2-1)
+		end
 	end
 end
 
