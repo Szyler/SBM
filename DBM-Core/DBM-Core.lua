@@ -717,50 +717,53 @@ do
 					for i = 1, numberOfRaidorPartyMembers do
 						local name = GetRaidRosterInfo(i) or UnitName('party'..i)
 						if (MSG_FROM == name or MSG_FROM == UnitName("player")) then
-							if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
-								-- for i=1, table.getn(o) do 
-									-- if(MSG_FROM == o[i]) then
-										-- if canRunSounds == true then
-													PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										-- end
+							isInGroup = true
+						end
+					end
+					if(isInGroup) then
+						if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
+							-- for i=1, table.getn(o) do 
+								-- if(MSG_FROM == o[i]) then
+									-- if canRunSounds == true then
+												PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
 									-- end
 								-- end
-								-- for i=1, table.getn(tankwhitelist) do 
-									-- if(MSG_FROM == tankwhitelist[i]) then
-										-- if canRunSounds == true then
-											-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										-- end
+							-- end
+							-- for i=1, table.getn(tankwhitelist) do 
+								-- if(MSG_FROM == tankwhitelist[i]) then
+									-- if canRunSounds == true then
+										-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
 									-- end
 								-- end
-							end
-							if(string.find(arg1,"sbm_cmd: pull_now")) then
-										-- for i=1, table.getn(o) do 
-											-- if(MSG_FROM == o[i]) then
-												-- if canRunSounds == true then
-															PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
-												-- end
-											-- end
-										-- end
-										-- for i=1, table.getn(tankwhitelist) do 
-											-- if(MSG_FROM == tankwhitelist[i]) then
-												-- if canRunSounds == true then
-													-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
-												-- end
-											-- end
-										-- end
-							end
-							if(string.find(arg1,"sbm_cmd: check: ")) then
-								-- if(REALM_NAME == "Andorhal - No-Risk") then
-									-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
-										-- for i=1, table.getn(o) do 
-											-- if(MSG_FROM == o[i]) then
-														sbmAbilityCheck()
-												-- break
+							-- end
+						end
+						if(string.find(arg1,"sbm_cmd: pull_now")) then
+									-- for i=1, table.getn(o) do 
+										-- if(MSG_FROM == o[i]) then
+											-- if canRunSounds == true then
+														PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
 											-- end
 										-- end
 									-- end
+									-- for i=1, table.getn(tankwhitelist) do 
+										-- if(MSG_FROM == tankwhitelist[i]) then
+											-- if canRunSounds == true then
+												-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+											-- end
+										-- end
+									-- end
+						end
+						if(string.find(arg1,"sbm_cmd: check: ")) then
+							-- if(REALM_NAME == "Andorhal - No-Risk") then
+								-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
+									-- for i=1, table.getn(o) do 
+										-- if(MSG_FROM == o[i]) then
+													sbmAbilityCheck()
+											-- break
+										-- end
+									-- end
 								-- end
-							end
+							-- end
 						end
 					end
 				end
