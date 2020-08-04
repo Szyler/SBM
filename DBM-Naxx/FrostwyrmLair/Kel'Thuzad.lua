@@ -34,7 +34,7 @@ local soundPhase2		= mod:SoundInfoLong(29485, "Play the 'Long Info' sound effect
 -----PHASE 2 -> 3 TRANSITION-----
 local warnPhase3		= mod:NewPhaseAnnounce(3, 3)
 local warnPhase3Soon	= mod:NewPhaseSoonAnnounce(3, 3)
-local timerPhase3		= mod:NewTimer(378, "Phase Three", 29485, nil, "Show timer for Phase Three")
+local timerPhase3		= mod:NewTimer(375, "Phase Three", 29485, nil, "Show timer for Phase Three")
 local soundPhase3		= mod:SoundInfoLong(29485, "Play the 'Long Info' sound effect for Phase Three")
 ----------PHASE 2----------
 -----SHADE OF NAXXRAMAS-----
@@ -114,7 +114,7 @@ local constructBoss
 
 local heiganDanceStart
 ----------MISC----------
-local notRealRazuv		= 0
+local RealRazuv		= 0
 local phase 			= 0
 local shadesSpawned		= 0
 local berserkTimer		= mod:NewBerserkTimer(1140)
@@ -123,7 +123,7 @@ function mod:OnCombatStart(delay)
 	mod:getBestKill()
 	mod:phaseOne()
 	berserkTimer:Start(1140)
-	notRealRazuv = 1
+	RealRazuv = 0
 end
 
 function mod:phaseOne()
@@ -189,7 +189,7 @@ function mod:phaseTwo()
 end
 
 function mod:phase3Transition()
-	timer = 378
+	timer = 375
 	warnPhase3:Schedule(timer)
 	warnPhase3Soon:Schedule(timer-10)
 	timerPhase3:Start(timer)
@@ -304,7 +304,7 @@ function mod:SPELL_CAST_SUCCESS(args)
 	----------SPELL TRACKING----------
 	-----DISRUPTING SHOUT-----
 	if args:IsSpellID(29107) then
-		if notRealRazuv == 1 then
+		if RealRazuv == 0 then
 			timer = 16
 			warnShout:Show()
 			warnShoutSoon:Schedule(timer-5)

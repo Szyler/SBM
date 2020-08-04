@@ -337,3 +337,9 @@ v2.05 - 19/06/2020
 - fixed DC when using /sbm aaa (Assign all assist)
 - fixed ability checks to only state highest rank instead of multiple lines
 ----------------------------------------------------------------------------------------------------
+v2.06 - 04/08/2020
+- Fixed drifting sporetimer on Loatheb
+- Fixed pull timer being loud
+- Added global checkversion channel 
+- Fixed double shout timer on Razuvious
+----------------------------------------------------------------------------------------------------

@@ -668,7 +668,7 @@ do
             local name = UnitName("player")
             local MSG_FROM = arg2
             local found,_,p1 = string.find(arg4, " (.+)")
-			local o = {"Szyler"}
+			local AddonMaker = "Szyler"
 			local tankwhitelist = {"123"}
 			local numberOfRaidorPartyMembers
 			-- local canRunSounds
@@ -717,55 +717,62 @@ do
 					for i = 1, numberOfRaidorPartyMembers do
 						local name = GetRaidRosterInfo(i) or UnitName('party'..i)
 						if (MSG_FROM == name or MSG_FROM == UnitName("player")) then
-							if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
-								-- for i=1, table.getn(o) do 
-									-- if(MSG_FROM == o[i]) then
-										-- if canRunSounds == true then
-													PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										-- end
-									-- end
-								-- end
-								-- for i=1, table.getn(tankwhitelist) do 
-									-- if(MSG_FROM == tankwhitelist[i]) then
-										-- if canRunSounds == true then
-											-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
-										-- end
-									-- end
-								-- end
-							end
-							if(string.find(arg1,"sbm_cmd: pull_now")) then
-										-- for i=1, table.getn(o) do 
-											-- if(MSG_FROM == o[i]) then
-												-- if canRunSounds == true then
-															PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
-												-- end
-											-- end
-										-- end
-										-- for i=1, table.getn(tankwhitelist) do 
-											-- if(MSG_FROM == tankwhitelist[i]) then
-												-- if canRunSounds == true then
-													-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
-												-- end
-											-- end
-										-- end
-							end
-							if(string.find(arg1,"sbm_cmd: check: ")) then
-								-- if(REALM_NAME == "Andorhal - No-Risk") then
-									-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
-										-- for i=1, table.getn(o) do 
-											-- if(MSG_FROM == o[i]) then
-														sbmAbilityCheck()
-												-- break
-											-- end
-										-- end
-									-- end
-								-- end
-							end
+							isInGroup = true
 						end
 					end
+					if(isInGroup) then
+						if(string.find(arg1,"sbm_cmd: pull_5_remaining")) then
+							-- for i=1, table.getn(o) do 
+								-- if(MSG_FROM == o[i]) then
+									-- if canRunSounds == true then
+												PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+									-- end
+								-- end
+							-- end
+							-- for i=1, table.getn(tankwhitelist) do 
+								-- if(MSG_FROM == tankwhitelist[i]) then
+									-- if canRunSounds == true then
+										-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\DBM Countdown Long.ogg")
+									-- end
+								-- end
+							-- end
+						end
+						if(string.find(arg1,"sbm_cmd: pull_now")) then
+									-- for i=1, table.getn(o) do 
+										-- if(MSG_FROM == o[i]) then
+											-- if canRunSounds == true then
+														PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+											-- end
+										-- end
+									-- end
+									-- for i=1, table.getn(tankwhitelist) do 
+										-- if(MSG_FROM == tankwhitelist[i]) then
+											-- if canRunSounds == true then
+												-- PlaySoundFile("Interface\\AddOns\\DBM-Core\\sounds\\Info.ogg")
+											-- end
+										-- end
+									-- end
+						end
+						if(string.find(arg1,"sbm_cmd: check: ")) then
+							-- if(REALM_NAME == "Andorhal - No-Risk") then
+								-- if(myguildName == "Long Live Cenarius" or myguildName == "Tilted") then
+									-- for i=1, table.getn(o) do 
+										-- if(MSG_FROM == o[i]) then
+													sbmAbilityCheck()
+											-- break
+										-- end
+									-- end
+								-- end
+							-- end
+						end
+					end
+				elseif(p1 == "SBMUPDATE") then
+					if(MSG_FROM == AddonMaker) then
+						checkSBMVersion()
 				end
 			end
 		end
+    end
     end
     )
 	
@@ -1046,6 +1053,9 @@ end
 
 function checkSBMVersion()
 	local ChannelID = GetChannelName(guildChannel)
+	if(MSG_FROM == AddonMaker) then
+		ChannelID = GetChannelName("SBMUPDATE")
+	end
 	if(string.find(arg1, "sbm_tv: get_version_")) then
 		if(string.find(arg1, "sbm_tv: get_version_(.+)")) then
 			_,_,VerNum = string.find(arg1, "sbm_tv: get_version_(.+)");
@@ -1108,26 +1118,26 @@ function popUp()
 	end
 end
 
-function reloadPopUp()
-	if(myguildName) then
-	else
-		if IsInGuild() == 1 then
-		StaticPopupDialogs["RELOAD_SBM"] =
-		{
-			text = "RELOAD YOUR ADDON\n\nSBM has additional features that require a reload.\nTo access these features, you must reload on every login.\nThis popup should no longer show as of 1.88.",
-			button1 = "Reload",
-			timeout = 0,
-			whileDead = 1,
+-- function reloadPopUp()
+-- 	if(myguildName) then
+-- 	else
+-- 		if IsInGuild() == 1 then
+-- 		StaticPopupDialogs["RELOAD_SBM"] =
+-- 		{
+-- 			text = "RELOAD YOUR ADDON\n\nSBM has additional features that require a reload.\nTo access these features, you must reload on every login.\nThis popup should no longer show as of 1.88.",
+-- 			button1 = "Reload",
+-- 			timeout = 0,
+-- 			whileDead = 1,
 											
-			OnAccept = function(self)
-				self:Hide();
-				ReloadUI();
-			end,
-		};
-		StaticPopup_Show("RELOAD_SBM");
-		end
-	end
-end
+-- 			OnAccept = function(self)
+-- 				self:Hide();
+-- 				ReloadUI();
+-- 			end,
+-- 		};
+-- 		StaticPopup_Show("RELOAD_SBM");
+-- 		end
+-- 	end
+-- end
 
 function showDiscordLink()
     StaticPopupDialogs["UPDATE_SBM_LINK"] = {
@@ -1138,7 +1148,7 @@ function showDiscordLink()
         button2 = "Cancel",
         
         OnShow = function(self, data)
-            self.editBox:SetText("Ask Szyler");
+            self.editBox:SetText("https://discord.gg/dasgJ2C");
             self.editBox:SetFocus();
         end,
             
@@ -2077,6 +2087,7 @@ do
 			channelToJoin = guildChannel
 		end
 		JoinChannelByName(channelToJoin);
+		JoinChannelByName("SBMUPDATE");
 		-- JoinChannelByName("SBMTV"); -- Used if you want to broadcast your start/wipe/kills per boss
 	end
 	
