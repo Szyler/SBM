@@ -9,7 +9,7 @@ mod:RegisterEvents(
 	"SPELL_CAST_SUCCESS",
 	"SPELL_AURA_APPLIED",
 	"SPELL_AURA_APPLIED_DOSE",
-	"SPELL_SUMMON",
+	"UNIT_DIED",
 	"UNIT_HEALTH",
 	"PLAYER_ALIVE"
 )
@@ -51,6 +51,7 @@ function mod:OnCombatStart(delay)
 	timerSpore:Start(sporeTimer - delay)
 	warnSporeSoon:Schedule(sporeTimer - 3 - delay)
 	timerDoom:Start(120 - delay, doomCounter + 1)
+	self:ScheduleMethod(sporeTimer, "SporeSpawn")
 end
 
 function mod:SPELL_CAST_SUCCESS(args)
@@ -86,16 +87,10 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 	end
 end
 
-function mod:SPELL_SUMMON(args)
-	if args:IsSpellID(29234) then
-		self:ScheduleMethod(timer, "SporeSpawn")
-	end
-end
-
 function mod:SporeSpawn(args)
+	timer = 14
 	warnSporeNow:Show()
 	soundSpore:Play();
-	timer = 18
 	timerSpore:Start(timer)
 	warnSporeSoon:Schedule(timer-3)
 	self:ScheduleMethod(timer, "SporeSpawn")
